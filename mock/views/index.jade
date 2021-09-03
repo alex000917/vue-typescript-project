@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  //- p Here is routes #{routes}
+  //- ul
+  //- each api in routes
+  //-   li a(href='#{api}') #{api} 
+
+
+  div
+  table
+    thead
+      tr: th Api Route
+    tbody
+      each api, i in routes
+        tr
+          td 
+            a(href="#{api}") #{api}
+  //-   li  
+  //-     a(href='/api/getEntities') getEntities
+    
+  //-   li '/api/recentItems'
+    
+  //-   li '/api/getApplicationPreferences'
+    
+  //-   li '/api/getAuthorizableEntities'
+    
+  //-   li '/api/getEntityRelationshipIcons'
+    
+  //-   li '/api/getFlexApplicationPreferences'
+    
+  //-   li '/api/getForms'
+    
+  //-   li '/api/getIconsInFolder'
+    
+  //-   li '/api/getWorkflows'
+
+    
+
+
+

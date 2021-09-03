@@ -1,0 +1,103 @@
+[ {
+  "description" : "",
+  "displayName" : "Orchestrator",
+  "displayNameLanguageKey" : "CSE_ORCHESTRATOR_ORCHESTRATOR_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ORCHESTRATOR_ORCHESTRATOR_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Orchestrator",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "מתזמר המשימות",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_orchestrator",
+  "orchestratorIlios" : [ {
+    "myspType" : "OrchestratorIlio",
+    "name" : "ilioSyncTasksFromGantt"
+  } ],
+  "orchestratorOlios" : [ {
+    "myspType" : "OrchestratorOlio",
+    "name" : "UpdatePercentageCompleted"
+  }, {
+    "myspType" : "OrchestratorOlio",
+    "name" : "updateIdeasCount"
+  }, {
+    "myspType" : "OrchestratorOlio",
+    "name" : "importGoalActualFromExcel"
+  }, {
+    "myspType" : "OrchestratorOlio",
+    "name" : "populateResourceFTEgaps"
+  }, {
+    "myspType" : "OrchestratorOlio",
+    "name" : "updateBudgetRequestActuals"
+  }, {
+    "myspType" : "OrchestratorOlio",
+    "name" : "updateSumStorypoints"
+  }, {
+    "myspType" : "OrchestratorOlio",
+    "name" : "calculateVendorFields"
+  }, {
+    "myspType" : "OrchestratorOlio",
+    "name" : "populateMyWorkMonthAggregates"
+  }, {
+    "myspType" : "OrchestratorOlio",
+    "name" : "updateIncompleteProjects"
+  }, {
+    "myspType" : "OrchestratorOlio",
+    "name" : "goalsActualsFromExcel"
+  }, {
+    "myspType" : "OrchestratorOlio",
+    "name" : "populateStaffReport"
+  }, {
+    "myspType" : "OrchestratorOlio",
+    "name" : "populateProjectBudgetSummaries"
+  }, {
+    "myspType" : "OrchestratorOlio",
+    "name" : "populateWorksheetAttendanceGaps"
+  } ],
+  "providers" : [ {
+    "myspType" : "Provider",
+    "name" : "SQLProvider",
+    "host" : "localhost",
+    "type" : "SQLProvider",
+    "port" : 39360,
+    "timeout" : 20000
+  }, {
+    "myspType" : "Provider",
+    "name" : "MSPProvider",
+    "host" : "localhost",
+    "type" : "MSPProvider",
+    "port" : 3938,
+    "timeout" : 200000
+  }, {
+    "myspType" : "Provider",
+    "name" : "SimpleExcelProvider",
+    "host" : "localhost",
+    "type" : "SimpleExcelProvider",
+    "port" : 3939,
+    "timeout" : 20000
+  }, {
+    "myspType" : "Provider",
+    "name" : "TFSProvider",
+    "host" : "localhost",
+    "type" : "TFSProvider",
+    "port" : 3981,
+    "timeout" : 20000
+  } ],
+  "msp2OrchestratorPort" : 2595,
+  "orchestrator2MspPort" : 3998,
+  "host" : "localhost",
+  "createdBy" : "Administrator",
+  "dateCreated" : 1525037183663,
+  "dateModified" : 1591129738537,
+  "modifiedBy" : null,
+  "deleted" : false,
+  "newInstance" : false,
+  "indexPosition" : 0,
+  "outOfTheBox" : false
+} ]

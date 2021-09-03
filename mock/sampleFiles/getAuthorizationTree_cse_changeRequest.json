@@ -1,0 +1,193 @@
+{
+  "myspType" : "AuthorizationTree",
+  "description" : "",
+  "displayName" : "Project Change Request",
+  "displayNameLanguageKey" : "CSE_CHANGEREQUEST_AUTH_TREE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_CHANGEREQUEST_AUTH_TREE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "בקשת שינוי בפרויקט",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_changeRequest",
+  "clientId" : null,
+  "createdBy" : "Administrator",
+  "dateCreated" : 1526259481860,
+  "dateModified" : 1530675929610,
+  "entityId" : "com.msp.dao.entities.cse.custom.Cse_DemandActivity",
+  "modifiedBy" : "Administrator",
+  "root" : {
+    "myspType" : "AuthorizationNode",
+    "description" : null,
+    "displayName" : null,
+    "displayNameLanguageKey" : null,
+    "descriptionLanguageKey" : null,
+    "languageTranslations" : null,
+    "notes" : null,
+    "systemName" : null,
+    "authorizationTreeId" : "cse_changeRequest",
+    "type" : null,
+    "children" : [ {
+      "myspType" : "AuthorizationNode",
+      "description" : "",
+      "displayName" : "CSE_ADMINISTRATOR_ROLE_DISPLAY_NAME",
+      "displayNameLanguageKey" : "CSE_ADMINISTRATOR_ROLE_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_ADMINISTRATOR_ROLE_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "CSE_ADMINISTRATOR_ROLE_DISPLAY_NAME",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "cse_administrator_role",
+      "authorizationTreeId" : "cse_changeRequest",
+      "type" : {
+        "myspType" : "DialogRoleAuthorizationNodeType",
+        "dialogRole" : {
+          "myspType" : "DialogRole",
+          "description" : "Administration",
+          "displayName" : "Administrator",
+          "displayNameLanguageKey" : "ADMINISTRATOR_DIALOG_DIALOG_ROLE_DISPLAY_NAME",
+          "descriptionLanguageKey" : "ADMINISTRATOR_DIALOG_DIALOG_ROLE_DESCRIPTION",
+          "languageTranslations" : [ {
+            "myspType" : "LanguageTranslation",
+            "description" : "Administration",
+            "displayName" : "Administrator",
+            "language" : "en"
+          }, {
+            "myspType" : "LanguageTranslation",
+            "description" : "מנהלן",
+            "displayName" : "מנהלן",
+            "language" : "he"
+          } ],
+          "notes" : "",
+          "systemName" : "administrator_dialog",
+          "baseRole" : {
+            "myspType" : "KeyValue",
+            "key" : "ADMINISTRATOR",
+            "value" : "6"
+          },
+          "clientId" : null,
+          "createdBy" : null,
+          "dateCreated" : 1328060779730,
+          "dateModified" : 1535667567000,
+          "modifiedBy" : null,
+          "workspaceId" : "Administrator",
+          "color" : "gray",
+          "icon" : "fa-cog",
+          "productSN" : "administration",
+          "deleted" : false,
+          "licenseRole" : 1,
+          "helixRole" : 1,
+          "id" : "6",
+          "newInstance" : false,
+          "outOfTheBox" : true
+        }
+      },
+      "children" : [ {
+        "myspType" : "AuthorizationNode",
+        "description" : "",
+        "displayName" : "CSE_CREATIONUSER_PROPERTY_DISPLAY_NAME",
+        "displayNameLanguageKey" : "CSE_CREATIONUSER_PROPERTY_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_CREATIONUSER_PROPERTY_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "CSE_CREATIONUSER_PROPERTY_DISPLAY_NAME",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "cse_creationUser_property",
+        "authorizationTreeId" : "cse_changeRequest",
+        "type" : {
+          "myspType" : "PropertyAuthorizationNodeType",
+          "path" : [ {
+            "myspType" : "KeyValue",
+            "key" : "tbl",
+            "value" : "com.msp.dao.entities.cse.custom.Cse_DemandActivity"
+          }, {
+            "myspType" : "KeyValue",
+            "key" : "creationUser",
+            "value" : "com.msp.dao.entities.User"
+          } ],
+          "userSingleLookup" : true
+        },
+        "children" : null,
+        "parent" : null
+      }, {
+        "myspType" : "AuthorizationNode",
+        "description" : "",
+        "displayName" : "CSE_REQUESTEDBY_PROPERTY_DISPLAY_NAME",
+        "displayNameLanguageKey" : "CSE_REQUESTEDBY_PROPERTY_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_REQUESTEDBY_PROPERTY_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "CSE_REQUESTEDBY_PROPERTY_DISPLAY_NAME",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "cse_requestedBy_property",
+        "authorizationTreeId" : "cse_changeRequest",
+        "type" : {
+          "myspType" : "PropertyAuthorizationNodeType",
+          "path" : [ {
+            "myspType" : "KeyValue",
+            "key" : "tbl",
+            "value" : "com.msp.dao.entities.cse.custom.Cse_DemandActivity"
+          }, {
+            "myspType" : "KeyValue",
+            "key" : "cse_requestedBy",
+            "value" : "com.msp.dao.entities.User"
+          } ],
+          "userSingleLookup" : true
+        },
+        "children" : null,
+        "parent" : null
+      }, {
+        "myspType" : "AuthorizationNode",
+        "description" : "",
+        "displayName" : "CSE_DEMANDACTIVITYBACKLOGREQUIREMENTSCSE_LEADBY_PROPERTY_DISPLAY_NAME",
+        "displayNameLanguageKey" : "CSE_DEMANDACTIVITYBACKLOGREQUIREMENTSCSE_LEADBY_PROPERTY_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_DEMANDACTIVITYBACKLOGREQUIREMENTSCSE_LEADBY_PROPERTY_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "CSE_DEMANDACTIVITYBACKLOGREQUIREMENTSCSE_LEADBY_PROPERTY_DISPLAY_NAME",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "cse_demandActivityBacklogRequirementscse_leadBy_property",
+        "authorizationTreeId" : "cse_changeRequest",
+        "type" : {
+          "myspType" : "PropertyAuthorizationNodeType",
+          "path" : [ {
+            "myspType" : "KeyValue",
+            "key" : "tbl",
+            "value" : "com.msp.dao.entities.cse.custom.Cse_DemandActivity"
+          }, {
+            "myspType" : "KeyValue",
+            "key" : "cse_demandActivityBacklogRequirements",
+            "value" : "com.msp.dao.entities.cse.custom.Cse_DemandActivity"
+          }, {
+            "myspType" : "KeyValue",
+            "key" : "cse_leadBy",
+            "value" : "com.msp.dao.entities.User"
+          } ],
+          "userSingleLookup" : true
+        },
+        "children" : null,
+        "parent" : null
+      } ],
+      "parent" : null
+    } ],
+    "parent" : null
+  },
+  "deleted" : false,
+  "id" : "cse_changeRequest",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}

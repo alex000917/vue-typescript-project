@@ -1,0 +1,25 @@
+{
+  "myspType" : "DisplayLanguages",
+  "displayLanguages" : [ {
+    "myspType" : "DisplayLanguage",
+    "id" : 1,
+    "name" : "English",
+    "active" : true,
+    "defaultLanguage" : true,
+    "disabled" : true
+  }, {
+    "myspType" : "DisplayLanguage",
+    "id" : 2,
+    "name" : "Hebrew",
+    "active" : true,
+    "defaultLanguage" : false,
+    "disabled" : false
+  }, {
+    "myspType" : "DisplayLanguage",
+    "id" : 3,
+    "name" : "POLISH",
+    "active" : false,
+    "defaultLanguage" : false,
+    "disabled" : false
+  } ]
+}

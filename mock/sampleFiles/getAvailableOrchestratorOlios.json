@@ -1,0 +1,1 @@
+[ "calculateVendorFields", "goalsActualsFromExcel", "importGoalActualFromExcel", "populateMyWorkMonthAggregates", "populateProjectBudgetSummaries", "populateResourceFTEgaps", "populateStaffReport", "populateWorksheetAttendanceGaps", "sumStorypoints", "updateActualWork", "updateBudgetRequestActuals", "updateIdeasCount", "updateIncompleteProjects" ]

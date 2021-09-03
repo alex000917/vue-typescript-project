@@ -1,0 +1,17 @@
+export enum TrackingTypes {
+  // Reporting modes
+  ACTUAL_WORK_UNLIMITED = 0,
+
+  ACTUAL_WORK_AND_PROGRESS_REMAINING_WORK = 1,
+
+  PERCENT_COMPLETE_ONLY = 2,
+
+  ACTUAL_WORK_AND_PROGRESS_PERCENT_COMPLETE = 3,
+
+  ACTUAL_WORK_AGAINST_ESTIMATED_WORK = 4,
+
+  // Actual Work and progress sub types
+  REMAINING_WORK = 0,
+
+  PERCENT_COMPLETE = 1
+}

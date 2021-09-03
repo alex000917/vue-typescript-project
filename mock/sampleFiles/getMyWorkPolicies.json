@@ -1,0 +1,45 @@
+{
+  "myspType" : "Node",
+  "attributes" : null,
+  "children" : [ {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_default"
+      } ],
+      "children" : [ ],
+      "icons" : null,
+      "name" : "Default",
+      "parent" : null,
+      "tooltip" : "Default",
+      "branch" : false,
+      "id" : "cse_default"
+    } ],
+    "icons" : null,
+    "name" : "Added Policies",
+    "parent" : null,
+    "tooltip" : "Added Policies",
+    "branch" : true,
+    "id" : "addedPolicies"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ ],
+    "icons" : null,
+    "name" : "Out of the Box Policies",
+    "parent" : null,
+    "tooltip" : "Out of the Box Policies",
+    "branch" : true,
+    "id" : "OutOfTheBoxPolicies"
+  } ],
+  "icons" : null,
+  "name" : "root",
+  "parent" : null,
+  "tooltip" : "root",
+  "branch" : true,
+  "id" : null
+}

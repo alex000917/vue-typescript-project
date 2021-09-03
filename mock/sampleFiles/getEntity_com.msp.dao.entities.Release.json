@@ -1,0 +1,3319 @@
+{
+  "description": "some awesome release",
+  "displayName": "Release",
+  "displayNameLanguageKey": "RELEASE_ENTITY_DISPLAY_NAME",
+  "descriptionLanguageKey": "RELEASE_ENTITY_DESCRIPTION",
+  "languageTranslations": [
+    {
+      "description": "",
+      "displayName": "גרסא",
+      "language": "he"
+    }
+  ],
+  "notes": "",
+  "systemName": "Release",
+  "clientId": null,
+  "createNotification": {
+    "bccRecipients": null,
+    "ccRecipients": null,
+    "toRecipients": {
+      "myspType": "TextAssembly",
+      "parts": [
+        "myname;",
+        [
+          {
+            "key": "tbl",
+            "value": "com.msp.dao.entities.Release"
+          },
+          {
+            "key": "currentStepDescription",
+            "value": null
+          }
+        ],
+        ";",
+        [
+          {
+            "key": "$APP_PROP",
+            "value": null
+          },
+          {
+            "key": "SCOREBOARD_LARGE_BACKGROUND_IMAGE",
+            "value": null
+          }
+        ],
+        ";"
+      ]
+    }
+  },
+  "createdBy": "Administrator",
+  "dateCreated": 1336281114487,
+  "dateModified": 1609443276252,
+  "defaultColumns": [
+    {
+      "myspType": "KeyValue",
+      "key": "ID",
+      "value": [
+        {
+          "key": "tbl",
+          "value": "com.msp.dao.entities.Release"
+        },
+        {
+          "key": "id",
+          "value": null
+        }
+      ]
+    },
+    {
+      "myspType": "KeyValue",
+      "key": "Name",
+      "value": [
+        {
+          "key": "tbl",
+          "value": "com.msp.dao.entities.Release"
+        },
+        {
+          "key": "name",
+          "value": null
+        }
+      ]
+    },
+    {
+      "myspType": "KeyValue",
+      "key": "Portfolio",
+      "value": [
+        {
+          "key": "tbl",
+          "value": "com.msp.dao.entities.Release"
+        },
+        {
+          "key": "portfolio",
+          "value": "com.msp.dao.entities.Portfolio"
+        }
+      ]
+    },
+    {
+      "myspType": "KeyValue",
+      "key": "Start Date",
+      "value": [
+        {
+          "key": "tbl",
+          "value": "com.msp.dao.entities.Release"
+        },
+        {
+          "key": "startDate",
+          "value": null
+        }
+      ]
+    },
+    {
+      "myspType": "KeyValue",
+      "key": "End Date",
+      "value": [
+        {
+          "key": "tbl",
+          "value": "com.msp.dao.entities.Release"
+        },
+        {
+          "key": "endDate",
+          "value": null
+        }
+      ]
+    },
+    {
+      "myspType": "KeyValue",
+      "key": "Delivery QA Manager",
+      "value": [
+        {
+          "key": "tbl",
+          "value": "com.msp.dao.entities.Release"
+        },
+        {
+          "key": "deliveryQaManager",
+          "value": "com.msp.dao.entities.User"
+        }
+      ]
+    },
+    {
+      "myspType": "KeyValue",
+      "key": "Customer Release Manager",
+      "value": [
+        {
+          "key": "tbl",
+          "value": "com.msp.dao.entities.Release"
+        },
+        {
+          "key": "customerReleaseManager",
+          "value": "com.msp.dao.entities.User"
+        }
+      ]
+    },
+    {
+      "myspType": "KeyValue",
+      "key": "Status",
+      "value": [
+        {
+          "key": "tbl",
+          "value": "com.msp.dao.entities.Release"
+        },
+        {
+          "key": "status",
+          "value": "com.msp.dao.entities.Status"
+        }
+      ]
+    },
+    {
+      "myspType": "KeyValue",
+      "key": "Email Address",
+      "value": [
+        {
+          "key": "tbl",
+          "value": "com.msp.dao.entities.Release"
+        },
+        {
+          "key": "creationUser",
+          "value": "com.msp.dao.entities.User"
+        },
+        {
+          "key": "emailAddress",
+          "value": null
+        }
+      ]
+    }
+  ],
+  "deleteNotification": null,
+  "discipline": {
+    "myspType": "KeyValue",
+    "key": "Requirement Management",
+    "value": "25"
+  },
+  "entityRelationship": null,
+  "lookupDefaultNameFormat": {
+    "myspType": "TextAssembly",
+    "parts": [
+      [
+        {
+          "key": "tbl",
+          "value": "com.msp.dao.entities.Release"
+        },
+        {
+          "key": "name",
+          "value": null
+        }
+      ],
+      [
+        {
+          "key": "tbl",
+          "value": "com.msp.dao.entities.Release"
+        },
+        {
+          "key": "currentStepId",
+          "value": null
+        }
+      ],
+      [
+        {
+          "key": "$APP_PROP",
+          "value": null
+        },
+        {
+          "key": "cse_hoursperFTE",
+          "value": null
+        }
+      ]
+    ]
+  },
+  "modifiedBy": "Administrator",
+  "modifyNotification": null,
+  "reportFilter": {
+    "roleGroups": [
+      {
+        "authorizationNodeNames": [],
+        "conditions": [
+          {
+            "myspType": "StateCondition",
+            "mainOperand": [],
+            "secondaryOperand": [
+              {
+                "myspType": "KeyValue",
+                "key": "Inactive",
+                "value": "2"
+              },
+              {
+                "myspType": "KeyValue",
+                "key": "Deleted",
+                "value": "3"
+              }
+            ],
+            "secondOperandIsApplicationPreference": false,
+            "secondOperandIsProperty": false,
+            "operator": null,
+            "skipConditionIfMainOperandIsEmpty": false,
+            "skipConditionIfSecondaryOperandIsEmpty": false
+          },
+          {
+            "myspType": "StatusCondition",
+            "mainOperand": [
+              {
+                "myspType": "KeyValue",
+                "key": "tbl",
+                "value": "com.msp.dao.entities.Release"
+              },
+              {
+                "myspType": "KeyValue",
+                "key": "status",
+                "value": "com.msp.dao.entities.Status"
+              },
+              {
+                "myspType": "KeyValue",
+                "key": "systemName",
+                "value": null
+              }
+            ],
+            "secondaryOperand": [
+              {
+                "myspType": "KeyValue",
+                "key": "Future",
+                "value": "RELEASE_FUTURE"
+              }
+            ],
+            "secondOperandIsApplicationPreference": false,
+            "secondOperandIsProperty": false,
+            "operator": "1",
+            "skipConditionIfMainOperandIsEmpty": false,
+            "skipConditionIfSecondaryOperandIsEmpty": false
+          },
+          {
+            "myspType": "RoleCondition",
+            "mainOperand": [],
+            "secondaryOperand": [
+              {
+                "myspType": "KeyValue",
+                "key": "Manager",
+                "value": "cse_role_Manager"
+              },
+              {
+                "myspType": "KeyValue",
+                "key": "Budget Referent",
+                "value": "cse_role_BudgetReferent"
+              }
+            ],
+            "secondOperandIsApplicationPreference": false,
+            "secondOperandIsProperty": false,
+            "operator": "1",
+            "skipConditionIfMainOperandIsEmpty": false,
+            "skipConditionIfSecondaryOperandIsEmpty": false,
+            "loggedInUser": true
+          },
+          {
+            "myspType": "PropertyCondition",
+            "mainOperand": [
+              {
+                "myspType": "KeyValue",
+                "key": "entity.property",
+                "value": "com.msp.dao.entities.Release"
+              },
+              {
+                "myspType": "KeyValue",
+                "key": "currentStepId",
+                "value": null
+              }
+            ],
+            "secondaryOperand": [
+              {
+                "myspType": "KeyValue",
+                "key": null,
+                "value": "123"
+              }
+            ],
+            "secondOperandIsApplicationPreference": false,
+            "secondOperandIsProperty": false,
+            "operator": "1",
+            "skipConditionIfMainOperandIsEmpty": true,
+            "skipConditionIfSecondaryOperandIsEmpty": false
+          }
+        ],
+        "title": "Everyone",
+        "everyone": true
+      }
+    ]
+  },
+  "properties": [
+    {
+      "myspType": "SetProperty",
+      "description": "",
+      "displayName": "Action Items",
+      "displayNameLanguageKey": "RELEASE_ACTIONITEMS_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_ACTIONITEMS_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "פעולות לביצוע",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "actionItems",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Table of Action Item",
+        "value": "10",
+        "lookupClassName": "com.msp.dao.entities.ActionItem"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "psurefEntityRefid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": null,
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "filter": null,
+      "orderByColumnName": null,
+      "table": "ActionItems",
+      "usingVanillaReference": false
+    },
+    {
+      "myspType": "CheckBoxProperty",
+      "description": "",
+      "displayName": "Advanced Resource Allocation",
+      "displayNameLanguageKey": "RELEASE_ADVANCEDRESOURCEALLOCATION_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_ADVANCEDRESOURCEALLOCATION_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "הקצאת משאבים מתקדמת",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "advancedResourceAllocation",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Yes No",
+        "value": "5"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "IsAdvancedResourceAllocation",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "bit (1)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultValue": {
+        "property": [
+          {
+            "myspType": "KeyValue",
+            "key": "tbl",
+            "value": "com.msp.dao.entities.Release"
+          },
+          {
+            "myspType": "KeyValue",
+            "key": "advancedResourceAllocation",
+            "value": null
+          }
+        ],
+        "blank": false,
+        "value": "false"
+      }
+    },
+    {
+      "myspType": "LookupProperty",
+      "description": "",
+      "displayName": "Assignee",
+      "displayNameLanguageKey": "RELEASE_ASSIGNEEUSER_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_ASSIGNEEUSER_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "גורם מטפל",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "assigneeUser",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Lookup To User",
+        "value": "9",
+        "lookupClassName": "com.msp.dao.entities.User"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refAssigneeUserid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "bigint (19)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "defaultValue": {
+        "property": [
+          {
+            "myspType": "KeyValue",
+            "key": "+APP_PROP",
+            "value": null
+          },
+          {
+            "myspType": "KeyValue",
+            "key": "cse_defaultBusinessRelationshipManager",
+            "value": null
+          }
+        ],
+        "blank": false
+      },
+      "canBeUseAsReferenceInReports": false,
+      "lookupToExtension": false
+    },
+    {
+      "myspType": "SetProperty",
+      "description": "",
+      "displayName": "Attachments",
+      "displayNameLanguageKey": "RELEASE_ATTACHMENTS_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_ATTACHMENTS_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "מסמכים",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "attachments",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Table of Attachment",
+        "value": "10",
+        "lookupClassName": "com.msp.dao.entities.Attachment"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "psurefEntityRefid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": null,
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "filter": null,
+      "orderByColumnName": null,
+      "table": "Attachments",
+      "usingVanillaReference": false
+    },
+    {
+      "myspType": "DateProperty",
+      "description": "",
+      "displayName": "Baseline End Date",
+      "displayNameLanguageKey": "RELEASE_BASELINEENDDATE_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_BASELINEENDDATE_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "תאריך סיום מקורי",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "baselineEndDate",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Date and Time",
+        "value": "4"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "BaselineEndDate",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "datetime (23)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultMaxValue": null,
+      "defaultMinValue": null,
+      "defaultValue": null,
+      "periodPickerType": "2"
+    },
+    {
+      "myspType": "SetProperty",
+      "description": "",
+      "displayName": "Baseline Requirements",
+      "displayNameLanguageKey": "RELEASE_BASEREQUIREMENTS_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_BASEREQUIREMENTS_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "דרישות מקוריות",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "baseRequirements",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Table of Requirement",
+        "value": "10",
+        "lookupClassName": "com.msp.dao.entities.Requirement"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refBaseReleaseid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": null,
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "filter": null,
+      "orderByColumnName": null,
+      "table": "Requirements",
+      "usingVanillaReference": false
+    },
+    {
+      "myspType": "LookupProperty",
+      "description": "",
+      "displayName": "Category",
+      "displayNameLanguageKey": "RELEASE_ENTITYCATEGORY_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_ENTITYCATEGORY_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "קטגוריה",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "entityCategory",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Lookup To Entity Category",
+        "value": "9",
+        "lookupClassName": "com.msp.dao.entities.EntityCategory"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refEntityCategoryid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "bigint (19)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "defaultValue": null,
+      "canBeUseAsReferenceInReports": false,
+      "lookupToExtension": false
+    },
+    {
+      "myspType": "SetProperty",
+      "description": "",
+      "displayName": "Child Releases",
+      "displayNameLanguageKey": "RELEASE_CHILDRELEASES_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_CHILDRELEASES_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "תתי-גרסאות",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "childReleases",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Table of Release",
+        "value": "10",
+        "lookupClassName": "com.msp.dao.entities.Release"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refParentReleaseid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": null,
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "filter": null,
+      "orderByColumnName": null,
+      "table": "Releases",
+      "usingVanillaReference": false
+    },
+    {
+      "myspType": "SetProperty",
+      "description": "",
+      "displayName": "Code Versions",
+      "displayNameLanguageKey": "RELEASE_CODEVERSIONS_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_CODEVERSIONS_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "גרסאות קוד",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "codeVersions",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Table of Code Version",
+        "value": "10",
+        "lookupClassName": "com.msp.dao.entities.CodeVersion"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refReleaseid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": null,
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "filter": null,
+      "orderByColumnName": null,
+      "table": "CodeVersions",
+      "usingVanillaReference": false
+    },
+    {
+      "myspType": "LookupProperty",
+      "description": "",
+      "displayName": "Created By",
+      "displayNameLanguageKey": "RELEASE_CREATIONUSER_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_CREATIONUSER_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "נוצר על-ידי",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "creationUser",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Lookup To User",
+        "value": "9",
+        "lookupClassName": "com.msp.dao.entities.User"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refCreationUserid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "bigint (19)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "defaultValue": null,
+      "canBeUseAsReferenceInReports": false,
+      "lookupToExtension": false
+    },
+    {
+      "myspType": "StringProperty",
+      "description": "",
+      "displayName": "Current Step Description",
+      "displayNameLanguageKey": "RELEASE_CURRENTSTEPDESCRIPTION_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_CURRENTSTEPDESCRIPTION_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "תיאור השלב הנוכחי",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "currentStepDescription",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Single Line of Text",
+        "value": "1"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "CurrentStepDescription",
+      "outOfTheBox": true,
+      "translated": true,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "varchar (250)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultValue": null,
+      "maximumTextLength": null
+    },
+    {
+      "myspType": "StringProperty",
+      "description": "",
+      "displayName": "Current Step ID",
+      "displayNameLanguageKey": "RELEASE_CURRENTSTEPID_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_CURRENTSTEPID_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "שלב נוכחי",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "currentStepId",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Single Line of Text",
+        "value": "1"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "CurrentStepId",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "varchar (250)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultValue": null,
+      "maximumTextLength": null
+    },
+    {
+      "myspType": "LookupProperty",
+      "description": "",
+      "displayName": "Customer QA Manager",
+      "displayNameLanguageKey": "RELEASE_CUSTOMERQAMANAGER_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_CUSTOMERQAMANAGER_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "מנהל QA לקוח",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "customerQaManager",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Lookup To User",
+        "value": "9",
+        "lookupClassName": "com.msp.dao.entities.User"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refCustomerQaManagerid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "bigint (19)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "defaultValue": null,
+      "canBeUseAsReferenceInReports": false,
+      "lookupToExtension": false
+    },
+    {
+      "myspType": "LookupProperty",
+      "description": "",
+      "displayName": "Customer Release Manager",
+      "displayNameLanguageKey": "RELEASE_CUSTOMERRELEASEMANAGER_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_CUSTOMERRELEASEMANAGER_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "מנהל גרסא צד לקוח",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "customerReleaseManager",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Lookup To User",
+        "value": "9",
+        "lookupClassName": "com.msp.dao.entities.User"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refCustomerReleaseManagerid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "bigint (19)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "defaultValue": null,
+      "canBeUseAsReferenceInReports": false,
+      "lookupToExtension": false
+    },
+    {
+      "myspType": "DateProperty",
+      "description": "",
+      "displayName": "Customer Review Target Date",
+      "displayNameLanguageKey": "RELEASE_CUSTOMERREVIEWTARGETDATE_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_CUSTOMERREVIEWTARGETDATE_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "תאריך יעד לסקר לקוח",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "customerReviewTargetDate",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Date and Time",
+        "value": "4"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "CustomerReviewTargetDate",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "datetime (23)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultMaxValue": null,
+      "defaultMinValue": null,
+      "defaultValue": null,
+      "periodPickerType": "2"
+    },
+    {
+      "myspType": "LookupProperty",
+      "description": "",
+      "displayName": "Delivery QA Manager",
+      "displayNameLanguageKey": "RELEASE_DELIVERYQAMANAGER_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_DELIVERYQAMANAGER_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "מנהל QA צד ספק",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "deliveryQaManager",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Lookup To User",
+        "value": "9",
+        "lookupClassName": "com.msp.dao.entities.User"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refDeliveryQaManagerid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "bigint (19)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "defaultValue": null,
+      "canBeUseAsReferenceInReports": false,
+      "lookupToExtension": false
+    },
+    {
+      "myspType": "DateProperty",
+      "description": "",
+      "displayName": "Delivery Review Target Date",
+      "displayNameLanguageKey": "RELEASE_DELIVERYREVIEWTARGETDATE_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_DELIVERYREVIEWTARGETDATE_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "תאריך יעד לסק צד ספק",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "deliveryReviewTargetDate",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Date and Time",
+        "value": "4"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "DeliveryReviewTargetDate",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "datetime (23)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultMaxValue": null,
+      "defaultMinValue": null,
+      "defaultValue": null,
+      "periodPickerType": "2"
+    },
+    {
+      "myspType": "LookupProperty",
+      "description": "",
+      "displayName": "EPM Project",
+      "displayNameLanguageKey": "RELEASE_PROJECT_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_PROJECT_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "פרוייקט EPM",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "project",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Lookup To Project",
+        "value": "9",
+        "lookupClassName": "com.msp.dao.entities.Project"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refProjectid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "bigint (19)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "defaultValue": null,
+      "canBeUseAsReferenceInReports": false,
+      "lookupToExtension": false
+    },
+    {
+      "myspType": "DateProperty",
+      "description": "",
+      "displayName": "End Date",
+      "displayNameLanguageKey": "RELEASE_ENDDATE_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_ENDDATE_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "תאריך סיום",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "endDate",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Date and Time",
+        "value": "4"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "EndDate",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "datetime (23)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultMaxValue": null,
+      "defaultMinValue": null,
+      "defaultValue": null,
+      "periodPickerType": "2"
+    },
+    {
+      "myspType": "StringProperty",
+      "description": "",
+      "displayName": "External Reference ID",
+      "displayNameLanguageKey": "RELEASE_EXTERNALREFERENCEID_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_EXTERNALREFERENCEID_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "מזהה חיצוני",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "externalReferenceId",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Single Line of Text",
+        "value": "1"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "ExternalReferenceId",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "varchar (200)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultValue": null,
+      "maximumTextLength": null
+    },
+    {
+      "myspType": "SetProperty",
+      "description": "",
+      "displayName": "Followers",
+      "displayNameLanguageKey": "RELEASE_FOLLOWERUSERS_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_FOLLOWERUSERS_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "משתמשים עוקבים",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "followerUsers",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Table of Follow User",
+        "value": "10",
+        "lookupClassName": "com.msp.dao.entities.FollowerUser"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "psurefEntityRefid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": null,
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "filter": null,
+      "orderByColumnName": null,
+      "table": "refObjectsFollowerUsers",
+      "usingVanillaReference": false
+    },
+    {
+      "myspType": "DateProperty",
+      "description": "",
+      "displayName": "Gantt Estimated Finish Date",
+      "displayNameLanguageKey": "RELEASE_GANTTESTIMATEDFINISHDATE_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_GANTTESTIMATEDFINISHDATE_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "תאריך סיום עפ\"י גאנט",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "ganttEstimatedFinishDate",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Date and Time",
+        "value": "4"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "GanttEstimatedFinishDate",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "datetime (23)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultMaxValue": null,
+      "defaultMinValue": null,
+      "defaultValue": null,
+      "periodPickerType": "2"
+    },
+    {
+      "myspType": "SetProperty",
+      "description": "",
+      "displayName": "HR Capacity",
+      "displayNameLanguageKey": "RELEASE_CAPACITYHRS_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_CAPACITYHRS_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "קיבולת כ\"א",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "capacityHRs",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Table of Capacity HR",
+        "value": "10",
+        "lookupClassName": "com.msp.dao.entities.CapacityHR"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refReleaseid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": null,
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "filter": null,
+      "orderByColumnName": null,
+      "table": "CapacityHR",
+      "usingVanillaReference": false
+    },
+    {
+      "myspType": "LookupProperty",
+      "description": "",
+      "displayName": "HR Capacity Mode",
+      "displayNameLanguageKey": "RELEASE_HRCAPACITYMODE_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_HRCAPACITYMODE_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "סוג תכנון קיבולת",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "hrCapacityMode",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Lookup To Generic Option Type",
+        "value": "9",
+        "lookupClassName": "com.msp.dao.entities.GenericOptionType"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refHrCapacityModeid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "bigint (19)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "defaultValue": null,
+      "canBeUseAsReferenceInReports": false,
+      "lookupToExtension": false
+    },
+    {
+      "myspType": "LookupProperty",
+      "description": "",
+      "displayName": "Hammock",
+      "displayNameLanguageKey": "RELEASE_HAMMOCK_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_HAMMOCK_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "ערסל",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "hammock",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Lookup To Hammock",
+        "value": "9",
+        "lookupClassName": "com.msp.dao.entities.Hammock"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refHammockid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "bigint (19)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "defaultValue": null,
+      "canBeUseAsReferenceInReports": false,
+      "lookupToExtension": false
+    },
+    {
+      "myspType": "NumericProperty",
+      "description": "",
+      "displayName": "ID",
+      "displayNameLanguageKey": "RELEASE_ID_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_ID_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "מזהה",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "id",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Large Number",
+        "value": "7"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "id",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 50,
+      "databaseColumnType": "bigint identity (19)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultMaxValue": null,
+      "defaultMinValue": null,
+      "defaultValue": null,
+      "useThousandSeparator": false
+    },
+    {
+      "myspType": "NumericProperty",
+      "description": "",
+      "displayName": "Index Position",
+      "displayNameLanguageKey": "RELEASE_INDEXPOSITION_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_INDEXPOSITION_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "מיקום",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "indexPosition",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Number",
+        "value": "6"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "IndexPosition",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "int (10)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultMaxValue": null,
+      "defaultMinValue": null,
+      "defaultValue": null,
+      "useThousandSeparator": false
+    },
+    {
+      "myspType": "ChoiceProperty",
+      "description": "",
+      "displayName": "Integration Flag",
+      "displayNameLanguageKey": "RELEASE_INTEGRATIONFLAG_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_INTEGRATIONFLAG_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "דגל אינטגרציה",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "integrationFlag",
+      "customLink": null,
+      "dataType": {
+        "myspType": "ChoiceDataType",
+        "key": "Choice",
+        "value": "3",
+        "options": [
+          {
+            "myspType": "ChoiceOption",
+            "description": "",
+            "displayName": "Success",
+            "displayNameLanguageKey": "RELEASE_INTEGRATIONFLAG_INTEGRATIONSUCCESS_CHOICE_OPTION_DISPLAY_NAME",
+            "descriptionLanguageKey": "RELEASE_INTEGRATIONFLAG_INTEGRATIONSUCCESS_CHOICE_OPTION_DESCRIPTION",
+            "languageTranslations": [
+              {
+                "description": "",
+                "displayName": "Success",
+                "language": "en"
+              },
+              {
+                "description": "",
+                "displayName": "הצלחה",
+                "language": "he"
+              }
+            ],
+            "notes": "",
+            "systemName": "integrationSuccess"
+          },
+          {
+            "myspType": "ChoiceOption",
+            "description": "",
+            "displayName": "Warning",
+            "displayNameLanguageKey": "RELEASE_INTEGRATIONFLAG_INTEGRATIONWARNING_CHOICE_OPTION_DISPLAY_NAME",
+            "descriptionLanguageKey": "RELEASE_INTEGRATIONFLAG_INTEGRATIONWARNING_CHOICE_OPTION_DESCRIPTION",
+            "languageTranslations": [
+              {
+                "description": "",
+                "displayName": "Warning",
+                "language": "en"
+              },
+              {
+                "description": "",
+                "displayName": "אזהרה",
+                "language": "he"
+              }
+            ],
+            "notes": "",
+            "systemName": "integrationWarning"
+          },
+          {
+            "myspType": "ChoiceOption",
+            "description": "",
+            "displayName": "Failed",
+            "displayNameLanguageKey": "RELEASE_INTEGRATIONFLAG_INTEGRATIONFAILED_CHOICE_OPTION_DISPLAY_NAME",
+            "descriptionLanguageKey": "RELEASE_INTEGRATIONFLAG_INTEGRATIONFAILED_CHOICE_OPTION_DESCRIPTION",
+            "languageTranslations": [
+              {
+                "description": "",
+                "displayName": "Failed",
+                "language": "en"
+              },
+              {
+                "description": "",
+                "displayName": "נכשל",
+                "language": "he"
+              }
+            ],
+            "notes": "",
+            "systemName": "integrationFailed"
+          }
+        ]
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refIntegrationFlagid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "bigint (19)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "blankOptionText": null,
+      "defaultValue": null,
+      "displayAsAutoCompleteInReports": false,
+      "includeBlank": false
+    },
+    {
+      "myspType": "SetProperty",
+      "description": "",
+      "displayName": "Integration Operations",
+      "displayNameLanguageKey": "RELEASE_INTEGRATIONOPERATIONS_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_INTEGRATIONOPERATIONS_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "פעולות אינטגרציה ברמת המופע",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "integrationOperations",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Table of Instance Level Integration Operation",
+        "value": "10",
+        "lookupClassName": "com.msp.dao.entities.InstanceLevelIntegrationOperation"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "psurefEntityRefid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": null,
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "filter": null,
+      "orderByColumnName": null,
+      "table": "InstanceLevelIntegrationOperations",
+      "usingVanillaReference": false
+    },
+    {
+      "myspType": "DateProperty",
+      "description": "",
+      "displayName": "Last Time Status Changed",
+      "displayNameLanguageKey": "RELEASE_LASTTIMESTATUSCHANGED_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_LASTTIMESTATUSCHANGED_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "תאריך שינוי סטטוס אחרון",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "lastTimeStatusChanged",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Date and Time",
+        "value": "4"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "LastTimeStatusChanged",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "datetime (23)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultMaxValue": null,
+      "defaultMinValue": null,
+      "defaultValue": null,
+      "periodPickerType": "2"
+    },
+    {
+      "myspType": "LookupProperty",
+      "description": "",
+      "displayName": "Last Updated By",
+      "displayNameLanguageKey": "RELEASE_UPDATEUSER_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_UPDATEUSER_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "עודכן ע\"י",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "updateUser",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Lookup To User",
+        "value": "9",
+        "lookupClassName": "com.msp.dao.entities.User"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refUpdateUserid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "bigint (19)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "defaultValue": null,
+      "canBeUseAsReferenceInReports": false,
+      "lookupToExtension": false
+    },
+    {
+      "myspType": "SetProperty",
+      "description": "",
+      "displayName": "Milestones",
+      "displayNameLanguageKey": "RELEASE_MILESTONES_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_MILESTONES_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "אבני דרך",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "milestones",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Table of Milestone",
+        "value": "10",
+        "lookupClassName": "com.msp.dao.entities.Milestone"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refReleaseid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": null,
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "filter": null,
+      "orderByColumnName": null,
+      "table": "Milestones",
+      "usingVanillaReference": false
+    },
+    {
+      "myspType": "LookupProperty",
+      "description": "",
+      "displayName": "Money Capacity",
+      "displayNameLanguageKey": "RELEASE_CAPACITYMONEY_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_CAPACITYMONEY_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "קיבולת כסף",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "capacityMoney",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Lookup To Capacity Money",
+        "value": "9",
+        "lookupClassName": "com.msp.dao.entities.CapacityMoney"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refCapacityMoneyid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "bigint (19)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "defaultValue": null,
+      "canBeUseAsReferenceInReports": false,
+      "lookupToExtension": false
+    },
+    {
+      "myspType": "StringProperty",
+      "description": "",
+      "displayName": "Name",
+      "displayNameLanguageKey": "RELEASE_NAME_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_NAME_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "שם",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "name",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Single Line of Text",
+        "value": "1"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "Name",
+      "outOfTheBox": true,
+      "translated": true,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "varchar (250)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultValue": null,
+      "maximumTextLength": null
+    },
+    {
+      "myspType": "LookupProperty",
+      "description": "",
+      "displayName": "Owner",
+      "displayNameLanguageKey": "RELEASE_OWNERUSER_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_OWNERUSER_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "אחראי",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "ownerUser",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Lookup To User",
+        "value": "9",
+        "lookupClassName": "com.msp.dao.entities.User"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refOwnerid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "bigint (19)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "defaultValue": null,
+      "canBeUseAsReferenceInReports": false,
+      "lookupToExtension": false
+    },
+    {
+      "myspType": "LookupProperty",
+      "description": "",
+      "displayName": "Parent Release",
+      "displayNameLanguageKey": "RELEASE_PARENTRELEASE_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_PARENTRELEASE_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "גרסת אב",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "parentRelease",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Lookup To Release",
+        "value": "9",
+        "lookupClassName": "com.msp.dao.entities.Release"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refParentReleaseid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "bigint (19)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "defaultValue": null,
+      "canBeUseAsReferenceInReports": false,
+      "lookupToExtension": false
+    },
+    {
+      "myspType": "TextProperty",
+      "description": "",
+      "displayName": "Path",
+      "displayNameLanguageKey": "RELEASE_PATH_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_PATH_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "מסלול",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "path",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Textarea",
+        "value": "2"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "Path",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "text (max)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultValue": null,
+      "maximumTextLength": null
+    },
+    {
+      "myspType": "LookupProperty",
+      "description": "",
+      "displayName": "Portfolio",
+      "displayNameLanguageKey": "RELEASE_PORTFOLIO_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_PORTFOLIO_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "פורטפוליו",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "portfolio",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Lookup To Portfolio",
+        "value": "9",
+        "lookupClassName": "com.msp.dao.entities.Portfolio"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refPortfolioid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "bigint (19)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "defaultValue": null,
+      "canBeUseAsReferenceInReports": false,
+      "lookupToExtension": false
+    },
+    {
+      "myspType": "StringProperty",
+      "description": "",
+      "displayName": "Previous Flow Step Description",
+      "displayNameLanguageKey": "RELEASE_PREVIOUSFLOWSTEPDESCRIPTION_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_PREVIOUSFLOWSTEPDESCRIPTION_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "תיאור שלב מחזור חיים ראשי קודם",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "previousFlowStepDescription",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Single Line of Text",
+        "value": "1"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "PreviousFlowStepDescription",
+      "outOfTheBox": true,
+      "translated": true,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "varchar (250)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultValue": null,
+      "maximumTextLength": null
+    },
+    {
+      "myspType": "StringProperty",
+      "description": "",
+      "displayName": "Previous Flow Step ID",
+      "displayNameLanguageKey": "RELEASE_PREVIOUSFLOWSTEPID_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_PREVIOUSFLOWSTEPID_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "מזהה שלב מחזור חיים ראשי קודם",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "previousFlowStepId",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Single Line of Text",
+        "value": "1"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "PreviousFlowStepId",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "varchar (250)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultValue": null,
+      "maximumTextLength": null
+    },
+    {
+      "myspType": "LookupProperty",
+      "description": "",
+      "displayName": "Previous Status",
+      "displayNameLanguageKey": "RELEASE_PREVIOUSSTATUS_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_PREVIOUSSTATUS_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "סטטוס קודם",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "previousStatus",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Lookup To Status",
+        "value": "9",
+        "lookupClassName": "com.msp.dao.entities.Status"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refPreviousStatusid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "bigint (19)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "defaultValue": null,
+      "canBeUseAsReferenceInReports": false,
+      "lookupToExtension": false
+    },
+    {
+      "myspType": "StringProperty",
+      "description": "",
+      "displayName": "Previous Step",
+      "displayNameLanguageKey": "RELEASE_PREVIOUSSTEPID_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_PREVIOUSSTEPID_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "השלב הקודם",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "previousStepId",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Single Line of Text",
+        "value": "1"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "PreviousStepId",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "varchar (250)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultValue": null,
+      "maximumTextLength": null
+    },
+    {
+      "myspType": "StringProperty",
+      "description": "",
+      "displayName": "Previous Step Description",
+      "displayNameLanguageKey": "RELEASE_PREVIOUSSTEPDESCRIPTION_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_PREVIOUSSTEPDESCRIPTION_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "תיאור שלב קודם",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "previousStepDescription",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Single Line of Text",
+        "value": "1"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "PreviousStepDescription",
+      "outOfTheBox": true,
+      "translated": true,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "varchar (250)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultValue": null,
+      "maximumTextLength": null
+    },
+    {
+      "myspType": "LookupProperty",
+      "description": "",
+      "displayName": "Project Template",
+      "displayNameLanguageKey": "RELEASE_PROJECTTEMPLATE_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_PROJECTTEMPLATE_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "תבנית פרוייקט",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "projectTemplate",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Lookup To Project Template",
+        "value": "9",
+        "lookupClassName": "com.msp.dao.entities.ProjectTemplate"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refProjectTemplateid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "bigint (19)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "defaultValue": null,
+      "canBeUseAsReferenceInReports": false,
+      "lookupToExtension": false
+    },
+    {
+      "myspType": "TextProperty",
+      "description": "",
+      "displayName": "QA Highlights",
+      "displayNameLanguageKey": "RELEASE_QAHIGHLIGHTS_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_QAHIGHLIGHTS_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "הבהרות בדיקה",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "qaHighLights",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Textarea",
+        "value": "2"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "QaHighlights",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "text (max)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultValue": null,
+      "maximumTextLength": null
+    },
+    {
+      "myspType": "NumericProperty",
+      "description": "",
+      "displayName": "RAG Status",
+      "displayNameLanguageKey": "RELEASE_RAGSTATUS_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_RAGSTATUS_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "מצב דגל",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "ragStatus",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Number",
+        "value": "6"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "RagStatus",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "int (10)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultMaxValue": null,
+      "defaultMinValue": null,
+      "defaultValue": null,
+      "useThousandSeparator": false
+    },
+    {
+      "myspType": "SetProperty",
+      "description": "",
+      "displayName": "RELEASE_PARTICIPANTS_PROPERTY_DISPLAY_NAME",
+      "displayNameLanguageKey": "RELEASE_PARTICIPANTS_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_PARTICIPANTS_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "RELEASE_PARTICIPANTS_PROPERTY_DISPLAY_NAME",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "participants",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Table of Participant",
+        "value": "10",
+        "lookupClassName": "com.msp.dao.entities.Participant"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "psurefEntityRefid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": null,
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "filter": null,
+      "orderByColumnName": null,
+      "table": "Participants",
+      "usingVanillaReference": false
+    },
+    {
+      "myspType": "SetProperty",
+      "description": "",
+      "displayName": "RELEASE_TASKACTIONITEMS_PROPERTY_DISPLAY_NAME",
+      "displayNameLanguageKey": "RELEASE_TASKACTIONITEMS_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_TASKACTIONITEMS_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "RELEASE_TASKACTIONITEMS_PROPERTY_DISPLAY_NAME",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "taskActionItems",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Table of Task",
+        "value": "10",
+        "lookupClassName": "com.msp.dao.entities.Task"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refReleaseid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": null,
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "filter": null,
+      "orderByColumnName": null,
+      "table": "Tasks",
+      "usingVanillaReference": false
+    },
+    {
+      "myspType": "LookupProperty",
+      "description": "",
+      "displayName": "Release Calculated Fields",
+      "displayNameLanguageKey": "RELEASE_RELEASEFORMULA_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_RELEASEFORMULA_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "שדות מחושבים של גרסא",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "releaseFormula",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Lookup To Release Calculated Fields",
+        "value": "9",
+        "lookupClassName": "com.msp.dao.entities.ReleaseFormula"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "id_releaseFormula",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "bigint identity (19)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "defaultValue": null,
+      "canBeUseAsReferenceInReports": false,
+      "lookupToExtension": false
+    },
+    {
+      "myspType": "TextProperty",
+      "description": "",
+      "displayName": "Release Notes",
+      "displayNameLanguageKey": "RELEASE_RELEASENOTES_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_RELEASENOTES_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "הערות הגרסא",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "releaseNotes",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Textarea",
+        "value": "2"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "ReleaseNotes",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "text (max)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultValue": null,
+      "maximumTextLength": null
+    },
+    {
+      "myspType": "SetProperty",
+      "description": "",
+      "displayName": "Requirements",
+      "displayNameLanguageKey": "RELEASE_REQUIREMENTS_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_REQUIREMENTS_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "דרישות",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "requirements",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Table of Requirement",
+        "value": "10",
+        "lookupClassName": "com.msp.dao.entities.Requirement"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refReleaseid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": null,
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "filter": null,
+      "orderByColumnName": null,
+      "table": "Requirements",
+      "usingVanillaReference": false
+    },
+    {
+      "myspType": "SetProperty",
+      "description": "",
+      "displayName": "Risks",
+      "displayNameLanguageKey": "RELEASE_RISKS_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_RISKS_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "סיכונים",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "risks",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Table of Risk",
+        "value": "10",
+        "lookupClassName": "com.msp.dao.entities.Risk"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refReleaseid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": null,
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "filter": null,
+      "orderByColumnName": null,
+      "table": "Risks",
+      "usingVanillaReference": false
+    },
+    {
+      "myspType": "DateProperty",
+      "description": "",
+      "displayName": "Start Date",
+      "displayNameLanguageKey": "RELEASE_STARTDATE_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_STARTDATE_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "תאריך התחלה",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "startDate",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Date and Time",
+        "value": "4"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "StartDate",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "datetime (23)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultMaxValue": null,
+      "defaultMinValue": null,
+      "defaultValue": null,
+      "periodPickerType": "2"
+    },
+    {
+      "myspType": "NumericProperty",
+      "description": "",
+      "displayName": "State",
+      "displayNameLanguageKey": "RELEASE_STATE_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_STATE_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "מצב רשומה",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "state",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Number",
+        "value": "6"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "State",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "int (10)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultMaxValue": null,
+      "defaultMinValue": null,
+      "defaultValue": null,
+      "useThousandSeparator": false
+    },
+    {
+      "myspType": "LookupProperty",
+      "description": "",
+      "displayName": "Status",
+      "displayNameLanguageKey": "RELEASE_STATUS_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_STATUS_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "סטטוס",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "status",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Lookup To Status",
+        "value": "9",
+        "lookupClassName": "com.msp.dao.entities.Status"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refStatusid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "bigint (19)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "defaultValue": null,
+      "canBeUseAsReferenceInReports": false,
+      "lookupToExtension": false
+    },
+    {
+      "myspType": "TextProperty",
+      "description": "",
+      "displayName": "Status Free Text",
+      "displayNameLanguageKey": "RELEASE_FREETEXTSTATUS_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_FREETEXTSTATUS_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "סטטוס טקסט חופשי",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "freeTextStatus",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Textarea",
+        "value": "2"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "FreeTextStatus",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "text (max)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultValue": null,
+      "maximumTextLength": null
+    },
+    {
+      "myspType": "DateProperty",
+      "description": "",
+      "displayName": "Time Created",
+      "displayNameLanguageKey": "RELEASE_TIMECREATED_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_TIMECREATED_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "זמן יצירה",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "timeCreated",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Date and Time",
+        "value": "4"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "TimeCreated",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "datetime (23)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultMaxValue": null,
+      "defaultMinValue": null,
+      "defaultValue": null,
+      "periodPickerType": "2"
+    },
+    {
+      "myspType": "DateProperty",
+      "description": "",
+      "displayName": "Time Updated",
+      "displayNameLanguageKey": "RELEASE_TIMEUPDATED_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_TIMEUPDATED_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "תאריך עדכון",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "timeUpdated",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Date and Time",
+        "value": "4"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "TimeUpdated",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "datetime (23)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultMaxValue": null,
+      "defaultMinValue": null,
+      "defaultValue": null,
+      "periodPickerType": "2"
+    },
+    {
+      "myspType": "NumericProperty",
+      "description": "",
+      "displayName": "Type",
+      "displayNameLanguageKey": "RELEASE_TYPE_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_TYPE_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "סוג",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "type",
+      "customLink": null,
+      "dataType": {
+        "myspType": "BaseDataType",
+        "key": "Number",
+        "value": "6"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "Type",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": "smallint (5)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "defaultMaxValue": null,
+      "defaultMinValue": null,
+      "defaultValue": null,
+      "useThousandSeparator": false
+    },
+    {
+      "myspType": "ManyToManyProperty",
+      "description": "",
+      "displayName": "Units of Measure",
+      "displayNameLanguageKey": "RELEASE_UNITOFMEASURES_PROPERTY_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_UNITOFMEASURES_PROPERTY_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "יחידות מדידה",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "unitOfMeasures",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Multi Lookup of Unit Of Measure",
+        "value": "11",
+        "lookupClassName": "com.msp.dao.entities.UnitOfMeasure"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refReleaseid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": null,
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "filter": null,
+      "orderByColumnName": null,
+      "table": "refReleasesUnitOfMeasures",
+      "usingVanillaReference": false,
+      "referenceColumn": "refUnitOfMeasureid"
+    },
+    {
+      "myspType": "SetProperty",
+      "description": "",
+      "displayName": "Children",
+      "displayNameLanguageKey": null,
+      "descriptionLanguageKey": null,
+      "languageTranslations": [
+        {
+          "description": null,
+          "displayName": "ילדים",
+          "language": "he"
+        }
+      ],
+      "notes": null,
+      "systemName": "children",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Table of Release",
+        "value": "10",
+        "lookupClassName": "com.msp.dao.entities.Release"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "id",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 100,
+      "databaseColumnType": null,
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "filter": null,
+      "orderByColumnName": null,
+      "table": "Releases",
+      "usingVanillaReference": false
+    },
+    {
+      "myspType": "LookupProperty",
+      "description": "",
+      "displayName": "Parent",
+      "displayNameLanguageKey": null,
+      "descriptionLanguageKey": null,
+      "languageTranslations": [
+        {
+          "description": null,
+          "displayName": "אב",
+          "language": "he"
+        }
+      ],
+      "notes": null,
+      "systemName": "parent",
+      "customLink": null,
+      "dataType": {
+        "myspType": "EntityBasedDataType",
+        "key": "Lookup to Release",
+        "value": "9",
+        "lookupClassName": "com.msp.dao.entities.Release"
+      },
+      "entityId": "com.msp.dao.entities.Release",
+      "valueChangedNotification": null,
+      "tabularReportsCategory": null,
+      "databaseColumnName": "refParentid",
+      "outOfTheBox": true,
+      "translated": false,
+      "excludePropertyFromReportGenerator": false,
+      "excludePropertyFromEventsGenerator": false,
+      "defaultWidth": 200,
+      "databaseColumnType": "bigint (19)",
+      "sql": null,
+      "formula": false,
+      "identity": false,
+      "virtualProperty": false,
+      "displayAsAutoCompleteInReports": false,
+      "linkToEntity": false,
+      "defaultValue": null,
+      "canBeUseAsReferenceInReports": false,
+      "lookupToExtension": false
+    }
+  ],
+  "sql": null,
+  "sqlConnection": {
+    "myspType": "KeyValue",
+    "key": "MSP_DB",
+    "value": "1"
+  },
+  "status": [
+    {
+      "myspType": "Status",
+      "description": "",
+      "displayName": "Closed-Working",
+      "displayNameLanguageKey": "RELEASE_CLOSED_WORKING_STATUS_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_CLOSED_WORKING_STATUS_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "Closed-Working",
+          "language": "en"
+        },
+        {
+          "description": "",
+          "displayName": "סגור-עובד",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "RELEASE_CLOSED_WORKING",
+      "outOfTheBox": true,
+      "setState": 1
+    },
+    {
+      "myspType": "Status",
+      "description": "",
+      "displayName": "Closed-Finished",
+      "displayNameLanguageKey": "RELEASE_CLOSED_FINISHED_STATUS_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_CLOSED_FINISHED_STATUS_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "Closed-Finished",
+          "language": "en"
+        },
+        {
+          "description": "",
+          "displayName": "סגור-גמור",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "RELEASE_CLOSED_FINISHED",
+      "outOfTheBox": true,
+      "setState": 2
+    },
+    {
+      "myspType": "Status",
+      "description": "",
+      "displayName": "Current Planning",
+      "displayNameLanguageKey": "RELEASE_CURRENT_PLANNING_STATUS_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_CURRENT_PLANNING_STATUS_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "Current Planning",
+          "language": "en"
+        },
+        {
+          "description": "",
+          "displayName": "בתכנון",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "RELEASE_CURRENT_PLANNING",
+      "outOfTheBox": true,
+      "setState": 1
+    },
+    {
+      "myspType": "Status",
+      "description": "",
+      "displayName": "Future",
+      "displayNameLanguageKey": "RELEASE_FUTURE_STATUS_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_FUTURE_STATUS_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "Future",
+          "language": "en"
+        },
+        {
+          "description": "",
+          "displayName": "עתידי",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "RELEASE_FUTURE",
+      "outOfTheBox": true,
+      "setState": 1
+    },
+    {
+      "myspType": "Status",
+      "description": "",
+      "displayName": "Active",
+      "displayNameLanguageKey": "RELEASE_ACTIVE_STATUS_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_ACTIVE_STATUS_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "Active",
+          "language": "en"
+        },
+        {
+          "description": "",
+          "displayName": "פעילה",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "RELEASE_ACTIVE",
+      "outOfTheBox": true,
+      "setState": 1
+    },
+    {
+      "myspType": "Status",
+      "description": "",
+      "displayName": "Delivery Content Review",
+      "displayNameLanguageKey": "RELEASE_DELIVERY_CONTENT_REVIEW_STATUS_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_DELIVERY_CONTENT_REVIEW_STATUS_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "Delivery Content Review",
+          "language": "en"
+        },
+        {
+          "description": "",
+          "displayName": "אישור תכולה מצד הספק",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "RELEASE_DELIVERY_CONTENT_REVIEW",
+      "outOfTheBox": true,
+      "setState": 1
+    },
+    {
+      "myspType": "Status",
+      "description": "",
+      "displayName": "Customer Content Review",
+      "displayNameLanguageKey": "RELEASE_CUSTOMER_CONTENT_REVIEW_STATUS_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_CUSTOMER_CONTENT_REVIEW_STATUS_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "Customer Content Review",
+          "language": "en"
+        },
+        {
+          "description": "",
+          "displayName": "אישור תכולה מצד הלקוח",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "RELEASE_CUSTOMER_CONTENT_REVIEW",
+      "outOfTheBox": true,
+      "setState": 1
+    },
+    {
+      "myspType": "Status",
+      "description": "",
+      "displayName": "In Progress",
+      "displayNameLanguageKey": "RELEASE_IN_PROGRESS_STATUS_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_IN_PROGRESS_STATUS_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "In Progress",
+          "language": "en"
+        },
+        {
+          "description": "",
+          "displayName": "בתהליך",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "RELEASE_IN_PROGRESS",
+      "outOfTheBox": true,
+      "setState": 1
+    },
+    {
+      "myspType": "Status",
+      "description": "",
+      "displayName": "Delivery Tests",
+      "displayNameLanguageKey": "RELEASE_DELIVERY_TESTS_STATUS_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_DELIVERY_TESTS_STATUS_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "Delivery Tests",
+          "language": "en"
+        },
+        {
+          "description": "",
+          "displayName": "בדיקות מסירה",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "RELEASE_DELIVERY_TESTS",
+      "outOfTheBox": true,
+      "setState": 1
+    },
+    {
+      "myspType": "Status",
+      "description": "",
+      "displayName": "Acceptance Tests",
+      "displayNameLanguageKey": "RELEASE_ACCEPTANCE_TESTS_STATUS_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_ACCEPTANCE_TESTS_STATUS_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "Acceptance Tests",
+          "language": "en"
+        },
+        {
+          "description": "",
+          "displayName": "בדיקות קבלה",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "RELEASE_ACCEPTANCE_TESTS",
+      "outOfTheBox": true,
+      "setState": 1
+    },
+    {
+      "myspType": "Status",
+      "description": "",
+      "displayName": "Awaiting Deployment",
+      "displayNameLanguageKey": "RELEASE_AWAITING_DEPLOYMENT_STATUS_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_AWAITING_DEPLOYMENT_STATUS_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "Awaiting Deployment",
+          "language": "en"
+        },
+        {
+          "description": "",
+          "displayName": "ממתין לפריסה",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "RELEASE_AWAITING_DEPLOYMENT",
+      "outOfTheBox": true,
+      "setState": 2
+    },
+    {
+      "myspType": "Status",
+      "description": "",
+      "displayName": "Completed",
+      "displayNameLanguageKey": "RELEASE_COMPLETED_STATUS_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_COMPLETED_STATUS_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "Completed",
+          "language": "en"
+        },
+        {
+          "description": "",
+          "displayName": "הסתיים",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "RELEASE_COMPLETED",
+      "outOfTheBox": true,
+      "setState": 2
+    },
+    {
+      "myspType": "Status",
+      "description": "",
+      "displayName": "Cancelled",
+      "displayNameLanguageKey": "RELEASE_CANCELLED_STATUS_DISPLAY_NAME",
+      "descriptionLanguageKey": "RELEASE_CANCELLED_STATUS_DESCRIPTION",
+      "languageTranslations": [
+        {
+          "description": "",
+          "displayName": "Cancelled",
+          "language": "en"
+        },
+        {
+          "description": "",
+          "displayName": "בוטלה",
+          "language": "he"
+        }
+      ],
+      "notes": "",
+      "systemName": "RELEASE_CANCELLED",
+      "outOfTheBox": true,
+      "setState": 2
+    }
+  ],
+  "milestonesTableProperty": "",
+  "milestonesTableDueDateProperty": "",
+  "milestonesTableStatusProperty": "",
+  "milestonesTableStatusDeliverableStatusProperty": "",
+  "milestonesTableDescriptionProperty": "",
+  "milestonesTableOwnerProperty": null,
+  "activityOwnerProperty": "",
+  "goalsProperty": "",
+  "enableForExecutionCenter": false,
+  "allowCreatingReport": true,
+  "canChangeAttachmentSupport": false,
+  "canChangeFollowersSupport": false,
+  "canChangeIntegrationSupport": true,
+  "creationPolicyType": 1,
+  "createUrl": "generated_create.jsp?entityCategoryId=$entityCategory.id",
+  "databaseTableName": "Releases",
+  "defaultUrl": "generated_edit.jsp?entityCategoryId=$entityCategory.id&id=$id&current_tab_object=@@CURRENT_TAB_OBJECT@@",
+  "deleted": false,
+  "editUrl": "generated_edit.jsp?entityCategoryId=$entityCategory.id&id=$id&current_tab_object=@@CURRENT_TAB_OBJECT@@",
+  "icon": "portfolio-16x16.png",
+  "id": "com.msp.dao.entities.Release",
+  "listUrl": "generated_manage_entity.jsp?entityCategoryId=$entityCategory.id",
+  "managementPolicy": 0,
+  "managementGenericURL": "",
+  "newInstance": false,
+  "outOfTheBox": true,
+  "supportAttachments": true,
+  "supportIntegration": false,
+  "appearInRecentVisit": false,
+  "primaryNamePropertySystemName": "name",
+  "cfgItemUniquePropertySystemName": null,
+  "reportDisplayIndexPosition": 0,
+  "supportFollowers": true,
+  "supportTimeTracking": false,
+  "supportIndexPosition": true,
+  "supportTree": true,
+  "supportWorkflowConfiguration": true,
+  "virtual": false,
+  "supportFormConfiguration": true
+}

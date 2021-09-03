@@ -1,0 +1,2261 @@
+{
+  "myspType" : "Workflow",
+  "description" : "",
+  "displayName" : "Epic",
+  "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_WORKFLOW_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_WORKFLOW_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Epic",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Epic",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_epic",
+  "attributes" : null,
+  "childrenXml" : null,
+  "authorizationTreeId" : "cse_projectRequirement",
+  "clientId" : null,
+  "createdBy" : "Administrator",
+  "dateCreated" : 1520201978012,
+  "dateModified" : 1544546458383,
+  "emptyLanesSystemName" : [ ],
+  "entityId" : "com.msp.dao.entities.cse.custom.Cse_DemandActivity",
+  "flowSteps" : [ {
+    "myspType" : "FlowStep",
+    "description" : "",
+    "displayName" : "Start",
+    "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_START_STEP_DISPLAY_NAME",
+    "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_START_STEP_DESCRIPTION",
+    "languageTranslations" : [ {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "CSE_DEMANDACTIVITY_CSE_EPIC_START_STEP_DISPLAY_NAME",
+      "language" : "en"
+    }, {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "CSE_DEMANDACTIVITY_CSE_EPIC_START_STEP_DISPLAY_NAME",
+      "language" : "he"
+    } ],
+    "notes" : "",
+    "systemName" : "START",
+    "attributes" : null,
+    "childrenXml" : null,
+    "approveByRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : {
+        "myspType" : "Restriction",
+        "roleGroups" : [ {
+          "myspType" : "RoleGroup",
+          "authorizationNodeNames" : [ ],
+          "conditions" : [ ],
+          "title" : "Everyone",
+          "everyone" : true
+        } ]
+      },
+      "assignee" : false,
+      "restrictionType" : null
+    },
+    "assigneeAuthorizationNodeSystemName" : null,
+    "enteringServerActionGroup" : null,
+    "exitingServerActionGroup" : null,
+    "instructionLine" : null,
+    "saveButtonRestriction" : null,
+    "stepNotification" : {
+      "myspType" : "StepNotification",
+      "additionalUsersNotification" : null,
+      "notifyAssignee" : true
+    },
+    "transitions" : [ {
+      "myspType" : "Transition",
+      "allowedUsersRestriction" : {
+        "myspType" : "WorkflowRestriction",
+        "restriction" : null,
+        "assignee" : false,
+        "restrictionType" : 1
+      },
+      "button" : {
+        "myspType" : "TransitionButton",
+        "description" : "",
+        "displayName" : "Create Epic",
+        "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_CREATE_CSE_DEMANDACTIVITY_DRAFT_WORKFLOW_BUTTON_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_CREATE_CSE_DEMANDACTIVITY_DRAFT_WORKFLOW_BUTTON_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "Create Epic",
+          "language" : "en"
+        }, {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "צור Epic",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "create_cse_DemandActivity_Draft",
+        "attributes" : null,
+        "childrenXml" : null,
+        "confirmationProperty" : {
+          "myspType" : "ConfirmationProperty",
+          "description" : null,
+          "displayName" : null,
+          "displayNameLanguageKey" : null,
+          "descriptionLanguageKey" : null,
+          "languageTranslations" : null,
+          "notes" : null,
+          "systemName" : null,
+          "specificConfirmationMessage" : false,
+          "type" : 1
+        },
+        "icon" : "approve.png",
+        "enforceMandatory" : true,
+        "fullSize" : true,
+        "overrideDisplaySettings" : true,
+        "transitionType" : 1
+      },
+      "showInGraph" : true,
+      "type" : 1,
+      "destinationTransitionSystemName" : null
+    } ],
+    "overrideDisplaySettings" : false,
+    "overrideInstructionLineSettings" : false,
+    "statusSystemName" : null,
+    "updateEntityStatusWhenEnteringStep" : true,
+    "optionalRestriction" : null,
+    "startStep" : true
+  }, {
+    "myspType" : "FlowStep",
+    "description" : "",
+    "displayName" : "Draft",
+    "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_DRAFT_STATUS_DISPLAY_NAME",
+    "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_DRAFT_STATUS_DESCRIPTION",
+    "languageTranslations" : [ {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "Draft",
+      "language" : "en"
+    }, {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "טיוטה",
+      "language" : "he"
+    } ],
+    "notes" : "",
+    "systemName" : "cse_DemandActivity_Draft",
+    "attributes" : null,
+    "childrenXml" : null,
+    "approveByRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : null,
+      "assignee" : true,
+      "restrictionType" : null
+    },
+    "assigneeAuthorizationNodeSystemName" : "cse_requestedBy_property",
+    "enteringServerActionGroup" : null,
+    "exitingServerActionGroup" : null,
+    "instructionLine" : [ {
+      "myspType" : "TextAssemblyTranslation",
+      "textAssembly" : {
+        "myspType" : "TextAssembly",
+        "parts" : [ "" ]
+      },
+      "language" : "en"
+    }, {
+      "myspType" : "TextAssemblyTranslation",
+      "textAssembly" : {
+        "myspType" : "TextAssembly",
+        "parts" : [ "" ]
+      },
+      "language" : "he"
+    } ],
+    "saveButtonRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : null,
+      "assignee" : true,
+      "restrictionType" : null
+    },
+    "stepNotification" : {
+      "myspType" : "StepNotification",
+      "additionalUsersNotification" : null,
+      "notifyAssignee" : true
+    },
+    "transitions" : [ {
+      "myspType" : "Transition",
+      "allowedUsersRestriction" : {
+        "myspType" : "WorkflowRestriction",
+        "restriction" : null,
+        "assignee" : false,
+        "restrictionType" : 1
+      },
+      "button" : {
+        "myspType" : "TransitionButton",
+        "description" : "",
+        "displayName" : "Cancel Epic",
+        "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_MOVE_TO_SIDE_STEP_CSE_DEMANDACTIVITY_CANCELLED_WORKFLOW_BUTTON_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_MOVE_TO_SIDE_STEP_CSE_DEMANDACTIVITY_CANCELLED_WORKFLOW_BUTTON_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "Cancel Epic",
+          "language" : "en"
+        }, {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "לבטל Epic",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "move_to_side_step_cse_DemandActivity_Cancelled",
+        "attributes" : null,
+        "childrenXml" : null,
+        "confirmationProperty" : {
+          "myspType" : "ConfirmationProperty",
+          "description" : null,
+          "displayName" : null,
+          "displayNameLanguageKey" : null,
+          "descriptionLanguageKey" : null,
+          "languageTranslations" : null,
+          "notes" : null,
+          "systemName" : null,
+          "specificConfirmationMessage" : false,
+          "type" : 3
+        },
+        "icon" : "on-hold.png",
+        "enforceMandatory" : false,
+        "fullSize" : false,
+        "overrideDisplaySettings" : true,
+        "transitionType" : 7
+      },
+      "showInGraph" : false,
+      "type" : 7,
+      "destinationTransitionSystemName" : null
+    }, {
+      "myspType" : "Transition",
+      "allowedUsersRestriction" : {
+        "myspType" : "WorkflowRestriction",
+        "restriction" : null,
+        "assignee" : false,
+        "restrictionType" : 1
+      },
+      "button" : {
+        "myspType" : "TransitionButton",
+        "description" : "",
+        "displayName" : "Approve",
+        "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_ESTIMATION_WORKFLOW_BUTTON_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_ESTIMATION_WORKFLOW_BUTTON_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Approve",
+          "language" : "en"
+        }, {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Approve",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "approve_cse_DemandActivity_Estimation",
+        "attributes" : null,
+        "childrenXml" : null,
+        "confirmationProperty" : {
+          "myspType" : "ConfirmationProperty",
+          "description" : null,
+          "displayName" : null,
+          "displayNameLanguageKey" : null,
+          "descriptionLanguageKey" : null,
+          "languageTranslations" : null,
+          "notes" : null,
+          "systemName" : null,
+          "specificConfirmationMessage" : false,
+          "type" : 1
+        },
+        "icon" : "approve.png",
+        "enforceMandatory" : true,
+        "fullSize" : true,
+        "overrideDisplaySettings" : false,
+        "transitionType" : 2
+      },
+      "showInGraph" : true,
+      "type" : 2,
+      "destinationTransitionSystemName" : null
+    }, {
+      "myspType" : "Transition",
+      "allowedUsersRestriction" : {
+        "myspType" : "WorkflowRestriction",
+        "restriction" : null,
+        "assignee" : false,
+        "restrictionType" : 1
+      },
+      "button" : {
+        "myspType" : "TransitionButton",
+        "description" : "",
+        "displayName" : "Skip to Backlog",
+        "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_SKIP_AHEAD_CSE_DEMANDACTIVITY_BACKLOG_WORKFLOW_BUTTON_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_SKIP_AHEAD_CSE_DEMANDACTIVITY_BACKLOG_WORKFLOW_BUTTON_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Skip to Backlog",
+          "language" : "en"
+        }, {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Skip to Backlog",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "skip_ahead_cse_DemandActivity_Backlog",
+        "attributes" : null,
+        "childrenXml" : null,
+        "confirmationProperty" : {
+          "myspType" : "ConfirmationProperty",
+          "description" : null,
+          "displayName" : null,
+          "displayNameLanguageKey" : null,
+          "descriptionLanguageKey" : null,
+          "languageTranslations" : null,
+          "notes" : null,
+          "systemName" : null,
+          "specificConfirmationMessage" : false,
+          "type" : 1
+        },
+        "icon" : "skip-ahead.png",
+        "enforceMandatory" : true,
+        "fullSize" : false,
+        "overrideDisplaySettings" : false,
+        "transitionType" : 4
+      },
+      "showInGraph" : false,
+      "type" : 4,
+      "destinationTransitionSystemName" : null
+    } ],
+    "overrideDisplaySettings" : false,
+    "overrideInstructionLineSettings" : false,
+    "statusSystemName" : "cse_DemandActivity_Draft",
+    "updateEntityStatusWhenEnteringStep" : true,
+    "optionalRestriction" : null,
+    "startStep" : false
+  }, {
+    "myspType" : "FlowStep",
+    "description" : "",
+    "displayName" : "Estimation",
+    "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_ESTIMATION_STATUS_DISPLAY_NAME",
+    "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_ESTIMATION_STATUS_DESCRIPTION",
+    "languageTranslations" : [ {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "Estimation",
+      "language" : "en"
+    }, {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "הערכה",
+      "language" : "he"
+    } ],
+    "notes" : "",
+    "systemName" : "cse_DemandActivity_Estimation",
+    "attributes" : null,
+    "childrenXml" : null,
+    "approveByRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : null,
+      "assignee" : true,
+      "restrictionType" : null
+    },
+    "assigneeAuthorizationNodeSystemName" : "cse_leadBy_property",
+    "enteringServerActionGroup" : null,
+    "exitingServerActionGroup" : null,
+    "instructionLine" : [ {
+      "myspType" : "TextAssemblyTranslation",
+      "textAssembly" : {
+        "myspType" : "TextAssembly",
+        "parts" : [ "" ]
+      },
+      "language" : "en"
+    }, {
+      "myspType" : "TextAssemblyTranslation",
+      "textAssembly" : {
+        "myspType" : "TextAssembly",
+        "parts" : [ "" ]
+      },
+      "language" : "he"
+    } ],
+    "saveButtonRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : null,
+      "assignee" : true,
+      "restrictionType" : null
+    },
+    "stepNotification" : {
+      "myspType" : "StepNotification",
+      "additionalUsersNotification" : null,
+      "notifyAssignee" : true
+    },
+    "transitions" : [ {
+      "myspType" : "Transition",
+      "allowedUsersRestriction" : {
+        "myspType" : "WorkflowRestriction",
+        "restriction" : null,
+        "assignee" : false,
+        "restrictionType" : 1
+      },
+      "button" : {
+        "myspType" : "TransitionButton",
+        "description" : "",
+        "displayName" : "Return to Draft",
+        "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_DRAFT_WORKFLOW_BUTTON_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_DRAFT_WORKFLOW_BUTTON_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Return to Draft",
+          "language" : "en"
+        }, {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Return to Draft",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "decline_cse_DemandActivity_Draft",
+        "attributes" : null,
+        "childrenXml" : null,
+        "confirmationProperty" : {
+          "myspType" : "ConfirmationProperty",
+          "description" : null,
+          "displayName" : null,
+          "displayNameLanguageKey" : null,
+          "descriptionLanguageKey" : null,
+          "languageTranslations" : null,
+          "notes" : null,
+          "systemName" : null,
+          "specificConfirmationMessage" : false,
+          "type" : 3
+        },
+        "icon" : "send-back.png",
+        "enforceMandatory" : false,
+        "fullSize" : false,
+        "overrideDisplaySettings" : false,
+        "transitionType" : 3
+      },
+      "showInGraph" : true,
+      "type" : 3,
+      "destinationTransitionSystemName" : null
+    }, {
+      "myspType" : "Transition",
+      "allowedUsersRestriction" : {
+        "myspType" : "WorkflowRestriction",
+        "restriction" : null,
+        "assignee" : false,
+        "restrictionType" : 1
+      },
+      "button" : {
+        "myspType" : "TransitionButton",
+        "description" : "",
+        "displayName" : "Approve",
+        "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_PRIORITIZATIONANDAPPROVAL_WORKFLOW_BUTTON_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_PRIORITIZATIONANDAPPROVAL_WORKFLOW_BUTTON_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Approve",
+          "language" : "en"
+        }, {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Approve",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "approve_cse_DemandActivity_PrioritizationandApproval",
+        "attributes" : null,
+        "childrenXml" : null,
+        "confirmationProperty" : {
+          "myspType" : "ConfirmationProperty",
+          "description" : null,
+          "displayName" : null,
+          "displayNameLanguageKey" : null,
+          "descriptionLanguageKey" : null,
+          "languageTranslations" : null,
+          "notes" : null,
+          "systemName" : null,
+          "specificConfirmationMessage" : false,
+          "type" : 1
+        },
+        "icon" : "approve.png",
+        "enforceMandatory" : true,
+        "fullSize" : true,
+        "overrideDisplaySettings" : false,
+        "transitionType" : 2
+      },
+      "showInGraph" : true,
+      "type" : 2,
+      "destinationTransitionSystemName" : null
+    }, {
+      "myspType" : "Transition",
+      "allowedUsersRestriction" : {
+        "myspType" : "WorkflowRestriction",
+        "restriction" : null,
+        "assignee" : false,
+        "restrictionType" : 1
+      },
+      "button" : {
+        "myspType" : "TransitionButton",
+        "description" : "",
+        "displayName" : "Cancel Epic",
+        "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_MOVE_TO_SIDE_STEP_CSE_DEMANDACTIVITY_CANCELLED_WORKFLOW_BUTTON_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_MOVE_TO_SIDE_STEP_CSE_DEMANDACTIVITY_CANCELLED_WORKFLOW_BUTTON_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "Cancel Epic",
+          "language" : "en"
+        }, {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "לבטל Epic",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "move_to_side_step_cse_DemandActivity_Cancelled",
+        "attributes" : null,
+        "childrenXml" : null,
+        "confirmationProperty" : {
+          "myspType" : "ConfirmationProperty",
+          "description" : null,
+          "displayName" : null,
+          "displayNameLanguageKey" : null,
+          "descriptionLanguageKey" : null,
+          "languageTranslations" : null,
+          "notes" : null,
+          "systemName" : null,
+          "specificConfirmationMessage" : false,
+          "type" : 3
+        },
+        "icon" : "on-hold.png",
+        "enforceMandatory" : false,
+        "fullSize" : false,
+        "overrideDisplaySettings" : true,
+        "transitionType" : 7
+      },
+      "showInGraph" : false,
+      "type" : 7,
+      "destinationTransitionSystemName" : null
+    } ],
+    "overrideDisplaySettings" : false,
+    "overrideInstructionLineSettings" : false,
+    "statusSystemName" : "cse_DemandActivity_Estimation",
+    "updateEntityStatusWhenEnteringStep" : true,
+    "optionalRestriction" : null,
+    "startStep" : false
+  }, {
+    "myspType" : "FlowStep",
+    "description" : "",
+    "displayName" : "Prioritization and Approval",
+    "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_PRIORITIZATIONANDAPPROVAL_STATUS_DISPLAY_NAME",
+    "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_PRIORITIZATIONANDAPPROVAL_STATUS_DESCRIPTION",
+    "languageTranslations" : [ {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "Prioritization and Approval",
+      "language" : "en"
+    }, {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "תעדוף ואישור",
+      "language" : "he"
+    } ],
+    "notes" : "",
+    "systemName" : "cse_DemandActivity_PrioritizationandApproval",
+    "attributes" : null,
+    "childrenXml" : null,
+    "approveByRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : null,
+      "assignee" : true,
+      "restrictionType" : null
+    },
+    "assigneeAuthorizationNodeSystemName" : "cse_requestedBy_property",
+    "enteringServerActionGroup" : null,
+    "exitingServerActionGroup" : null,
+    "instructionLine" : [ {
+      "myspType" : "TextAssemblyTranslation",
+      "textAssembly" : {
+        "myspType" : "TextAssembly",
+        "parts" : [ "" ]
+      },
+      "language" : "en"
+    }, {
+      "myspType" : "TextAssemblyTranslation",
+      "textAssembly" : {
+        "myspType" : "TextAssembly",
+        "parts" : [ "" ]
+      },
+      "language" : "he"
+    } ],
+    "saveButtonRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : null,
+      "assignee" : true,
+      "restrictionType" : null
+    },
+    "stepNotification" : {
+      "myspType" : "StepNotification",
+      "additionalUsersNotification" : null,
+      "notifyAssignee" : true
+    },
+    "transitions" : [ {
+      "myspType" : "Transition",
+      "allowedUsersRestriction" : {
+        "myspType" : "WorkflowRestriction",
+        "restriction" : null,
+        "assignee" : false,
+        "restrictionType" : 1
+      },
+      "button" : {
+        "myspType" : "TransitionButton",
+        "description" : "",
+        "displayName" : "Return to Estimation",
+        "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_ESTIMATION_WORKFLOW_BUTTON_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_ESTIMATION_WORKFLOW_BUTTON_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Return to Estimation",
+          "language" : "en"
+        }, {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Return to Estimation",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "decline_cse_DemandActivity_Estimation",
+        "attributes" : null,
+        "childrenXml" : null,
+        "confirmationProperty" : {
+          "myspType" : "ConfirmationProperty",
+          "description" : null,
+          "displayName" : null,
+          "displayNameLanguageKey" : null,
+          "descriptionLanguageKey" : null,
+          "languageTranslations" : null,
+          "notes" : null,
+          "systemName" : null,
+          "specificConfirmationMessage" : false,
+          "type" : 3
+        },
+        "icon" : "send-back.png",
+        "enforceMandatory" : false,
+        "fullSize" : false,
+        "overrideDisplaySettings" : false,
+        "transitionType" : 3
+      },
+      "showInGraph" : true,
+      "type" : 3,
+      "destinationTransitionSystemName" : null
+    }, {
+      "myspType" : "Transition",
+      "allowedUsersRestriction" : {
+        "myspType" : "WorkflowRestriction",
+        "restriction" : null,
+        "assignee" : false,
+        "restrictionType" : 1
+      },
+      "button" : {
+        "myspType" : "TransitionButton",
+        "description" : "",
+        "displayName" : "Move to Backlog",
+        "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_BACKLOG_WORKFLOW_BUTTON_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_BACKLOG_WORKFLOW_BUTTON_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "Move to Backlog",
+          "language" : "en"
+        }, {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "מעבר לצבר משימות",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "approve_cse_DemandActivity_Backlog",
+        "attributes" : null,
+        "childrenXml" : null,
+        "confirmationProperty" : {
+          "myspType" : "ConfirmationProperty",
+          "description" : null,
+          "displayName" : null,
+          "displayNameLanguageKey" : null,
+          "descriptionLanguageKey" : null,
+          "languageTranslations" : null,
+          "notes" : null,
+          "systemName" : null,
+          "specificConfirmationMessage" : false,
+          "type" : 1
+        },
+        "icon" : "approve.png",
+        "enforceMandatory" : true,
+        "fullSize" : true,
+        "overrideDisplaySettings" : true,
+        "transitionType" : 2
+      },
+      "showInGraph" : true,
+      "type" : 2,
+      "destinationTransitionSystemName" : null
+    }, {
+      "myspType" : "Transition",
+      "allowedUsersRestriction" : {
+        "myspType" : "WorkflowRestriction",
+        "restriction" : null,
+        "assignee" : false,
+        "restrictionType" : 1
+      },
+      "button" : {
+        "myspType" : "TransitionButton",
+        "description" : "",
+        "displayName" : "Cancel Epic",
+        "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_MOVE_TO_SIDE_STEP_CSE_DEMANDACTIVITY_CANCELLED_WORKFLOW_BUTTON_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_MOVE_TO_SIDE_STEP_CSE_DEMANDACTIVITY_CANCELLED_WORKFLOW_BUTTON_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "Cancel Epic",
+          "language" : "en"
+        }, {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "לבטל Epic",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "move_to_side_step_cse_DemandActivity_Cancelled",
+        "attributes" : null,
+        "childrenXml" : null,
+        "confirmationProperty" : {
+          "myspType" : "ConfirmationProperty",
+          "description" : null,
+          "displayName" : null,
+          "displayNameLanguageKey" : null,
+          "descriptionLanguageKey" : null,
+          "languageTranslations" : null,
+          "notes" : null,
+          "systemName" : null,
+          "specificConfirmationMessage" : false,
+          "type" : 3
+        },
+        "icon" : "on-hold.png",
+        "enforceMandatory" : false,
+        "fullSize" : false,
+        "overrideDisplaySettings" : true,
+        "transitionType" : 7
+      },
+      "showInGraph" : false,
+      "type" : 7,
+      "destinationTransitionSystemName" : null
+    } ],
+    "overrideDisplaySettings" : false,
+    "overrideInstructionLineSettings" : false,
+    "statusSystemName" : "cse_DemandActivity_PrioritizationandApproval",
+    "updateEntityStatusWhenEnteringStep" : true,
+    "optionalRestriction" : null,
+    "startStep" : false
+  }, {
+    "myspType" : "FlowStep",
+    "description" : "",
+    "displayName" : "Backlog",
+    "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_BACKLOG_STATUS_DISPLAY_NAME",
+    "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_BACKLOG_STATUS_DESCRIPTION",
+    "languageTranslations" : [ {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "Backlog",
+      "language" : "en"
+    }, {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "צבר משימות",
+      "language" : "he"
+    } ],
+    "notes" : "",
+    "systemName" : "cse_DemandActivity_Backlog",
+    "attributes" : null,
+    "childrenXml" : null,
+    "approveByRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : null,
+      "assignee" : true,
+      "restrictionType" : null
+    },
+    "assigneeAuthorizationNodeSystemName" : "cse_leadBy_property",
+    "enteringServerActionGroup" : null,
+    "exitingServerActionGroup" : null,
+    "instructionLine" : [ {
+      "myspType" : "TextAssemblyTranslation",
+      "textAssembly" : {
+        "myspType" : "TextAssembly",
+        "parts" : [ "" ]
+      },
+      "language" : "en"
+    }, {
+      "myspType" : "TextAssemblyTranslation",
+      "textAssembly" : {
+        "myspType" : "TextAssembly",
+        "parts" : [ "" ]
+      },
+      "language" : "he"
+    } ],
+    "saveButtonRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : null,
+      "assignee" : true,
+      "restrictionType" : null
+    },
+    "stepNotification" : {
+      "myspType" : "StepNotification",
+      "additionalUsersNotification" : null,
+      "notifyAssignee" : true
+    },
+    "transitions" : [ {
+      "myspType" : "Transition",
+      "allowedUsersRestriction" : {
+        "myspType" : "WorkflowRestriction",
+        "restriction" : null,
+        "assignee" : false,
+        "restrictionType" : 1
+      },
+      "button" : {
+        "myspType" : "TransitionButton",
+        "description" : "",
+        "displayName" : "Move to Implementation",
+        "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_IMPLEMENTATION_WORKFLOW_BUTTON_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_IMPLEMENTATION_WORKFLOW_BUTTON_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "Move to Implementation",
+          "language" : "en"
+        }, {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "מעבר ליישום",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "approve_cse_DemandActivity_Implementation",
+        "attributes" : null,
+        "childrenXml" : null,
+        "confirmationProperty" : {
+          "myspType" : "ConfirmationProperty",
+          "description" : null,
+          "displayName" : null,
+          "displayNameLanguageKey" : null,
+          "descriptionLanguageKey" : null,
+          "languageTranslations" : null,
+          "notes" : null,
+          "systemName" : null,
+          "specificConfirmationMessage" : false,
+          "type" : 1
+        },
+        "icon" : "approve.png",
+        "enforceMandatory" : true,
+        "fullSize" : true,
+        "overrideDisplaySettings" : true,
+        "transitionType" : 2
+      },
+      "showInGraph" : true,
+      "type" : 2,
+      "destinationTransitionSystemName" : null
+    }, {
+      "myspType" : "Transition",
+      "allowedUsersRestriction" : {
+        "myspType" : "WorkflowRestriction",
+        "restriction" : null,
+        "assignee" : false,
+        "restrictionType" : 1
+      },
+      "button" : {
+        "myspType" : "TransitionButton",
+        "description" : "",
+        "displayName" : "Cancel Epic",
+        "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_MOVE_TO_SIDE_STEP_CSE_DEMANDACTIVITY_CANCELLED_WORKFLOW_BUTTON_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_MOVE_TO_SIDE_STEP_CSE_DEMANDACTIVITY_CANCELLED_WORKFLOW_BUTTON_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "Cancel Epic",
+          "language" : "en"
+        }, {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "לבטל Epic",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "move_to_side_step_cse_DemandActivity_Cancelled",
+        "attributes" : null,
+        "childrenXml" : null,
+        "confirmationProperty" : {
+          "myspType" : "ConfirmationProperty",
+          "description" : null,
+          "displayName" : null,
+          "displayNameLanguageKey" : null,
+          "descriptionLanguageKey" : null,
+          "languageTranslations" : null,
+          "notes" : null,
+          "systemName" : null,
+          "specificConfirmationMessage" : false,
+          "type" : 3
+        },
+        "icon" : "on-hold.png",
+        "enforceMandatory" : false,
+        "fullSize" : false,
+        "overrideDisplaySettings" : true,
+        "transitionType" : 7
+      },
+      "showInGraph" : false,
+      "type" : 7,
+      "destinationTransitionSystemName" : null
+    }, {
+      "myspType" : "Transition",
+      "allowedUsersRestriction" : {
+        "myspType" : "WorkflowRestriction",
+        "restriction" : null,
+        "assignee" : false,
+        "restrictionType" : 1
+      },
+      "button" : {
+        "myspType" : "TransitionButton",
+        "description" : "",
+        "displayName" : "Return to Prioritization and Approval",
+        "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_PRIORITIZATIONANDAPPROVAL_WORKFLOW_BUTTON_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_PRIORITIZATIONANDAPPROVAL_WORKFLOW_BUTTON_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Return to Prioritization and Approval",
+          "language" : "en"
+        }, {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Return to Prioritization and Approval",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "decline_cse_DemandActivity_PrioritizationandApproval",
+        "attributes" : null,
+        "childrenXml" : null,
+        "confirmationProperty" : {
+          "myspType" : "ConfirmationProperty",
+          "description" : null,
+          "displayName" : null,
+          "displayNameLanguageKey" : null,
+          "descriptionLanguageKey" : null,
+          "languageTranslations" : null,
+          "notes" : null,
+          "systemName" : null,
+          "specificConfirmationMessage" : false,
+          "type" : 3
+        },
+        "icon" : "send-back.png",
+        "enforceMandatory" : false,
+        "fullSize" : false,
+        "overrideDisplaySettings" : false,
+        "transitionType" : 3
+      },
+      "showInGraph" : true,
+      "type" : 3,
+      "destinationTransitionSystemName" : null
+    } ],
+    "overrideDisplaySettings" : false,
+    "overrideInstructionLineSettings" : false,
+    "statusSystemName" : "cse_DemandActivity_Backlog",
+    "updateEntityStatusWhenEnteringStep" : true,
+    "optionalRestriction" : null,
+    "startStep" : false
+  }, {
+    "myspType" : "FlowStep",
+    "description" : "",
+    "displayName" : "Implementation",
+    "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_IMPLEMENTATION_STATUS_DISPLAY_NAME",
+    "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_IMPLEMENTATION_STATUS_DESCRIPTION",
+    "languageTranslations" : [ {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "Implementation",
+      "language" : "en"
+    }, {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "יישום",
+      "language" : "he"
+    } ],
+    "notes" : "",
+    "systemName" : "cse_DemandActivity_Implementation",
+    "attributes" : null,
+    "childrenXml" : null,
+    "approveByRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : null,
+      "assignee" : true,
+      "restrictionType" : null
+    },
+    "assigneeAuthorizationNodeSystemName" : "cse_leadBy_property",
+    "enteringServerActionGroup" : null,
+    "exitingServerActionGroup" : null,
+    "instructionLine" : [ {
+      "myspType" : "TextAssemblyTranslation",
+      "textAssembly" : {
+        "myspType" : "TextAssembly",
+        "parts" : [ "" ]
+      },
+      "language" : "en"
+    }, {
+      "myspType" : "TextAssemblyTranslation",
+      "textAssembly" : {
+        "myspType" : "TextAssembly",
+        "parts" : [ "" ]
+      },
+      "language" : "he"
+    } ],
+    "saveButtonRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : null,
+      "assignee" : true,
+      "restrictionType" : null
+    },
+    "stepNotification" : {
+      "myspType" : "StepNotification",
+      "additionalUsersNotification" : null,
+      "notifyAssignee" : true
+    },
+    "transitions" : [ {
+      "myspType" : "Transition",
+      "allowedUsersRestriction" : {
+        "myspType" : "WorkflowRestriction",
+        "restriction" : null,
+        "assignee" : false,
+        "restrictionType" : 1
+      },
+      "button" : {
+        "myspType" : "TransitionButton",
+        "description" : "",
+        "displayName" : "Return to Backlog",
+        "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_BACKLOG_WORKFLOW_BUTTON_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_BACKLOG_WORKFLOW_BUTTON_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Return to Backlog",
+          "language" : "en"
+        }, {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Return to Backlog",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "decline_cse_DemandActivity_Backlog",
+        "attributes" : null,
+        "childrenXml" : null,
+        "confirmationProperty" : {
+          "myspType" : "ConfirmationProperty",
+          "description" : null,
+          "displayName" : null,
+          "displayNameLanguageKey" : null,
+          "descriptionLanguageKey" : null,
+          "languageTranslations" : null,
+          "notes" : null,
+          "systemName" : null,
+          "specificConfirmationMessage" : false,
+          "type" : 3
+        },
+        "icon" : "send-back.png",
+        "enforceMandatory" : false,
+        "fullSize" : false,
+        "overrideDisplaySettings" : false,
+        "transitionType" : 3
+      },
+      "showInGraph" : true,
+      "type" : 3,
+      "destinationTransitionSystemName" : null
+    }, {
+      "myspType" : "Transition",
+      "allowedUsersRestriction" : {
+        "myspType" : "WorkflowRestriction",
+        "restriction" : null,
+        "assignee" : false,
+        "restrictionType" : 1
+      },
+      "button" : {
+        "myspType" : "TransitionButton",
+        "description" : "",
+        "displayName" : "Cancel Epic",
+        "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_MOVE_TO_SIDE_STEP_CSE_DEMANDACTIVITY_CANCELLED_WORKFLOW_BUTTON_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_MOVE_TO_SIDE_STEP_CSE_DEMANDACTIVITY_CANCELLED_WORKFLOW_BUTTON_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "Cancel Epic",
+          "language" : "en"
+        }, {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "לבטל Epic",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "move_to_side_step_cse_DemandActivity_Cancelled",
+        "attributes" : null,
+        "childrenXml" : null,
+        "confirmationProperty" : {
+          "myspType" : "ConfirmationProperty",
+          "description" : null,
+          "displayName" : null,
+          "displayNameLanguageKey" : null,
+          "descriptionLanguageKey" : null,
+          "languageTranslations" : null,
+          "notes" : null,
+          "systemName" : null,
+          "specificConfirmationMessage" : false,
+          "type" : 3
+        },
+        "icon" : "on-hold.png",
+        "enforceMandatory" : false,
+        "fullSize" : false,
+        "overrideDisplaySettings" : true,
+        "transitionType" : 7
+      },
+      "showInGraph" : false,
+      "type" : 7,
+      "destinationTransitionSystemName" : null
+    }, {
+      "myspType" : "Transition",
+      "allowedUsersRestriction" : {
+        "myspType" : "WorkflowRestriction",
+        "restriction" : null,
+        "assignee" : false,
+        "restrictionType" : 1
+      },
+      "button" : {
+        "myspType" : "TransitionButton",
+        "description" : "",
+        "displayName" : "Approve",
+        "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_ACCEPTANCE_WORKFLOW_BUTTON_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_ACCEPTANCE_WORKFLOW_BUTTON_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Approve",
+          "language" : "en"
+        }, {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Approve",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "approve_cse_DemandActivity_Acceptance",
+        "attributes" : null,
+        "childrenXml" : null,
+        "confirmationProperty" : {
+          "myspType" : "ConfirmationProperty",
+          "description" : null,
+          "displayName" : null,
+          "displayNameLanguageKey" : null,
+          "descriptionLanguageKey" : null,
+          "languageTranslations" : null,
+          "notes" : null,
+          "systemName" : null,
+          "specificConfirmationMessage" : false,
+          "type" : 1
+        },
+        "icon" : "approve.png",
+        "enforceMandatory" : true,
+        "fullSize" : true,
+        "overrideDisplaySettings" : false,
+        "transitionType" : 2
+      },
+      "showInGraph" : true,
+      "type" : 2,
+      "destinationTransitionSystemName" : null
+    } ],
+    "overrideDisplaySettings" : false,
+    "overrideInstructionLineSettings" : false,
+    "statusSystemName" : "cse_DemandActivity_Implementation",
+    "updateEntityStatusWhenEnteringStep" : true,
+    "optionalRestriction" : null,
+    "startStep" : false
+  }, {
+    "myspType" : "FlowStep",
+    "description" : "",
+    "displayName" : "Acceptance",
+    "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_ACCEPTANCE_STATUS_DISPLAY_NAME",
+    "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_ACCEPTANCE_STATUS_DESCRIPTION",
+    "languageTranslations" : [ {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "Acceptance",
+      "language" : "en"
+    }, {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "בדיקות קבלה",
+      "language" : "he"
+    } ],
+    "notes" : "",
+    "systemName" : "cse_DemandActivity_Acceptance",
+    "attributes" : null,
+    "childrenXml" : null,
+    "approveByRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : null,
+      "assignee" : true,
+      "restrictionType" : null
+    },
+    "assigneeAuthorizationNodeSystemName" : "cse_requestedBy_property",
+    "enteringServerActionGroup" : null,
+    "exitingServerActionGroup" : null,
+    "instructionLine" : [ {
+      "myspType" : "TextAssemblyTranslation",
+      "textAssembly" : {
+        "myspType" : "TextAssembly",
+        "parts" : [ "" ]
+      },
+      "language" : "en"
+    }, {
+      "myspType" : "TextAssemblyTranslation",
+      "textAssembly" : {
+        "myspType" : "TextAssembly",
+        "parts" : [ "" ]
+      },
+      "language" : "he"
+    } ],
+    "saveButtonRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : null,
+      "assignee" : true,
+      "restrictionType" : null
+    },
+    "stepNotification" : {
+      "myspType" : "StepNotification",
+      "additionalUsersNotification" : null,
+      "notifyAssignee" : true
+    },
+    "transitions" : [ {
+      "myspType" : "Transition",
+      "allowedUsersRestriction" : {
+        "myspType" : "WorkflowRestriction",
+        "restriction" : null,
+        "assignee" : false,
+        "restrictionType" : 1
+      },
+      "button" : {
+        "myspType" : "TransitionButton",
+        "description" : "",
+        "displayName" : "Return to Implementation",
+        "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_IMPLEMENTATION_WORKFLOW_BUTTON_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_IMPLEMENTATION_WORKFLOW_BUTTON_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Return to Implementation",
+          "language" : "en"
+        }, {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Return to Implementation",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "decline_cse_DemandActivity_Implementation",
+        "attributes" : null,
+        "childrenXml" : null,
+        "confirmationProperty" : {
+          "myspType" : "ConfirmationProperty",
+          "description" : null,
+          "displayName" : null,
+          "displayNameLanguageKey" : null,
+          "descriptionLanguageKey" : null,
+          "languageTranslations" : null,
+          "notes" : null,
+          "systemName" : null,
+          "specificConfirmationMessage" : false,
+          "type" : 3
+        },
+        "icon" : "send-back.png",
+        "enforceMandatory" : false,
+        "fullSize" : false,
+        "overrideDisplaySettings" : false,
+        "transitionType" : 3
+      },
+      "showInGraph" : true,
+      "type" : 3,
+      "destinationTransitionSystemName" : null
+    }, {
+      "myspType" : "Transition",
+      "allowedUsersRestriction" : {
+        "myspType" : "WorkflowRestriction",
+        "restriction" : null,
+        "assignee" : false,
+        "restrictionType" : 1
+      },
+      "button" : {
+        "myspType" : "TransitionButton",
+        "description" : "",
+        "displayName" : "Complete",
+        "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_COMPLETED_WORKFLOW_BUTTON_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_COMPLETED_WORKFLOW_BUTTON_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "Complete",
+          "language" : "en"
+        }, {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "הושלם",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "approve_cse_DemandActivity_Completed",
+        "attributes" : null,
+        "childrenXml" : null,
+        "confirmationProperty" : {
+          "myspType" : "ConfirmationProperty",
+          "description" : null,
+          "displayName" : null,
+          "displayNameLanguageKey" : null,
+          "descriptionLanguageKey" : null,
+          "languageTranslations" : null,
+          "notes" : null,
+          "systemName" : null,
+          "specificConfirmationMessage" : false,
+          "type" : 1
+        },
+        "icon" : "approve.png",
+        "enforceMandatory" : true,
+        "fullSize" : true,
+        "overrideDisplaySettings" : true,
+        "transitionType" : 2
+      },
+      "showInGraph" : true,
+      "type" : 2,
+      "destinationTransitionSystemName" : null
+    } ],
+    "overrideDisplaySettings" : false,
+    "overrideInstructionLineSettings" : false,
+    "statusSystemName" : "cse_DemandActivity_Acceptance",
+    "updateEntityStatusWhenEnteringStep" : true,
+    "optionalRestriction" : null,
+    "startStep" : false
+  }, {
+    "myspType" : "FlowStep",
+    "description" : "",
+    "displayName" : "Completed",
+    "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_COMPLETED_STATUS_DISPLAY_NAME",
+    "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_COMPLETED_STATUS_DESCRIPTION",
+    "languageTranslations" : [ {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "Completed",
+      "language" : "en"
+    }, {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "הושלם",
+      "language" : "he"
+    } ],
+    "notes" : "",
+    "systemName" : "cse_DemandActivity_Completed",
+    "attributes" : null,
+    "childrenXml" : null,
+    "approveByRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : null,
+      "assignee" : true,
+      "restrictionType" : null
+    },
+    "assigneeAuthorizationNodeSystemName" : "cse_leadBy_property",
+    "enteringServerActionGroup" : null,
+    "exitingServerActionGroup" : null,
+    "instructionLine" : [ {
+      "myspType" : "TextAssemblyTranslation",
+      "textAssembly" : {
+        "myspType" : "TextAssembly",
+        "parts" : [ "" ]
+      },
+      "language" : "en"
+    }, {
+      "myspType" : "TextAssemblyTranslation",
+      "textAssembly" : {
+        "myspType" : "TextAssembly",
+        "parts" : [ "" ]
+      },
+      "language" : "he"
+    } ],
+    "saveButtonRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : null,
+      "assignee" : true,
+      "restrictionType" : null
+    },
+    "stepNotification" : {
+      "myspType" : "StepNotification",
+      "additionalUsersNotification" : null,
+      "notifyAssignee" : true
+    },
+    "transitions" : [ {
+      "myspType" : "Transition",
+      "allowedUsersRestriction" : {
+        "myspType" : "WorkflowRestriction",
+        "restriction" : null,
+        "assignee" : false,
+        "restrictionType" : 1
+      },
+      "button" : {
+        "myspType" : "TransitionButton",
+        "description" : "",
+        "displayName" : "Return to Acceptance",
+        "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_ACCEPTANCE_WORKFLOW_BUTTON_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_ACCEPTANCE_WORKFLOW_BUTTON_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Return to Acceptance",
+          "language" : "en"
+        }, {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Return to Acceptance",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "decline_cse_DemandActivity_Acceptance",
+        "attributes" : null,
+        "childrenXml" : null,
+        "confirmationProperty" : {
+          "myspType" : "ConfirmationProperty",
+          "description" : null,
+          "displayName" : null,
+          "displayNameLanguageKey" : null,
+          "descriptionLanguageKey" : null,
+          "languageTranslations" : null,
+          "notes" : null,
+          "systemName" : null,
+          "specificConfirmationMessage" : false,
+          "type" : 3
+        },
+        "icon" : "send-back.png",
+        "enforceMandatory" : false,
+        "fullSize" : false,
+        "overrideDisplaySettings" : false,
+        "transitionType" : 3
+      },
+      "showInGraph" : true,
+      "type" : 3,
+      "destinationTransitionSystemName" : null
+    } ],
+    "overrideDisplaySettings" : false,
+    "overrideInstructionLineSettings" : false,
+    "statusSystemName" : "cse_DemandActivity_Completed",
+    "updateEntityStatusWhenEnteringStep" : true,
+    "optionalRestriction" : null,
+    "startStep" : false
+  } ],
+  "modifiedBy" : "Administrator",
+  "ribbons" : [ {
+    "myspType" : "Ribbon",
+    "description" : "",
+    "displayName" : "Approval",
+    "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVAL_RIBBON_DISPLAY_NAME",
+    "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVAL_RIBBON_DESCRIPTION",
+    "languageTranslations" : [ {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "Approval",
+      "language" : "en"
+    }, {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "אישור",
+      "language" : "he"
+    } ],
+    "notes" : "",
+    "systemName" : "approval",
+    "buttons" : [ {
+      "myspType" : "TransitionButton",
+      "description" : "",
+      "displayName" : "Create Epic",
+      "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_CREATE_CSE_DEMANDACTIVITY_DRAFT_WORKFLOW_BUTTON_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_CREATE_CSE_DEMANDACTIVITY_DRAFT_WORKFLOW_BUTTON_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "Create Epic",
+        "language" : "en"
+      }, {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "צור Epic",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "create_cse_DemandActivity_Draft",
+      "attributes" : null,
+      "childrenXml" : null,
+      "confirmationProperty" : {
+        "myspType" : "ConfirmationProperty",
+        "description" : null,
+        "displayName" : null,
+        "displayNameLanguageKey" : null,
+        "descriptionLanguageKey" : null,
+        "languageTranslations" : null,
+        "notes" : null,
+        "systemName" : null,
+        "specificConfirmationMessage" : false,
+        "type" : 1
+      },
+      "icon" : "approve.png",
+      "enforceMandatory" : true,
+      "fullSize" : true,
+      "overrideDisplaySettings" : true,
+      "transitionType" : 1
+    }, {
+      "myspType" : "TransitionButton",
+      "description" : "",
+      "displayName" : "Move to Backlog",
+      "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_BACKLOG_WORKFLOW_BUTTON_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_BACKLOG_WORKFLOW_BUTTON_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "Move to Backlog",
+        "language" : "en"
+      }, {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "מעבר לצבר משימות",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "approve_cse_DemandActivity_Backlog",
+      "attributes" : null,
+      "childrenXml" : null,
+      "confirmationProperty" : {
+        "myspType" : "ConfirmationProperty",
+        "description" : null,
+        "displayName" : null,
+        "displayNameLanguageKey" : null,
+        "descriptionLanguageKey" : null,
+        "languageTranslations" : null,
+        "notes" : null,
+        "systemName" : null,
+        "specificConfirmationMessage" : false,
+        "type" : 1
+      },
+      "icon" : "approve.png",
+      "enforceMandatory" : true,
+      "fullSize" : true,
+      "overrideDisplaySettings" : true,
+      "transitionType" : 2
+    }, {
+      "myspType" : "TransitionButton",
+      "description" : "",
+      "displayName" : "Move to Implementation",
+      "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_IMPLEMENTATION_WORKFLOW_BUTTON_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_IMPLEMENTATION_WORKFLOW_BUTTON_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "Move to Implementation",
+        "language" : "en"
+      }, {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "מעבר ליישום",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "approve_cse_DemandActivity_Implementation",
+      "attributes" : null,
+      "childrenXml" : null,
+      "confirmationProperty" : {
+        "myspType" : "ConfirmationProperty",
+        "description" : null,
+        "displayName" : null,
+        "displayNameLanguageKey" : null,
+        "descriptionLanguageKey" : null,
+        "languageTranslations" : null,
+        "notes" : null,
+        "systemName" : null,
+        "specificConfirmationMessage" : false,
+        "type" : 1
+      },
+      "icon" : "approve.png",
+      "enforceMandatory" : true,
+      "fullSize" : true,
+      "overrideDisplaySettings" : true,
+      "transitionType" : 2
+    }, {
+      "myspType" : "TransitionButton",
+      "description" : "",
+      "displayName" : "Complete",
+      "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_COMPLETED_WORKFLOW_BUTTON_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_COMPLETED_WORKFLOW_BUTTON_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "Complete",
+        "language" : "en"
+      }, {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "הושלם",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "approve_cse_DemandActivity_Completed",
+      "attributes" : null,
+      "childrenXml" : null,
+      "confirmationProperty" : {
+        "myspType" : "ConfirmationProperty",
+        "description" : null,
+        "displayName" : null,
+        "displayNameLanguageKey" : null,
+        "descriptionLanguageKey" : null,
+        "languageTranslations" : null,
+        "notes" : null,
+        "systemName" : null,
+        "specificConfirmationMessage" : false,
+        "type" : 1
+      },
+      "icon" : "approve.png",
+      "enforceMandatory" : true,
+      "fullSize" : true,
+      "overrideDisplaySettings" : true,
+      "transitionType" : 2
+    }, {
+      "myspType" : "TransitionButton",
+      "description" : "",
+      "displayName" : "Approve",
+      "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_ESTIMATION_WORKFLOW_BUTTON_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_ESTIMATION_WORKFLOW_BUTTON_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Approve",
+        "language" : "en"
+      }, {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Approve",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "approve_cse_DemandActivity_Estimation",
+      "attributes" : null,
+      "childrenXml" : null,
+      "confirmationProperty" : {
+        "myspType" : "ConfirmationProperty",
+        "description" : null,
+        "displayName" : null,
+        "displayNameLanguageKey" : null,
+        "descriptionLanguageKey" : null,
+        "languageTranslations" : null,
+        "notes" : null,
+        "systemName" : null,
+        "specificConfirmationMessage" : false,
+        "type" : 1
+      },
+      "icon" : "approve.png",
+      "enforceMandatory" : true,
+      "fullSize" : true,
+      "overrideDisplaySettings" : false,
+      "transitionType" : 2
+    }, {
+      "myspType" : "TransitionButton",
+      "description" : "",
+      "displayName" : "Approve",
+      "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_ACCEPTANCE_WORKFLOW_BUTTON_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_ACCEPTANCE_WORKFLOW_BUTTON_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Approve",
+        "language" : "en"
+      }, {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Approve",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "approve_cse_DemandActivity_Acceptance",
+      "attributes" : null,
+      "childrenXml" : null,
+      "confirmationProperty" : {
+        "myspType" : "ConfirmationProperty",
+        "description" : null,
+        "displayName" : null,
+        "displayNameLanguageKey" : null,
+        "descriptionLanguageKey" : null,
+        "languageTranslations" : null,
+        "notes" : null,
+        "systemName" : null,
+        "specificConfirmationMessage" : false,
+        "type" : 1
+      },
+      "icon" : "approve.png",
+      "enforceMandatory" : true,
+      "fullSize" : true,
+      "overrideDisplaySettings" : false,
+      "transitionType" : 2
+    }, {
+      "myspType" : "TransitionButton",
+      "description" : "",
+      "displayName" : "Skip to Backlog",
+      "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_SKIP_AHEAD_CSE_DEMANDACTIVITY_BACKLOG_WORKFLOW_BUTTON_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_SKIP_AHEAD_CSE_DEMANDACTIVITY_BACKLOG_WORKFLOW_BUTTON_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Skip to Backlog",
+        "language" : "en"
+      }, {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Skip to Backlog",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "skip_ahead_cse_DemandActivity_Backlog",
+      "attributes" : null,
+      "childrenXml" : null,
+      "confirmationProperty" : {
+        "myspType" : "ConfirmationProperty",
+        "description" : null,
+        "displayName" : null,
+        "displayNameLanguageKey" : null,
+        "descriptionLanguageKey" : null,
+        "languageTranslations" : null,
+        "notes" : null,
+        "systemName" : null,
+        "specificConfirmationMessage" : false,
+        "type" : 1
+      },
+      "icon" : "skip-ahead.png",
+      "enforceMandatory" : true,
+      "fullSize" : false,
+      "overrideDisplaySettings" : false,
+      "transitionType" : 4
+    }, {
+      "myspType" : "TransitionButton",
+      "description" : "",
+      "displayName" : "Approve",
+      "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_PRIORITIZATIONANDAPPROVAL_WORKFLOW_BUTTON_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_APPROVE_CSE_DEMANDACTIVITY_PRIORITIZATIONANDAPPROVAL_WORKFLOW_BUTTON_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Approve",
+        "language" : "en"
+      }, {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Approve",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "approve_cse_DemandActivity_PrioritizationandApproval",
+      "attributes" : null,
+      "childrenXml" : null,
+      "confirmationProperty" : {
+        "myspType" : "ConfirmationProperty",
+        "description" : null,
+        "displayName" : null,
+        "displayNameLanguageKey" : null,
+        "descriptionLanguageKey" : null,
+        "languageTranslations" : null,
+        "notes" : null,
+        "systemName" : null,
+        "specificConfirmationMessage" : false,
+        "type" : 1
+      },
+      "icon" : "approve.png",
+      "enforceMandatory" : true,
+      "fullSize" : true,
+      "overrideDisplaySettings" : false,
+      "transitionType" : 2
+    } ],
+    "ribbonType" : 1
+  }, {
+    "myspType" : "Ribbon",
+    "description" : "",
+    "displayName" : "General",
+    "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_GENERAL_RIBBON_DISPLAY_NAME",
+    "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_GENERAL_RIBBON_DESCRIPTION",
+    "languageTranslations" : [ {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "General",
+      "language" : "en"
+    }, {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "כללי",
+      "language" : "he"
+    } ],
+    "notes" : "",
+    "systemName" : "general",
+    "buttons" : [ {
+      "myspType" : "WorkflowSaveButton",
+      "description" : "",
+      "displayName" : "Save",
+      "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_SAVE_WORKFLOW_BUTTON_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_SAVE_WORKFLOW_BUTTON_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "Save",
+        "language" : "en"
+      }, {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "שמור",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "save",
+      "attributes" : null,
+      "childrenXml" : null,
+      "confirmationProperty" : {
+        "myspType" : "ConfirmationProperty",
+        "description" : null,
+        "displayName" : null,
+        "displayNameLanguageKey" : null,
+        "descriptionLanguageKey" : null,
+        "languageTranslations" : null,
+        "notes" : null,
+        "systemName" : null,
+        "specificConfirmationMessage" : false,
+        "type" : 4
+      },
+      "icon" : "save.png",
+      "enforceMandatory" : false,
+      "fullSize" : true
+    }, {
+      "myspType" : "SaveAsNewWorkflowButton",
+      "description" : "",
+      "displayName" : "Save as New",
+      "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_SAVE_AS_NEW_WORKFLOW_BUTTON_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_SAVE_AS_NEW_WORKFLOW_BUTTON_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "Save as New",
+        "language" : "en"
+      }, {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "שמור כחדש",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "save_as_new",
+      "attributes" : null,
+      "childrenXml" : null,
+      "confirmationProperty" : {
+        "myspType" : "ConfirmationProperty",
+        "description" : null,
+        "displayName" : null,
+        "displayNameLanguageKey" : null,
+        "descriptionLanguageKey" : null,
+        "languageTranslations" : null,
+        "notes" : null,
+        "systemName" : null,
+        "specificConfirmationMessage" : false,
+        "type" : 1
+      },
+      "icon" : "save-as-new.png",
+      "enforceMandatory" : false,
+      "fullSize" : false,
+      "viewByRestriction" : {
+        "myspType" : "Restriction",
+        "roleGroups" : [ {
+          "myspType" : "RoleGroup",
+          "authorizationNodeNames" : [ ],
+          "conditions" : [ ],
+          "title" : "Everyone",
+          "everyone" : true
+        } ]
+      }
+    }, {
+      "myspType" : "TransitionButton",
+      "description" : "",
+      "displayName" : "Cancel Epic",
+      "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_MOVE_TO_SIDE_STEP_CSE_DEMANDACTIVITY_CANCELLED_WORKFLOW_BUTTON_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_MOVE_TO_SIDE_STEP_CSE_DEMANDACTIVITY_CANCELLED_WORKFLOW_BUTTON_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "Cancel Epic",
+        "language" : "en"
+      }, {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "לבטל Epic",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "move_to_side_step_cse_DemandActivity_Cancelled",
+      "attributes" : null,
+      "childrenXml" : null,
+      "confirmationProperty" : {
+        "myspType" : "ConfirmationProperty",
+        "description" : null,
+        "displayName" : null,
+        "displayNameLanguageKey" : null,
+        "descriptionLanguageKey" : null,
+        "languageTranslations" : null,
+        "notes" : null,
+        "systemName" : null,
+        "specificConfirmationMessage" : false,
+        "type" : 3
+      },
+      "icon" : "on-hold.png",
+      "enforceMandatory" : false,
+      "fullSize" : false,
+      "overrideDisplaySettings" : true,
+      "transitionType" : 7
+    } ],
+    "ribbonType" : 3
+  }, {
+    "myspType" : "Ribbon",
+    "description" : "",
+    "displayName" : "Rejection",
+    "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_REJECTION_RIBBON_DISPLAY_NAME",
+    "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_REJECTION_RIBBON_DESCRIPTION",
+    "languageTranslations" : [ {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "Rejection",
+      "language" : "en"
+    }, {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "דחייה",
+      "language" : "he"
+    } ],
+    "notes" : "",
+    "systemName" : "rejection",
+    "buttons" : [ {
+      "myspType" : "TransitionButton",
+      "description" : "",
+      "displayName" : "Return to Draft",
+      "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_DRAFT_WORKFLOW_BUTTON_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_DRAFT_WORKFLOW_BUTTON_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Return to Draft",
+        "language" : "en"
+      }, {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Return to Draft",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "decline_cse_DemandActivity_Draft",
+      "attributes" : null,
+      "childrenXml" : null,
+      "confirmationProperty" : {
+        "myspType" : "ConfirmationProperty",
+        "description" : null,
+        "displayName" : null,
+        "displayNameLanguageKey" : null,
+        "descriptionLanguageKey" : null,
+        "languageTranslations" : null,
+        "notes" : null,
+        "systemName" : null,
+        "specificConfirmationMessage" : false,
+        "type" : 3
+      },
+      "icon" : "send-back.png",
+      "enforceMandatory" : false,
+      "fullSize" : false,
+      "overrideDisplaySettings" : false,
+      "transitionType" : 3
+    }, {
+      "myspType" : "TransitionButton",
+      "description" : "",
+      "displayName" : "Return to Backlog",
+      "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_BACKLOG_WORKFLOW_BUTTON_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_BACKLOG_WORKFLOW_BUTTON_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Return to Backlog",
+        "language" : "en"
+      }, {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Return to Backlog",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "decline_cse_DemandActivity_Backlog",
+      "attributes" : null,
+      "childrenXml" : null,
+      "confirmationProperty" : {
+        "myspType" : "ConfirmationProperty",
+        "description" : null,
+        "displayName" : null,
+        "displayNameLanguageKey" : null,
+        "descriptionLanguageKey" : null,
+        "languageTranslations" : null,
+        "notes" : null,
+        "systemName" : null,
+        "specificConfirmationMessage" : false,
+        "type" : 3
+      },
+      "icon" : "send-back.png",
+      "enforceMandatory" : false,
+      "fullSize" : false,
+      "overrideDisplaySettings" : false,
+      "transitionType" : 3
+    }, {
+      "myspType" : "TransitionButton",
+      "description" : "",
+      "displayName" : "Return to Implementation",
+      "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_IMPLEMENTATION_WORKFLOW_BUTTON_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_IMPLEMENTATION_WORKFLOW_BUTTON_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Return to Implementation",
+        "language" : "en"
+      }, {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Return to Implementation",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "decline_cse_DemandActivity_Implementation",
+      "attributes" : null,
+      "childrenXml" : null,
+      "confirmationProperty" : {
+        "myspType" : "ConfirmationProperty",
+        "description" : null,
+        "displayName" : null,
+        "displayNameLanguageKey" : null,
+        "descriptionLanguageKey" : null,
+        "languageTranslations" : null,
+        "notes" : null,
+        "systemName" : null,
+        "specificConfirmationMessage" : false,
+        "type" : 3
+      },
+      "icon" : "send-back.png",
+      "enforceMandatory" : false,
+      "fullSize" : false,
+      "overrideDisplaySettings" : false,
+      "transitionType" : 3
+    }, {
+      "myspType" : "TransitionButton",
+      "description" : "",
+      "displayName" : "Return to Estimation",
+      "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_ESTIMATION_WORKFLOW_BUTTON_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_ESTIMATION_WORKFLOW_BUTTON_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Return to Estimation",
+        "language" : "en"
+      }, {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Return to Estimation",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "decline_cse_DemandActivity_Estimation",
+      "attributes" : null,
+      "childrenXml" : null,
+      "confirmationProperty" : {
+        "myspType" : "ConfirmationProperty",
+        "description" : null,
+        "displayName" : null,
+        "displayNameLanguageKey" : null,
+        "descriptionLanguageKey" : null,
+        "languageTranslations" : null,
+        "notes" : null,
+        "systemName" : null,
+        "specificConfirmationMessage" : false,
+        "type" : 3
+      },
+      "icon" : "send-back.png",
+      "enforceMandatory" : false,
+      "fullSize" : false,
+      "overrideDisplaySettings" : false,
+      "transitionType" : 3
+    }, {
+      "myspType" : "TransitionButton",
+      "description" : "",
+      "displayName" : "Return to Acceptance",
+      "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_ACCEPTANCE_WORKFLOW_BUTTON_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_ACCEPTANCE_WORKFLOW_BUTTON_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Return to Acceptance",
+        "language" : "en"
+      }, {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Return to Acceptance",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "decline_cse_DemandActivity_Acceptance",
+      "attributes" : null,
+      "childrenXml" : null,
+      "confirmationProperty" : {
+        "myspType" : "ConfirmationProperty",
+        "description" : null,
+        "displayName" : null,
+        "displayNameLanguageKey" : null,
+        "descriptionLanguageKey" : null,
+        "languageTranslations" : null,
+        "notes" : null,
+        "systemName" : null,
+        "specificConfirmationMessage" : false,
+        "type" : 3
+      },
+      "icon" : "send-back.png",
+      "enforceMandatory" : false,
+      "fullSize" : false,
+      "overrideDisplaySettings" : false,
+      "transitionType" : 3
+    }, {
+      "myspType" : "TransitionButton",
+      "description" : "",
+      "displayName" : "Return to Prioritization and Approval",
+      "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_PRIORITIZATIONANDAPPROVAL_WORKFLOW_BUTTON_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CSE_EPIC_DECLINE_CSE_DEMANDACTIVITY_PRIORITIZATIONANDAPPROVAL_WORKFLOW_BUTTON_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Return to Prioritization and Approval",
+        "language" : "en"
+      }, {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Return to Prioritization and Approval",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "decline_cse_DemandActivity_PrioritizationandApproval",
+      "attributes" : null,
+      "childrenXml" : null,
+      "confirmationProperty" : {
+        "myspType" : "ConfirmationProperty",
+        "description" : null,
+        "displayName" : null,
+        "displayNameLanguageKey" : null,
+        "descriptionLanguageKey" : null,
+        "languageTranslations" : null,
+        "notes" : null,
+        "systemName" : null,
+        "specificConfirmationMessage" : false,
+        "type" : 3
+      },
+      "icon" : "send-back.png",
+      "enforceMandatory" : false,
+      "fullSize" : false,
+      "overrideDisplaySettings" : false,
+      "transitionType" : 3
+    } ],
+    "ribbonType" : 2
+  } ],
+  "sideSteps" : [ {
+    "myspType" : "SideStep",
+    "description" : "",
+    "displayName" : "Cancelled",
+    "displayNameLanguageKey" : "CSE_DEMANDACTIVITY_CANCELLED_STATUS_DISPLAY_NAME",
+    "descriptionLanguageKey" : "CSE_DEMANDACTIVITY_CANCELLED_STATUS_DESCRIPTION",
+    "languageTranslations" : [ {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "Cancelled",
+      "language" : "en"
+    }, {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "מבוטל",
+      "language" : "he"
+    } ],
+    "notes" : "",
+    "systemName" : "cse_DemandActivity_Cancelled",
+    "attributes" : null,
+    "childrenXml" : null,
+    "approveByRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : null,
+      "assignee" : true,
+      "restrictionType" : null
+    },
+    "assigneeAuthorizationNodeSystemName" : "cse_leadBy_property",
+    "enteringServerActionGroup" : null,
+    "exitingServerActionGroup" : null,
+    "instructionLine" : [ {
+      "myspType" : "TextAssemblyTranslation",
+      "textAssembly" : {
+        "myspType" : "TextAssembly",
+        "parts" : [ "" ]
+      },
+      "language" : "en"
+    }, {
+      "myspType" : "TextAssemblyTranslation",
+      "textAssembly" : {
+        "myspType" : "TextAssembly",
+        "parts" : [ "" ]
+      },
+      "language" : "he"
+    } ],
+    "saveButtonRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : null,
+      "assignee" : true,
+      "restrictionType" : null
+    },
+    "stepNotification" : {
+      "myspType" : "StepNotification",
+      "additionalUsersNotification" : null,
+      "notifyAssignee" : true
+    },
+    "transitions" : [ ],
+    "overrideDisplaySettings" : false,
+    "overrideInstructionLineSettings" : false,
+    "statusSystemName" : "cse_DemandActivity_Cancelled",
+    "updateEntityStatusWhenEnteringStep" : true,
+    "resumeButton" : null,
+    "displayResumeMainFlowButton" : false
+  } ],
+  "actionWorkflowRules" : [ ],
+  "stopWorkflowRules" : [ ],
+  "deleted" : false,
+  "id" : "cse_epic",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}

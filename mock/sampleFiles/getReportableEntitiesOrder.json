@@ -1,0 +1,44 @@
+{
+  "myspType" : "EntityReportOrderApplicationInformation",
+  "entityOrder" : [ {
+    "myspType" : "KeyValue",
+    "key" : "Demand Activity",
+    "value" : "com.msp.dao.entities.cse.custom.Cse_DemandActivity"
+  }, {
+    "myspType" : "KeyValue",
+    "key" : "Strategic goal",
+    "value" : "com.msp.dao.entities.cse.custom.Cse_Goal"
+  }, {
+    "myspType" : "KeyValue",
+    "key" : "Outline Budget Plan",
+    "value" : "com.msp.dao.entities.cse.custom.Cse_OutlineBudgetPlan"
+  }, {
+    "myspType" : "KeyValue",
+    "key" : "Innovation Campaign",
+    "value" : "com.msp.dao.entities.cse.custom.Cse_InnovationCampaign"
+  }, {
+    "myspType" : "KeyValue",
+    "key" : "Supplier / Vendor",
+    "value" : "com.msp.dao.entities.cse.custom.Cse_SupplierVendor"
+  }, {
+    "myspType" : "KeyValue",
+    "key" : "Project Status Update",
+    "value" : "com.msp.dao.entities.cse.custom.Cse_DemandActivityStatusUpdate"
+  }, {
+    "myspType" : "KeyValue",
+    "key" : "Contract",
+    "value" : "com.msp.dao.entities.cse.custom.Cse_Contract"
+  }, {
+    "myspType" : "KeyValue",
+    "key" : "Survey",
+    "value" : "com.msp.dao.entities.cse.custom.Cse_Survey"
+  }, {
+    "myspType" : "KeyValue",
+    "key" : "Rollout",
+    "value" : "com.msp.dao.entities.cse.custom.Cse_Rollout"
+  }, {
+    "myspType" : "KeyValue",
+    "key" : "Request for Estimate",
+    "value" : "com.msp.dao.entities.cse.custom.Cse_Cse_RequestforEstimate"
+  } ]
+}

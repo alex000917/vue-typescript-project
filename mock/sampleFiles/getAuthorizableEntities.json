@@ -1,0 +1,3213 @@
+{
+  "myspType" : "Node",
+  "attributes" : null,
+  "children" : [ {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_acceptanceCriteriaStatus"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Acceptance Criteria Status"
+      } ],
+      "name" : "Acceptance Criteria Status",
+      "parent" : null,
+      "tooltip" : "Acceptance Criteria Status",
+      "branch" : false,
+      "id" : "cse_acceptanceCriteriaStatus"
+    } ],
+    "icons" : null,
+    "name" : "Acceptance Criteria Status",
+    "parent" : null,
+    "tooltip" : "Acceptance Criteria Status",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_AcceptanceCriteriaStatus"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "AdminTimeCategory"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Admin Time Category"
+      } ],
+      "name" : "Admin Time Category",
+      "parent" : null,
+      "tooltip" : "Admin Time Category",
+      "branch" : false,
+      "id" : "AdminTimeCategory"
+    } ],
+    "icons" : null,
+    "name" : "Admin Time Category",
+    "parent" : null,
+    "tooltip" : "Admin Time Category",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.AdminTimeCategory"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_approvalMatrixTemplate"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Approval Matrix Template"
+      } ],
+      "name" : "Approval Matrix Template",
+      "parent" : null,
+      "tooltip" : "Approval Matrix Template",
+      "branch" : false,
+      "id" : "cse_approvalMatrixTemplate"
+    } ],
+    "icons" : null,
+    "name" : "Approval Matrix Template",
+    "parent" : null,
+    "tooltip" : "Approval Matrix Template",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_ApprovalMatrixTemplate"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_approvalMatrixTemplateType"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Approval Matrix Template Type"
+      } ],
+      "name" : "Approval Matrix Template Type",
+      "parent" : null,
+      "tooltip" : "Approval Matrix Template Type",
+      "branch" : false,
+      "id" : "cse_approvalMatrixTemplateType"
+    } ],
+    "icons" : null,
+    "name" : "Approval Matrix Template Type",
+    "parent" : null,
+    "tooltip" : "Approval Matrix Template Type",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_ApprovalMatrixTemplateType"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_approvalStatus"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Approval Status"
+      } ],
+      "name" : "Approval Status",
+      "parent" : null,
+      "tooltip" : "Approval Status",
+      "branch" : false,
+      "id" : "cse_approvalStatus"
+    } ],
+    "icons" : null,
+    "name" : "Approval Status",
+    "parent" : null,
+    "tooltip" : "Approval Status",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_ApprovalStatus"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "AttachmentType_attachmentType"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Attachment Type"
+      } ],
+      "name" : "Attachment Type",
+      "parent" : null,
+      "tooltip" : "Attachment Type",
+      "branch" : false,
+      "id" : "AttachmentType_attachmentType"
+    } ],
+    "icons" : null,
+    "name" : "Attachment Type",
+    "parent" : null,
+    "tooltip" : "Attachment Type",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.AttachmentType"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_baseCalendar"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Base Calendar"
+      } ],
+      "name" : "Base Calendar",
+      "parent" : null,
+      "tooltip" : "Base Calendar",
+      "branch" : false,
+      "id" : "cse_baseCalendar"
+    } ],
+    "icons" : null,
+    "name" : "Base Calendar",
+    "parent" : null,
+    "tooltip" : "Base Calendar",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_BaseCalendar"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_budgetRAGStatus"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Budget RAG Status"
+      } ],
+      "name" : "Budget RAG Status",
+      "parent" : null,
+      "tooltip" : "Budget RAG Status",
+      "branch" : false,
+      "id" : "cse_budgetRAGStatus"
+    } ],
+    "icons" : null,
+    "name" : "Budget RAG Status",
+    "parent" : null,
+    "tooltip" : "Budget RAG Status",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_BudgetRAGStatus"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "BudgetaryLine_budgetaryLine"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Budgetary Line"
+      } ],
+      "name" : "Budgetary Line",
+      "parent" : null,
+      "tooltip" : "Budgetary Line",
+      "branch" : false,
+      "id" : "BudgetaryLine_budgetaryLine"
+    } ],
+    "icons" : null,
+    "name" : "Budgetary Line",
+    "parent" : null,
+    "tooltip" : "Budgetary Line",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.BudgetaryLine"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_businessPlanRange"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Business Plan Range"
+      } ],
+      "name" : "Business Plan Range",
+      "parent" : null,
+      "tooltip" : "Business Plan Range",
+      "branch" : false,
+      "id" : "cse_businessPlanRange"
+    } ],
+    "icons" : null,
+    "name" : "Business Plan Range",
+    "parent" : null,
+    "tooltip" : "Business Plan Range",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_BusinessPlanRange"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_capexOpex"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Capex/Opex"
+      } ],
+      "name" : "Capex/Opex",
+      "parent" : null,
+      "tooltip" : "Capex/Opex",
+      "branch" : false,
+      "id" : "cse_capexOpex"
+    } ],
+    "icons" : null,
+    "name" : "Capex/Opex",
+    "parent" : null,
+    "tooltip" : "Capex/Opex",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_CapexOpex"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_cashflowType"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Cashflow Type"
+      } ],
+      "name" : "Cashflow Type",
+      "parent" : null,
+      "tooltip" : "Cashflow Type",
+      "branch" : false,
+      "id" : "cse_cashflowType"
+    } ],
+    "icons" : null,
+    "name" : "Cashflow Type",
+    "parent" : null,
+    "tooltip" : "Cashflow Type",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_CashflowType"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_changeRequestType"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Change Request Type"
+      } ],
+      "name" : "Change Request Type",
+      "parent" : null,
+      "tooltip" : "Change Request Type",
+      "branch" : false,
+      "id" : "cse_changeRequestType"
+    } ],
+    "icons" : null,
+    "name" : "Change Request Type",
+    "parent" : null,
+    "tooltip" : "Change Request Type",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_ChangeRequestType"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_checklistStatus"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Checklist Status"
+      } ],
+      "name" : "Checklist Status",
+      "parent" : null,
+      "tooltip" : "Checklist Status",
+      "branch" : false,
+      "id" : "cse_checklistStatus"
+    } ],
+    "icons" : null,
+    "name" : "Checklist Status",
+    "parent" : null,
+    "tooltip" : "Checklist Status",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_ChecklistStatus"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_checklistTemplate"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Checklist Template"
+      } ],
+      "name" : "Checklist Template",
+      "parent" : null,
+      "tooltip" : "Checklist Template",
+      "branch" : false,
+      "id" : "cse_checklistTemplate"
+    } ],
+    "icons" : null,
+    "name" : "Checklist Template",
+    "parent" : null,
+    "tooltip" : "Checklist Template",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_ChecklistTemplate"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_checklistTemplateType"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Checklist Template Type"
+      } ],
+      "name" : "Checklist Template Type",
+      "parent" : null,
+      "tooltip" : "Checklist Template Type",
+      "branch" : false,
+      "id" : "cse_checklistTemplateType"
+    } ],
+    "icons" : null,
+    "name" : "Checklist Template Type",
+    "parent" : null,
+    "tooltip" : "Checklist Template Type",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_ChecklistTemplateType"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_contract"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Contract"
+      } ],
+      "name" : "Contract",
+      "parent" : null,
+      "tooltip" : "Contract",
+      "branch" : false,
+      "id" : "cse_contract"
+    } ],
+    "icons" : null,
+    "name" : "Contract",
+    "parent" : null,
+    "tooltip" : "Contract",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_Contract"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_contractChangeRequest"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Contract Change Request"
+      } ],
+      "name" : "Contract Change Request",
+      "parent" : null,
+      "tooltip" : "Contract Change Request",
+      "branch" : false,
+      "id" : "cse_contractChangeRequest"
+    } ],
+    "icons" : null,
+    "name" : "Contract Change Request",
+    "parent" : null,
+    "tooltip" : "Contract Change Request",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_ContractChangeRequest"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "CostItemType_costItemType"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Cost Item Type"
+      } ],
+      "name" : "Cost Item Type",
+      "parent" : null,
+      "tooltip" : "Cost Item Type",
+      "branch" : false,
+      "id" : "CostItemType_costItemType"
+    } ],
+    "icons" : null,
+    "name" : "Cost Item Type",
+    "parent" : null,
+    "tooltip" : "Cost Item Type",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.CostItemType"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_costLevel"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Cost Level"
+      } ],
+      "name" : "Cost Level",
+      "parent" : null,
+      "tooltip" : "Cost Level",
+      "branch" : false,
+      "id" : "cse_costLevel"
+    } ],
+    "icons" : null,
+    "name" : "Cost Level",
+    "parent" : null,
+    "tooltip" : "Cost Level",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_CostLevel"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_country"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Country"
+      } ],
+      "name" : "Country",
+      "parent" : null,
+      "tooltip" : "Country",
+      "branch" : false,
+      "id" : "cse_country"
+    } ],
+    "icons" : null,
+    "name" : "Country",
+    "parent" : null,
+    "tooltip" : "Country",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_Country"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_criteriaWeight"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Criteria Weight"
+      } ],
+      "name" : "Criteria Weight",
+      "parent" : null,
+      "tooltip" : "Criteria Weight",
+      "branch" : false,
+      "id" : "cse_criteriaWeight"
+    } ],
+    "icons" : null,
+    "name" : "Criteria Weight",
+    "parent" : null,
+    "tooltip" : "Criteria Weight",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_CriteriaWeight"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "Currency_currency"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Currency"
+      } ],
+      "name" : "Currency",
+      "parent" : null,
+      "tooltip" : "Currency",
+      "branch" : false,
+      "id" : "Currency_currency"
+    } ],
+    "icons" : null,
+    "name" : "Currency",
+    "parent" : null,
+    "tooltip" : "Currency",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.Currency"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "Demand"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Demand"
+      } ],
+      "name" : "Demand",
+      "parent" : null,
+      "tooltip" : "Demand",
+      "branch" : false,
+      "id" : "Demand"
+    } ],
+    "icons" : null,
+    "name" : "Demand",
+    "parent" : null,
+    "tooltip" : "Demand",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.Demand"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_budgetRequest"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Demand Activity"
+      } ],
+      "name" : "Budget Request",
+      "parent" : null,
+      "tooltip" : "Budget Request",
+      "branch" : false,
+      "id" : "cse_budgetRequest"
+    }, {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_generalRequirement"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Demand Activity"
+      } ],
+      "name" : "General Requirement",
+      "parent" : null,
+      "tooltip" : "General Requirement",
+      "branch" : false,
+      "id" : "cse_generalRequirement"
+    }, {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_generalTask"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Demand Activity"
+      } ],
+      "name" : "General Task",
+      "parent" : null,
+      "tooltip" : "General Task",
+      "branch" : false,
+      "id" : "cse_generalTask"
+    }, {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_idea"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Demand Activity"
+      } ],
+      "name" : "Idea",
+      "parent" : null,
+      "tooltip" : "Idea",
+      "branch" : false,
+      "id" : "cse_idea"
+    }, {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_internalWorkPackage"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Demand Activity"
+      } ],
+      "name" : "Internal Work Package",
+      "parent" : null,
+      "tooltip" : "Internal Work Package",
+      "branch" : false,
+      "id" : "cse_internalWorkPackage"
+    }, {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_maintenanceProjects"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Demand Activity"
+      } ],
+      "name" : "Maintenance Projects",
+      "parent" : null,
+      "tooltip" : "Maintenance Projects",
+      "branch" : false,
+      "id" : "cse_maintenanceProjects"
+    }, {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_procurementRequest"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Demand Activity"
+      } ],
+      "name" : "Procurement Request",
+      "parent" : null,
+      "tooltip" : "Procurement Request",
+      "branch" : false,
+      "id" : "cse_procurementRequest"
+    }, {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_program"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Demand Activity"
+      } ],
+      "name" : "Program",
+      "parent" : null,
+      "tooltip" : "Program",
+      "branch" : false,
+      "id" : "cse_program"
+    }, {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_waterfallProject"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Demand Activity"
+      } ],
+      "name" : "Project",
+      "parent" : null,
+      "tooltip" : "Project",
+      "branch" : false,
+      "id" : "cse_waterfallProject"
+    }, {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_changeRequest"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Demand Activity"
+      } ],
+      "name" : "Project Change Request",
+      "parent" : null,
+      "tooltip" : "Project Change Request",
+      "branch" : false,
+      "id" : "cse_changeRequest"
+    }, {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_projectRequirement"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Demand Activity"
+      } ],
+      "name" : "Project Requirement",
+      "parent" : null,
+      "tooltip" : "Project Requirement",
+      "branch" : false,
+      "id" : "cse_projectRequirement"
+    }, {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_projectTemplates"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Demand Activity"
+      } ],
+      "name" : "Project Templates",
+      "parent" : null,
+      "tooltip" : "Project Templates",
+      "branch" : false,
+      "id" : "cse_projectTemplates"
+    }, {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_releaseSprint"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Demand Activity"
+      } ],
+      "name" : "Release / Sprint",
+      "parent" : null,
+      "tooltip" : "Release / Sprint",
+      "branch" : false,
+      "id" : "cse_releaseSprint"
+    }, {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_workPackage"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Demand Activity"
+      } ],
+      "name" : "Work Package",
+      "parent" : null,
+      "tooltip" : "Work Package",
+      "branch" : false,
+      "id" : "cse_workPackage"
+    } ],
+    "icons" : null,
+    "name" : "Demand Activity",
+    "parent" : null,
+    "tooltip" : "Demand Activity",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_DemandActivity"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_demandPriority"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Demand Priority"
+      } ],
+      "name" : "Demand Priority",
+      "parent" : null,
+      "tooltip" : "Demand Priority",
+      "branch" : false,
+      "id" : "cse_demandPriority"
+    } ],
+    "icons" : null,
+    "name" : "Demand Priority",
+    "parent" : null,
+    "tooltip" : "Demand Priority",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_DemandPriority"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "Department_department"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Department"
+      } ],
+      "name" : "Department",
+      "parent" : null,
+      "tooltip" : "Department",
+      "branch" : false,
+      "id" : "Department_department"
+    } ],
+    "icons" : null,
+    "name" : "Department",
+    "parent" : null,
+    "tooltip" : "Department",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.Department"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_detailedTask"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Detailed Task"
+      } ],
+      "name" : "Detailed Task",
+      "parent" : null,
+      "tooltip" : "Detailed Task",
+      "branch" : false,
+      "id" : "cse_detailedTask"
+    } ],
+    "icons" : null,
+    "name" : "Detailed Task",
+    "parent" : null,
+    "tooltip" : "Detailed Task",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_Cse_DetailedTask"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_detailedTaskType"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Detailed Task Type"
+      } ],
+      "name" : "Detailed Task Type",
+      "parent" : null,
+      "tooltip" : "Detailed Task Type",
+      "branch" : false,
+      "id" : "cse_detailedTaskType"
+    } ],
+    "icons" : null,
+    "name" : "Detailed Task Type",
+    "parent" : null,
+    "tooltip" : "Detailed Task Type",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_DetailedTaskType"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "Division_division"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Division"
+      } ],
+      "name" : "Division",
+      "parent" : null,
+      "tooltip" : "Division",
+      "branch" : false,
+      "id" : "Division_division"
+    } ],
+    "icons" : null,
+    "name" : "Division",
+    "parent" : null,
+    "tooltip" : "Division",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.Division"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "EPM_EPMConnection"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "EPM"
+      } ],
+      "name" : "EPM Connection",
+      "parent" : null,
+      "tooltip" : "EPM Connection",
+      "branch" : false,
+      "id" : "EPM_EPMConnection"
+    } ],
+    "icons" : null,
+    "name" : "EPM",
+    "parent" : null,
+    "tooltip" : "EPM",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.EPM"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_estimateResponseType"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Estimate Response Type"
+      } ],
+      "name" : "Estimate Response Type",
+      "parent" : null,
+      "tooltip" : "Estimate Response Type",
+      "branch" : false,
+      "id" : "cse_estimateResponseType"
+    } ],
+    "icons" : null,
+    "name" : "Estimate Response Type",
+    "parent" : null,
+    "tooltip" : "Estimate Response Type",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_EstimateResponseType"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "HRSkill_HRSkill"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "HR Skill"
+      } ],
+      "name" : "HR Skill",
+      "parent" : null,
+      "tooltip" : "HR Skill",
+      "branch" : false,
+      "id" : "HRSkill_HRSkill"
+    } ],
+    "icons" : null,
+    "name" : "HR Skill",
+    "parent" : null,
+    "tooltip" : "HR Skill",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.HRSkill"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_HRbusinessprocess"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "HR business process"
+      } ],
+      "name" : "HR business process",
+      "parent" : null,
+      "tooltip" : "HR business process",
+      "branch" : false,
+      "id" : "cse_HRbusinessprocess"
+    } ],
+    "icons" : null,
+    "name" : "HR business process",
+    "parent" : null,
+    "tooltip" : "HR business process",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_HRbusinessprocess"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_highLevelMilestoneStatus"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "High Level Milestone Status"
+      } ],
+      "name" : "High Level Milestone Status",
+      "parent" : null,
+      "tooltip" : "High Level Milestone Status",
+      "branch" : false,
+      "id" : "cse_highLevelMilestoneStatus"
+    } ],
+    "icons" : null,
+    "name" : "High Level Milestone Status",
+    "parent" : null,
+    "tooltip" : "High Level Milestone Status",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_HighLevelMilestoneStatus"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_ideaOOB"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Idea"
+      } ],
+      "name" : "Idea OOB",
+      "parent" : null,
+      "tooltip" : "Idea OOB",
+      "branch" : false,
+      "id" : "cse_ideaOOB"
+    } ],
+    "icons" : null,
+    "name" : "Idea",
+    "parent" : null,
+    "tooltip" : "Idea",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_Idea"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_innovationCampaign"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Innovation Campaign"
+      } ],
+      "name" : "Innovation Campaign",
+      "parent" : null,
+      "tooltip" : "Innovation Campaign",
+      "branch" : false,
+      "id" : "cse_innovationCampaign"
+    } ],
+    "icons" : null,
+    "name" : "Innovation Campaign",
+    "parent" : null,
+    "tooltip" : "Innovation Campaign",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_InnovationCampaign"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "Insight"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Insight"
+      } ],
+      "name" : "Insight",
+      "parent" : null,
+      "tooltip" : "Insight",
+      "branch" : false,
+      "id" : "Insight"
+    } ],
+    "icons" : null,
+    "name" : "Insight",
+    "parent" : null,
+    "tooltip" : "Insight",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.Insight"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "KPI"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "KPI"
+      } ],
+      "name" : "KPI",
+      "parent" : null,
+      "tooltip" : "KPI",
+      "branch" : false,
+      "id" : "KPI"
+    } ],
+    "icons" : null,
+    "name" : "KPI",
+    "parent" : null,
+    "tooltip" : "KPI",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.KPI"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "LineClassification"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Line Classification"
+      } ],
+      "name" : "Line Classification",
+      "parent" : null,
+      "tooltip" : "Line Classification",
+      "branch" : false,
+      "id" : "LineClassification"
+    } ],
+    "icons" : null,
+    "name" : "Line Classification",
+    "parent" : null,
+    "tooltip" : "Line Classification",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.LineClassification"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_lineItemType"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Line Item Type"
+      } ],
+      "name" : "Line Item Type",
+      "parent" : null,
+      "tooltip" : "Line Item Type",
+      "branch" : false,
+      "id" : "cse_lineItemType"
+    } ],
+    "icons" : null,
+    "name" : "Line Item Type",
+    "parent" : null,
+    "tooltip" : "Line Item Type",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_LineItemType"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_linkType"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Link Type"
+      } ],
+      "name" : "Link Type",
+      "parent" : null,
+      "tooltip" : "Link Type",
+      "branch" : false,
+      "id" : "cse_linkType"
+    } ],
+    "icons" : null,
+    "name" : "Link Type",
+    "parent" : null,
+    "tooltip" : "Link Type",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_LinkType"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "MeetingType_meetingType"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Meeting Type"
+      } ],
+      "name" : "Meeting Type",
+      "parent" : null,
+      "tooltip" : "Meeting Type",
+      "branch" : false,
+      "id" : "MeetingType_meetingType"
+    } ],
+    "icons" : null,
+    "name" : "Meeting Type",
+    "parent" : null,
+    "tooltip" : "Meeting Type",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.MeetingType"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_milestoneTemplate"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Milestone Template"
+      } ],
+      "name" : "Milestone Template",
+      "parent" : null,
+      "tooltip" : "Milestone Template",
+      "branch" : false,
+      "id" : "cse_milestoneTemplate"
+    } ],
+    "icons" : null,
+    "name" : "Milestone Template",
+    "parent" : null,
+    "tooltip" : "Milestone Template",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_MilestoneTemplate"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "MilestoneType_milestoneType"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Milestone Type"
+      } ],
+      "name" : "Milestone Type",
+      "parent" : null,
+      "tooltip" : "Milestone Type",
+      "branch" : false,
+      "id" : "MilestoneType_milestoneType"
+    } ],
+    "icons" : null,
+    "name" : "Milestone Type",
+    "parent" : null,
+    "tooltip" : "Milestone Type",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.MilestoneType"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "MyWorkTimeReport"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "My Work Time Report"
+      } ],
+      "name" : "My Work Time Report",
+      "parent" : null,
+      "tooltip" : "My Work Time Report",
+      "branch" : false,
+      "id" : "MyWorkTimeReport"
+    } ],
+    "icons" : null,
+    "name" : "My Work Time Report",
+    "parent" : null,
+    "tooltip" : "My Work Time Report",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.MyWorkTimeReport"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_negotiationType"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Negotiation Type"
+      } ],
+      "name" : "Negotiation Type",
+      "parent" : null,
+      "tooltip" : "Negotiation Type",
+      "branch" : false,
+      "id" : "cse_negotiationType"
+    } ],
+    "icons" : null,
+    "name" : "Negotiation Type",
+    "parent" : null,
+    "tooltip" : "Negotiation Type",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_NegotiationType"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_offeringGrade"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Offering Grade"
+      } ],
+      "name" : "Offering Grade",
+      "parent" : null,
+      "tooltip" : "Offering Grade",
+      "branch" : false,
+      "id" : "cse_offeringGrade"
+    } ],
+    "icons" : null,
+    "name" : "Offering Grade",
+    "parent" : null,
+    "tooltip" : "Offering Grade",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_OfferingGrade"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_onboardingPhase"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Onboarding Phase"
+      } ],
+      "name" : "Onboarding Phase",
+      "parent" : null,
+      "tooltip" : "Onboarding Phase",
+      "branch" : false,
+      "id" : "cse_onboardingPhase"
+    } ],
+    "icons" : null,
+    "name" : "Onboarding Phase",
+    "parent" : null,
+    "tooltip" : "Onboarding Phase",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_OnboardingPhase"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_onboardingType"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Onboarding Type"
+      } ],
+      "name" : "Onboarding Type",
+      "parent" : null,
+      "tooltip" : "Onboarding Type",
+      "branch" : false,
+      "id" : "cse_onboardingType"
+    } ],
+    "icons" : null,
+    "name" : "Onboarding Type",
+    "parent" : null,
+    "tooltip" : "Onboarding Type",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_OnboardingType"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "Organization_organization"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Organization"
+      } ],
+      "name" : "Organization",
+      "parent" : null,
+      "tooltip" : "Organization",
+      "branch" : false,
+      "id" : "Organization_organization"
+    } ],
+    "icons" : null,
+    "name" : "Organization",
+    "parent" : null,
+    "tooltip" : "Organization",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.Organization"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_organizationUnit"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Organization Unit"
+      } ],
+      "name" : "Organization Unit",
+      "parent" : null,
+      "tooltip" : "Organization Unit",
+      "branch" : false,
+      "id" : "cse_organizationUnit"
+    } ],
+    "icons" : null,
+    "name" : "Organization Unit",
+    "parent" : null,
+    "tooltip" : "Organization Unit",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_OrganizationUnit"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_outlineBudgetPlan"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Outline Budget Plan"
+      } ],
+      "name" : "Outline Budget Plan",
+      "parent" : null,
+      "tooltip" : "Outline Budget Plan",
+      "branch" : false,
+      "id" : "cse_outlineBudgetPlan"
+    } ],
+    "icons" : null,
+    "name" : "Outline Budget Plan",
+    "parent" : null,
+    "tooltip" : "Outline Budget Plan",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_OutlineBudgetPlan"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_planResolution"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Plan Resolution"
+      } ],
+      "name" : "Plan Resolution",
+      "parent" : null,
+      "tooltip" : "Plan Resolution",
+      "branch" : false,
+      "id" : "cse_planResolution"
+    } ],
+    "icons" : null,
+    "name" : "Plan Resolution",
+    "parent" : null,
+    "tooltip" : "Plan Resolution",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_PlanResolution"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "Portfolio_portfolio"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Portfolio"
+      } ],
+      "name" : "Portfolio",
+      "parent" : null,
+      "tooltip" : "Portfolio",
+      "branch" : false,
+      "id" : "Portfolio_portfolio"
+    } ],
+    "icons" : null,
+    "name" : "Portfolio",
+    "parent" : null,
+    "tooltip" : "Portfolio",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.Portfolio"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "PortfolioType_portfolioType"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Portfolio Type"
+      } ],
+      "name" : "Portfolio Type",
+      "parent" : null,
+      "tooltip" : "Portfolio Type",
+      "branch" : false,
+      "id" : "PortfolioType_portfolioType"
+    } ],
+    "icons" : null,
+    "name" : "Portfolio Type",
+    "parent" : null,
+    "tooltip" : "Portfolio Type",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.PortfolioType"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_prioritizationDecision"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Prioritization Decision"
+      } ],
+      "name" : "Prioritization Decision",
+      "parent" : null,
+      "tooltip" : "Prioritization Decision",
+      "branch" : false,
+      "id" : "cse_prioritizationDecision"
+    } ],
+    "icons" : null,
+    "name" : "Prioritization Decision",
+    "parent" : null,
+    "tooltip" : "Prioritization Decision",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_PrioritizationDecision"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "Priority_priority"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Priority"
+      } ],
+      "name" : "Priority",
+      "parent" : null,
+      "tooltip" : "Priority",
+      "branch" : false,
+      "id" : "Priority_priority"
+    } ],
+    "icons" : null,
+    "name" : "Priority",
+    "parent" : null,
+    "tooltip" : "Priority",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.Priority"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "Project_EPMProject"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Project"
+      } ],
+      "name" : "EPM Project",
+      "parent" : null,
+      "tooltip" : "EPM Project",
+      "branch" : false,
+      "id" : "Project_EPMProject"
+    } ],
+    "icons" : null,
+    "name" : "Project",
+    "parent" : null,
+    "tooltip" : "Project",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.Project"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_projectClassification"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Project Classification"
+      } ],
+      "name" : "Project Classification",
+      "parent" : null,
+      "tooltip" : "Project Classification",
+      "branch" : false,
+      "id" : "cse_projectClassification"
+    } ],
+    "icons" : null,
+    "name" : "Project Classification",
+    "parent" : null,
+    "tooltip" : "Project Classification",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_ProjectClassification"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_demandActivityStatusUpdate"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Project Status Update"
+      } ],
+      "name" : "Project Status Update",
+      "parent" : null,
+      "tooltip" : "Project Status Update",
+      "branch" : false,
+      "id" : "cse_demandActivityStatusUpdate"
+    } ],
+    "icons" : null,
+    "name" : "Project Status Update",
+    "parent" : null,
+    "tooltip" : "Project Status Update",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_DemandActivityStatusUpdate"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "ProjectTemplate_EPMProjectTemplate"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Project Template"
+      } ],
+      "name" : "EPM Project Template",
+      "parent" : null,
+      "tooltip" : "EPM Project Template",
+      "branch" : false,
+      "id" : "ProjectTemplate_EPMProjectTemplate"
+    } ],
+    "icons" : null,
+    "name" : "Project Template",
+    "parent" : null,
+    "tooltip" : "Project Template",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.ProjectTemplate"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_publishStatus"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Publish Status"
+      } ],
+      "name" : "Publish Status",
+      "parent" : null,
+      "tooltip" : "Publish Status",
+      "branch" : false,
+      "id" : "cse_publishStatus"
+    } ],
+    "icons" : null,
+    "name" : "Publish Status",
+    "parent" : null,
+    "tooltip" : "Publish Status",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_PublishStatus"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_qualificationStatus"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Qualification Status"
+      } ],
+      "name" : "Qualification Status",
+      "parent" : null,
+      "tooltip" : "Qualification Status",
+      "branch" : false,
+      "id" : "cse_qualificationStatus"
+    } ],
+    "icons" : null,
+    "name" : "Qualification Status",
+    "parent" : null,
+    "tooltip" : "Qualification Status",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_QualificationStatus"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_RAGStatus"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "RAG Status"
+      } ],
+      "name" : "RAG Status",
+      "parent" : null,
+      "tooltip" : "RAG Status",
+      "branch" : false,
+      "id" : "cse_RAGStatus"
+    } ],
+    "icons" : null,
+    "name" : "RAG Status",
+    "parent" : null,
+    "tooltip" : "RAG Status",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_RAGStatus"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_rating"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Rating"
+      } ],
+      "name" : "Rating",
+      "parent" : null,
+      "tooltip" : "Rating",
+      "branch" : false,
+      "id" : "cse_rating"
+    } ],
+    "icons" : null,
+    "name" : "Rating",
+    "parent" : null,
+    "tooltip" : "Rating",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_Rating"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_renewalType"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Renewal Type"
+      } ],
+      "name" : "Renewal Type",
+      "parent" : null,
+      "tooltip" : "Renewal Type",
+      "branch" : false,
+      "id" : "cse_renewalType"
+    } ],
+    "icons" : null,
+    "name" : "Renewal Type",
+    "parent" : null,
+    "tooltip" : "Renewal Type",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_RenewalType"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_renewalTypeType"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Renewal Type Category"
+      } ],
+      "name" : "Renewal Type Category",
+      "parent" : null,
+      "tooltip" : "Renewal Type Category",
+      "branch" : false,
+      "id" : "cse_renewalTypeType"
+    } ],
+    "icons" : null,
+    "name" : "Renewal Type Category",
+    "parent" : null,
+    "tooltip" : "Renewal Type Category",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_RenewalTypeType"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_renewalstatus"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Renewal status"
+      } ],
+      "name" : "Renewal status",
+      "parent" : null,
+      "tooltip" : "Renewal status",
+      "branch" : false,
+      "id" : "cse_renewalstatus"
+    } ],
+    "icons" : null,
+    "name" : "Renewal status",
+    "parent" : null,
+    "tooltip" : "Renewal status",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_Renewalstatus"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_requirementType"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Requirement Type"
+      } ],
+      "name" : "Requirement Type",
+      "parent" : null,
+      "tooltip" : "Requirement Type",
+      "branch" : false,
+      "id" : "cse_requirementType"
+    } ],
+    "icons" : null,
+    "name" : "Requirement Type",
+    "parent" : null,
+    "tooltip" : "Requirement Type",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_RequirementType"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "Resource_resource"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Resource"
+      } ],
+      "name" : "Resource",
+      "parent" : null,
+      "tooltip" : "Resource",
+      "branch" : false,
+      "id" : "Resource_resource"
+    } ],
+    "icons" : null,
+    "name" : "Resource",
+    "parent" : null,
+    "tooltip" : "Resource",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.Resource"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "RestIntegration"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Rest Integration"
+      } ],
+      "name" : "Integration",
+      "parent" : null,
+      "tooltip" : "Integration",
+      "branch" : false,
+      "id" : "RestIntegration"
+    } ],
+    "icons" : null,
+    "name" : "Rest Integration",
+    "parent" : null,
+    "tooltip" : "Rest Integration",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.RestIntegration"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "RiskCategory_riskCategory"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Risk Category"
+      } ],
+      "name" : "Risk Category",
+      "parent" : null,
+      "tooltip" : "Risk Category",
+      "branch" : false,
+      "id" : "RiskCategory_riskCategory"
+    } ],
+    "icons" : null,
+    "name" : "Risk Category",
+    "parent" : null,
+    "tooltip" : "Risk Category",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.RiskCategory"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_riskIssue"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Risk Issue"
+      } ],
+      "name" : "Risk Issue",
+      "parent" : null,
+      "tooltip" : "Risk Issue",
+      "branch" : false,
+      "id" : "cse_riskIssue"
+    } ],
+    "icons" : null,
+    "name" : "Risk Issue",
+    "parent" : null,
+    "tooltip" : "Risk Issue",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_RiskIssue"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_riskIssueStatus"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Risk Issue Status"
+      } ],
+      "name" : "Risk Issue Status",
+      "parent" : null,
+      "tooltip" : "Risk Issue Status",
+      "branch" : false,
+      "id" : "cse_riskIssueStatus"
+    } ],
+    "icons" : null,
+    "name" : "Risk Issue Status",
+    "parent" : null,
+    "tooltip" : "Risk Issue Status",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_RiskIssueStatus"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_riskLevel"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Risk Level"
+      } ],
+      "name" : "Risk Level",
+      "parent" : null,
+      "tooltip" : "Risk Level",
+      "branch" : false,
+      "id" : "cse_riskLevel"
+    } ],
+    "icons" : null,
+    "name" : "Risk Level",
+    "parent" : null,
+    "tooltip" : "Risk Level",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_RiskLevel"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "RiskProbability_riskProbability"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Risk Probability"
+      } ],
+      "name" : "Risk Probability",
+      "parent" : null,
+      "tooltip" : "Risk Probability",
+      "branch" : false,
+      "id" : "RiskProbability_riskProbability"
+    } ],
+    "icons" : null,
+    "name" : "Risk Probability",
+    "parent" : null,
+    "tooltip" : "Risk Probability",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.RiskProbability"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_riskRAGStatus"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Risk RAG Status"
+      } ],
+      "name" : "Risk RAG Status",
+      "parent" : null,
+      "tooltip" : "Risk RAG Status",
+      "branch" : false,
+      "id" : "cse_riskRAGStatus"
+    } ],
+    "icons" : null,
+    "name" : "Risk RAG Status",
+    "parent" : null,
+    "tooltip" : "Risk RAG Status",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_RiskRAGStatus"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "RiskSeverity_riskSeverity"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Risk Severity"
+      } ],
+      "name" : "Risk Severity",
+      "parent" : null,
+      "tooltip" : "Risk Severity",
+      "branch" : false,
+      "id" : "RiskSeverity_riskSeverity"
+    } ],
+    "icons" : null,
+    "name" : "Risk Severity",
+    "parent" : null,
+    "tooltip" : "Risk Severity",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.RiskSeverity"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_rollout"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Rollout"
+      } ],
+      "name" : "Rollout",
+      "parent" : null,
+      "tooltip" : "Rollout",
+      "branch" : false,
+      "id" : "cse_rollout"
+    } ],
+    "icons" : null,
+    "name" : "Rollout",
+    "parent" : null,
+    "tooltip" : "Rollout",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_Rollout"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_rolloutType"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Rollout Type"
+      } ],
+      "name" : "Rollout Type",
+      "parent" : null,
+      "tooltip" : "Rollout Type",
+      "branch" : false,
+      "id" : "cse_rolloutType"
+    } ],
+    "icons" : null,
+    "name" : "Rollout Type",
+    "parent" : null,
+    "tooltip" : "Rollout Type",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_RolloutType"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "RootCauseCategory_rootCauseCategory"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Root Cause Category"
+      } ],
+      "name" : "Root Cause Category",
+      "parent" : null,
+      "tooltip" : "Root Cause Category",
+      "branch" : false,
+      "id" : "RootCauseCategory_rootCauseCategory"
+    } ],
+    "icons" : null,
+    "name" : "Root Cause Category",
+    "parent" : null,
+    "tooltip" : "Root Cause Category",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.RootCauseCategory"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_scheduleRAGStatus"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Schedule RAG Status"
+      } ],
+      "name" : "Schedule RAG Status",
+      "parent" : null,
+      "tooltip" : "Schedule RAG Status",
+      "branch" : false,
+      "id" : "cse_scheduleRAGStatus"
+    } ],
+    "icons" : null,
+    "name" : "Schedule RAG Status",
+    "parent" : null,
+    "tooltip" : "Schedule RAG Status",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_ScheduleRAGStatus"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_scopeRAGStatus"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Scope RAG Status"
+      } ],
+      "name" : "Scope RAG Status",
+      "parent" : null,
+      "tooltip" : "Scope RAG Status",
+      "branch" : false,
+      "id" : "cse_scopeRAGStatus"
+    } ],
+    "icons" : null,
+    "name" : "Scope RAG Status",
+    "parent" : null,
+    "tooltip" : "Scope RAG Status",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_ScopeRAGStatus"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "Section_section"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Section"
+      } ],
+      "name" : "Section",
+      "parent" : null,
+      "tooltip" : "Section",
+      "branch" : false,
+      "id" : "Section_section"
+    } ],
+    "icons" : null,
+    "name" : "Section",
+    "parent" : null,
+    "tooltip" : "Section",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.Section"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "System_serviceCatalog"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Service"
+      } ],
+      "name" : "Service Catalog",
+      "parent" : null,
+      "tooltip" : "Service Catalog",
+      "branch" : false,
+      "id" : "System_serviceCatalog"
+    } ],
+    "icons" : null,
+    "name" : "Service",
+    "parent" : null,
+    "tooltip" : "Service",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.System"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_skill"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Skill"
+      } ],
+      "name" : "Skill",
+      "parent" : null,
+      "tooltip" : "Skill",
+      "branch" : false,
+      "id" : "cse_skill"
+    } ],
+    "icons" : null,
+    "name" : "Skill",
+    "parent" : null,
+    "tooltip" : "Skill",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_Skill"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_skillLevel"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Skill Level"
+      } ],
+      "name" : "Skill Level",
+      "parent" : null,
+      "tooltip" : "Skill Level",
+      "branch" : false,
+      "id" : "cse_skillLevel"
+    } ],
+    "icons" : null,
+    "name" : "Skill Level",
+    "parent" : null,
+    "tooltip" : "Skill Level",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_SkillLevel"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "StepCheckList_stepChecklist"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Step Checklist"
+      } ],
+      "name" : "Step Checklist",
+      "parent" : null,
+      "tooltip" : "Step Checklist",
+      "branch" : false,
+      "id" : "StepCheckList_stepChecklist"
+    } ],
+    "icons" : null,
+    "name" : "Step Checklist",
+    "parent" : null,
+    "tooltip" : "Step Checklist",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.StepCheckList"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "StrategicGoal_strategicGoal"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Strategic Goal"
+      } ],
+      "name" : "Strategic Goal",
+      "parent" : null,
+      "tooltip" : "Strategic Goal",
+      "branch" : false,
+      "id" : "StrategicGoal_strategicGoal"
+    } ],
+    "icons" : null,
+    "name" : "Strategic Goal",
+    "parent" : null,
+    "tooltip" : "Strategic Goal",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.StrategicGoal"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_goal"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Strategic goal"
+      } ],
+      "name" : "Goal",
+      "parent" : null,
+      "tooltip" : "Goal",
+      "branch" : false,
+      "id" : "cse_goal"
+    } ],
+    "icons" : null,
+    "name" : "Strategic goal",
+    "parent" : null,
+    "tooltip" : "Strategic goal",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_Goal"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_supplierVendor"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Supplier / Vendor"
+      } ],
+      "name" : "Supplier / Vendor",
+      "parent" : null,
+      "tooltip" : "Supplier / Vendor",
+      "branch" : false,
+      "id" : "cse_supplierVendor"
+    } ],
+    "icons" : null,
+    "name" : "Supplier / Vendor",
+    "parent" : null,
+    "tooltip" : "Supplier / Vendor",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_SupplierVendor"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_survey"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Survey"
+      } ],
+      "name" : "Survey",
+      "parent" : null,
+      "tooltip" : "Survey",
+      "branch" : false,
+      "id" : "cse_survey"
+    } ],
+    "icons" : null,
+    "name" : "Survey",
+    "parent" : null,
+    "tooltip" : "Survey",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_Survey"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_surveyTemplate"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Survey Template"
+      } ],
+      "name" : "Survey Template",
+      "parent" : null,
+      "tooltip" : "Survey Template",
+      "branch" : false,
+      "id" : "cse_surveyTemplate"
+    } ],
+    "icons" : null,
+    "name" : "Survey Template",
+    "parent" : null,
+    "tooltip" : "Survey Template",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_SurveyTemplate"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_system"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "System"
+      } ],
+      "name" : "System",
+      "parent" : null,
+      "tooltip" : "System",
+      "branch" : false,
+      "id" : "cse_system"
+    } ],
+    "icons" : null,
+    "name" : "System",
+    "parent" : null,
+    "tooltip" : "System",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_System"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_tshirtSize"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "T-shirt Size"
+      } ],
+      "name" : "T-shirt Size",
+      "parent" : null,
+      "tooltip" : "T-shirt Size",
+      "branch" : false,
+      "id" : "cse_tshirtSize"
+    } ],
+    "icons" : null,
+    "name" : "T-shirt Size",
+    "parent" : null,
+    "tooltip" : "T-shirt Size",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_TshirtSize"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_taskItemType"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Task Item Type"
+      } ],
+      "name" : "Task Item Type",
+      "parent" : null,
+      "tooltip" : "Task Item Type",
+      "branch" : false,
+      "id" : "cse_taskItemType"
+    } ],
+    "icons" : null,
+    "name" : "Task Item Type",
+    "parent" : null,
+    "tooltip" : "Task Item Type",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_TaskItemType"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_taskStatus"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Task Status"
+      } ],
+      "name" : "Task Status",
+      "parent" : null,
+      "tooltip" : "Task Status",
+      "branch" : false,
+      "id" : "cse_taskStatus"
+    } ],
+    "icons" : null,
+    "name" : "Task Status",
+    "parent" : null,
+    "tooltip" : "Task Status",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_TaskStatus"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "TaskType_taskType"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Task Type"
+      } ],
+      "name" : "Task Type",
+      "parent" : null,
+      "tooltip" : "Task Type",
+      "branch" : false,
+      "id" : "TaskType_taskType"
+    } ],
+    "icons" : null,
+    "name" : "Task Type",
+    "parent" : null,
+    "tooltip" : "Task Type",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.TaskType"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "Team_team"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Team"
+      } ],
+      "name" : "Team",
+      "parent" : null,
+      "tooltip" : "Team",
+      "branch" : false,
+      "id" : "Team_team"
+    } ],
+    "icons" : null,
+    "name" : "Team",
+    "parent" : null,
+    "tooltip" : "Team",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.Team"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "Scenario_impactTemplate"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Template (Scenario)"
+      } ],
+      "name" : "Impact Template",
+      "parent" : null,
+      "tooltip" : "Impact Template",
+      "branch" : false,
+      "id" : "Scenario_impactTemplate"
+    } ],
+    "icons" : null,
+    "name" : "Template (Scenario)",
+    "parent" : null,
+    "tooltip" : "Template (Scenario)",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.Scenario"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_units"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Units"
+      } ],
+      "name" : "Units",
+      "parent" : null,
+      "tooltip" : "Units",
+      "branch" : false,
+      "id" : "cse_units"
+    } ],
+    "icons" : null,
+    "name" : "Units",
+    "parent" : null,
+    "tooltip" : "Units",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_Units"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "User_user"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "User"
+      } ],
+      "name" : "User",
+      "parent" : null,
+      "tooltip" : "User",
+      "branch" : false,
+      "id" : "User_user"
+    } ],
+    "icons" : null,
+    "name" : "User",
+    "parent" : null,
+    "tooltip" : "User",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.User"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "cse_valueLevel"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Value Level"
+      } ],
+      "name" : "Value Level",
+      "parent" : null,
+      "tooltip" : "Value Level",
+      "branch" : false,
+      "id" : "cse_valueLevel"
+    } ],
+    "icons" : null,
+    "name" : "Value Level",
+    "parent" : null,
+    "tooltip" : "Value Level",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.cse.custom.Cse_ValueLevel"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "Vendor_vendor"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Vendor"
+      } ],
+      "name" : "Vendor",
+      "parent" : null,
+      "tooltip" : "Vendor",
+      "branch" : false,
+      "id" : "Vendor_vendor"
+    } ],
+    "icons" : null,
+    "name" : "Vendor",
+    "parent" : null,
+    "tooltip" : "Vendor",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.Vendor"
+  }, {
+    "myspType" : "Node",
+    "attributes" : null,
+    "children" : [ {
+      "myspType" : "Node",
+      "attributes" : [ {
+        "myspType" : "KeyValue",
+        "key" : "SYSTEM_NAME",
+        "value" : "Worksheet"
+      } ],
+      "children" : [ ],
+      "icons" : [ {
+        "myspType" : "Icon",
+        "source" : "/MSP/resources/images/flex/authorization-tree-document-16x16.png",
+        "tooltip" : "Worksheet"
+      } ],
+      "name" : "Worksheet",
+      "parent" : null,
+      "tooltip" : "Worksheet",
+      "branch" : false,
+      "id" : "Worksheet"
+    } ],
+    "icons" : null,
+    "name" : "Worksheet",
+    "parent" : null,
+    "tooltip" : "Worksheet",
+    "branch" : true,
+    "id" : "com.msp.dao.entities.Worksheet"
+  } ],
+  "icons" : null,
+  "name" : "root",
+  "parent" : null,
+  "tooltip" : "root",
+  "branch" : true,
+  "id" : null
+}

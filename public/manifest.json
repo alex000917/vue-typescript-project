@@ -1,0 +1,20 @@
+{
+  "name": "solution-designer",
+  "short_name": "mspd",
+  "icons": [
+    {
+      "src": "./assets/img/logo.png",
+      "sizes": "220x117",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/img/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fff",
+  "theme_color": "#4DBA87"
+}

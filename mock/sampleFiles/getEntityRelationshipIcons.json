@@ -1,0 +1,55 @@
+[ {
+  "key" : "/MSP/resources/images/entityRelationship/budgetary-line-16x16.png",
+  "value" : "budgetary-line-16x16.png"
+}, {
+  "key" : "/MSP/resources/images/entityRelationship/bullet-black-16x16.png",
+  "value" : "bullet-black-16x16.png"
+}, {
+  "key" : "/MSP/resources/images/entityRelationship/bullet-blue-16x16.png",
+  "value" : "bullet-blue-16x16.png"
+}, {
+  "key" : "/MSP/resources/images/entityRelationship/bullet-green-16x16.png",
+  "value" : "bullet-green-16x16.png"
+}, {
+  "key" : "/MSP/resources/images/entityRelationship/bullet-orange-16x16.png",
+  "value" : "bullet-orange-16x16.png"
+}, {
+  "key" : "/MSP/resources/images/entityRelationship/bullet-pink-16x16.png",
+  "value" : "bullet-pink-16x16.png"
+}, {
+  "key" : "/MSP/resources/images/entityRelationship/bullet-purple-16x16.png",
+  "value" : "bullet-purple-16x16.png"
+}, {
+  "key" : "/MSP/resources/images/entityRelationship/bullet-red-16x16.png",
+  "value" : "bullet-red-16x16.png"
+}, {
+  "key" : "/MSP/resources/images/entityRelationship/bullet-white-16x16.png",
+  "value" : "bullet-white-16x16.png"
+}, {
+  "key" : "/MSP/resources/images/entityRelationship/bullet-yellow-16x16.png",
+  "value" : "bullet-yellow-16x16.png"
+}, {
+  "key" : "/MSP/resources/images/entityRelationship/code-version-16x16.png",
+  "value" : "code-version-16x16.png"
+}, {
+  "key" : "/MSP/resources/images/entityRelationship/folder.png",
+  "value" : "folder.png"
+}, {
+  "key" : "/MSP/resources/images/entityRelationship/metric-goal-16x16.png",
+  "value" : "metric-goal-16x16.png"
+}, {
+  "key" : "/MSP/resources/images/entityRelationship/organizational-unit-16x16.png",
+  "value" : "organizational-unit-16x16.png"
+}, {
+  "key" : "/MSP/resources/images/entityRelationship/portfolio-16x16.png",
+  "value" : "portfolio-16x16.png"
+}, {
+  "key" : "/MSP/resources/images/entityRelationship/release-16x16.png",
+  "value" : "release-16x16.png"
+}, {
+  "key" : "/MSP/resources/images/entityRelationship/root-cause-16x16.png",
+  "value" : "root-cause-16x16.png"
+}, {
+  "key" : "/MSP/resources/images/entityRelationship/strategic-goal-16x16.png",
+  "value" : "strategic-goal-16x16.png"
+} ]

@@ -1,0 +1,64 @@
+{
+	"description": "",
+	"displayName": "Default",
+	"displayNameLanguageKey": null,
+	"descriptionLanguageKey": null,
+	"languageTranslations": [],
+	"notes": null,
+	"systemName": "cse_default",
+	"root": {
+		"description": null,
+		"displayName": null,
+		"displayNameLanguageKey": null,
+		"descriptionLanguageKey": null,
+		"languageTranslations": [],
+		"notes": null,
+		"systemName": null,
+		"children": [
+			{
+				"description": null,
+				"displayName": "Demand Activity",
+				"displayNameLanguageKey": null,
+				"descriptionLanguageKey": null,
+				"languageTranslations": [],
+				"notes": "",
+				"systemName": null,
+				"children": [
+					{
+						"description": null,
+						"displayName": null,
+						"displayNameLanguageKey": null,
+						"descriptionLanguageKey": null,
+						"languageTranslations": [],
+						"notes": null,
+						"systemName": null,
+						"children": [
+							{
+								"description": "",
+								"displayName": "Tasks assigned to me",
+								"displayNameLanguageKey": "CSE_DEFAULT_COM.MSP.DAO.ENTITIES.CSE.CUSTOM.CSE_DEMANDACTIVITY_CSE_TASKSASSIGNEDTOME_TASK_GROUP_TREE_NODE_DISPLAY_NAME",
+								"descriptionLanguageKey": "CSE_DEFAULT_COM.MSP.DAO.ENTITIES.CSE.CUSTOM.CSE_DEMANDACTIVITY_CSE_TASKSASSIGNEDTOME_TASK_GROUP_TREE_NODE_DESCRIPTION",
+								"languageTranslations": [
+									{
+										"description": "",
+										"displayName": "Tasks assigned to me",
+										"language": "en"
+									},
+									{
+										"description": "",
+										"displayName": "המשימות שהוקצו לי",
+										"language": "he"
+									}
+								],
+								"notes": "",
+								"systemName": "cse_tasksassignedtome",
+								"children": [],
+								"parent": null
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}

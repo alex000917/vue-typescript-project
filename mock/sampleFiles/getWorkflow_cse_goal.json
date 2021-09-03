@@ -1,0 +1,778 @@
+{
+  "myspType" : "Workflow",
+  "description" : "",
+  "displayName" : "Goal",
+  "displayNameLanguageKey" : "CSE_GOAL_CSE_GOAL_WORKFLOW_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_GOAL_CSE_GOAL_WORKFLOW_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Goal",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "יעד",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_goal",
+  "attributes" : null,
+  "childrenXml" : null,
+  "authorizationTreeId" : "cse_goal",
+  "clientId" : null,
+  "createdBy" : "Administrator",
+  "dateCreated" : 1518645957468,
+  "dateModified" : 1526202589237,
+  "emptyLanesSystemName" : [ ],
+  "entityId" : "com.msp.dao.entities.cse.custom.Cse_Goal",
+  "flowSteps" : [ {
+    "myspType" : "FlowStep",
+    "description" : "",
+    "displayName" : "Start",
+    "displayNameLanguageKey" : "CSE_GOAL_CSE_GOAL_START_STEP_DISPLAY_NAME",
+    "descriptionLanguageKey" : "CSE_GOAL_CSE_GOAL_START_STEP_DESCRIPTION",
+    "languageTranslations" : [ {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "CSE_GOAL_CSE_GOAL_START_STEP_DISPLAY_NAME",
+      "language" : "en"
+    }, {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "CSE_GOAL_CSE_GOAL_START_STEP_DISPLAY_NAME",
+      "language" : "he"
+    } ],
+    "notes" : "",
+    "systemName" : "START",
+    "attributes" : null,
+    "childrenXml" : null,
+    "approveByRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : {
+        "myspType" : "Restriction",
+        "roleGroups" : [ {
+          "myspType" : "RoleGroup",
+          "authorizationNodeNames" : [ ],
+          "conditions" : [ ],
+          "title" : "Everyone",
+          "everyone" : true
+        } ]
+      },
+      "assignee" : false,
+      "restrictionType" : null
+    },
+    "assigneeAuthorizationNodeSystemName" : null,
+    "enteringServerActionGroup" : null,
+    "exitingServerActionGroup" : null,
+    "instructionLine" : null,
+    "saveButtonRestriction" : null,
+    "stepNotification" : {
+      "myspType" : "StepNotification",
+      "additionalUsersNotification" : null,
+      "notifyAssignee" : true
+    },
+    "transitions" : [ {
+      "myspType" : "Transition",
+      "allowedUsersRestriction" : {
+        "myspType" : "WorkflowRestriction",
+        "restriction" : null,
+        "assignee" : false,
+        "restrictionType" : 1
+      },
+      "button" : {
+        "myspType" : "TransitionButton",
+        "description" : "",
+        "displayName" : "Create Strategic goal",
+        "displayNameLanguageKey" : "CSE_GOAL_CSE_GOAL_CREATE_CSE_GOAL_PUBLISHED_WORKFLOW_BUTTON_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_GOAL_CSE_GOAL_CREATE_CSE_GOAL_PUBLISHED_WORKFLOW_BUTTON_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Create Strategic goal",
+          "language" : "en"
+        }, {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Create Strategic goal",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "create_cse_Goal_Published",
+        "attributes" : null,
+        "childrenXml" : null,
+        "confirmationProperty" : {
+          "myspType" : "ConfirmationProperty",
+          "description" : null,
+          "displayName" : null,
+          "displayNameLanguageKey" : null,
+          "descriptionLanguageKey" : null,
+          "languageTranslations" : null,
+          "notes" : null,
+          "systemName" : null,
+          "specificConfirmationMessage" : false,
+          "type" : 1
+        },
+        "icon" : "approve.png",
+        "enforceMandatory" : true,
+        "fullSize" : true,
+        "overrideDisplaySettings" : false,
+        "transitionType" : 1
+      },
+      "showInGraph" : true,
+      "type" : 1,
+      "destinationTransitionSystemName" : null
+    } ],
+    "overrideDisplaySettings" : false,
+    "overrideInstructionLineSettings" : false,
+    "statusSystemName" : null,
+    "updateEntityStatusWhenEnteringStep" : true,
+    "optionalRestriction" : null,
+    "startStep" : true
+  }, {
+    "myspType" : "FlowStep",
+    "description" : "",
+    "displayName" : "Published",
+    "displayNameLanguageKey" : "CSE_GOAL_PUBLISHED_STATUS_DISPLAY_NAME",
+    "descriptionLanguageKey" : "CSE_GOAL_PUBLISHED_STATUS_DESCRIPTION",
+    "languageTranslations" : [ {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "Published",
+      "language" : "en"
+    }, {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "יצא לאור",
+      "language" : "he"
+    } ],
+    "notes" : "",
+    "systemName" : "cse_Goal_Published",
+    "attributes" : null,
+    "childrenXml" : null,
+    "approveByRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : null,
+      "assignee" : true,
+      "restrictionType" : null
+    },
+    "assigneeAuthorizationNodeSystemName" : "cse_owner_property",
+    "enteringServerActionGroup" : null,
+    "exitingServerActionGroup" : null,
+    "instructionLine" : [ {
+      "myspType" : "TextAssemblyTranslation",
+      "textAssembly" : {
+        "myspType" : "TextAssembly",
+        "parts" : [ "" ]
+      },
+      "language" : "en"
+    }, {
+      "myspType" : "TextAssemblyTranslation",
+      "textAssembly" : {
+        "myspType" : "TextAssembly",
+        "parts" : [ "" ]
+      },
+      "language" : "he"
+    } ],
+    "saveButtonRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : null,
+      "assignee" : true,
+      "restrictionType" : null
+    },
+    "stepNotification" : {
+      "myspType" : "StepNotification",
+      "additionalUsersNotification" : null,
+      "notifyAssignee" : true
+    },
+    "transitions" : [ {
+      "myspType" : "Transition",
+      "allowedUsersRestriction" : {
+        "myspType" : "WorkflowRestriction",
+        "restriction" : null,
+        "assignee" : false,
+        "restrictionType" : 1
+      },
+      "button" : {
+        "myspType" : "TransitionButton",
+        "description" : "",
+        "displayName" : "Complete Goal",
+        "displayNameLanguageKey" : "CSE_GOAL_CSE_GOAL_APPROVE_CSE_GOAL_COMPLETED_WORKFLOW_BUTTON_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_GOAL_CSE_GOAL_APPROVE_CSE_GOAL_COMPLETED_WORKFLOW_BUTTON_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "Complete Goal",
+          "language" : "en"
+        }, {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "היעד הסתיים",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "approve_cse_Goal_Completed",
+        "attributes" : null,
+        "childrenXml" : null,
+        "confirmationProperty" : {
+          "myspType" : "ConfirmationProperty",
+          "description" : null,
+          "displayName" : null,
+          "displayNameLanguageKey" : null,
+          "descriptionLanguageKey" : null,
+          "languageTranslations" : null,
+          "notes" : null,
+          "systemName" : null,
+          "specificConfirmationMessage" : false,
+          "type" : 1
+        },
+        "icon" : "approve.png",
+        "enforceMandatory" : true,
+        "fullSize" : true,
+        "overrideDisplaySettings" : true,
+        "transitionType" : 2
+      },
+      "showInGraph" : true,
+      "type" : 2,
+      "destinationTransitionSystemName" : null
+    }, {
+      "myspType" : "Transition",
+      "allowedUsersRestriction" : {
+        "myspType" : "WorkflowRestriction",
+        "restriction" : null,
+        "assignee" : false,
+        "restrictionType" : 1
+      },
+      "button" : {
+        "myspType" : "TransitionButton",
+        "description" : "",
+        "displayName" : "Cancel",
+        "displayNameLanguageKey" : "CSE_GOAL_CSE_GOAL_MOVE_TO_SIDE_STEP_CSE_GOAL_CANCELLED_WORKFLOW_BUTTON_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_GOAL_CSE_GOAL_MOVE_TO_SIDE_STEP_CSE_GOAL_CANCELLED_WORKFLOW_BUTTON_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "Cancel",
+          "language" : "en"
+        }, {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "לבטל",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "move_to_side_step_cse_Goal_Cancelled",
+        "attributes" : null,
+        "childrenXml" : null,
+        "confirmationProperty" : {
+          "myspType" : "ConfirmationProperty",
+          "description" : null,
+          "displayName" : null,
+          "displayNameLanguageKey" : null,
+          "descriptionLanguageKey" : null,
+          "languageTranslations" : null,
+          "notes" : null,
+          "systemName" : null,
+          "specificConfirmationMessage" : false,
+          "type" : 3
+        },
+        "icon" : "on-hold.png",
+        "enforceMandatory" : false,
+        "fullSize" : false,
+        "overrideDisplaySettings" : true,
+        "transitionType" : 7
+      },
+      "showInGraph" : false,
+      "type" : 7,
+      "destinationTransitionSystemName" : null
+    } ],
+    "overrideDisplaySettings" : false,
+    "overrideInstructionLineSettings" : false,
+    "statusSystemName" : "cse_Goal_Published",
+    "updateEntityStatusWhenEnteringStep" : true,
+    "optionalRestriction" : null,
+    "startStep" : false
+  }, {
+    "myspType" : "FlowStep",
+    "description" : "",
+    "displayName" : "Completed",
+    "displayNameLanguageKey" : "CSE_GOAL_COMPLETED_STATUS_DISPLAY_NAME",
+    "descriptionLanguageKey" : "CSE_GOAL_COMPLETED_STATUS_DESCRIPTION",
+    "languageTranslations" : [ {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "Completed",
+      "language" : "en"
+    }, {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "הושלם",
+      "language" : "he"
+    } ],
+    "notes" : "",
+    "systemName" : "cse_Goal_Completed",
+    "attributes" : null,
+    "childrenXml" : null,
+    "approveByRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : null,
+      "assignee" : true,
+      "restrictionType" : null
+    },
+    "assigneeAuthorizationNodeSystemName" : "cse_owner_property",
+    "enteringServerActionGroup" : null,
+    "exitingServerActionGroup" : null,
+    "instructionLine" : [ {
+      "myspType" : "TextAssemblyTranslation",
+      "textAssembly" : {
+        "myspType" : "TextAssembly",
+        "parts" : [ "" ]
+      },
+      "language" : "en"
+    }, {
+      "myspType" : "TextAssemblyTranslation",
+      "textAssembly" : {
+        "myspType" : "TextAssembly",
+        "parts" : [ "" ]
+      },
+      "language" : "he"
+    } ],
+    "saveButtonRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : null,
+      "assignee" : true,
+      "restrictionType" : null
+    },
+    "stepNotification" : {
+      "myspType" : "StepNotification",
+      "additionalUsersNotification" : null,
+      "notifyAssignee" : true
+    },
+    "transitions" : [ {
+      "myspType" : "Transition",
+      "allowedUsersRestriction" : {
+        "myspType" : "WorkflowRestriction",
+        "restriction" : null,
+        "assignee" : false,
+        "restrictionType" : 1
+      },
+      "button" : {
+        "myspType" : "TransitionButton",
+        "description" : "",
+        "displayName" : "Return to Published",
+        "displayNameLanguageKey" : "CSE_GOAL_CSE_GOAL_DECLINE_CSE_GOAL_PUBLISHED_WORKFLOW_BUTTON_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_GOAL_CSE_GOAL_DECLINE_CSE_GOAL_PUBLISHED_WORKFLOW_BUTTON_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Return to Published",
+          "language" : "en"
+        }, {
+          "myspType" : "LanguageTranslation",
+          "description" : null,
+          "displayName" : "Return to Published",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "decline_cse_Goal_Published",
+        "attributes" : null,
+        "childrenXml" : null,
+        "confirmationProperty" : {
+          "myspType" : "ConfirmationProperty",
+          "description" : null,
+          "displayName" : null,
+          "displayNameLanguageKey" : null,
+          "descriptionLanguageKey" : null,
+          "languageTranslations" : null,
+          "notes" : null,
+          "systemName" : null,
+          "specificConfirmationMessage" : false,
+          "type" : 3
+        },
+        "icon" : "send-back.png",
+        "enforceMandatory" : false,
+        "fullSize" : false,
+        "overrideDisplaySettings" : false,
+        "transitionType" : 3
+      },
+      "showInGraph" : true,
+      "type" : 3,
+      "destinationTransitionSystemName" : null
+    } ],
+    "overrideDisplaySettings" : false,
+    "overrideInstructionLineSettings" : false,
+    "statusSystemName" : "cse_Goal_Completed",
+    "updateEntityStatusWhenEnteringStep" : true,
+    "optionalRestriction" : null,
+    "startStep" : false
+  } ],
+  "modifiedBy" : "Administrator",
+  "ribbons" : [ {
+    "myspType" : "Ribbon",
+    "description" : "",
+    "displayName" : "Approval",
+    "displayNameLanguageKey" : "CSE_GOAL_CSE_GOAL_APPROVAL_RIBBON_DISPLAY_NAME",
+    "descriptionLanguageKey" : "CSE_GOAL_CSE_GOAL_APPROVAL_RIBBON_DESCRIPTION",
+    "languageTranslations" : [ {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "Approval",
+      "language" : "en"
+    }, {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "אישור",
+      "language" : "he"
+    } ],
+    "notes" : "",
+    "systemName" : "approval",
+    "buttons" : [ {
+      "myspType" : "TransitionButton",
+      "description" : "",
+      "displayName" : "Create Strategic goal",
+      "displayNameLanguageKey" : "CSE_GOAL_CSE_GOAL_CREATE_CSE_GOAL_PUBLISHED_WORKFLOW_BUTTON_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_GOAL_CSE_GOAL_CREATE_CSE_GOAL_PUBLISHED_WORKFLOW_BUTTON_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Create Strategic goal",
+        "language" : "en"
+      }, {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Create Strategic goal",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "create_cse_Goal_Published",
+      "attributes" : null,
+      "childrenXml" : null,
+      "confirmationProperty" : {
+        "myspType" : "ConfirmationProperty",
+        "description" : null,
+        "displayName" : null,
+        "displayNameLanguageKey" : null,
+        "descriptionLanguageKey" : null,
+        "languageTranslations" : null,
+        "notes" : null,
+        "systemName" : null,
+        "specificConfirmationMessage" : false,
+        "type" : 1
+      },
+      "icon" : "approve.png",
+      "enforceMandatory" : true,
+      "fullSize" : true,
+      "overrideDisplaySettings" : false,
+      "transitionType" : 1
+    }, {
+      "myspType" : "TransitionButton",
+      "description" : "",
+      "displayName" : "Complete Goal",
+      "displayNameLanguageKey" : "CSE_GOAL_CSE_GOAL_APPROVE_CSE_GOAL_COMPLETED_WORKFLOW_BUTTON_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_GOAL_CSE_GOAL_APPROVE_CSE_GOAL_COMPLETED_WORKFLOW_BUTTON_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "Complete Goal",
+        "language" : "en"
+      }, {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "היעד הסתיים",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "approve_cse_Goal_Completed",
+      "attributes" : null,
+      "childrenXml" : null,
+      "confirmationProperty" : {
+        "myspType" : "ConfirmationProperty",
+        "description" : null,
+        "displayName" : null,
+        "displayNameLanguageKey" : null,
+        "descriptionLanguageKey" : null,
+        "languageTranslations" : null,
+        "notes" : null,
+        "systemName" : null,
+        "specificConfirmationMessage" : false,
+        "type" : 1
+      },
+      "icon" : "approve.png",
+      "enforceMandatory" : true,
+      "fullSize" : true,
+      "overrideDisplaySettings" : true,
+      "transitionType" : 2
+    } ],
+    "ribbonType" : 1
+  }, {
+    "myspType" : "Ribbon",
+    "description" : "",
+    "displayName" : "General",
+    "displayNameLanguageKey" : "CSE_GOAL_CSE_GOAL_GENERAL_RIBBON_DISPLAY_NAME",
+    "descriptionLanguageKey" : "CSE_GOAL_CSE_GOAL_GENERAL_RIBBON_DESCRIPTION",
+    "languageTranslations" : [ {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "General",
+      "language" : "en"
+    }, {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "כללי",
+      "language" : "he"
+    } ],
+    "notes" : "",
+    "systemName" : "general",
+    "buttons" : [ {
+      "myspType" : "WorkflowSaveButton",
+      "description" : "",
+      "displayName" : "Save",
+      "displayNameLanguageKey" : "CSE_GOAL_CSE_GOAL_SAVE_WORKFLOW_BUTTON_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_GOAL_CSE_GOAL_SAVE_WORKFLOW_BUTTON_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "Save",
+        "language" : "en"
+      }, {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "שמור",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "save",
+      "attributes" : null,
+      "childrenXml" : null,
+      "confirmationProperty" : {
+        "myspType" : "ConfirmationProperty",
+        "description" : null,
+        "displayName" : null,
+        "displayNameLanguageKey" : null,
+        "descriptionLanguageKey" : null,
+        "languageTranslations" : null,
+        "notes" : null,
+        "systemName" : null,
+        "specificConfirmationMessage" : false,
+        "type" : 4
+      },
+      "icon" : "save.png",
+      "enforceMandatory" : false,
+      "fullSize" : true
+    }, {
+      "myspType" : "SaveAsNewWorkflowButton",
+      "description" : "",
+      "displayName" : "Save as New",
+      "displayNameLanguageKey" : "CSE_GOAL_CSE_GOAL_SAVE_AS_NEW_WORKFLOW_BUTTON_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_GOAL_CSE_GOAL_SAVE_AS_NEW_WORKFLOW_BUTTON_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "Save as New",
+        "language" : "en"
+      }, {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "שמור כחדש",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "save_as_new",
+      "attributes" : null,
+      "childrenXml" : null,
+      "confirmationProperty" : {
+        "myspType" : "ConfirmationProperty",
+        "description" : null,
+        "displayName" : null,
+        "displayNameLanguageKey" : null,
+        "descriptionLanguageKey" : null,
+        "languageTranslations" : null,
+        "notes" : null,
+        "systemName" : null,
+        "specificConfirmationMessage" : false,
+        "type" : 1
+      },
+      "icon" : "save-as-new.png",
+      "enforceMandatory" : false,
+      "fullSize" : false,
+      "viewByRestriction" : {
+        "myspType" : "Restriction",
+        "roleGroups" : [ {
+          "myspType" : "RoleGroup",
+          "authorizationNodeNames" : [ ],
+          "conditions" : [ ],
+          "title" : "Everyone",
+          "everyone" : true
+        } ]
+      }
+    }, {
+      "myspType" : "TransitionButton",
+      "description" : "",
+      "displayName" : "Cancel",
+      "displayNameLanguageKey" : "CSE_GOAL_CSE_GOAL_MOVE_TO_SIDE_STEP_CSE_GOAL_CANCELLED_WORKFLOW_BUTTON_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_GOAL_CSE_GOAL_MOVE_TO_SIDE_STEP_CSE_GOAL_CANCELLED_WORKFLOW_BUTTON_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "Cancel",
+        "language" : "en"
+      }, {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "לבטל",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "move_to_side_step_cse_Goal_Cancelled",
+      "attributes" : null,
+      "childrenXml" : null,
+      "confirmationProperty" : {
+        "myspType" : "ConfirmationProperty",
+        "description" : null,
+        "displayName" : null,
+        "displayNameLanguageKey" : null,
+        "descriptionLanguageKey" : null,
+        "languageTranslations" : null,
+        "notes" : null,
+        "systemName" : null,
+        "specificConfirmationMessage" : false,
+        "type" : 3
+      },
+      "icon" : "on-hold.png",
+      "enforceMandatory" : false,
+      "fullSize" : false,
+      "overrideDisplaySettings" : true,
+      "transitionType" : 7
+    } ],
+    "ribbonType" : 3
+  }, {
+    "myspType" : "Ribbon",
+    "description" : "",
+    "displayName" : "Rejection",
+    "displayNameLanguageKey" : "CSE_GOAL_CSE_GOAL_REJECTION_RIBBON_DISPLAY_NAME",
+    "descriptionLanguageKey" : "CSE_GOAL_CSE_GOAL_REJECTION_RIBBON_DESCRIPTION",
+    "languageTranslations" : [ {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "Rejection",
+      "language" : "en"
+    }, {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "דחייה",
+      "language" : "he"
+    } ],
+    "notes" : "",
+    "systemName" : "rejection",
+    "buttons" : [ {
+      "myspType" : "TransitionButton",
+      "description" : "",
+      "displayName" : "Return to Published",
+      "displayNameLanguageKey" : "CSE_GOAL_CSE_GOAL_DECLINE_CSE_GOAL_PUBLISHED_WORKFLOW_BUTTON_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_GOAL_CSE_GOAL_DECLINE_CSE_GOAL_PUBLISHED_WORKFLOW_BUTTON_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Return to Published",
+        "language" : "en"
+      }, {
+        "myspType" : "LanguageTranslation",
+        "description" : null,
+        "displayName" : "Return to Published",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "decline_cse_Goal_Published",
+      "attributes" : null,
+      "childrenXml" : null,
+      "confirmationProperty" : {
+        "myspType" : "ConfirmationProperty",
+        "description" : null,
+        "displayName" : null,
+        "displayNameLanguageKey" : null,
+        "descriptionLanguageKey" : null,
+        "languageTranslations" : null,
+        "notes" : null,
+        "systemName" : null,
+        "specificConfirmationMessage" : false,
+        "type" : 3
+      },
+      "icon" : "send-back.png",
+      "enforceMandatory" : false,
+      "fullSize" : false,
+      "overrideDisplaySettings" : false,
+      "transitionType" : 3
+    } ],
+    "ribbonType" : 2
+  } ],
+  "sideSteps" : [ {
+    "myspType" : "SideStep",
+    "description" : "",
+    "displayName" : "Cancelled",
+    "displayNameLanguageKey" : "CSE_GOAL_CANCELLED_STATUS_DISPLAY_NAME",
+    "descriptionLanguageKey" : "CSE_GOAL_CANCELLED_STATUS_DESCRIPTION",
+    "languageTranslations" : [ {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "Cancelled",
+      "language" : "en"
+    }, {
+      "myspType" : "LanguageTranslation",
+      "description" : "",
+      "displayName" : "מבוטל",
+      "language" : "he"
+    } ],
+    "notes" : "",
+    "systemName" : "cse_Goal_Cancelled",
+    "attributes" : null,
+    "childrenXml" : null,
+    "approveByRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : null,
+      "assignee" : true,
+      "restrictionType" : null
+    },
+    "assigneeAuthorizationNodeSystemName" : "cse_owner_property",
+    "enteringServerActionGroup" : null,
+    "exitingServerActionGroup" : null,
+    "instructionLine" : [ {
+      "myspType" : "TextAssemblyTranslation",
+      "textAssembly" : {
+        "myspType" : "TextAssembly",
+        "parts" : [ "" ]
+      },
+      "language" : "en"
+    }, {
+      "myspType" : "TextAssemblyTranslation",
+      "textAssembly" : {
+        "myspType" : "TextAssembly",
+        "parts" : [ "" ]
+      },
+      "language" : "he"
+    } ],
+    "saveButtonRestriction" : {
+      "myspType" : "WorkflowRestriction",
+      "restriction" : null,
+      "assignee" : true,
+      "restrictionType" : null
+    },
+    "stepNotification" : {
+      "myspType" : "StepNotification",
+      "additionalUsersNotification" : null,
+      "notifyAssignee" : true
+    },
+    "transitions" : [ ],
+    "overrideDisplaySettings" : false,
+    "overrideInstructionLineSettings" : false,
+    "statusSystemName" : "cse_Goal_Cancelled",
+    "updateEntityStatusWhenEnteringStep" : true,
+    "resumeButton" : null,
+    "displayResumeMainFlowButton" : false
+  } ],
+  "actionWorkflowRules" : [ ],
+  "stopWorkflowRules" : [ ],
+  "deleted" : false,
+  "id" : "cse_goal",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}

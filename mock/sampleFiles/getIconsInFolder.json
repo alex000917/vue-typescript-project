@@ -1,0 +1,43 @@
+[ {
+  "key" : "/MSP/resources/images/karambit/workflow_ribbon/half/approve.png",
+  "value" : "approve.png"
+}, {
+  "key" : "/MSP/resources/images/karambit/workflow_ribbon/half/calculator.png",
+  "value" : "calculator.png"
+}, {
+  "key" : "/MSP/resources/images/karambit/workflow_ribbon/half/cancel.png",
+  "value" : "cancel.png"
+}, {
+  "key" : "/MSP/resources/images/karambit/workflow_ribbon/half/delete.png",
+  "value" : "delete.png"
+}, {
+  "key" : "/MSP/resources/images/karambit/workflow_ribbon/half/generic.png",
+  "value" : "generic.png"
+}, {
+  "key" : "/MSP/resources/images/karambit/workflow_ribbon/half/lock-go-16x16.png",
+  "value" : "lock-go-16x16.png"
+}, {
+  "key" : "/MSP/resources/images/karambit/workflow_ribbon/half/on-hold.png",
+  "value" : "on-hold.png"
+}, {
+  "key" : "/MSP/resources/images/karambit/workflow_ribbon/half/print.png",
+  "value" : "print.png"
+}, {
+  "key" : "/MSP/resources/images/karambit/workflow_ribbon/half/reject.png",
+  "value" : "reject.png"
+}, {
+  "key" : "/MSP/resources/images/karambit/workflow_ribbon/half/save-as-new.png",
+  "value" : "save-as-new.png"
+}, {
+  "key" : "/MSP/resources/images/karambit/workflow_ribbon/half/save.png",
+  "value" : "save.png"
+}, {
+  "key" : "/MSP/resources/images/karambit/workflow_ribbon/half/send-back.png",
+  "value" : "send-back.png"
+}, {
+  "key" : "/MSP/resources/images/karambit/workflow_ribbon/half/show-list.png",
+  "value" : "show-list.png"
+}, {
+  "key" : "/MSP/resources/images/karambit/workflow_ribbon/half/skip-ahead.png",
+  "value" : "skip-ahead.png"
+} ]

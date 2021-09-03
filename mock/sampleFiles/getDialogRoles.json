@@ -1,0 +1,1103 @@
+[ {
+  "description" : "Administration",
+  "displayName" : "Administrator",
+  "displayNameLanguageKey" : "ADMINISTRATOR_DIALOG_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "ADMINISTRATOR_DIALOG_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "Administration",
+    "displayName" : "Administrator",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "מנהלן",
+    "displayName" : "מנהלן",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "administrator_dialog",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "ADMINISTRATOR",
+    "value" : "6"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1328060779730,
+  "dateModified" : 1535667567000,
+  "modifiedBy" : null,
+  "workspaceId" : "Administrator",
+  "color" : "gray",
+  "icon" : "fa-cog",
+  "productSN" : "administration",
+  "deleted" : false,
+  "licenseRole" : 1,
+  "helixRole" : 1,
+  "id" : "6",
+  "newInstance" : false,
+  "outOfTheBox" : true
+}, {
+  "description" : "",
+  "displayName" : "Solution Designer",
+  "displayNameLanguageKey" : "ADMINISTRATOR_SOLUTIONDESIGNER_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "ADMINISTRATOR_SOLUTIONDESIGNER_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Solution Designer",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "מעצב הפתרון",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "administrator_solutiondesigner",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "ADMINISTRATOR",
+    "value" : "6"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1332973315257,
+  "dateModified" : 1332973315000,
+  "modifiedBy" : null,
+  "workspaceId" : "Solution Designer",
+  "color" : null,
+  "icon" : "fa-wrench",
+  "productSN" : "solution_designer",
+  "deleted" : false,
+  "licenseRole" : 0,
+  "helixRole" : 1,
+  "id" : "18",
+  "newInstance" : false,
+  "outOfTheBox" : true
+}, {
+  "description" : "",
+  "displayName" : "SUPER_USER_DIALOG_ROLE_DISPLAY_NAME",
+  "displayNameLanguageKey" : "SUPER_USER_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "SUPER_USER_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "SUPER_USER_DIALOG_ROLE_DISPLAY_NAME",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "SUPER_USER_DIALOG_ROLE_DISPLAY_NAME",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "super_user",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1518374999110,
+  "dateModified" : 1518374999000,
+  "modifiedBy" : null,
+  "workspaceId" : "Employee",
+  "color" : null,
+  "icon" : null,
+  "productSN" : null,
+  "deleted" : false,
+  "licenseRole" : 3,
+  "helixRole" : 2,
+  "id" : "28",
+  "newInstance" : false,
+  "outOfTheBox" : true
+}, {
+  "description" : "",
+  "displayName" : "VIEW_ONLY_DIALOG_ROLE_DISPLAY_NAME",
+  "displayNameLanguageKey" : "VIEW_ONLY_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "VIEW_ONLY_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "VIEW_ONLY_DIALOG_ROLE_DISPLAY_NAME",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "VIEW_ONLY_DIALOG_ROLE_DISPLAY_NAME",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "view_only",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1518374999207,
+  "dateModified" : 1518374999000,
+  "modifiedBy" : null,
+  "workspaceId" : "Employee",
+  "color" : null,
+  "icon" : null,
+  "productSN" : null,
+  "deleted" : false,
+  "licenseRole" : 3,
+  "helixRole" : 2,
+  "id" : "29",
+  "newInstance" : false,
+  "outOfTheBox" : true
+}, {
+  "description" : "",
+  "displayName" : "Budget Plan Owner",
+  "displayNameLanguageKey" : "CSE_ROLE_BUDGETPLANOWNER_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_BUDGETPLANOWNER_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Budget Plan Owner",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "אחראי תכנון תקציב",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_BudgetPlanOwner",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1518682660330,
+  "dateModified" : 1535666553000,
+  "modifiedBy" : null,
+  "workspaceId" : "budgetPlanOwner",
+  "color" : "blue",
+  "icon" : "fa-dollar-sign",
+  "productSN" : "cse_product_BudgetPlanning",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "30",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Budget Referent",
+  "displayNameLanguageKey" : "CSE_ROLE_BUDGETREFERENT_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_BUDGETREFERENT_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Budget Referent",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "רפרנט תקציב",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_BudgetReferent",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1518825224027,
+  "dateModified" : 1535666308000,
+  "modifiedBy" : null,
+  "workspaceId" : "budgetReferent",
+  "color" : "blue",
+  "icon" : "fa-dollar-sign",
+  "productSN" : "cse_product_BudgetPlanning",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "31",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Project Manager",
+  "displayNameLanguageKey" : "CSE_ROLE_PROJECTMANAGER_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_PROJECTMANAGER_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Project Manager",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "מנהל פרוייקט",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_ProjectManager",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1522648226797,
+  "dateModified" : 1535666375000,
+  "modifiedBy" : null,
+  "workspaceId" : "projectManager",
+  "color" : "teal",
+  "icon" : "fa-project-diagram",
+  "productSN" : "cse_product_ProjectManagement",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "32",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Innovation Manager",
+  "displayNameLanguageKey" : "CSE_ROLE_INNOVATIONMANAGER_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_INNOVATIONMANAGER_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Innovation Manager",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "מנהל חדשנות",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_InnovationManager",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1525385773193,
+  "dateModified" : 1535666308000,
+  "modifiedBy" : null,
+  "workspaceId" : "innovationManager",
+  "color" : "purple",
+  "icon" : "fa-lightbulb",
+  "productSN" : "cse_product_Innovation",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "33",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "Innovation Management for Employee",
+  "displayName" : "Innovation Employee",
+  "displayNameLanguageKey" : "CSE_ROLE_INNOVATIONEMPLOYEE_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_INNOVATIONEMPLOYEE_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "Innovation Management for Employee",
+    "displayName" : "Innovation Employee",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "מערכת ניהול חדשנות",
+    "displayName" : "עובד חדשנות",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_InnovationEmployee",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1525387466220,
+  "dateModified" : 1537146317000,
+  "modifiedBy" : null,
+  "workspaceId" : "innovationEmployee",
+  "color" : "purple",
+  "icon" : "fa-lightbulb",
+  "productSN" : "cse_product_Innovation",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "34",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Resource Manager",
+  "displayNameLanguageKey" : "CSE_ROLE_RESOURCEMANAGER_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_RESOURCEMANAGER_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Resource Manager",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "מנהל משאבים",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_ResourceManager",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1525896630250,
+  "dateModified" : 1535666375000,
+  "modifiedBy" : null,
+  "workspaceId" : "resourceManager",
+  "color" : "teal",
+  "icon" : "fa-users",
+  "productSN" : "cse_product_ResourceManagement",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "35",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Procurement Referent",
+  "displayNameLanguageKey" : "CSE_ROLE_PROCUREMENTREFERENT_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_PROCUREMENTREFERENT_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Procurement Referent",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "רפרנט רכש",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_ProcurementReferent",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1526009374360,
+  "dateModified" : 1535666308000,
+  "modifiedBy" : null,
+  "workspaceId" : "procurementReferent",
+  "color" : "green",
+  "icon" : "fa-hand-holding-usd",
+  "productSN" : "cse_product_Procurement",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "36",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Procurement Manager",
+  "displayNameLanguageKey" : "CSE_ROLE_PROCUREMENTMANAGER_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_PROCUREMENTMANAGER_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Procurement Manager",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "מנהל רכש",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_ProcurementManager",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1526009374360,
+  "dateModified" : 1535666553000,
+  "modifiedBy" : null,
+  "workspaceId" : "procurementManager",
+  "color" : "green",
+  "icon" : "fa-hand-holding-usd",
+  "productSN" : "cse_product_Procurement",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "37",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "Strategy & Goal management for C-Level executives and VPs",
+  "displayName" : "C-Level executives",
+  "displayNameLanguageKey" : "CSE_ROLE_CFO_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_CFO_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "Strategy & Goal management for C-Level executives and VPs",
+    "displayName" : "C-Level executives",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "ניהול אסטרטגיה ומטרות ארגוניות להנהלה בכירה",
+    "displayName" : "מנהלים בכירים",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_CFO",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1526596037437,
+  "dateModified" : 1535666308000,
+  "modifiedBy" : null,
+  "workspaceId" : "ClevelStrategy",
+  "color" : "turquoise",
+  "icon" : "fa-bullseye",
+  "productSN" : "cse_product_ExecutionPanel",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "39",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "Strategy & Goal Management for the CEO",
+  "displayName" : "CEO",
+  "displayNameLanguageKey" : "CSE_ROLE_CEO_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_CEO_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "Strategy & Goal Management for the CEO",
+    "displayName" : "CEO",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "ניהול אסטרטגיה ומטרות ארגוניות למנכ\"ל",
+    "displayName" : "מנכ\"ל",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_CEO",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1526596052200,
+  "dateModified" : 1535666553000,
+  "modifiedBy" : null,
+  "workspaceId" : "strategyGoalManagement",
+  "color" : "turquoise",
+  "icon" : "fa-bullseye",
+  "productSN" : "cse_product_StrategyGoals",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "40",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "PMO",
+  "displayNameLanguageKey" : "CSE_ROLE_PMO_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_PMO_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "PMO",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "PMO",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_PMO",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1527546350990,
+  "dateModified" : 1535666375000,
+  "modifiedBy" : null,
+  "workspaceId" : "pmo",
+  "color" : "teal",
+  "icon" : "fa-project-diagram",
+  "productSN" : "cse_product_ProjectManagement",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "41",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Vendor Manager",
+  "displayNameLanguageKey" : "CSE_ROLE_VENDORMANAGEMENT_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_VENDORMANAGEMENT_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Vendor Manager",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "מנהל יצרנים",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_VendorManagement",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1529016293107,
+  "dateModified" : 1535666553000,
+  "modifiedBy" : null,
+  "workspaceId" : "vendorManagement",
+  "color" : "green",
+  "icon" : "fa-industry",
+  "productSN" : "cse_product_VendorManagement",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "43",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "Time and Attendance for Employees",
+  "displayName" : "Employee",
+  "displayNameLanguageKey" : "CSE_ROLE_TIMEANDATTENDANCE_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_TIMEANDATTENDANCE_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "Time and Attendance for Employees",
+    "displayName" : "Employee",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "מערכת דיווח שעות לעובדים",
+    "displayName" : "עובד",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_TimeandAttendance",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1529975867217,
+  "dateModified" : 1545849570000,
+  "modifiedBy" : null,
+  "workspaceId" : "TimeAndAttendance",
+  "color" : "teal",
+  "icon" : "fa-clock",
+  "productSN" : "my_work",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "44",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Requirement Manager",
+  "displayNameLanguageKey" : "CSE_ROLE_REQUIREMENTMANAGER_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_REQUIREMENTMANAGER_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Requirement Manager",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "מנהל דרישה",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_RequirementManager",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1536273990330,
+  "dateModified" : 1537146317000,
+  "modifiedBy" : null,
+  "workspaceId" : "RequirementManager",
+  "color" : null,
+  "icon" : "fa-list",
+  "productSN" : "cse_product_RequirementManagement",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "45",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Onboarding Manager",
+  "displayNameLanguageKey" : "CSE_ROLE_HRMANAGER_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_HRMANAGER_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Onboarding Manager",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "מנהל כניסה לתפקיד",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_HRManager",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1543949223167,
+  "dateModified" : 1583437890417,
+  "modifiedBy" : null,
+  "workspaceId" : "HRManager",
+  "color" : null,
+  "icon" : "fa-user-circle",
+  "productSN" : "cse_product_Onboarding",
+  "deleted" : false,
+  "licenseRole" : 3,
+  "helixRole" : 2,
+  "id" : "46",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "VP HR",
+  "displayNameLanguageKey" : "CSE_ROLE_VPHR_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_VPHR_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "VP HR",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "סמנכ\"ל כוח אדם",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_VPHR",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1544492633063,
+  "dateModified" : 1544492633000,
+  "modifiedBy" : null,
+  "workspaceId" : "VPHR",
+  "color" : null,
+  "icon" : "fa-user-circle",
+  "productSN" : "cse_product_Onboarding",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "47",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Requirement Customer",
+  "displayNameLanguageKey" : "CSE_ROLE_REQUIREMENTCUSTOMER_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_REQUIREMENTCUSTOMER_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Requirement Customer",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "לקוח הדרישה",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_RequirementCustomer",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1544734175037,
+  "dateModified" : 1544758205000,
+  "modifiedBy" : null,
+  "workspaceId" : "RequirementCustomer",
+  "color" : null,
+  "icon" : "fa-list",
+  "productSN" : "cse_product_RequirementManagement",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "48",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Business Representative",
+  "displayNameLanguageKey" : "CSE_ROLE_BUSINESSREPRESENTATIVE_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_BUSINESSREPRESENTATIVE_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Business Representative",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "נציג הלקוח",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_BusinessRepresentative",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1544738743803,
+  "dateModified" : 1550175107000,
+  "modifiedBy" : null,
+  "workspaceId" : "RequirementsBusinessRepresentative",
+  "color" : null,
+  "icon" : "fa-list",
+  "productSN" : "cse_product_RequirementManagement",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "49",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Implementation Lead",
+  "displayNameLanguageKey" : "CSE_ROLE_IMPLEMENTATIONLEAD_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_IMPLEMENTATIONLEAD_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Implementation Lead",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "מנהל צוות",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_ImplementationLead",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1544744233170,
+  "dateModified" : 1550175037000,
+  "modifiedBy" : null,
+  "workspaceId" : "RequirementsImplementationLead",
+  "color" : null,
+  "icon" : "fa-list",
+  "productSN" : "cse_product_RequirementManagement",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "50",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "Business Relationship Manager",
+  "displayName" : "BRM",
+  "displayNameLanguageKey" : "CSE_ROLE_BRM_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_BRM_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "Business Relationship Manager",
+    "displayName" : "BRM",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "מנהל קשר עסקי",
+    "displayName" : "BRM",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_BRM",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1545339892997,
+  "dateModified" : 1545339892000,
+  "modifiedBy" : null,
+  "workspaceId" : "BRM",
+  "color" : null,
+  "icon" : "fa-list",
+  "productSN" : "cse_product_RequirementManagement",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "51",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Onboarding Employee",
+  "displayNameLanguageKey" : "CSE_ROLE_HREMPLOYEE_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_HREMPLOYEE_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Onboarding Employee",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "משתמש כניסה לתפקיד",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_HREmployee",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1546893806867,
+  "dateModified" : 1546971635000,
+  "modifiedBy" : null,
+  "workspaceId" : "HREmployee",
+  "color" : null,
+  "icon" : "fa-user-circle",
+  "productSN" : "cse_product_Onboarding",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "52",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Projects Employee",
+  "displayNameLanguageKey" : "CSE_ROLE_PROJECTEMPLOYEE_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_PROJECTEMPLOYEE_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Projects Employee",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "עובד פרויקטים",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_ProjectEmployee",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1551054051030,
+  "dateModified" : 1551652786000,
+  "modifiedBy" : null,
+  "workspaceId" : "ProjectsEmployee",
+  "color" : null,
+  "icon" : "fa-project-diagram",
+  "productSN" : "cse_product_ProjectManagement",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "53",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Requirements Employee",
+  "displayNameLanguageKey" : "CSE_ROLE_REQUIREMENTEMPLOYEE_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_REQUIREMENTEMPLOYEE_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Requirements Employee",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "עובד דרישות",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_RequirementEmployee",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1551054087890,
+  "dateModified" : 1551652786000,
+  "modifiedBy" : null,
+  "workspaceId" : "RequirementsEmployee",
+  "color" : null,
+  "icon" : "fa-list",
+  "productSN" : "cse_product_RequirementManagement",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "54",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "Task Manager",
+  "displayName" : "Manager",
+  "displayNameLanguageKey" : "CSE_ROLE_MANAGER_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_MANAGER_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "Task Manager",
+    "displayName" : "Manager",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "מנהל",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_Manager",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1571856931923,
+  "dateModified" : 1577052664197,
+  "modifiedBy" : null,
+  "workspaceId" : "TaskManager",
+  "color" : null,
+  "icon" : "fa-tasks",
+  "productSN" : "cse_product_TaskManagement",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "55",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Release Deployment Owner",
+  "displayNameLanguageKey" : "CSE_ROLE_RELEASEDEPLOYMENTOWNER_DIALOG_ROLE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_ROLE_RELEASEDEPLOYMENTOWNER_DIALOG_ROLE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Release Deployment Owner",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "מנהל העברה לייצור",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_role_ReleaseDeploymentOwner",
+  "baseRole" : {
+    "myspType" : "KeyValue",
+    "key" : "EMPLOYEE",
+    "value" : "1"
+  },
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1574351603473,
+  "dateModified" : 1581530272813,
+  "modifiedBy" : null,
+  "workspaceId" : "ReleaseDeploymentOwner",
+  "color" : null,
+  "icon" : "fa-user",
+  "productSN" : "cse_product_ReleaseDeployment",
+  "deleted" : false,
+  "licenseRole" : 2,
+  "helixRole" : 2,
+  "id" : "56",
+  "newInstance" : false,
+  "outOfTheBox" : false
+} ]

@@ -1,0 +1,481 @@
+[ {
+  "description" : "",
+  "displayName" : "Solution Designer",
+  "displayNameLanguageKey" : "SOLUTION_DESIGNER_PRODUCT_DISPLAY_NAME",
+  "descriptionLanguageKey" : "SOLUTION_DESIGNER_PRODUCT_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Solution Designer",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "מעצב הפתרון",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "solution_designer",
+  "baseRole" : null,
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1535661977420,
+  "dateModified" : 1535661977000,
+  "modifiedBy" : null,
+  "color" : "gray",
+  "icon" : null,
+  "deleted" : false,
+  "id" : "1",
+  "newInstance" : false,
+  "outOfTheBox" : true
+}, {
+  "description" : "",
+  "displayName" : "Administration",
+  "displayNameLanguageKey" : "ADMINISTRATION_PRODUCT_DISPLAY_NAME",
+  "descriptionLanguageKey" : "ADMINISTRATION_PRODUCT_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Administration",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "ניהול מערכת",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "administration",
+  "baseRole" : null,
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1535661977427,
+  "dateModified" : 1535661977000,
+  "modifiedBy" : null,
+  "color" : "gray",
+  "icon" : null,
+  "deleted" : false,
+  "id" : "2",
+  "newInstance" : false,
+  "outOfTheBox" : true
+}, {
+  "description" : "",
+  "displayName" : "Time And Attendance",
+  "displayNameLanguageKey" : "MY_WORK_PRODUCT_DISPLAY_NAME",
+  "descriptionLanguageKey" : "MY_WORK_PRODUCT_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Time And Attendance",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "גליון עבודה",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "my_work",
+  "baseRole" : null,
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1535661977430,
+  "dateModified" : 1545849383000,
+  "modifiedBy" : null,
+  "color" : "orange",
+  "icon" : null,
+  "deleted" : false,
+  "id" : "3",
+  "newInstance" : false,
+  "outOfTheBox" : true
+}, {
+  "description" : "",
+  "displayName" : "Execution Center",
+  "displayNameLanguageKey" : "EXECUTION_CENTER_PRODUCT_DISPLAY_NAME",
+  "descriptionLanguageKey" : "EXECUTION_CENTER_PRODUCT_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Execution Center",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "ניהול אסטרטגיה ויעדים",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "execution_center",
+  "baseRole" : null,
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1535661977430,
+  "dateModified" : 1535661977000,
+  "modifiedBy" : null,
+  "color" : "turquoise",
+  "icon" : null,
+  "deleted" : false,
+  "id" : "4",
+  "newInstance" : false,
+  "outOfTheBox" : true
+}, {
+  "description" : "",
+  "displayName" : "Innovation",
+  "displayNameLanguageKey" : "CSE_PRODUCT_INNOVATION_PRODUCT_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_PRODUCT_INNOVATION_PRODUCT_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Innovation",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "חדשנות",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_product_Innovation",
+  "baseRole" : null,
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1535665198497,
+  "dateModified" : 1535665198000,
+  "modifiedBy" : null,
+  "color" : "purple",
+  "icon" : null,
+  "deleted" : false,
+  "id" : "5",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Budget Planning",
+  "displayNameLanguageKey" : "CSE_PRODUCT_BUDGETPLANNING_PRODUCT_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_PRODUCT_BUDGETPLANNING_PRODUCT_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Budget Planning",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "תכנון תקציב",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_product_BudgetPlanning",
+  "baseRole" : null,
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1535665198497,
+  "dateModified" : 1537146081000,
+  "modifiedBy" : null,
+  "color" : "green",
+  "icon" : null,
+  "deleted" : false,
+  "id" : "6",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Strategy & Goals",
+  "displayNameLanguageKey" : "CSE_PRODUCT_STRATEGYGOALS_PRODUCT_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_PRODUCT_STRATEGYGOALS_PRODUCT_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Strategy & Goals",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "אסטרטגיה ויעדים",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_product_StrategyGoals",
+  "baseRole" : null,
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1535665431827,
+  "dateModified" : 1535665431000,
+  "modifiedBy" : null,
+  "color" : "turquoise",
+  "icon" : null,
+  "deleted" : false,
+  "id" : "7",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Resource Management",
+  "displayNameLanguageKey" : "CSE_PRODUCT_RESOURCEMANAGEMENT_PRODUCT_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_PRODUCT_RESOURCEMANAGEMENT_PRODUCT_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Resource Management",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "ניהול משאבים",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_product_ResourceManagement",
+  "baseRole" : null,
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1535665431827,
+  "dateModified" : 1535665431000,
+  "modifiedBy" : null,
+  "color" : "teal",
+  "icon" : null,
+  "deleted" : false,
+  "id" : "9",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Project Management",
+  "displayNameLanguageKey" : "CSE_PRODUCT_PROJECTMANAGEMENT_PRODUCT_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_PRODUCT_PROJECTMANAGEMENT_PRODUCT_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Project Management",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "ניהול פרוייקט",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_product_ProjectManagement",
+  "baseRole" : null,
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1535665431827,
+  "dateModified" : 1535665431000,
+  "modifiedBy" : null,
+  "color" : "teal",
+  "icon" : null,
+  "deleted" : false,
+  "id" : "10",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Vendor Management",
+  "displayNameLanguageKey" : "CSE_PRODUCT_VENDORMANAGEMENT_PRODUCT_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_PRODUCT_VENDORMANAGEMENT_PRODUCT_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Vendor Management",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "ניהול יצרן",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_product_VendorManagement",
+  "baseRole" : null,
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1535665431827,
+  "dateModified" : 1537146081000,
+  "modifiedBy" : null,
+  "color" : "green",
+  "icon" : null,
+  "deleted" : false,
+  "id" : "11",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Procurement",
+  "displayNameLanguageKey" : "CSE_PRODUCT_PROCUREMENT_PRODUCT_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_PRODUCT_PROCUREMENT_PRODUCT_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Procurement",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "רכש",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_product_Procurement",
+  "baseRole" : null,
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1535665431827,
+  "dateModified" : 1535665431000,
+  "modifiedBy" : null,
+  "color" : "green",
+  "icon" : null,
+  "deleted" : false,
+  "id" : "12",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Execution Panel",
+  "displayNameLanguageKey" : "CSE_PRODUCT_EXECUTIONPANEL_PRODUCT_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_PRODUCT_EXECUTIONPANEL_PRODUCT_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Execution Panel",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "ניהול אסטרטגיה",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_product_ExecutionPanel",
+  "baseRole" : null,
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1535665431827,
+  "dateModified" : 1535665431000,
+  "modifiedBy" : null,
+  "color" : "turquoise",
+  "icon" : null,
+  "deleted" : false,
+  "id" : "13",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Requirement Management",
+  "displayNameLanguageKey" : "CSE_PRODUCT_REQUIREMENTMANAGEMENT_PRODUCT_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_PRODUCT_REQUIREMENTMANAGEMENT_PRODUCT_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Requirement Management",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "ניהול דרישות",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_product_RequirementManagement",
+  "baseRole" : null,
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1536273882870,
+  "dateModified" : 1551806562000,
+  "modifiedBy" : null,
+  "color" : "blue",
+  "icon" : null,
+  "deleted" : false,
+  "id" : "14",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Onboarding",
+  "displayNameLanguageKey" : "CSE_PRODUCT_ONBOARDING_PRODUCT_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_PRODUCT_ONBOARDING_PRODUCT_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Onboarding",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "כניסה לתפקיד",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_product_Onboarding",
+  "baseRole" : null,
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1543948902337,
+  "dateModified" : 1544402550000,
+  "modifiedBy" : null,
+  "color" : "orange",
+  "icon" : null,
+  "deleted" : false,
+  "id" : "15",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Task Management",
+  "displayNameLanguageKey" : "CSE_PRODUCT_TASKMANAGEMENT_PRODUCT_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_PRODUCT_TASKMANAGEMENT_PRODUCT_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Task Management",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "ניהול משימות",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_product_TaskManagement",
+  "baseRole" : null,
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1571856479713,
+  "dateModified" : 1571856479000,
+  "modifiedBy" : null,
+  "color" : "blue",
+  "icon" : null,
+  "deleted" : false,
+  "id" : "16",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}, {
+  "description" : "",
+  "displayName" : "Release Deployment",
+  "displayNameLanguageKey" : "CSE_PRODUCT_RELEASEDEPLOYMENT_PRODUCT_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_PRODUCT_RELEASEDEPLOYMENT_PRODUCT_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "Release Deployment",
+    "language" : "en"
+  }, {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "העברה לייצור",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_product_ReleaseDeployment",
+  "baseRole" : null,
+  "clientId" : null,
+  "createdBy" : null,
+  "dateCreated" : 1574351531947,
+  "dateModified" : 1577059302927,
+  "modifiedBy" : null,
+  "color" : "purple",
+  "icon" : null,
+  "deleted" : false,
+  "id" : "17",
+  "newInstance" : false,
+  "outOfTheBox" : false
+} ]

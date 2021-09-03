@@ -1,0 +1,129 @@
+{
+  "myspType" : "AuthorizationTree",
+  "description" : "",
+  "displayName" : "Survey",
+  "displayNameLanguageKey" : "CSE_SURVEY_AUTH_TREE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_SURVEY_AUTH_TREE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "סקר",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_survey",
+  "clientId" : null,
+  "createdBy" : "Administrator",
+  "dateCreated" : 1527735544000,
+  "dateModified" : 1527736588277,
+  "entityId" : "com.msp.dao.entities.cse.custom.Cse_Survey",
+  "modifiedBy" : "Administrator",
+  "root" : {
+    "myspType" : "AuthorizationNode",
+    "description" : null,
+    "displayName" : null,
+    "displayNameLanguageKey" : null,
+    "descriptionLanguageKey" : null,
+    "languageTranslations" : null,
+    "notes" : null,
+    "systemName" : null,
+    "authorizationTreeId" : "cse_survey",
+    "type" : null,
+    "children" : [ {
+      "myspType" : "AuthorizationNode",
+      "description" : "",
+      "displayName" : "CSE_ADMINISTRATION_ROLE_DISPLAY_NAME",
+      "displayNameLanguageKey" : "CSE_ADMINISTRATION_ROLE_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_ADMINISTRATION_ROLE_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "CSE_ADMINISTRATION_ROLE_DISPLAY_NAME",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "cse_administration_role",
+      "authorizationTreeId" : "cse_survey",
+      "type" : {
+        "myspType" : "DialogRoleAuthorizationNodeType",
+        "dialogRole" : {
+          "myspType" : "DialogRole",
+          "description" : "Administration",
+          "displayName" : "Administrator",
+          "displayNameLanguageKey" : "ADMINISTRATOR_DIALOG_DIALOG_ROLE_DISPLAY_NAME",
+          "descriptionLanguageKey" : "ADMINISTRATOR_DIALOG_DIALOG_ROLE_DESCRIPTION",
+          "languageTranslations" : [ {
+            "myspType" : "LanguageTranslation",
+            "description" : "Administration",
+            "displayName" : "Administrator",
+            "language" : "en"
+          }, {
+            "myspType" : "LanguageTranslation",
+            "description" : "מנהלן",
+            "displayName" : "מנהלן",
+            "language" : "he"
+          } ],
+          "notes" : "",
+          "systemName" : "administrator_dialog",
+          "baseRole" : {
+            "myspType" : "KeyValue",
+            "key" : "ADMINISTRATOR",
+            "value" : "6"
+          },
+          "clientId" : null,
+          "createdBy" : null,
+          "dateCreated" : 1328060779730,
+          "dateModified" : 1535667567000,
+          "modifiedBy" : null,
+          "workspaceId" : "Administrator",
+          "color" : "gray",
+          "icon" : "fa-cog",
+          "productSN" : "administration",
+          "deleted" : false,
+          "licenseRole" : 1,
+          "helixRole" : 1,
+          "id" : "6",
+          "newInstance" : false,
+          "outOfTheBox" : true
+        }
+      },
+      "children" : [ {
+        "myspType" : "AuthorizationNode",
+        "description" : "",
+        "displayName" : "CSE_FILLEDBY_PROPERTY_DISPLAY_NAME",
+        "displayNameLanguageKey" : "CSE_FILLEDBY_PROPERTY_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_FILLEDBY_PROPERTY_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "CSE_FILLEDBY_PROPERTY_DISPLAY_NAME",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "cse_filledBy_property",
+        "authorizationTreeId" : "cse_survey",
+        "type" : {
+          "myspType" : "PropertyAuthorizationNodeType",
+          "path" : [ {
+            "myspType" : "KeyValue",
+            "key" : "tbl",
+            "value" : "com.msp.dao.entities.cse.custom.Cse_Survey"
+          }, {
+            "myspType" : "KeyValue",
+            "key" : "cse_filledBy",
+            "value" : "com.msp.dao.entities.User"
+          } ],
+          "userSingleLookup" : true
+        },
+        "children" : null,
+        "parent" : null
+      } ],
+      "parent" : null
+    } ],
+    "parent" : null
+  },
+  "deleted" : false,
+  "id" : "cse_survey",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}

@@ -1,0 +1,31 @@
+[ {
+  "description" : "",
+  "displayName" : "Global - 24x7",
+  "displayNameLanguageKey" : "CSE_GLOBAL24X7_MY_WORK_CALENDAR_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_GLOBAL24X7_MY_WORK_CALENDAR_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "גלובל - 24x7",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_global24x7",
+  "exceptionDays" : [ ],
+  "id" : null,
+  "createdBy" : null,
+  "dateModified" : 1541104913747,
+  "modifiedBy" : null,
+  "clientId" : null,
+  "dateCreated" : 1520459987757,
+  "deleted" : false,
+  "newInstance" : false,
+  "outOfTheBox" : false,
+  "sunday" : true,
+  "monday" : true,
+  "tuesday" : true,
+  "wednesday" : true,
+  "thursday" : true,
+  "friday" : true,
+  "saturday" : true
+} ]

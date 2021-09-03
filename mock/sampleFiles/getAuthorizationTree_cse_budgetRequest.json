@@ -1,0 +1,313 @@
+{
+  "myspType" : "AuthorizationTree",
+  "description" : "",
+  "displayName" : "Budget Request",
+  "displayNameLanguageKey" : "CSE_BUDGETREQUEST_AUTH_TREE_DISPLAY_NAME",
+  "descriptionLanguageKey" : "CSE_BUDGETREQUEST_AUTH_TREE_DESCRIPTION",
+  "languageTranslations" : [ {
+    "myspType" : "LanguageTranslation",
+    "description" : "",
+    "displayName" : "בקשת תקציב",
+    "language" : "he"
+  } ],
+  "notes" : "",
+  "systemName" : "cse_budgetRequest",
+  "clientId" : null,
+  "createdBy" : "Administrator",
+  "dateCreated" : 1518821461780,
+  "dateModified" : 1559164897840,
+  "entityId" : "com.msp.dao.entities.cse.custom.Cse_DemandActivity",
+  "modifiedBy" : "Administrator",
+  "root" : {
+    "myspType" : "AuthorizationNode",
+    "description" : null,
+    "displayName" : null,
+    "displayNameLanguageKey" : null,
+    "descriptionLanguageKey" : null,
+    "languageTranslations" : null,
+    "notes" : null,
+    "systemName" : null,
+    "authorizationTreeId" : "cse_budgetRequest",
+    "type" : null,
+    "children" : [ {
+      "myspType" : "AuthorizationNode",
+      "description" : "",
+      "displayName" : "CSE_ADMINISTRATOR_ROLE_DISPLAY_NAME",
+      "displayNameLanguageKey" : "CSE_ADMINISTRATOR_ROLE_DISPLAY_NAME",
+      "descriptionLanguageKey" : "CSE_ADMINISTRATOR_ROLE_DESCRIPTION",
+      "languageTranslations" : [ {
+        "myspType" : "LanguageTranslation",
+        "description" : "",
+        "displayName" : "CSE_ADMINISTRATOR_ROLE_DISPLAY_NAME",
+        "language" : "he"
+      } ],
+      "notes" : "",
+      "systemName" : "cse_administrator_role",
+      "authorizationTreeId" : "cse_budgetRequest",
+      "type" : {
+        "myspType" : "DialogRoleAuthorizationNodeType",
+        "dialogRole" : {
+          "myspType" : "DialogRole",
+          "description" : "Administration",
+          "displayName" : "Administrator",
+          "displayNameLanguageKey" : "ADMINISTRATOR_DIALOG_DIALOG_ROLE_DISPLAY_NAME",
+          "descriptionLanguageKey" : "ADMINISTRATOR_DIALOG_DIALOG_ROLE_DESCRIPTION",
+          "languageTranslations" : [ {
+            "myspType" : "LanguageTranslation",
+            "description" : "Administration",
+            "displayName" : "Administrator",
+            "language" : "en"
+          }, {
+            "myspType" : "LanguageTranslation",
+            "description" : "מנהלן",
+            "displayName" : "מנהלן",
+            "language" : "he"
+          } ],
+          "notes" : "",
+          "systemName" : "administrator_dialog",
+          "baseRole" : {
+            "myspType" : "KeyValue",
+            "key" : "ADMINISTRATOR",
+            "value" : "6"
+          },
+          "clientId" : null,
+          "createdBy" : null,
+          "dateCreated" : 1328060779730,
+          "dateModified" : 1535667567000,
+          "modifiedBy" : null,
+          "workspaceId" : "Administrator",
+          "color" : "gray",
+          "icon" : "fa-cog",
+          "productSN" : "administration",
+          "deleted" : false,
+          "licenseRole" : 1,
+          "helixRole" : 1,
+          "id" : "6",
+          "newInstance" : false,
+          "outOfTheBox" : true
+        }
+      },
+      "children" : [ {
+        "myspType" : "AuthorizationNode",
+        "description" : "",
+        "displayName" : "CSE_BUDGETPLANCSE_OWNER_PROPERTY_DISPLAY_NAME",
+        "displayNameLanguageKey" : "CSE_BUDGETPLANCSE_OWNER_PROPERTY_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_BUDGETPLANCSE_OWNER_PROPERTY_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "CSE_BUDGETPLANCSE_OWNER_PROPERTY_DISPLAY_NAME",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "cse_budgetPlancse_owner_property",
+        "authorizationTreeId" : "cse_budgetRequest",
+        "type" : {
+          "myspType" : "PropertyAuthorizationNodeType",
+          "path" : [ {
+            "myspType" : "KeyValue",
+            "key" : "tbl",
+            "value" : "com.msp.dao.entities.cse.custom.Cse_DemandActivity"
+          }, {
+            "myspType" : "KeyValue",
+            "key" : "cse_budgetPlan",
+            "value" : "com.msp.dao.entities.cse.custom.Cse_OutlineBudgetPlan"
+          }, {
+            "myspType" : "KeyValue",
+            "key" : "cse_owner",
+            "value" : "com.msp.dao.entities.User"
+          } ],
+          "userSingleLookup" : true
+        },
+        "children" : [ {
+          "myspType" : "AuthorizationNode",
+          "description" : "",
+          "displayName" : "CSE_LEADBY_PROPERTY_DISPLAY_NAME",
+          "displayNameLanguageKey" : "CSE_LEADBY_PROPERTY_DISPLAY_NAME",
+          "descriptionLanguageKey" : "CSE_LEADBY_PROPERTY_DESCRIPTION",
+          "languageTranslations" : [ {
+            "myspType" : "LanguageTranslation",
+            "description" : "",
+            "displayName" : "CSE_LEADBY_PROPERTY_DISPLAY_NAME",
+            "language" : "he"
+          } ],
+          "notes" : "",
+          "systemName" : "cse_leadBy_property",
+          "authorizationTreeId" : "cse_budgetRequest",
+          "type" : {
+            "myspType" : "PropertyAuthorizationNodeType",
+            "path" : [ {
+              "myspType" : "KeyValue",
+              "key" : "tbl",
+              "value" : "com.msp.dao.entities.cse.custom.Cse_DemandActivity"
+            }, {
+              "myspType" : "KeyValue",
+              "key" : "cse_leadBy",
+              "value" : "com.msp.dao.entities.User"
+            } ],
+            "userSingleLookup" : true
+          },
+          "children" : [ {
+            "myspType" : "AuthorizationNode",
+            "description" : "",
+            "displayName" : "CSE_REQUESTEDBY_PROPERTY_DISPLAY_NAME",
+            "displayNameLanguageKey" : "CSE_REQUESTEDBY_PROPERTY_DISPLAY_NAME",
+            "descriptionLanguageKey" : "CSE_REQUESTEDBY_PROPERTY_DESCRIPTION",
+            "languageTranslations" : [ {
+              "myspType" : "LanguageTranslation",
+              "description" : "",
+              "displayName" : "CSE_REQUESTEDBY_PROPERTY_DISPLAY_NAME",
+              "language" : "he"
+            } ],
+            "notes" : "",
+            "systemName" : "cse_requestedBy_property",
+            "authorizationTreeId" : "cse_budgetRequest",
+            "type" : {
+              "myspType" : "PropertyAuthorizationNodeType",
+              "path" : [ {
+                "myspType" : "KeyValue",
+                "key" : "tbl",
+                "value" : "com.msp.dao.entities.cse.custom.Cse_DemandActivity"
+              }, {
+                "myspType" : "KeyValue",
+                "key" : "cse_requestedBy",
+                "value" : "com.msp.dao.entities.User"
+              } ],
+              "userSingleLookup" : true
+            },
+            "children" : null,
+            "parent" : null
+          } ],
+          "parent" : null
+        } ],
+        "parent" : null
+      }, {
+        "myspType" : "AuthorizationNode",
+        "description" : "",
+        "displayName" : "CSE_PROCUREMENTMANAGER_ROLE_DISPLAY_NAME",
+        "displayNameLanguageKey" : "CSE_PROCUREMENTMANAGER_ROLE_DISPLAY_NAME",
+        "descriptionLanguageKey" : "CSE_PROCUREMENTMANAGER_ROLE_DESCRIPTION",
+        "languageTranslations" : [ {
+          "myspType" : "LanguageTranslation",
+          "description" : "",
+          "displayName" : "CSE_PROCUREMENTMANAGER_ROLE_DISPLAY_NAME",
+          "language" : "he"
+        } ],
+        "notes" : "",
+        "systemName" : "cse_procurementManager_role",
+        "authorizationTreeId" : "cse_budgetRequest",
+        "type" : {
+          "myspType" : "DialogRoleAuthorizationNodeType",
+          "dialogRole" : {
+            "myspType" : "DialogRole",
+            "description" : "",
+            "displayName" : "Procurement Manager",
+            "displayNameLanguageKey" : "CSE_ROLE_PROCUREMENTMANAGER_DIALOG_ROLE_DISPLAY_NAME",
+            "descriptionLanguageKey" : "CSE_ROLE_PROCUREMENTMANAGER_DIALOG_ROLE_DESCRIPTION",
+            "languageTranslations" : [ {
+              "myspType" : "LanguageTranslation",
+              "description" : "",
+              "displayName" : "Procurement Manager",
+              "language" : "en"
+            }, {
+              "myspType" : "LanguageTranslation",
+              "description" : "",
+              "displayName" : "מנהל רכש",
+              "language" : "he"
+            } ],
+            "notes" : "",
+            "systemName" : "cse_role_ProcurementManager",
+            "baseRole" : {
+              "myspType" : "KeyValue",
+              "key" : "EMPLOYEE",
+              "value" : "1"
+            },
+            "clientId" : null,
+            "createdBy" : null,
+            "dateCreated" : 1526009374360,
+            "dateModified" : 1535666553000,
+            "modifiedBy" : null,
+            "workspaceId" : "procurementManager",
+            "color" : "green",
+            "icon" : "fa-hand-holding-usd",
+            "productSN" : "cse_product_Procurement",
+            "deleted" : false,
+            "licenseRole" : 2,
+            "helixRole" : 2,
+            "id" : "37",
+            "newInstance" : false,
+            "outOfTheBox" : false
+          }
+        },
+        "children" : [ {
+          "myspType" : "AuthorizationNode",
+          "description" : "",
+          "displayName" : "CSE_PROCUREMENTREFERENT_ROLE_DISPLAY_NAME",
+          "displayNameLanguageKey" : "CSE_PROCUREMENTREFERENT_ROLE_DISPLAY_NAME",
+          "descriptionLanguageKey" : "CSE_PROCUREMENTREFERENT_ROLE_DESCRIPTION",
+          "languageTranslations" : [ {
+            "myspType" : "LanguageTranslation",
+            "description" : "",
+            "displayName" : "CSE_PROCUREMENTREFERENT_ROLE_DISPLAY_NAME",
+            "language" : "he"
+          } ],
+          "notes" : "",
+          "systemName" : "cse_procurementReferent_role",
+          "authorizationTreeId" : "cse_budgetRequest",
+          "type" : {
+            "myspType" : "DialogRoleAuthorizationNodeType",
+            "dialogRole" : {
+              "myspType" : "DialogRole",
+              "description" : "",
+              "displayName" : "Procurement Referent",
+              "displayNameLanguageKey" : "CSE_ROLE_PROCUREMENTREFERENT_DIALOG_ROLE_DISPLAY_NAME",
+              "descriptionLanguageKey" : "CSE_ROLE_PROCUREMENTREFERENT_DIALOG_ROLE_DESCRIPTION",
+              "languageTranslations" : [ {
+                "myspType" : "LanguageTranslation",
+                "description" : "",
+                "displayName" : "Procurement Referent",
+                "language" : "en"
+              }, {
+                "myspType" : "LanguageTranslation",
+                "description" : "",
+                "displayName" : "רפרנט רכש",
+                "language" : "he"
+              } ],
+              "notes" : "",
+              "systemName" : "cse_role_ProcurementReferent",
+              "baseRole" : {
+                "myspType" : "KeyValue",
+                "key" : "EMPLOYEE",
+                "value" : "1"
+              },
+              "clientId" : null,
+              "createdBy" : null,
+              "dateCreated" : 1526009374360,
+              "dateModified" : 1535666308000,
+              "modifiedBy" : null,
+              "workspaceId" : "procurementReferent",
+              "color" : "green",
+              "icon" : "fa-hand-holding-usd",
+              "productSN" : "cse_product_Procurement",
+              "deleted" : false,
+              "licenseRole" : 2,
+              "helixRole" : 2,
+              "id" : "36",
+              "newInstance" : false,
+              "outOfTheBox" : false
+            }
+          },
+          "children" : null,
+          "parent" : null
+        } ],
+        "parent" : null
+      } ],
+      "parent" : null
+    } ],
+    "parent" : null
+  },
+  "deleted" : false,
+  "id" : "cse_budgetRequest",
+  "newInstance" : false,
+  "outOfTheBox" : false
+}
