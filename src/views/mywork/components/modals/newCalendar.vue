@@ -161,7 +161,7 @@ import { MyWorkCalendar, ExceptionDay } from "@/models/myWork";
 import { MyWorkModule } from "@/store/modules/myWorkMod";
 import { ArrayUtils } from "@/models/Utils/ArrayUtils";
 import { DataUtils } from "@/models/Utils/DataUtils";
-import MiniTable from "@/views/entities/components/miniTable.vue";
+import MiniTable from "@/views/workflows/components/miniTable.vue";
 import selectIconModalVue from "@/views/entities/components/selectIconModal.vue";
 import { ElForm } from "element-ui/types/form";
 

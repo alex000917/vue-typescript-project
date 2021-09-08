@@ -1,100 +1,147 @@
 <template>
-  <div></div>
-  <!-- <div class="body">
-      <div style="height: 100%; overflow-y: auto; overflow-x: hidden">
+  <el-row class="workflow-display">
+    <el-row type="flex" align="middle" class="workflow-display__header">
+      <el-image src="/assets/img/display-name-2-32x32.png" fit="fill" />
+      <span class="workflow-display__header-title">Display And Name</span>
+    </el-row>
+
+    <el-row>
+      <el-checkbox v-model="useCustomSettings"
+        >Use the following display name instead of the defeault
+        settings</el-checkbox
+      >
+
+      <el-form
+        :model="form"
+        :rules="rules"
+        ref="form"
+        label-width="120px"
+        hide-required-asterisk
+        class="workflow-display__form"
+      >
         <el-row>
-          <span class="title"> English </span>
-          <el-divider class="divider" />
+          <span class="workflow-display__form-title">English</span>
+          <el-divider class="workflow-display__form-divider" />
         </el-row>
-        <el-row style="margin-bottom: 20px">
-          <el-col :span="5" :offset="1">
-            <span class="title"> Display name </span>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item prop="displayName">
-              <el-input
-                v-model="productForm.displayName"
-                autocomplete="off"
-                style="min-width: 245px; font-size: 16px"
-                type="text"
-                size="small"
-              />
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row style="margin-top: 15px; margin-bottom: 15px">
-          <el-col :span="5" :offset="1">
-            <span class="title"> Description </span>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item prop="description">
-              <el-input
-                v-model="productForm.description"
-                autocomplete="off"
-                style="min-width: 245px; font-size: 16px"
-                type="textarea"
-                size="small"
-                :rows="2"
-              />
-            </el-form-item>
-          </el-col>
-        </el-row>
+
+        <el-form-item label="Display name" prop="enDisplayName">
+          <el-input v-model="form.enDisplayName"></el-input>
+        </el-form-item>
+
+        <el-form-item label="Tooltip">
+          <el-input
+            v-model="form.enTooltip"
+            autocomplete="off"
+            type="textarea"
+            size="small"
+            :rows="2"
+            class="workflow-display__form-textarea"
+          />
+        </el-form-item>
+
         <el-row>
-          <span class="title"> Hebrew </span>
-          <el-divider class="divider" />
+          <span class="workflow-display__form-title">Hebrew</span>
+          <el-divider class="workflow-display__form-divider" />
         </el-row>
-        <el-row style="margin-bottom: 20px">
-          <el-col :span="5" :offset="1">
-            <span class="title"> Display name </span>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item prop="languageTranslations.0.displayName">
-              <el-input
-                dir="rtl"
-                v-model="productForm.languageTranslations[0].displayName"
-                autocomplete="off"
-                style="min-width: 245px; font-size: 16px"
-                type="text"
-                size="small"
-              />
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row style="margin-top: 15px; margin-bottom: 20px">
-          <el-col :span="5" :offset="1">
-            <span class="title"> Description </span>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item prop="languageTranslations.0.description">
-              <el-input
-                dir="rtl"
-                v-model="productForm.languageTranslations[0].description"
-                autocomplete="off"
-                style="min-width: 245px; font-size: 16px"
-                type="textarea"
-                size="small"
-                :rows="2"
-              />
-            </el-form-item>
-          </el-col>
-        </el-row>
-      </div>
-    </div> -->
+
+        <el-form-item label="Display name" prop="heDisplayName">
+          <el-input v-model="form.heDisplayName" dir="rtl"></el-input>
+        </el-form-item>
+
+        <el-form-item label="Tooltip">
+          <el-input
+            v-model="form.heTooltip"
+            dir="rtl"
+            autocomplete="off"
+            type="textarea"
+            size="small"
+            :rows="2"
+            class="workflow-display__form-textarea"
+          />
+        </el-form-item>
+      </el-form>
+    </el-row>
+  </el-row>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import { WorkflowModule } from "@/store/modules/WorkflowMod";
+import { Component, Prop, Vue, Watch } from "vue-property-decorator"
+import { WorkflowModule } from "@/store/modules/WorkflowMod"
 
 @Component({
   name: "Display",
-  components: {},
+  components: {}
 })
 export default class extends Vue {
   get currentWorkflow() {
-    return WorkflowModule.ActiveWorkflow;
+    return WorkflowModule.ActiveWorkflow
+  }
+
+  useCustomSettings = true;
+  form = {
+    enDisplayName: "",
+    enTooltip: "",
+    heDisplayName: "",
+    heTooltip: ""
+  }
+
+  rules = {
+    enDisplayName: [
+      {
+        required: true,
+        message: "Please input display name in English",
+        trigger: "blur"
+      }
+    ],
+    heDisplayName: [
+      {
+        required: true,
+        message: "Please input display name in Hebrew",
+        trigger: "blur"
+      }
+    ]
+  };
+
+  mounted() {
+    console.log("hey")
   }
 }
 </script>
-<style lang="scss" scoped>
+
+<style lang="scss">
+.workflow-display {
+  .el-row {
+    margin: 10px 0;
+  }
+
+  .el-form-item__label {
+    font-weight: 600;
+    text-align: left;
+    padding-left: 20px;
+  }
+
+  &__header {
+    margin-top: 0;
+
+    &-title {
+      font-size: 18px;
+      margin-left: 10px;
+    }
+  }
+
+  &__form {
+    padding: 0px 15px;
+    margin-top: 5px;
+
+    &-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    &-divider {
+      margin-top: 5px;
+      margin-bottom: 15px;
+    }
+  }
+}
 </style>

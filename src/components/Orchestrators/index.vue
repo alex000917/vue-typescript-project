@@ -75,7 +75,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import MiniTable from "@/views/entities/components/miniTable.vue";
+import MiniTable from "@/views/workflows/components/miniTable.vue";
 import { Orchestrator } from "@/models/orchestrator/Orchestrator";
 import { debug } from "console";
 import { AppCacheModule } from "@/store/modules/appCache";

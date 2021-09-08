@@ -24,25 +24,26 @@
             variant="outline-primary"
             icon="el-icon-menu"
             @click="(openButtonDailog = 'newribbon'), (showButtonDialog = true)"
-            >New Group
+          >
+            New Group
           </el-button>
           <el-dropdown
-            @command="onNewButtonClick"
             style="padding: 0 10px 0 10px"
+            @command="onNewButtonClick"
           >
-            <el-button variant="outline-primary" icon="el-icon-plus"
-              >New Button
+            <el-button variant="outline-primary" icon="el-icon-plus">
+              New Button
             </el-button>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item icon="el-icon-printer" command="a"
-                >Print</el-dropdown-item
-              >
-              <el-dropdown-item icon="el-icon-star-on" command="b"
-                >Follow this</el-dropdown-item
-              >
-              <el-dropdown-item icon="el-icon-star-off" command="c"
-                >Unfollow this</el-dropdown-item
-              >
+              <el-dropdown-item icon="el-icon-printer" command="a">
+                Print
+              </el-dropdown-item>
+              <el-dropdown-item icon="el-icon-star-on" command="b">
+                Follow this
+              </el-dropdown-item>
+              <el-dropdown-item icon="el-icon-star-off" command="c">
+                Unfollow this
+              </el-dropdown-item>
               <!-- <el-dropdown-item icon="el-icon-s-flag" command="d"
                 >Action button</el-dropdown-item
               > -->
@@ -53,13 +54,15 @@
             variant="outline-primary"
             icon="el-icon-edit"
             @click="onEdit()"
-            >Edit
+          >
+            Edit
           </el-button>
           <el-button
             variant="outline-primary"
             icon="el-icon-delete"
             @click="onDelete"
-            >Delete
+          >
+            Delete
           </el-button>
         </el-row>
       </el-col>
@@ -88,7 +91,7 @@
             :label="column.label"
             :width="column.width"
           >
-            <template v-slot="scope" v-if="column.label === 'Name'">
+            <template v-if="column.label === 'Name'" v-slot="scope">
               <el-image
                 style="transform: translate(0px, 7px)"
                 :src="scope.row.icon"
@@ -110,17 +113,16 @@
       :button-sys-name="buttonSysName"
       :ribbon-sys-name="ribbonSysName"
       :workflow-sys-name="currentWorkflow.systemName"
-    >
-    </edit-button>
+    />
     <new-action-button
       v-if="openButtonDailog == 'newaction'"
       :dialog-visible.sync="showButtonDialog"
-    ></new-action-button>
+    />
     <new-ribbon-group
       v-if="openButtonDailog == 'newribbon'"
       :dialog-visible.sync="showButtonDialog"
       :workflow-sys-name="currentWorkflow.systemName"
-    ></new-ribbon-group>
+    />
   </el-dialog>
 </template>
 
@@ -141,21 +143,21 @@ import { raw } from "express";
 
 @Component({
   name: "WorkflowButtons",
-  components: { EditButton, NewRibbonGroup, NewActionButton },
+  components: { EditButton, NewRibbonGroup, NewActionButton }
 })
 export default class extends Vue {
   @Prop({ required: true }) dialogVisible!: boolean;
   @Prop({ required: true }) currentWorkflow!: Workflow;
 
   findText = "";
-  showButtonDialog: boolean = false;
-  openButtonDailog: string = "";
+  showButtonDialog = false;
+  openButtonDailog = "";
 
   currentRow: any = null;
 
-  buttonTitle: string = "";
-  buttonSysName: string = "";
-  ribbonSysName: string = "";
+  buttonTitle = "";
+  buttonSysName = "";
+  ribbonSysName = "";
 
   private transitions: Transition[] = [];
 
@@ -165,17 +167,17 @@ export default class extends Vue {
     {
       prop: "displayName",
       label: "Name",
-      width: "350",
+      width: "350"
       // icon: "/assets/img/approve.png",
     },
     {
       prop: "from",
-      label: "From",
+      label: "From"
     },
     {
       prop: "to",
-      label: "To",
-    },
+      label: "To"
+    }
   ];
 
   get ribbons() {
@@ -192,11 +194,12 @@ export default class extends Vue {
 
   fromText(type: number, desinationStep: string, sourceStep: string) {
     if (desinationStep) {
-      let trans = this.transitions.filter(
-        (trans) => trans.type == type && trans.destinationStep == desinationStep
+      const trans = this.transitions.filter(
+        trans => trans.type == type && trans.destinationStep == desinationStep
       );
-      if (trans.length > 0)
+      if (trans.length > 0) {
         return this.getStepName(trans.length, trans[0].sourceStep);
+      }
     } else if (sourceStep) return this.getSideStepButton(sourceStep);
 
     return null;
@@ -205,46 +208,47 @@ export default class extends Vue {
   toText(type: number, desinationStep: string, sourceStep: string) {
     if (desinationStep) {
       if (type == 7) return this.getSideStepButton(desinationStep);
-      var step = this.flowSteps?.find((x) => x.systemName == desinationStep);
+      var step = this.flowSteps?.find(x => x.systemName == desinationStep);
       return step?.displayName;
     } else if (sourceStep) {
-      let trans = this.transitions.filter(
-        (trans) => trans.destinationStep == sourceStep
+      const trans = this.transitions.filter(
+        trans => trans.destinationStep == sourceStep
       );
-      if (trans.length > 0)
+      if (trans.length > 0) {
         return this.getStepName(trans.length, trans[0].sourceStep);
+      }
     }
 
     return null;
   }
 
   getSideStepButton(systemName: string) {
-    var _sideStep = this.sideSteps?.find((x) => x.systemName == systemName);
+    var _sideStep = this.sideSteps?.find(x => x.systemName == systemName);
     return _sideStep?.displayName;
   }
 
   getStepName(transLenght: number, systemName: string) {
     if (transLenght == 1) {
-      let step = this.flowSteps?.find((x) => x.systemName == systemName);
+      const step = this.flowSteps?.find(x => x.systemName == systemName);
       return step?.displayName;
     } else if (transLenght > 1) return "many";
     else return null;
   }
 
   get tableData() {
-    let rs: any = [];
+    const rs: any = [];
     this.ribbons?.forEach((ribbon: Ribbon) => {
-      let ribbonButton: IRibbonButtons = {
+      const ribbonButton: IRibbonButtons = {
         id: ribbon.systemName,
         icon: "/assets/img/button-group-16x16.png",
         displayName: ribbon.displayName,
-        children: ([] = []),
+        children: [] = []
       };
       ribbon.buttons.forEach((btn: Button) => {
         // if (btn.displayName == "Resume main flow") {
         //   console.log(btn);
         // }
-        let childValue: any = {
+        const childValue: any = {
           ribbonId: ribbon.systemName,
           transitionType: btn.transitionType,
           id: btn.systemName,
@@ -260,7 +264,7 @@ export default class extends Vue {
             btn.transitionType as number,
             btn.destinationStep as string,
             btn.sourceStep as string
-          ),
+          )
         };
 
         ribbonButton.children.push(childValue);
@@ -278,6 +282,7 @@ export default class extends Vue {
   }
 
   private onRowDbClick(row: any) {
+    console.log("hey");
     this.currentRow = row;
     this.buttonTitle = row.displayName;
     this.buttonSysName = row.id;
@@ -311,7 +316,7 @@ export default class extends Vue {
   }
 
   mounted() {
-    this.flowSteps?.forEach((step) => {
+    this.flowSteps?.forEach(step => {
       this.transitions.push(...step.transitions);
     });
   }
@@ -343,5 +348,3 @@ interface IRibbonButtons {
   padding: 15px 15px 10px;
 }
 </style>
-
-     

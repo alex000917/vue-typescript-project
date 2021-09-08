@@ -295,7 +295,7 @@ import {
 import { EntitiesModule } from "@/store/modules/entitiesMod";
 import Filters from "@/components/Filters/index.vue";
 import Conditions from "@/components/Conditions/index.vue";
-import MiniTable from "@/views/entities/components/miniTable.vue";
+import MiniTable from "@/views/workflows/components/miniTable.vue";
 import ReportingMode from "./reporting.vue";
 import { KeyValue } from "@/models/KeyValue";
 import propertyFilterVue from "@/components/Filters/components/propertyFilter.vue";

@@ -40,7 +40,7 @@ import { Component, Watch } from "vue-property-decorator";
 import { MyWorkModule } from "@/store/modules/myWorkMod";
 import { mixins } from "vue-class-component";
 import ModalMixin from "@/views/mywork/components/modals/mixin";
-import MiniTable from "@/views/entities/components/miniTable.vue";
+import MiniTable from "@/views/workflows/components/miniTable.vue";
 import NewCalendar from "@/views/mywork/components/modals/newCalendar.vue";
 import { MyWorkCalendar, MyWorkPolicy } from "@/models/myWork";
 import { ArrayUtils } from "@/models/Utils/ArrayUtils";
