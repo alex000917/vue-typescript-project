@@ -1,76 +1,86 @@
 <template>
-  <el-row class="workflow-display">
-    <el-row type="flex" align="middle" class="workflow-display__header">
-      <el-image src="/assets/img/display-name-2-32x32.png" fit="fill" />
-      <span class="workflow-display__header-title">Display And Name</span>
+  <SettingItemWrapper icon-name="display-name-2-32x32" title="Display And Name">
+    <el-row class="workflow-display">
+      <el-row>
+        <el-checkbox v-model="useCustomSettings"
+          >Use the following display name instead of the defeault
+          settings</el-checkbox
+        >
+
+        <el-form
+          :model="form"
+          :rules="rules"
+          ref="form"
+          label-width="120px"
+          hide-required-asterisk
+          :class="[
+            'workflow-display__form',
+            {'disabled': !useCustomSettings}
+          ]"
+        >
+          <el-row>
+            <span class="workflow-display__form-title">English</span>
+            <el-divider class="workflow-display__form-divider" />
+          </el-row>
+
+          <el-form-item label="Display name" prop="enDisplayName">
+            <el-input
+              v-model="form.enDisplayName"
+              :disabled="!useCustomSettings"
+            />
+          </el-form-item>
+
+          <el-form-item label="Tooltip">
+            <el-input
+              v-model="form.enTooltip"
+              autocomplete="off"
+              type="textarea"
+              size="small"
+              :rows="2"
+              :disabled="!useCustomSettings"
+              class="workflow-display__form-textarea"
+            />
+          </el-form-item>
+
+          <el-row>
+            <span class="workflow-display__form-title">Hebrew</span>
+            <el-divider class="workflow-display__form-divider" />
+          </el-row>
+
+          <el-form-item label="Display name" prop="heDisplayName">
+            <el-input
+              v-model="form.heDisplayName"
+              dir="rtl"
+              :disabled="!useCustomSettings"
+            />
+          </el-form-item>
+
+          <el-form-item label="Tooltip">
+            <el-input
+              v-model="form.heTooltip"
+              dir="rtl"
+              autocomplete="off"
+              type="textarea"
+              size="small"
+              :rows="2"
+              :disabled="!useCustomSettings"
+              class="workflow-display__form-textarea"
+            />
+          </el-form-item>
+        </el-form>
+      </el-row>
     </el-row>
-
-    <el-row>
-      <el-checkbox v-model="useCustomSettings"
-        >Use the following display name instead of the defeault
-        settings</el-checkbox
-      >
-
-      <el-form
-        :model="form"
-        :rules="rules"
-        ref="form"
-        label-width="120px"
-        hide-required-asterisk
-        class="workflow-display__form"
-      >
-        <el-row>
-          <span class="workflow-display__form-title">English</span>
-          <el-divider class="workflow-display__form-divider" />
-        </el-row>
-
-        <el-form-item label="Display name" prop="enDisplayName">
-          <el-input v-model="form.enDisplayName"></el-input>
-        </el-form-item>
-
-        <el-form-item label="Tooltip">
-          <el-input
-            v-model="form.enTooltip"
-            autocomplete="off"
-            type="textarea"
-            size="small"
-            :rows="2"
-            class="workflow-display__form-textarea"
-          />
-        </el-form-item>
-
-        <el-row>
-          <span class="workflow-display__form-title">Hebrew</span>
-          <el-divider class="workflow-display__form-divider" />
-        </el-row>
-
-        <el-form-item label="Display name" prop="heDisplayName">
-          <el-input v-model="form.heDisplayName" dir="rtl"></el-input>
-        </el-form-item>
-
-        <el-form-item label="Tooltip">
-          <el-input
-            v-model="form.heTooltip"
-            dir="rtl"
-            autocomplete="off"
-            type="textarea"
-            size="small"
-            :rows="2"
-            class="workflow-display__form-textarea"
-          />
-        </el-form-item>
-      </el-form>
-    </el-row>
-  </el-row>
+  </SettingItemWrapper>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from "vue-property-decorator"
+import { Component, Vue } from "vue-property-decorator"
 import { WorkflowModule } from "@/store/modules/WorkflowMod"
+import SettingItemWrapper from "@/components/SettingItemWrapper/index.vue"
 
 @Component({
   name: "Display",
-  components: {}
+  components: { SettingItemWrapper }
 })
 export default class extends Vue {
   get currentWorkflow() {
@@ -141,6 +151,10 @@ export default class extends Vue {
     &-divider {
       margin-top: 5px;
       margin-bottom: 15px;
+    }
+
+    &.disabled {
+      opacity: 0.5;
     }
   }
 }

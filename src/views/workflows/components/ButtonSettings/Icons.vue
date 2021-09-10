@@ -1,67 +1,66 @@
 <template>
-  <el-row class="workflow-icon">
-    <el-row type="flex" align="middle" class="workflow-icon__header">
-      <el-image src="/assets/img/icon.png" fit="fill" />
-      <span class="workflow-icon__header-title">Icon</span>
-    </el-row>
-
-    <el-row type="flex" align="top" class="workflow-icon__icon">
-      <span>Icon:</span>
-      <el-image
-        class="workflow-icon__icon-preview"
-        :src="imageUrl"
-        fit="fill"
-      />
-      <el-button
-        @click="showSelectIconModal = true"
-        class="workflow-icon__icon-button"
-      >
-        select
-      </el-button>
-    </el-row>
-
-    <el-row class="workflow-icon__size">
-      <el-row>Size:</el-row>
-      <el-row type="flex" align="middle">
-        <el-radio v-model="iconSizeType" label="half_size">
-          <el-image
-            src="/assets/img/icon.png"
-            class="workflow-icon__size-half-image"
-          />
-          <span>Half size</span>
-        </el-radio>
+  <SettingItemWrapper icon-name="icon" title="Icon">
+    <el-row class="workflow-icon">
+      <el-row type="flex" align="top" class="workflow-icon__icon">
+        <span>Icon:</span>
+        <el-image
+          class="workflow-icon__icon-preview"
+          :src="imageUrl"
+          fit="fill"
+        />
+        <el-button
+          @click="showSelectIconModal = true"
+          class="workflow-icon__icon-button"
+        >
+          select
+        </el-button>
       </el-row>
-      <el-row type="flex" align="middle">
-        <el-radio v-model="iconSizeType" label="full_size">
-          <el-image
-            src="/assets/img/icon.png"
-            class="workflow-icon__size-full-image"
-          />
-          <span>Full size</span>
-        </el-radio>
-      </el-row>
-    </el-row>
 
-    <el-row class="workflow-icon__note">
-      Note: the first button will always be displayed in full size.
+      <el-row class="workflow-icon__size">
+        <el-row>Size:</el-row>
+        <el-row type="flex" align="middle">
+          <el-radio v-model="iconSizeType" label="half_size">
+            <el-image
+              src="/assets/img/icon.png"
+              class="workflow-icon__size-half-image"
+            />
+            <span>Half size</span>
+          </el-radio>
+        </el-row>
+        <el-row type="flex" align="middle">
+          <el-radio v-model="iconSizeType" label="full_size">
+            <el-image
+              src="/assets/img/icon.png"
+              class="workflow-icon__size-full-image"
+            />
+            <span>Full size</span>
+          </el-radio>
+        </el-row>
+      </el-row>
+
+      <el-row class="workflow-icon__note">
+        Note: the first button will always be displayed in full size.
+      </el-row>
     </el-row>
 
     <select-icon-modal
       v-model="imageUrl"
       :visible.sync="showSelectIconModal"
     />
-  </el-row>
+  </SettingItemWrapper>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator"
 import { FlexPreferencesModule } from "@/store/modules/AppFlexPreferencesMod"
 import selectIconModal from "@/components/selectIcon/index.vue"
+import SettingItemWrapper from "@/components/SettingItemWrapper/index.vue"
 
 @Component({
   name: "Icon",
   components: {
-    selectIconModal
+    selectIconModal,
+    SettingItemWrapper
   }
 })
 export default class extends Vue {
