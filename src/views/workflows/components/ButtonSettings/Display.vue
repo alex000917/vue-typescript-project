@@ -25,14 +25,14 @@
 
           <el-form-item label="Display name" prop="enDisplayName">
             <el-input
-              v-model="form.enDisplayName"
+              v-model="form.en.displayName"
               :disabled="!useCustomSettings"
             />
           </el-form-item>
 
           <el-form-item label="Tooltip">
             <el-input
-              v-model="form.enTooltip"
+              v-model="form.en.description"
               autocomplete="off"
               type="textarea"
               size="small"
@@ -49,7 +49,7 @@
 
           <el-form-item label="Display name" prop="heDisplayName">
             <el-input
-              v-model="form.heDisplayName"
+              v-model="form.he.displayName"
               dir="rtl"
               :disabled="!useCustomSettings"
             />
@@ -57,7 +57,7 @@
 
           <el-form-item label="Tooltip">
             <el-input
-              v-model="form.heTooltip"
+              v-model="form.he.description"
               dir="rtl"
               autocomplete="off"
               type="textarea"
@@ -74,8 +74,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
-import { WorkflowModule } from "@/store/modules/WorkflowMod"
+import { Component, Vue, Prop } from "vue-property-decorator"
 import SettingItemWrapper from "@/components/SettingItemWrapper/index.vue"
 
 @Component({
@@ -83,27 +82,45 @@ import SettingItemWrapper from "@/components/SettingItemWrapper/index.vue"
   components: { SettingItemWrapper }
 })
 export default class extends Vue {
-  get currentWorkflow() {
-    return WorkflowModule.ActiveWorkflow
-  }
+  @Prop({
+    required: true,
+    default: () => [{}]
+  }) info!: any;
 
   useCustomSettings = true;
-  form = {
-    enDisplayName: "",
-    enTooltip: "",
-    heDisplayName: "",
-    heTooltip: ""
+  get form() {
+    return {
+      en: {
+        displayName: this?.info[0]?.displayName,
+        description: this?.info[0]?.description
+      },
+      he: {
+        displayName: this?.info[1]?.displayName,
+        description: this?.info[1]?.description
+      }
+    }
+  }
+
+  set form(value: any) {
+    const translation = this.info
+
+    translation[0].displayName = value.en.displayName
+    translation[0].description = value.en.description
+    translation[1].displayName = value.he.displayName
+    translation[1].description = value.he.description
+
+    this.$emit("update:info", translation)
   }
 
   rules = {
-    enDisplayName: [
+    "en.displayName": [
       {
         required: true,
         message: "Please input display name in English",
         trigger: "blur"
       }
     ],
-    heDisplayName: [
+    "he.displayName": [
       {
         required: true,
         message: "Please input display name in Hebrew",
@@ -122,6 +139,9 @@ export default class extends Vue {
 .workflow-display {
   .el-row {
     margin: 10px 0;
+  }
+  .el-input--mini {
+    width: calc(100% - 120px);
   }
 
   .el-form-item__label {

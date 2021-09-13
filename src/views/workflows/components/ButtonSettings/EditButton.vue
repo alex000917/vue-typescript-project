@@ -9,7 +9,10 @@
   >
     <el-tabs tab-position="left" stretch>
       <el-tab-pane label="Display">
-        <display ref="display" />
+        <display
+          ref="display"
+          :info.sync="dialogInfo.languageTranslations"
+        />
       </el-tab-pane>
       <el-tab-pane label="Icon">
         <icons ref="Icon" />
@@ -88,9 +91,24 @@ export default class extends Vue {
   @Prop({ required: true }) workflowSysName!: string;
 
   mandatory = true;
+  dialogInfo: any = {};
+
+  get originButonInfo() {
+    const ribbon = WorkflowModule.ActiveWorkflow?.ribbons?.find(ribbon =>
+      ribbon.systemName === this.ribbonSysName
+    )
+
+    return ribbon?.buttons?.find(button =>
+      button.systemName === this.buttonSysName
+    )
+  }
 
   handleClose() {
     this.$emit("update:dialogVisible", false)
+  }
+
+  mounted() {
+    this.dialogInfo = this.originButonInfo
   }
 }
 </script>
