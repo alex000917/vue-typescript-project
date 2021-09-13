@@ -130,46 +130,46 @@ export const asyncRoutes: RouteConfig[] = [
       }
     ]
   },
-  {
-    path: "/entities",
-    component: Layout,
-    children: [
-      {
-        path: "index/:id?",
-        component: () =>
-          import(
-            /* webpackChunkName: "entities" */ "@/views/entities/index.vue"
-          ),
-        beforeEnter: (to, from, next) => {
-          console.log("entity beforeEnter")
-          next()
-        },
-        name: "entities",
-        meta: {
-          title: "entities",
-          icon: "edit"
-        }
-      }
-    ]
-  },
-  {
-    path: "/auth",
-    component: Layout,
-    children: [
-      {
-        path: "index/:id?",
-        component: () =>
-          import(
-            /* webpackChunkName: "Authorization" */ "@/views/authorization/index.vue"
-          ),
-        name: "auth",
-        meta: {
-          title: "authorization",
-          icon: "tree-table"
-        }
-      }
-    ]
-  },
+  // {
+  //   path: "/entities",
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: "index/:id?",
+  //       component: () =>
+  //         import(
+  //           /* webpackChunkName: "entities" */ "@/views/entities/index.vue"
+  //         ),
+  //       beforeEnter: (to, from, next) => {
+  //         console.log("entity beforeEnter")
+  //         next()
+  //       },
+  //       name: "entities",
+  //       meta: {
+  //         title: "entities",
+  //         icon: "edit"
+  //       }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: "/auth",
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: "index/:id?",
+  //       component: () =>
+  //         import(
+  //           /* webpackChunkName: "Authorization" */ "@/views/authorization/index.vue"
+  //         ),
+  //       name: "auth",
+  //       meta: {
+  //         title: "authorization",
+  //         icon: "tree-table"
+  //       }
+  //     }
+  //   ]
+  // },
   {
     path: "/settings",
     component: Layout,
@@ -188,24 +188,24 @@ export const asyncRoutes: RouteConfig[] = [
       }
     ]
   },
-  {
-    path: "/importExport",
-    component: Layout,
-    children: [
-      {
-        path: "index",
-        component: () =>
-          import(
-            /* webpackChunkName: "importExport" */ "@/views/importexport/index.vue"
-          ),
-        name: "importExport",
-        meta: {
-          title: "importExport",
-          icon: "international"
-        }
-      }
-    ]
-  },
+  // {
+  //   path: "/importExport",
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: "index",
+  //       component: () =>
+  //         import(
+  //           /* webpackChunkName: "importExport" */ "@/views/importexport/index.vue"
+  //         ),
+  //       name: "importExport",
+  //       meta: {
+  //         title: "importExport",
+  //         icon: "international"
+  //       }
+  //     }
+  //   ]
+  // },
   {
     path: "/sample",
     component: Layout,
