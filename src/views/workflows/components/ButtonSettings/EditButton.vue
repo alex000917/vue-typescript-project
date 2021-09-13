@@ -15,7 +15,10 @@
         />
       </el-tab-pane>
       <el-tab-pane label="Icon">
-        <icons ref="Icon" />
+        <icons ref="Icon"
+          :icon.sync="dialogInfo.icon"
+          :full-size.sync="dialogInfo.fullSize"
+        />
       </el-tab-pane>
       <el-tab-pane label="Confirmation">
         <confirmation ref="Confirmation" />
@@ -24,7 +27,7 @@
         <SettingItemWrapper icon-name="mandatory-32x32" title="Mandatory">
           <el-row style="margin-top: 30px; height: calc(100% - 62px)">
             <el-checkbox
-              v-model="mandatory"
+              v-model="dialogInfo.enforceMandatory"
             >
               Check that all mandatory controls have a value before moving the workflow
             </el-checkbox>
@@ -39,7 +42,7 @@
         <SettingItemWrapper icon-name="notes32x32" title="Notes">
           <el-row class="workflow-edit-button__note">
             Notes
-            <el-input type="textarea" :rows="10" />
+            <el-input type="textarea" :rows="10" v-model="dialogInfo.notes" />
           </el-row>
         </SettingItemWrapper>
       </el-tab-pane>
@@ -47,12 +50,14 @@
         <SettingItemWrapper icon-name="Advanced-32x32" title="Advanced">
           <el-row class="workflow-edit-button__advanced">
             <span>System name: </span>
-            <span></span>
+            <span>{{ dialogInfo.systemName }}</span>
           </el-row>
         </SettingItemWrapper>
       </el-tab-pane>
       <el-tab-pane label="XML">
-        <xml-extensions ref="XML" />
+        <SettingItemWrapper icon-name="xml32x32" title="XML Extensions">
+          <xml-extensions ref="XML" />
+        </SettingItemWrapper>
       </el-tab-pane>
     </el-tabs>
 
@@ -107,7 +112,8 @@ export default class extends Vue {
     this.$emit("update:dialogVisible", false)
   }
 
-  mounted() {
+  @Watch("dialogVisible", { deep: true, immediate: true })
+  setUp(value: Boolean) {
     this.dialogInfo = this.originButonInfo
   }
 }

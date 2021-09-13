@@ -19,7 +19,7 @@
       <el-row class="workflow-icon__size">
         <el-row>Size:</el-row>
         <el-row type="flex" align="middle">
-          <el-radio v-model="iconSizeType" label="half_size">
+          <el-radio v-model="isFullSize" label="half_size">
             <el-image
               src="/assets/img/icon.png"
               class="workflow-icon__size-half-image"
@@ -28,7 +28,7 @@
           </el-radio>
         </el-row>
         <el-row type="flex" align="middle">
-          <el-radio v-model="iconSizeType" label="full_size">
+          <el-radio v-model="isFullSize" label="full_size">
             <el-image
               src="/assets/img/icon.png"
               class="workflow-icon__size-full-image"
@@ -51,8 +51,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from "vue-property-decorator"
-import { FlexPreferencesModule } from "@/store/modules/AppFlexPreferencesMod"
+import { Component, Prop, Vue } from "vue-property-decorator"
 import selectIconModal from "@/components/selectIcon/index.vue"
 import SettingItemWrapper from "@/components/SettingItemWrapper/index.vue"
 
@@ -64,21 +63,31 @@ import SettingItemWrapper from "@/components/SettingItemWrapper/index.vue"
   }
 })
 export default class extends Vue {
-  @Prop({ default: "en" }) private languageKey!: string;
+  @Prop({ default: "icon.png", required: false }) private icon!: string;
+  @Prop({ default: true, required: false }) private fullSize!: Boolean;
 
-  imageUrl = "/assets/img/icon.png";
   showSelectIconModal = false;
   iconSizeType = "full_size";
 
-  get labels() {
-    const translations = FlexPreferencesModule.FlexPreferences.translations
-    return translations.find(lang => {
-      return lang.key === this.languageKey
-    })
+  get imageUrl() {
+    return `/MSP/resources/images/entityRelationship/${this.icon}`
   }
 
-  selectIcon(payload: string) {
-    console.log("select Image", payload)
+  set imageUrl(value: string) {
+    const iconStrAry = value.split("/")
+    this.$emit("update:icon", iconStrAry[iconStrAry.length - 1])
+  }
+
+  get isFullSize(): string {
+    return this.fullSize ? "full_size" : "half_size"
+  }
+
+  set isFullSize(value: string) {
+    if (value === "full_size") {
+      this.$emit("update:fullSize", true)
+    } else {
+      this.$emit("update:fullSize", false)
+    }
   }
 }
 </script>
