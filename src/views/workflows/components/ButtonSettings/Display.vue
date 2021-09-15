@@ -76,6 +76,7 @@
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from "vue-property-decorator"
 import SettingItemWrapper from "@/components/SettingItemWrapper/index.vue"
+import { cloneDeep } from "lodash"
 
 @Component({
   name: "Display",
@@ -86,6 +87,11 @@ export default class extends Vue {
     required: true,
     default: () => [{}]
   }) info!: any;
+
+  @Prop({
+    required: false,
+    default: false
+  }) showed!: Boolean;
 
   useCustomSettings = true;
   form: any = {
@@ -116,23 +122,26 @@ export default class extends Vue {
     ]
   };
 
-  @Watch("info", { deep: true, immediate: true })
-  setUp(value: any) {
-    this.form = {
-      en: {
-        displayName: value[0]?.displayName,
-        description: value[0]?.description
-      },
-      he: {
-        displayName: value[1]?.displayName,
-        description: value[1]?.description
+  @Watch("showed", { deep: true, immediate: true })
+  setUp(value: Boolean) {
+    console.log("display")
+    if (value) {
+      this.form = {
+        en: {
+          displayName: this.info[0]?.displayName,
+          description: this.info[0]?.description
+        },
+        he: {
+          displayName: this.info[1]?.displayName,
+          description: this.info[1]?.description
+        }
       }
     }
   }
 
   @Watch("form", { deep: true, immediate: true })
   onChangeForm(value: any) {
-    const translation = this.info
+    const translation = cloneDeep(this.info)
 
     translation[0].displayName = value.en.displayName
     translation[0].description = value.en.description

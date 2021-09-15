@@ -282,7 +282,6 @@ export default class extends Vue {
   }
 
   private onRowDbClick(row: any) {
-    console.log("hey");
     this.currentRow = row;
     this.buttonTitle = row.displayName;
     this.buttonSysName = row.id;

@@ -27,7 +27,7 @@
 
       <el-row class="workflow-confirmation__message">
         <el-checkbox
-          v-model="useCustomMessage"
+          v-model="form.useCustomMessage"
           :disabled="confirmation === 'not_show_message'"
         >
           Use the following message instead of the default
@@ -40,7 +40,7 @@
           hide-required-asterisk
           :class="[
             'workflow-confirmation__message_form',
-            {'disabled': !useCustomMessage}
+            {'disabled': !form.useCustomMessage || confirmation === 'not_show_message'}
           ]"
         >
           <el-row>
@@ -51,7 +51,7 @@
             <el-input
               v-model="form.enMessage"
               size="mini"
-              :disabled="!useCustomMessage"
+              :disabled="!form.useCustomMessage || confirmation === 'not_show_message'"
             />
           </el-form-item>
 
@@ -64,7 +64,7 @@
               v-model="form.heMessage"
               dir="rtl"
               size="mini"
-              :disabled="!useCustomMessage"
+              :disabled="!form.useCustomMessage || confirmation === 'not_show_message'"
             />
           </el-form-item>
         </el-form>
@@ -76,6 +76,8 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator"
 import SettingItemWrapper from "@/components/SettingItemWrapper/index.vue"
+import { cloneDeep } from "lodash"
+import { LanguageTranslation } from "@/models/LanguageTranslation"
 
 @Component({
   name: "Confirmation",
@@ -84,9 +86,19 @@ import SettingItemWrapper from "@/components/SettingItemWrapper/index.vue"
   }
 })
 export default class extends Vue {
+  @Prop({
+    required: true,
+    default: () => [{}]
+  }) info!: any;
+
+  @Prop({
+    required: false,
+    default: false
+  }) showed!: Boolean;
+
   confirmation = "are_you_sure";
-  useCustomMessage = false;
   form = {
+    useCustomMessage: false,
     enMessage: "",
     heMessage: ""
   };
@@ -103,6 +115,30 @@ export default class extends Vue {
       trigger: "blur"
     }
   };
+
+  @Watch("showed", { deep: true, immediate: true })
+  setUp(value: Boolean) {
+    if (value) {
+      this.form = {
+        useCustomMessage: this.info.specificConfirmationMessage,
+        enMessage: this.info.languageTranslations ? this.info.languageTranslations[0].displayName : "",
+        heMessage: this.info.languageTranslations ? this.info.languageTranslations[1].displayName : ""
+      }
+    }
+  }
+
+  @Watch("form", { deep: true, immediate: true })
+  onChangeForm(value: any) {
+    const confirmation = cloneDeep(this.info)
+
+    confirmation.specificConfirmationMessage = value.useCustomMessage
+    confirmation.languageTranslations = [
+      new LanguageTranslation("en", value.enMessage, ""),
+      new LanguageTranslation("he", value.heMessage, "")
+    ]
+
+    this.$emit("update:info", confirmation)
+  }
 }
 </script>
 

@@ -4,14 +4,14 @@
       Use the following to add XML attributes and elements to the form XML
       definition file.
     </p>
-    <p style="margin-top: 40px;">
+    <p style="margin-top: 20px;">
       Attributes:
       <span class="require-content"
         >(Will be appended to the workflow element)</span
       >
     </p>
     <el-row style="margin-top: 5px">
-      <el-input type="textarea" :rows="4" />
+      <el-input type="textarea" :rows="4" v-model="attributesValue" />
     </el-row>
 
     <p style="margin-top: 30px;">
@@ -22,18 +22,44 @@
     </p>
 
     <el-row style="margin-top: 5px">
-      <el-input type="textarea" :rows="4" />
+      <el-input type="textarea" :rows="4" v-model="childrenXmlValue" />
     </el-row>
   </el-container>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Prop } from "vue-property-decorator";
 
 @Component({
   name: "",
   components: {}
 })
-export default class extends Vue {}
+export default class extends Vue {
+  @Prop({
+    required: true,
+    default: () => [{}]
+  }) attributes!: string;
+
+  @Prop({
+    required: false,
+    default: false
+  }) childrenXml!: string;
+
+  get attributesValue() {
+    return this.attributes
+  }
+
+  set attributesValue(value: string) {
+    this.$emit("update:attributes", value)
+  }
+
+  get childrenXmlValue() {
+    return this.childrenXml
+  }
+
+  set childrenXmlValue(value: string) {
+    this.$emit("update:childrenXml", value)
+  }
+}
 </script>
 
 <style lang="scss">

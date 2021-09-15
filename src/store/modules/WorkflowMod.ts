@@ -45,6 +45,10 @@ class WorkflowMod extends VuexModule implements IWorkflowData {
     );
   }
 
+  get activeWorkflow(): Workflow {
+    return this.ActiveWorkflow;
+  }
+
   @Action
   public async getWorkflows() {
     const rs = await getWorkflows();

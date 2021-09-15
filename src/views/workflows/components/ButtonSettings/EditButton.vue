@@ -2,7 +2,6 @@
   <el-dialog
     :title="buttonTitle + ' Settings'"
     :visible.sync="dialogVisible"
-    :before-close="handleClose"
     center
     append-to-body
     class="workflow-edit-button"
@@ -12,6 +11,7 @@
         <display
           ref="display"
           :info.sync="dialogInfo.languageTranslations"
+          :showed="dialogVisible"
         />
       </el-tab-pane>
       <el-tab-pane label="Icon">
@@ -21,7 +21,10 @@
         />
       </el-tab-pane>
       <el-tab-pane label="Confirmation">
-        <confirmation ref="Confirmation" />
+        <confirmation ref="Confirmation"
+          :info.sync="dialogInfo.confirmationProperty"
+          :showed="dialogVisible"
+        />
       </el-tab-pane>
       <el-tab-pane label="Mandatory">
         <SettingItemWrapper icon-name="mandatory-32x32" title="Mandatory">
@@ -56,13 +59,17 @@
       </el-tab-pane>
       <el-tab-pane label="XML">
         <SettingItemWrapper icon-name="xml32x32" title="XML Extensions">
-          <xml-extensions ref="XML" />
+          <xml-extensions
+            ref="XML"
+            :attributes.sync="dialogInfo.attributes"
+            :childrenXml.sync="dialogInfo.childrenXml"
+          />
         </SettingItemWrapper>
       </el-tab-pane>
     </el-tabs>
 
     <span slot="footer" class="workflow-edit-button__footer">
-      <el-button type="default" style="margin-right: 20px"> Ok </el-button>
+      <el-button type="default" style="margin-right: 20px" @click="handleOk"> Ok </el-button>
       <el-button
         type="text"
         style="text-decoration: underline"
@@ -83,6 +90,8 @@ import Conditions from "@/components/Conditions/index.vue"
 import XmlExtensions from "../SettingsModal/xmlExtensions.vue"
 import { WorkflowModule } from "@/store/modules/WorkflowMod"
 import SettingItemWrapper from "@/components/SettingItemWrapper/index.vue"
+import { cloneDeep } from "lodash"
+import { Workflow } from "@/models/Workflows/workflow"
 
 @Component({
   name: "EditButton",
@@ -108,13 +117,33 @@ export default class extends Vue {
     )
   }
 
+  handleOk() {
+    const originActiveWorkflow = cloneDeep(WorkflowModule.ActiveWorkflow)
+    const ribbonIndex = WorkflowModule.ActiveWorkflow?.ribbons?.findIndex(ribbon =>
+      ribbon.systemName === this.ribbonSysName
+    )
+
+    // eslint-disable-next-line
+    const buttonIndex = WorkflowModule.ActiveWorkflow?.ribbons[ribbonIndex]["buttons"].findIndex((button: any) => 
+      button?.systemName === this.buttonSysName
+    )
+
+    this.dialogInfo.displayName = this.dialogInfo.languageTranslations[0].displayName
+    originActiveWorkflow["ribbons"][ribbonIndex]["buttons"][buttonIndex] = this.dialogInfo
+
+    this.$store.commit("SET_ACTIVE_WORKFLOW", originActiveWorkflow)
+    this.$emit("update:dialogVisible", false)
+  }
+
   handleClose() {
     this.$emit("update:dialogVisible", false)
   }
 
   @Watch("dialogVisible", { deep: true, immediate: true })
   setUp(value: Boolean) {
-    this.dialogInfo = this.originButonInfo
+    if (value) {
+      this.dialogInfo = cloneDeep(this.originButonInfo)
+    }
   }
 }
 </script>
@@ -131,7 +160,7 @@ export default class extends Vue {
   }
 
   &__advanced {
-    margin-top: 10px;
+    margin-top: 20px;
   }
 
   &__footer {
