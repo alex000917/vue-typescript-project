@@ -122,7 +122,7 @@
                   <span
                     :style="{
                       paddingLeft: '3px',
-                      color: isLookupPropertyType(data) ? '#1890ff' : 'inherit',
+                      color: isLookupPropertyType(data) ? '#1890ff' : 'inherit'
                     }"
                     >{{ data[treeNodeKey] }}</span
                   >
@@ -168,7 +168,7 @@ import { ConditionUtils } from "@/models/Utils/ConditionUtils";
 import { text } from "express";
 import {
   PropertyPath,
-  PropertySelectorPath,
+  PropertySelectorPath
 } from "@/models/PropertySelectorPath";
 import { EntityController } from "@/models/controllers/EntityController";
 import { last } from "lodash";
@@ -179,7 +179,7 @@ import { LanguagesPresentationModel } from "@/models/Utils/LanguagesPresentation
 import ScrollPane from "@/components/Tags/ScrollPane.vue";
 @Component({
   name: "PropertySelectModel",
-  components: { miniTree, ScrollPane },
+  components: { miniTree, ScrollPane }
 })
 export default class extends Vue {
   @Prop({ required: true }) dialogVisible!: boolean;
@@ -199,7 +199,7 @@ export default class extends Vue {
   private lookupTypeslist = ["9", "11"];
   private query = {
     text: "",
-    type: "",
+    type: ""
   };
 
   message = "";
@@ -215,11 +215,11 @@ export default class extends Vue {
     const rs: string[] = [];
     if (this.validProperties && this.validProperties.length > 0) {
       //rs.push(...this.lookupTypeslist);
-      this.validProperties.forEach((x) => {
+      this.validProperties.forEach(x => {
         rs.push(x);
       });
     } else {
-      this.typeOptions.forEach((x) => {
+      this.typeOptions.forEach(x => {
         rs.push(x.value);
       });
     }
@@ -274,8 +274,8 @@ export default class extends Vue {
 
   get allowedPropTypesString() {
     if (!this.validProperties) return "";
-    const validPropTitles = this.validProperties?.map((vProp) => {
-      return this.typeOptions.find((option) => option.value === vProp)?.key;
+    const validPropTitles = this.validProperties?.map(vProp => {
+      return this.typeOptions.find(option => option.value === vProp)?.key;
     });
     return this.validProperties.length
       ? "Select a property of type " + validPropTitles.join(" or ")
@@ -284,11 +284,11 @@ export default class extends Vue {
 
   get getFilteredProperties() {
     return this.allowedProperties
-      ? this.currentEntity?.properties.filter((x) =>
+      ? this.currentEntity?.properties.filter(x =>
           this.displayPropertyTypes.includes(x.dataType?.value)
         )
       : this.allowedEntityName
-      ? this.currentEntity?.properties.filter((x) =>
+      ? this.currentEntity?.properties.filter(x =>
           this.lookupTypeslist.includes(x.dataType?.value)
         )
       : this.currentEntity?.properties;
@@ -298,7 +298,7 @@ export default class extends Vue {
     this.getFilteredProperties?.map((d: any) => {
       d.icons = [];
       d.icons.push({
-        source: DataTypeFactory.getDataTypeIcon(d.dataType.value),
+        source: DataTypeFactory.getDataTypeIcon(d.dataType.value)
       });
     });
     this.message = this.allowedPropTypesString;
@@ -307,22 +307,22 @@ export default class extends Vue {
         displayName: "Added Properties",
         dataType: {
           key: "",
-          value: "",
+          value: ""
         },
         icons: [],
         children: this.getFilteredProperties?.filter(
-          (x) => x.outOfTheBox === false
-        ),
+          x => x.outOfTheBox === false
+        )
       },
       {
         displayName: "Out-of-the-box properties",
         dataType: {
           key: "",
-          value: "",
+          value: ""
         },
         icons: [],
-        children: this.getFilteredProperties?.filter((x) => x.outOfTheBox),
-      },
+        children: this.getFilteredProperties?.filter(x => x.outOfTheBox)
+      }
     ];
   }
 
@@ -332,7 +332,7 @@ export default class extends Vue {
   }
 
   onBreadCrumClick(value: any) {
-    const index = this.displayPaths.findIndex((x) => x.key === value.key);
+    const index = this.displayPaths.findIndex(x => x.key === value.key);
 
     let lastItemIndex = this.displayPaths.length - 1;
     while (index < lastItemIndex) {
@@ -464,7 +464,7 @@ export default class extends Vue {
     const parts: any[] | null = [];
     const prevNode = this.currentEntity;
 
-    this.propertyPath.map((x) => {
+    this.propertyPath.map(x => {
       parts.push(x);
     });
     text.parts = parts;
@@ -555,7 +555,7 @@ export default class extends Vue {
     await this.loadBaseEntity(this.path[0].value);
     for (let i = 1; i < this.path.length; i++) {
       var prop = this.currentEntity?.properties.find(
-        (c) => c.systemName == this.path[i].key
+        c => c.systemName == this.path[i].key
       );
       if (prop) {
         await this.setCurrentEntity(prop.displayName, prop);
