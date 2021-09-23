@@ -38,8 +38,9 @@
         </SettingItemWrapper>
       </el-tab-pane>
       <el-tab-pane label="Viewed By">
-        <SettingItemWrapper icon-name="viewed-by32x32" title="Viewed By" />
-        <!-- <conditions :data="[]" ref="ViewedBy" /> -->
+        <SettingItemWrapper icon-name="viewed-by32x32" title="Viewed By">
+          <Conditions :data="[]" :visible-conditions="['state']"></Conditions>
+        </SettingItemWrapper>
       </el-tab-pane>
       <el-tab-pane label="Note">
         <SettingItemWrapper icon-name="notes32x32" title="Notes">
@@ -124,7 +125,7 @@ export default class extends Vue {
     )
 
     // eslint-disable-next-line
-    const buttonIndex = WorkflowModule.ActiveWorkflow?.ribbons[ribbonIndex]["buttons"].findIndex((button: any) => 
+    const buttonIndex = WorkflowModule.ActiveWorkflow?.ribbons[ribbonIndex]["buttons"].findIndex((button: any) =>
       button?.systemName === this.buttonSysName
     )
 
@@ -164,7 +165,7 @@ export default class extends Vue {
   }
 
   &__footer {
-    
+
   }
 }
 </style>

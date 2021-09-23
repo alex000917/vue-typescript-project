@@ -136,6 +136,18 @@
       :auth-nodes-system-names="newRoleGroupModalData.authNodesSystemNames"
       @onClickAddEveryOne="addNewRoleGroup"
     />
+    <PorpertyFilter
+      :dialogVisible.sync="showFilterModal['property']"
+      :data="{
+        propertyFirst: {
+          displayName: ''
+        },
+        propertySecond: {
+          displayName: ''
+        },
+        conditions: {}
+      }"
+    />
   </div>
 </template>
 <script lang="ts">
@@ -145,6 +157,7 @@ import { RoleGroup } from "@/models/RoleGroup.ts"
 import { Restriction } from "@/models/Restriction.ts"
 import { AuthorizationTree } from "@/models/authorizations/AuthorizationTree.ts"
 import { LanguagesPresentationModel } from "@/models/Utils/LanguagesPresentationModel.ts"
+import PorpertyFilter from "./components/propertyFilter.vue"
 
 interface ITreeRole {
   label: String
@@ -165,7 +178,8 @@ const defaultFilterData: any = {
 @Component({
   name: "",
   components: {
-    NewRoleGroupModal
+    NewRoleGroupModal,
+    PorpertyFilter
   }
 })
 export default class extends Vue {

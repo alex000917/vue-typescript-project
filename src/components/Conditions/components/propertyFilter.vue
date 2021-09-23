@@ -8,19 +8,11 @@
     :close-on-click-modal="false"
     append-to-body
   >
-    <el-form
-      ref="form"
-      label-position="left"
-      :model="items"
-      :rules="formRules"
-    >
+    <el-form ref="form" label-position="left" :model="items" :rules="formRules">
       <el-row>
         Compare a property to another property or to a given value
       </el-row>
-      <el-row
-        style="margin-top: 20px; align-items: center"
-        type="flex"
-      >
+      <el-row style="margin-top: 20px; align-items: center" type="flex">
         <el-form-item prop="propertyFirst">
           <el-input
             v-model="items.propertyFirst.displayName"
@@ -32,22 +24,13 @@
         <el-button
           type="text"
           style="padding: 0; padding-top: 5px"
-          @click="
-            selectPropertyModal.show = true;
-            selectPropertyModal.key = 'first';
-          "
+          @click.prevent="onShowPropertySelector"
         >
           <el-image src="/assets/img/form-document-16x16.png" />
         </el-button>
       </el-row>
-      <el-row
-        style="margin-top: 20px"
-        type="flex"
-      >
-        <el-select
-          v-model="items.condition"
-          placeholder="Select"
-        >
+      <el-row style="margin-top: 20px" type="flex">
+        <el-select v-model="items.condition" placeholder="Select">
           <el-option
             v-for="item in options"
             :key="item.key"
@@ -56,10 +39,7 @@
           />
         </el-select>
       </el-row>
-      <el-row
-        style="margin-top: 20px"
-        type="flex"
-      >
+      <el-row style="margin-top: 20px" type="flex">
         <el-form-item prop="propertySecond">
           <el-input
             v-model="items.propertySecond.displayName"
@@ -75,16 +55,10 @@
           style="display: flex; align-items: center"
           @command="selectInputMethod"
         >
-          <el-button
-            type="text"
-            style="padding: 0"
-          >
+          <el-button type="text" style="padding: 0">
             <el-image src="/assets/img/down_arrow.png" />
           </el-button>
-          <el-dropdown-menu
-            slot="dropdown"
-            style="margin-top: 0"
-          >
+          <el-dropdown-menu slot="dropdown" style="margin-top: 0">
             <el-dropdown-item command="typeText">
               Type text...
             </el-dropdown-item>
@@ -97,10 +71,7 @@
           </el-dropdown-menu>
         </el-dropdown>
       </el-row>
-      <el-checkbox-group
-        v-model="skipCheckList"
-        style="margin-top: 20px"
-      >
+      <el-checkbox-group v-model="skipCheckList" style="margin-top: 20px">
         <el-checkbox label="skip_first">
           Skip this condition if{{ items.propertyFirst }} is empty
         </el-checkbox>
@@ -113,17 +84,11 @@
       </el-checkbox-group>
     </el-form>
     <div slot="footer">
-      <el-button
-        style="margin-right: 20px"
-        @click="okHandler"
-      >
+      <el-button style="margin-right: 20px" @click="okHandler">
         Ok
       </el-button>
 
-      <el-button
-        style="margin-right: 20px"
-        @click="cancelHandler"
-      >
+      <el-button style="margin-right: 20px" @click="cancelHandler">
         Cancel
       </el-button>
     </div>
@@ -131,32 +96,30 @@
       :result-handler="resultHandler"
       :dialog-visible.sync="selectPropertyModal.show"
     /> -->
-    <prefModel
-      :is-open.sync="showPref"
-      :result-handler="onPrefSelected"
-    />
+    <prefModel :is-open.sync="showPref" :result-handler="onPrefSelected" />
     <select-property-model
       :dialog-visible.sync="selectPropertyModal.show"
       :result-handler="resultHandler"
-      :entity-id="entity.id"
+      :entity-id="activeWorkflow.entityId"
     />
   </el-dialog>
 </template>
-<script lang='ts'>
-import { Component, Prop, Watch, Vue } from "vue-property-decorator"
+<script lang="ts">
+import { Component, Prop, Watch, Vue } from "vue-property-decorator";
 // import SelectProperty from "./selectProperty.vue"
-import SelectPropertyModel from "@/components/PropertySelector/index.vue"
-import { EntitiesModule } from "@/store/modules/entitiesMod"
-import { FormsModule } from "@/store/modules/FormsStore"
-import { KeyValue } from "@/models/KeyValue"
-import { ApplicationPreferenceFactory } from "@/models/Utils/ApplicationPreferenceFactory"
-import { ApplicationPreference } from "@/models/ApplicationPreference"
-import { TextAssembly } from "@/models/TextAssembly"
-import { PropertySelectorPath } from "@/models/PropertySelectorPath"
-import propertyselectorVue from "@/views/forms/components/propertyselector.vue"
-import { PropertyCondition } from "@/models/Conditions"
-import { ElForm } from "element-ui/types/form"
-import prefModel from "@/components/Preferences/prefModel.vue"
+import SelectPropertyModel from "@/components/PropertySelector/index.vue";
+import { EntitiesModule } from "@/store/modules/entitiesMod";
+import { FormsModule } from "@/store/modules/FormsStore";
+import { WorkflowModule } from "@/store/modules/WorkflowMod";
+import { KeyValue } from "@/models/KeyValue";
+import { ApplicationPreferenceFactory } from "@/models/Utils/ApplicationPreferenceFactory";
+import { ApplicationPreference } from "@/models/ApplicationPreference";
+import { TextAssembly } from "@/models/TextAssembly";
+import { PropertySelectorPath } from "@/models/PropertySelectorPath";
+import propertyselectorVue from "@/views/forms/components/propertyselector.vue";
+import { PropertyCondition } from "@/models/Conditions";
+import { ElForm } from "element-ui/types/form";
+import prefModel from "@/components/Preferences/prefModel.vue";
 @Component({
   name: "",
   components: { SelectPropertyModel, prefModel }
@@ -164,9 +127,9 @@ import prefModel from "@/components/Preferences/prefModel.vue"
 export default class extends Vue {
   @Prop({ required: true }) dialogVisible!: boolean;
   @Prop({ required: true }) data!: {
-    active: boolean
-    inactive: boolean
-    deleted: boolean
+    active: boolean;
+    inactive: boolean;
+    deleted: boolean;
   };
 
   private skipCheckList = [];
@@ -176,22 +139,33 @@ export default class extends Vue {
   // };
   private secondPropertyReadOnly = false;
 
-  private items = {}as any;
+  private items = {} as any;
 
   get entity() {
-    return EntitiesModule.currentEntity
+    return EntitiesModule.currentEntity;
   }
 
-  private options:KeyValue[]=[]
+  private options: KeyValue[] = [];
+
+  get activeWorkflow() {
+    return WorkflowModule.activeWorkflow
+  }
+
+  onShowPropertySelector(e) {
+    e.preventDefault();
+    console.log("first clicked");
+    this.selectPropertyModal.show = true;
+    this.selectPropertyModal.key = "first";
+  }
 
   @Watch("dataType", { immediate: true })
-  private async loadOptions(datatype:number) {
-    await FormsModule.getOperatorsByDataType(datatype).then((rs) => {
-      this.options = []
+  private async loadOptions(datatype: number) {
+    await FormsModule.getOperatorsByDataType(datatype).then(rs => {
+      this.options = [];
       for (const pair of rs) {
-        this.options.push(pair)
+        this.options.push(pair);
       }
-    })
+    });
   }
 
   private formRules = {
@@ -217,58 +191,58 @@ export default class extends Vue {
   };
 
   get showModal() {
-    return this.dialogVisible
+    return this.dialogVisible;
   }
 
   set showModal(val: boolean) {
-    this.$emit("update:dialogVisible", val)
+    this.$emit("update:dialogVisible", val);
   }
 
   @Watch("data", { immediate: true, deep: true })
   private setItems(val: any) {
-    this.items = { ...val }
+    this.items = { ...val };
   }
 
   selectInputMethod(command: string) {
-    this.items.propertySecond = ""
+    this.items.propertySecond = "";
     if (command === "typeText") {
       this.selectPropertyModal = {
         show: false,
         key: "first"
-      }
-      this.secondPropertyReadOnly = false
-      this.items.propertySecond = { displayName: "" }
+      };
+      this.secondPropertyReadOnly = false;
+      this.items.propertySecond = { displayName: "" };
     } else if (command === "selectPreference") {
-      this.showPref = true
+      this.showPref = true;
     } else {
       if (command === "selectProperty") {
         this.selectPropertyModal = {
           show: true,
           key: "second"
-        }
+        };
       }
-      this.secondPropertyReadOnly = true
+      this.secondPropertyReadOnly = true;
     }
   }
 
   okHandler() {
     (this.$refs.form as ElForm).validate((valid: boolean) => {
       if (valid) {
-        this.$emit("update:data", this.items)
-        this.showModal = false
+        this.$emit("update:data", this.items);
+        this.showModal = false;
       } else {
-        console.log("error submit!!")
-        return false
+        console.log("error submit!!");
+        return false;
       }
-    })
+    });
   }
 
   cancelHandler() {
-    (this.$refs.form as ElForm).resetFields()
-    this.showModal = false
+    (this.$refs.form as ElForm).resetFields();
+    this.showModal = false;
   }
 
-  dataType=1
+  dataType = 1;
   async resultHandler(result: PropertySelectorPath) {
     // let str = ""
     // const newItems = Object.assign({}, this.items)
@@ -281,32 +255,32 @@ export default class extends Vue {
     //   newItems.propertySecond = str
     // }
     // this.items = newItems
-
-    if (this.selectPropertyModal.key === "first") {
-      this.items.propertyFirst = result
-
-      const lastpart = result.paths[result.paths.length - 1]
-      this.dataType = parseInt(lastpart?.dataType?.value)
-    } else if (this.selectPropertyModal.key === "second") {
-      this.items.propertySecond = result
-    }
+    // if (this.selectPropertyModal.key === "first") {
+    //   this.items.propertyFirst = result
+    //   const lastpart = result.paths[result.paths.length - 1]
+    //   this.dataType = parseInt(lastpart?.dataType?.value)
+    // } else if (this.selectPropertyModal.key === "second") {
+    //   this.items.propertySecond = result
+    // }
   }
 
-  convertToTextAssembly(data:any[]) {
-    const textAssembly = new TextAssembly()
-    textAssembly.parts = []
-    const item:any = Object.assign({}, data)
+  convertToTextAssembly(data: any[]) {
+    const textAssembly = new TextAssembly();
+    textAssembly.parts = [];
+    const item: any = Object.assign({}, data);
 
-    if (typeof (item) === "object") {
+    if (typeof item === "object") {
       // if item.parts then its PropertyPaths
       if (item.paths) {
-            textAssembly.parts?.push((item as PropertySelectorPath).toTextAssemblyParts())
+        textAssembly.parts?.push(
+          (item as PropertySelectorPath).toTextAssemblyParts()
+        );
       }
     } else {
-          textAssembly?.parts?.push(item)
+      textAssembly?.parts?.push(item);
     }
 
-    return textAssembly
+    return textAssembly;
   }
 
   async created() {
@@ -314,17 +288,18 @@ export default class extends Vue {
       propertyFirst: "",
       condition: {},
       propertySecond: ""
-    }
+    };
   }
 
-  showPref=false;
-  onPrefSelected(value:ApplicationPreference) {
-    this.items.propertySecond = value
+  showPref = false;
+
+  onPrefSelected(value: ApplicationPreference) {
+    this.items.propertySecond = value;
   }
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .filter-container {
   .select-container {
     display: flex;
