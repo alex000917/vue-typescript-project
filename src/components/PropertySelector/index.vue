@@ -51,6 +51,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import { EntitiesModule } from "@/store/modules/entitiesMod";
 import { KeyValue } from "@/models/KeyValue";
 import ScrollPane from "@/components/Tags/ScrollPane.vue";
 import { ConditionUtils } from "@/models/Utils/ConditionUtils";
