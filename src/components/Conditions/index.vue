@@ -118,8 +118,14 @@
       :auth-nodes-system-names="newRoleGroupModalData.authNodesSystemNames"
       @onClickAddEveryOne="addNewRoleGroup"
     />
-    <PorpertyFilter
+    <property-filter
       :dialogVisible.sync="showFilterModal['property']"
+      @onPropertyFilterComplete="resultPropertyFilter"
+      :propertyFilterData="propertyFilterData"
+    />
+    <itemset-condition
+      :dialogVisible.sync="showFilterModal['itemset']"
+      @onItemsetComplete="resultItemset"
     />
   </div>
 </template>
@@ -130,7 +136,8 @@ import { RoleGroup } from "@/models/RoleGroup";
 import { Restriction } from "@/models/Restriction";
 import { AuthorizationTree } from "@/models/authorizations/AuthorizationTree";
 import { LanguagesPresentationModel } from "@/models/Utils/LanguagesPresentationModel";
-import PorpertyFilter from "./components/propertyFilter.vue";
+import PropertyFilter from "./components/propertyFilter.vue";
+import ItemsetCondition from "./components/itemSet.vue";
 
 interface ITreeRole {
   label: String;
@@ -138,21 +145,12 @@ interface ITreeRole {
   children: ITreeRole[];
 }
 
-const defaultFilterData: any = {
-  state: [],
-  userRole: [],
-  sql: {
-    displayName: null,
-    query: null,
-  },
-  property: "",
-};
-
 @Component({
   name: "",
   components: {
     NewRoleGroupModal,
-    PorpertyFilter,
+    PropertyFilter,
+    ItemsetCondition
   },
 })
 export default class extends Vue {
@@ -163,6 +161,27 @@ export default class extends Vue {
   private visibleConditions!: string[];
   @Prop({ required: false }) conditionsDivHeight!: boolean;
 
+  private defaultFilterData: any = {
+    state: [],
+    userRole: [],
+    sql: {
+      displayName: null,
+      query: null,
+    },
+    property: {
+      propertyFirst: {
+        displayName: "",
+        value: null,
+      },
+      propertySecond: {
+        displayName: "",
+        value: null,
+      },
+      condition: "",
+      children: [],
+    },
+  };
+
   private conditionsList = [
     { id: "property", label: "Property" },
     { id: "itemset", label: "Item Set" },
@@ -170,7 +189,6 @@ export default class extends Vue {
     { id: "status", label: "Status" },
     { id: "entityCategory", label: "Entity category" },
     { id: "javascript", label: "Javscript" },
-    { id: "worksheet", label: "Worksheet" },
     { id: "attachement", label: "Attachment" },
   ];
 
@@ -201,7 +219,8 @@ export default class extends Vue {
       displayName: "",
       value: null,
     },
-    conditions: [],
+    condition: "",
+    skipCheckList: [],
   };
 
   private showFilterModal: any = {
@@ -210,9 +229,10 @@ export default class extends Vue {
     userRole: false,
     property: false,
     sql: false,
+    itemset: false
   };
 
-  private filterData = defaultFilterData;
+  private filterData = this.defaultFilterData;
   private selectedFilterKey = "";
 
   private newRoleGroupModalData = {
@@ -248,11 +268,15 @@ export default class extends Vue {
     newData.sql = data.sql.displayName ? [data.sql.displayName] : [];
     this.updateTreeChildren("sql", newData, "");
 
-    if (oldData && data && oldData.property !== data.property) {
+    if (oldData && data && data.property) {
+      if (this.treeItems?.length === 0) {
+        this.treeItems.push({ label: "everyone", children: [] });
+      }
+      console.log("watch data", data);
       this.treeItems[0].children.push({
-        label: data.property,
+        label: data.property.label,
         key: "property",
-        children: [],
+        children: data.property.children,
       });
     }
   }
@@ -262,12 +286,31 @@ export default class extends Vue {
   }
 
   resultPropertyFilter(items: any) {
-    // if (items) {
-    //   this.propertyFilterData = { ...items };
-    //   console.log("propertyFilterData", this.propertyFilterData);
-    //   this.filterData.property =
-    //     this.propertyFilterData.propertyFirst.displayName;
-    // }
+    if (items) {
+      this.propertyFilterData = { ...items };
+      this.filterData.property.label = "";
+      if (items.propertyFirst)
+        this.filterData.property.label +=
+          this.propertyFilterData.propertyFirst.displayName;
+      if (items.conditio)
+        this.filterData.property.label +=
+          " " + this.propertyFilterData.condition;
+      if (items.propertySecond)
+        this.filterData.property.label +=
+          " " + this.propertyFilterData.propertySecond.displayName;
+      if (items?.skipCheckList?.length > 0) {
+        for (let value of items.skipCheckList) {
+          this.filterData.property.children.push({
+            label: `Skip if ${items[value].displayName} is empty`,
+          });
+        }
+      }
+      console.log("this.filterData", this.filterData);
+    }
+  }
+
+  resultItemset() {
+    
   }
 
   handleNodeClick(data: any) {
@@ -275,6 +318,7 @@ export default class extends Vue {
   }
 
   updateTreeChildren(key: string, childNodeData: any, initialLabel: string) {
+    if (this.treeItems?.length === 0) return;
     let label = initialLabel;
     if (childNodeData[key].length) {
       label += childNodeData[key].join(" or ");
@@ -323,7 +367,7 @@ export default class extends Vue {
     } else if (this.checkIfNewRoleGroup(roleGroupName)) {
       const newRoleGroup: RoleGroup = new RoleGroup();
 
-      if (roleGroupName === "EveryOne" && !nodeSystemNames) {
+      if (roleGroupName === "Everyone" && !nodeSystemNames) {
         newRoleGroup.everyone = true;
       } else {
         newRoleGroup.authorizationNodeNames = nodeSystemNames;
@@ -331,8 +375,8 @@ export default class extends Vue {
 
       newRoleGroup.conditions = [];
       newRoleGroup.title = roleGroupName;
-
-      this.treeItems = [...this.treeItems, newRoleGroup];
+      this.treeItems.push({ label: roleGroupName, children: [] });
+      console.log(this.treeItems);
     }
   }
 
@@ -343,10 +387,10 @@ export default class extends Vue {
 
   deleteHandler() {
     if (this.selectedFilterKey === "everyone") {
-      this.filterData = defaultFilterData;
+      this.filterData = this.defaultFilterData;
     } else {
       this.filterData[this.selectedFilterKey] =
-        defaultFilterData[this.selectedFilterKey];
+        this.defaultFilterData[this.selectedFilterKey];
     }
   }
 
@@ -363,7 +407,7 @@ export default class extends Vue {
   }
 
   created() {
-    this.filterData = defaultFilterData;
+    this.filterData = this.defaultFilterData;
   }
 }
 </script>
@@ -389,4 +433,4 @@ export default class extends Vue {
     height: 50px;
   }
 }
-</style>``
+</style>
