@@ -35,7 +35,7 @@
             v-for="item in options"
             :key="item.key"
             :label="item.key"
-            :value="item.value"
+            :value="item.key"
           />
         </el-select>
       </el-row>
@@ -71,15 +71,16 @@
           </el-dropdown-menu>
         </el-dropdown>
       </el-row>
-      <el-checkbox-group v-model="skipCheckList" style="margin-top: 20px">
-        <el-checkbox label="skip_first">
+      <el-checkbox-group style="margin-top: 20px" v-model="items.skipCheckList">
+        <el-checkbox label="propertyFirst">
           Skip this condition if{{ items.propertyFirst.displayName }} is empty
         </el-checkbox>
         <el-checkbox
           v-if="selectPropertyModal.key === 'second'"
-          label="skip_second"
+          label="propertySecond"
         >
-          Skip this condition if[{{ items.propertySecond.displayName }}] is empty
+          Skip this condition if[{{ items.propertySecond.displayName }}] is
+          empty
         </el-checkbox>
       </el-checkbox-group>
     </el-form>
@@ -119,32 +120,26 @@ import { PropertyCondition } from "@/models/Conditions";
 import { ElForm } from "element-ui/types/form";
 import prefModel from "@/components/Preferences/prefModel.vue";
 @Component({
-  name: "",
+  name: "property-filter",
   components: { SelectPropertyModel, prefModel },
 })
 export default class extends Vue {
   @Prop({ required: true }) dialogVisible!: boolean;
-  // @Prop({ required: true }) resultPropertyFilter!: any;
-  // @Prop({required: true}) propertyFilterData!: any;
-  
+  @Prop({ required: true }) propertyFilterData!: any;
 
-  private skipCheckList = [];
-  // private result = {
-  //   first: [],
-  //   second: []
-  // };
   private secondPropertyReadOnly = false;
 
   private items = {
     propertyFirst: {
-      displayName: '',
-      value: null
+      displayName: "",
+      value: null,
     },
     propertySecond: {
-      displayName: '',
-      value: null
+      displayName: "",
+      value: null,
     },
-    conditions: []
+    condition: "",
+    skipCheckList: [],
   } as any;
 
   get entity() {
@@ -167,13 +162,12 @@ export default class extends Vue {
   private async loadOptions(datatype: number) {
     await FormsModule.getOperatorsByDataType(datatype).then((rs) => {
       this.options = [];
-      if (rs?.length){
+      if (rs?.length) {
         let pair: any = null;
         for (pair of rs) {
           this.options.push(pair);
         }
       }
-        
     });
   }
 
@@ -237,8 +231,7 @@ export default class extends Vue {
   okHandler() {
     (this.$refs.form as ElForm).validate((valid: boolean) => {
       if (valid) {
-        this.$emit("update:data", this.items);
-        // this.resultPropertyFilter(this.items);
+        this.$emit("onPropertyFilterComplete", this.items);
         this.showModal = false;
       } else {
         console.log("error submit!!");
@@ -260,26 +253,22 @@ export default class extends Vue {
     if (result.length > 1) {
       str += `[Workflow(${result[0].key}): ${result[1].key}]`;
     }
-    console.log('str',str)
+    console.log("str", str);
     if (this.selectPropertyModal.key === "first") {
-      // let propertyFirst = {displayName: str, value: result};
-      // newItems = {...newItems, propertyFirst: propertyFirst}
       newItems.propertyFirst = {};
       newItems.propertyFirst.displayName = str;
       newItems.propertyFirst.value = result;
     } else {
-      // let propertySecond = {displayName: str, value: result};
-      // newItems = {...newItems, propertySecond: propertySecond}
-      newItems.propertySecond = {}
+      newItems.propertySecond = {};
       newItems.propertySecond.displayName = str;
       newItems.propertySecond.value = result;
     }
-    this.items = {...newItems};
+    this.items = { ...newItems };
     if (this.selectPropertyModal.key === "first") {
       const lastpart = result[result.length - 1];
-      console.log('lastpart',lastpart?.value?.dataType?.value)
+      console.log("lastpart", lastpart?.value?.dataType?.value);
       this.dataType = parseInt(lastpart?.value?.dataType?.value);
-    } 
+    }
   }
 
   convertToTextAssembly(data: any[]) {
@@ -301,9 +290,7 @@ export default class extends Vue {
     return textAssembly;
   }
 
-  async created() {
-
-  }
+  async created() {}
 
   showPref = false;
 
