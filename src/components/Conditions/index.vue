@@ -127,6 +127,10 @@
       :dialogVisible.sync="showFilterModal['itemset']"
       @onItemsetComplete="resultItemset"
     />
+    <workflow-condition
+      :dialogVisible.sync="showFilterModal['workflow']"
+      @onWorkflowComplete="resultWorkflow"
+    />
   </div>
 </template>
 <script lang="ts">
@@ -138,6 +142,7 @@ import { AuthorizationTree } from "@/models/authorizations/AuthorizationTree";
 import { LanguagesPresentationModel } from "@/models/Utils/LanguagesPresentationModel";
 import PropertyFilter from "./components/propertyFilter.vue";
 import ItemsetCondition from "./components/itemSet.vue";
+import WorkflowCondition from "./components/workflow.vue";
 
 interface ITreeRole {
   label: String;
@@ -150,7 +155,8 @@ interface ITreeRole {
   components: {
     NewRoleGroupModal,
     PropertyFilter,
-    ItemsetCondition
+    ItemsetCondition,
+    WorkflowCondition,
   },
 })
 export default class extends Vue {
@@ -179,6 +185,15 @@ export default class extends Vue {
       },
       condition: "",
       children: [],
+    },
+    workflow: {
+      property: {
+        displayName: "",
+        value: null,
+      },
+      condition: "",
+      workflow: "",
+      step: "",
     },
   };
 
@@ -229,7 +244,8 @@ export default class extends Vue {
     userRole: false,
     property: false,
     sql: false,
-    itemset: false
+    itemset: false,
+    workflow: false,
   };
 
   private filterData = this.defaultFilterData;
@@ -268,16 +284,29 @@ export default class extends Vue {
     newData.sql = data.sql.displayName ? [data.sql.displayName] : [];
     this.updateTreeChildren("sql", newData, "");
 
-    if (oldData && data && data.property) {
+    if (oldData && data) {
       if (this.treeItems?.length === 0) {
         this.treeItems.push({ label: "everyone", children: [] });
       }
-      console.log("watch data", data);
-      this.treeItems[0].children.push({
-        label: data.property.label,
-        key: "property",
-        children: data.property.children,
-      });
+
+      if (data.property !== oldData.property) {
+        this.treeItems[0].children.push({
+          label: data.property.label,
+          key: "property",
+          children: data.property.children,
+        });
+      }
+
+      if (data.workflow !== oldData.workflow) { console.log('watch workflow', data.workflow)
+        let str: string = "";
+        if (data.workflow.property.displayName) str += data.workflow.property.displayName;
+        if (data.workflow.condition) str += " " + data.workflow.condition;
+        if (data.workflow.step) str += " " + data.step;
+        this.treeItems[0].children.push({
+          label: str,
+          key: "workflow"
+        });
+      }
     }
   }
 
@@ -309,8 +338,13 @@ export default class extends Vue {
     }
   }
 
-  resultItemset() {
-    
+  resultItemset(items: any) {}
+
+  resultWorkflow(items: any) {
+    if (items) {
+      this.filterData.workflow = { ...items };
+      console.log('workflow',this.filterData)
+    }
   }
 
   handleNodeClick(data: any) {
@@ -381,7 +415,7 @@ export default class extends Vue {
   }
 
   newFilterHandler(command: string) {
-    console.log('command', command)
+    console.log("command", command);
     this.showFilterModal[command] = true;
   }
 

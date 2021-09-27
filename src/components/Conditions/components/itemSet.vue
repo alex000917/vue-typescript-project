@@ -289,7 +289,7 @@ export default class extends Vue {
   }
 
   okHandler() {
-    this.$emit("onItemsetComplete");
+    this.$emit("onItemsetComplete", this.items);
     this.showModal = false;
   }
 
