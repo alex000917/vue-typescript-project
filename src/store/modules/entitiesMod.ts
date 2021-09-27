@@ -249,7 +249,7 @@ class EntitiesMod extends VuexModule implements IEntitiesState {
   @Action
   public async getEntity(entityId: string): Promise<Entity> {
     let entity: any = this.TempEntityCache.get(entityId) as Entity
-    // console.log("getting entity to cache " + entityId);
+    console.log("getting entity to cache " + entityId);
     if (!entity) {
       entity = await this.getAndCacheEntity(entityId);
       // for(const p of entity.properties){

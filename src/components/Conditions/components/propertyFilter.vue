@@ -73,20 +73,18 @@
       </el-row>
       <el-checkbox-group v-model="skipCheckList" style="margin-top: 20px">
         <el-checkbox label="skip_first">
-          Skip this condition if{{ items.propertyFirst }} is empty
+          Skip this condition if{{ items.propertyFirst.displayName }} is empty
         </el-checkbox>
         <el-checkbox
           v-if="selectPropertyModal.key === 'second'"
           label="skip_second"
         >
-          Skip this condition if[{{ items.propertySecond }}] is empty
+          Skip this condition if[{{ items.propertySecond.displayName }}] is empty
         </el-checkbox>
       </el-checkbox-group>
     </el-form>
     <div slot="footer">
-      <el-button style="margin-right: 20px" @click="okHandler">
-        Ok
-      </el-button>
+      <el-button style="margin-right: 20px" @click="okHandler"> Ok </el-button>
 
       <el-button style="margin-right: 20px" @click="cancelHandler">
         Cancel
@@ -122,15 +120,13 @@ import { ElForm } from "element-ui/types/form";
 import prefModel from "@/components/Preferences/prefModel.vue";
 @Component({
   name: "",
-  components: { SelectPropertyModel, prefModel }
+  components: { SelectPropertyModel, prefModel },
 })
 export default class extends Vue {
   @Prop({ required: true }) dialogVisible!: boolean;
-  @Prop({ required: true }) data!: {
-    active: boolean;
-    inactive: boolean;
-    deleted: boolean;
-  };
+  // @Prop({ required: true }) resultPropertyFilter!: any;
+  // @Prop({required: true}) propertyFilterData!: any;
+  
 
   private skipCheckList = [];
   // private result = {
@@ -139,7 +135,17 @@ export default class extends Vue {
   // };
   private secondPropertyReadOnly = false;
 
-  private items = {} as any;
+  items = {
+    propertyFirst: {
+      displayName: '',
+      value: null
+    },
+    propertySecond: {
+      displayName: '',
+      value: null
+    },
+    conditions: []
+  } as any;
 
   get entity() {
     return EntitiesModule.currentEntity;
@@ -148,11 +154,10 @@ export default class extends Vue {
   private options: KeyValue[] = [];
 
   get activeWorkflow() {
-    return WorkflowModule.activeWorkflow
+    return WorkflowModule.activeWorkflow;
   }
 
-  onShowPropertySelector(e) {
-    e.preventDefault();
+  onShowPropertySelector() {
     console.log("first clicked");
     this.selectPropertyModal.show = true;
     this.selectPropertyModal.key = "first";
@@ -160,11 +165,15 @@ export default class extends Vue {
 
   @Watch("dataType", { immediate: true })
   private async loadOptions(datatype: number) {
-    await FormsModule.getOperatorsByDataType(datatype).then(rs => {
+    await FormsModule.getOperatorsByDataType(datatype).then((rs) => {
       this.options = [];
-      for (const pair of rs) {
-        this.options.push(pair);
+      if (rs?.length){
+        let pair: any = null;
+        for (pair of rs) {
+          this.options.push(pair);
+        }
       }
+        
     });
   }
 
@@ -173,21 +182,21 @@ export default class extends Vue {
       {
         required: true,
         message: "Please select entity property",
-        trigger: "blur"
-      }
+        trigger: "blur",
+      },
     ],
     propertySecond: [
       {
         required: true,
         message: "Please select entity property",
-        trigger: "blur"
-      }
-    ]
+        trigger: "blur",
+      },
+    ],
   };
 
   private selectPropertyModal = {
     show: false,
-    key: "first"
+    key: "first",
   };
 
   get showModal() {
@@ -208,7 +217,7 @@ export default class extends Vue {
     if (command === "typeText") {
       this.selectPropertyModal = {
         show: false,
-        key: "first"
+        key: "first",
       };
       this.secondPropertyReadOnly = false;
       this.items.propertySecond = { displayName: "" };
@@ -218,7 +227,7 @@ export default class extends Vue {
       if (command === "selectProperty") {
         this.selectPropertyModal = {
           show: true,
-          key: "second"
+          key: "second",
         };
       }
       this.secondPropertyReadOnly = true;
@@ -229,6 +238,7 @@ export default class extends Vue {
     (this.$refs.form as ElForm).validate((valid: boolean) => {
       if (valid) {
         this.$emit("update:data", this.items);
+        // this.resultPropertyFilter(this.items);
         this.showModal = false;
       } else {
         console.log("error submit!!");
@@ -243,25 +253,33 @@ export default class extends Vue {
   }
 
   dataType = 1;
-  async resultHandler(result: PropertySelectorPath) {
-    // let str = ""
-    // const newItems = Object.assign({}, this.items)
-    // if (result.length > 1) {
-    //   str += `[Entity(${result[0].value}): ${result[1].value}]`
-    // }
-    // if (this.selectPropertyModal.key === "first") {
-    //   newItems.propertyFirst = str
-    // } else {
-    //   newItems.propertySecond = str
-    // }
-    // this.items = newItems
-    // if (this.selectPropertyModal.key === "first") {
-    //   this.items.propertyFirst = result
-    //   const lastpart = result.paths[result.paths.length - 1]
-    //   this.dataType = parseInt(lastpart?.dataType?.value)
-    // } else if (this.selectPropertyModal.key === "second") {
-    //   this.items.propertySecond = result
-    // }
+  async resultHandler(result: KeyValue[]) {
+    console.log("resultHandler", result);
+    let str = "";
+    let newItems = Object.assign({}, this.items);
+    if (result.length > 1) {
+      str += `[Workflow(${result[0].key}): ${result[1].key}]`;
+    }
+    console.log('str',str)
+    if (this.selectPropertyModal.key === "first") {
+      // let propertyFirst = {displayName: str, value: result};
+      // newItems = {...newItems, propertyFirst: propertyFirst}
+      newItems.propertyFirst = {};
+      newItems.propertyFirst.displayName = str;
+      newItems.propertyFirst.value = result;
+    } else {
+      // let propertySecond = {displayName: str, value: result};
+      // newItems = {...newItems, propertySecond: propertySecond}
+      newItems.propertySecond = {}
+      newItems.propertySecond.displayName = str;
+      newItems.propertySecond.value = result;
+    }
+    this.items = {...newItems};
+    if (this.selectPropertyModal.key === "first") {
+      const lastpart = result[result.length - 1];
+      console.log('lastpart',lastpart?.value?.dataType?.value)
+      this.dataType = parseInt(lastpart?.value?.dataType?.value);
+    } 
   }
 
   convertToTextAssembly(data: any[]) {
@@ -284,11 +302,7 @@ export default class extends Vue {
   }
 
   async created() {
-    this.items = {
-      propertyFirst: "",
-      condition: {},
-      propertySecond: ""
-    };
+
   }
 
   showPref = false;

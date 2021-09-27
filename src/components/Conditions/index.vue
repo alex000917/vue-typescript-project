@@ -2,42 +2,35 @@
   <div>
     <div class="outer-modal-container">
       <slot name="description" />
-      <el-row
-        type="flex"
-        class="command-container"
-      >
+      <el-row type="flex" class="command-container">
         <el-col :span="5" class="command-button">
           <el-button
             type="text"
             icon="el-icon-user"
-            :title="lpmInstance.getLocalizedString(languagesPresentationModel.NEW_ROLE_GROUP)"
+            :title="
+              lpmInstance.getLocalizedString(
+                languagesPresentationModel.NEW_ROLE_GROUP
+              )
+            "
           >
-            <span
-              class="button-text"
-              @click="showRoleGroupPopup('new')"
-            >{{ lpmInstance.getLocalizedString(languagesPresentationModel.NEW_ROLE_GROUP) }}</span>
+            <span class="button-text" @click="showRoleGroupPopup('new')">{{
+              lpmInstance.getLocalizedString(
+                languagesPresentationModel.NEW_ROLE_GROUP
+              )
+            }}</span>
           </el-button>
         </el-col>
-        <el-col
-          v-if="showFiltersButton"
-          class="command-button"
-        >
+        <el-col v-if="showFiltersButton" class="command-button">
           <el-dropdown
             trigger="click"
             size="small"
             placement="bottom-start"
             @command="newFilterHandler"
           >
-            <el-button
-              type="text"
-              icon="el-icon-brush"
-            >
+            <el-button type="text" icon="el-icon-brush">
               <span class="button-text">New Filter</span>
             </el-button>
-            <el-dropdown-menu
-              slot="dropdown"
-              style="margin-top: 0"
-            >
+            <el-dropdown-menu slot="dropdown" style="margin-top: 0">
               <el-dropdown-item
                 v-for="filter in filtersList"
                 :key="filter.id"
@@ -48,10 +41,7 @@
             </el-dropdown-menu>
           </el-dropdown>
         </el-col>
-        <el-col
-          :span="5"
-          class="command-button"
-        >
+        <el-col :span="5" class="command-button">
           <el-dropdown
             trigger="click"
             size="small"
@@ -65,10 +55,7 @@
             >
               <span class="button-text">New Condition </span>
             </el-button>
-            <el-dropdown-menu
-              slot="dropdown"
-              style="margin-top: 0"
-            >
+            <el-dropdown-menu slot="dropdown" style="margin-top: 0">
               <el-dropdown-item
                 v-for="condition in conditionsList"
                 :key="condition.id"
@@ -80,24 +67,20 @@
           </el-dropdown>
         </el-col>
         <el-col :span="2" class="command-button">
-          <el-button
-            type="text"
-            icon="el-icon-edit-outline"
-          >
+          <el-button type="text" icon="el-icon-edit-outline">
             <span class="button-text">Edit</span>
           </el-button>
         </el-col>
         <el-col :span="2" class="command-button">
-          <el-button
-            type="text"
-            icon="el-icon-delete"
-            @click="deleteHandler"
-          >
+          <el-button type="text" icon="el-icon-delete" @click="deleteHandler">
             <span class="button-text">Delete</span>
           </el-button>
         </el-col>
       </el-row>
-      <div class="table-container" :class="conditionsDivHeight ? 'table-container-small' : ''">
+      <div
+        class="table-container"
+        :class="conditionsDivHeight ? 'table-container-small' : ''"
+      >
         <el-tree
           :data="treeItems"
           accordion
@@ -106,10 +89,7 @@
           class="tree-container"
           @node-click="handleNodeClick"
         >
-          <span
-            slot-scope="{node, data}"
-            class="custom-tree-node"
-          >
+          <span slot-scope="{ node, data }" class="custom-tree-node">
             <div style="display: flex; align-items: center">
               <el-image
                 style="width: 20px; height: 20px"
@@ -132,37 +112,30 @@
       :current-auth-tree="authorizationTree"
       :allowed-node-types="allowedNodeTypes"
       :state="newRoleGroupModalData.state"
-      :should-show-everyone-button="newRoleGroupModalData.shouldShowEveryoneButton"
+      :should-show-everyone-button="
+        newRoleGroupModalData.shouldShowEveryoneButton
+      "
       :auth-nodes-system-names="newRoleGroupModalData.authNodesSystemNames"
       @onClickAddEveryOne="addNewRoleGroup"
     />
     <PorpertyFilter
       :dialogVisible.sync="showFilterModal['property']"
-      :data="{
-        propertyFirst: {
-          displayName: ''
-        },
-        propertySecond: {
-          displayName: ''
-        },
-        conditions: {}
-      }"
     />
   </div>
 </template>
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from "vue-property-decorator"
-import NewRoleGroupModal from "./newRoleGroupModal.vue"
-import { RoleGroup } from "@/models/RoleGroup.ts"
-import { Restriction } from "@/models/Restriction.ts"
-import { AuthorizationTree } from "@/models/authorizations/AuthorizationTree.ts"
-import { LanguagesPresentationModel } from "@/models/Utils/LanguagesPresentationModel.ts"
-import PorpertyFilter from "./components/propertyFilter.vue"
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import NewRoleGroupModal from "./newRoleGroupModal.vue";
+import { RoleGroup } from "@/models/RoleGroup";
+import { Restriction } from "@/models/Restriction";
+import { AuthorizationTree } from "@/models/authorizations/AuthorizationTree";
+import { LanguagesPresentationModel } from "@/models/Utils/LanguagesPresentationModel";
+import PorpertyFilter from "./components/propertyFilter.vue";
 
 interface ITreeRole {
-  label: String
-  key: String
-  children: ITreeRole[]
+  label: String;
+  key: String;
+  children: ITreeRole[];
 }
 
 const defaultFilterData: any = {
@@ -170,22 +143,24 @@ const defaultFilterData: any = {
   userRole: [],
   sql: {
     displayName: null,
-    query: null
+    query: null,
   },
-  property: ""
-}
+  property: "",
+};
 
 @Component({
   name: "",
   components: {
     NewRoleGroupModal,
-    PorpertyFilter
-  }
+    PorpertyFilter,
+  },
 })
 export default class extends Vue {
   @Prop({ required: true }) private data!: any;
-  @Prop({ required: false, default: [] }) private visibleFilters!: string[];
-  @Prop({ required: false, default: () => [] }) private visibleConditions!: string[];
+  @Prop({ required: false, default: () => [] })
+  private visibleFilters!: string[];
+  @Prop({ required: false, default: () => [] })
+  private visibleConditions!: string[];
   @Prop({ required: false }) conditionsDivHeight!: boolean;
 
   private conditionsList = [
@@ -196,7 +171,7 @@ export default class extends Vue {
     { id: "entityCategory", label: "Entity category" },
     { id: "javascript", label: "Javscript" },
     { id: "worksheet", label: "Worksheet" },
-    { id: "attachement", label: "Attachment" }
+    { id: "attachement", label: "Attachment" },
   ];
 
   private filtersList = [
@@ -204,25 +179,37 @@ export default class extends Vue {
     { id: "entityCategory", label: "Entity category" },
     { id: "userRole", label: "Logged in user role" },
     { id: "property", label: "Property" },
-    { id: "sql", label: "SQL" }
+    { id: "sql", label: "SQL" },
   ];
 
   private treeItems: any[] = [];
   private defaultTreeProps = {
     children: "children",
-    label: "label"
-  }
+    label: "label",
+  };
 
-  private authorizationTree: AuthorizationTree = new AuthorizationTree()
-  private currentRoleGroup: RoleGroup | null = new RoleGroup()
-  private allowedNodeTypes = []
+  private authorizationTree: AuthorizationTree = new AuthorizationTree();
+  private currentRoleGroup: RoleGroup | null = new RoleGroup();
+  private allowedNodeTypes = [];
+
+  private propertyFilterData = {
+    propertyFirst: {
+      displayName: "",
+      value: null,
+    },
+    propertySecond: {
+      displayName: "",
+      value: null,
+    },
+    conditions: [],
+  };
 
   private showFilterModal: any = {
     state: false,
     entityCategory: false,
     userRole: false,
     property: false,
-    sql: false
+    sql: false,
   };
 
   private filterData = defaultFilterData;
@@ -232,142 +219,150 @@ export default class extends Vue {
     state: "new",
     shouldShowEveryoneButton: true,
     authNodesSystemNames: [],
-    visible: false
+    visible: false,
   };
 
   get showFiltersButton() {
-    return !!this.visibleFilters.length
+    return !!this.visibleFilters.length;
   }
 
   get showConditionsButton() {
-    return !!this.visibleConditions.length
+    return !!this.visibleConditions.length;
   }
 
   get languagesPresentationModel() {
-    return LanguagesPresentationModel
+    return LanguagesPresentationModel;
   }
 
   private lpmInstance = LanguagesPresentationModel.getInstance();
 
   @Watch("getFilterData", { deep: true, immediate: true })
   private changeTreeData(data: any, oldData: any) {
-    const stateLabel = "State is "
-    this.updateTreeChildren("state", data, stateLabel)
+    const stateLabel = "State is ";
+    this.updateTreeChildren("state", data, stateLabel);
 
-    const userRoleLabel = "Logged in user is assigned to role "
-    this.updateTreeChildren("userRole", data, userRoleLabel)
+    const userRoleLabel = "Logged in user is assigned to role ";
+    this.updateTreeChildren("userRole", data, userRoleLabel);
 
-    const newData = Object.assign({}, data)
-    newData.sql = data.sql.displayName ? [data.sql.displayName] : []
-    this.updateTreeChildren("sql", newData, "")
+    const newData = Object.assign({}, data);
+    newData.sql = data.sql.displayName ? [data.sql.displayName] : [];
+    this.updateTreeChildren("sql", newData, "");
 
     if (oldData && data && oldData.property !== data.property) {
       this.treeItems[0].children.push({
         label: data.property,
         key: "property",
-        children: []
-      })
+        children: [],
+      });
     }
   }
 
   get getFilterData() {
-    return Object.assign({}, this.filterData)
+    return Object.assign({}, this.filterData);
+  }
+
+  resultPropertyFilter(items: any) {
+    // if (items) {
+    //   this.propertyFilterData = { ...items };
+    //   console.log("propertyFilterData", this.propertyFilterData);
+    //   this.filterData.property =
+    //     this.propertyFilterData.propertyFirst.displayName;
+    // }
   }
 
   handleNodeClick(data: any) {
-    this.selectedFilterKey = data.key
+    this.selectedFilterKey = data.key;
   }
 
   updateTreeChildren(key: string, childNodeData: any, initialLabel: string) {
-    let label = initialLabel
+    let label = initialLabel;
     if (childNodeData[key].length) {
-      label += childNodeData[key].join(" or ")
+      label += childNodeData[key].join(" or ");
     } else {
       this.treeItems[0].children = this.treeItems[0].children.filter(
         (item: ITreeRole) => item.key !== key
-      )
+      );
     }
-    let flag = false
+    let flag = false;
     this.treeItems[0].children.forEach((item: ITreeRole) => {
       if (item.key === key) {
-        item.label = label
-        flag = true
+        item.label = label;
+        flag = true;
       }
-    })
+    });
     if (!flag && childNodeData[key].length) {
       this.treeItems[0].children.push({
         label,
         key,
-        children: []
-      })
+        children: [],
+      });
     }
   }
 
   showRoleGroupPopup(state: string, authNodesSystemNames: [] = []): void {
     const shouldShowEveryoneButton: boolean = this.checkIfNewRoleGroup(
-      this.lpmInstance.getLocalizedString(
-        LanguagesPresentationModel.EVERYONE
-      )
-    )
+      this.lpmInstance.getLocalizedString(LanguagesPresentationModel.EVERYONE)
+    );
 
     if (state === "new") {
-      this.currentRoleGroup = new RoleGroup()
-      this.currentRoleGroup = null
+      this.currentRoleGroup = new RoleGroup();
+      this.currentRoleGroup = null;
     }
 
-    this.newRoleGroupModalData.visible = true
-    this.newRoleGroupModalData.state = state
-    this.newRoleGroupModalData.shouldShowEveryoneButton = shouldShowEveryoneButton
-    this.newRoleGroupModalData.authNodesSystemNames = authNodesSystemNames
+    this.newRoleGroupModalData.visible = true;
+    this.newRoleGroupModalData.state = state;
+    this.newRoleGroupModalData.shouldShowEveryoneButton =
+      shouldShowEveryoneButton;
+    this.newRoleGroupModalData.authNodesSystemNames = authNodesSystemNames;
   }
 
   addNewRoleGroup(roleGroupName: string | null, nodeSystemNames: any[]): void {
     if (this.currentRoleGroup) {
-      this.currentRoleGroup.authorizationNodeNames = nodeSystemNames
-      this.currentRoleGroup.title = roleGroupName
+      this.currentRoleGroup.authorizationNodeNames = nodeSystemNames;
+      this.currentRoleGroup.title = roleGroupName;
     } else if (this.checkIfNewRoleGroup(roleGroupName)) {
-      const newRoleGroup: RoleGroup = new RoleGroup()
+      const newRoleGroup: RoleGroup = new RoleGroup();
 
       if (roleGroupName === "EveryOne" && !nodeSystemNames) {
-        newRoleGroup.everyone = true
+        newRoleGroup.everyone = true;
       } else {
-        newRoleGroup.authorizationNodeNames = nodeSystemNames
+        newRoleGroup.authorizationNodeNames = nodeSystemNames;
       }
 
-      newRoleGroup.conditions = []
-      newRoleGroup.title = roleGroupName
+      newRoleGroup.conditions = [];
+      newRoleGroup.title = roleGroupName;
 
-      this.treeItems = [...this.treeItems, newRoleGroup]
+      this.treeItems = [...this.treeItems, newRoleGroup];
     }
   }
 
   newFilterHandler(command: string) {
-    this.showFilterModal[command] = true
+    this.showFilterModal[command] = true;
   }
 
   deleteHandler() {
     if (this.selectedFilterKey === "everyone") {
-      this.filterData = defaultFilterData
+      this.filterData = defaultFilterData;
     } else {
       this.filterData[this.selectedFilterKey] =
-        defaultFilterData[this.selectedFilterKey]
+        defaultFilterData[this.selectedFilterKey];
     }
   }
 
   newRoleGroupOkHandler() {
-    console.log("hello, just clicked Ok Button")
+    console.log("hello, just clicked Ok Button");
   }
 
   private checkIfNewRoleGroup(roleGroupName: string | null): boolean {
     const duplicatedTreeItems = this.treeItems.filter((roleGroup) => {
-      return roleGroup.label === roleGroupName && !roleGroup.everyone
-    })
+      return roleGroup.label === roleGroupName && !roleGroup.everyone;
+    });
 
-    return !duplicatedTreeItems.length
+    return !duplicatedTreeItems.length;
   }
 
   created() {
-    this.filterData = defaultFilterData
+    this.filterData = defaultFilterData;
   }
 }
 </script>
