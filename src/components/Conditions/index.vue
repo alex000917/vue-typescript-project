@@ -337,6 +337,7 @@ export default class extends Vue {
   }
 
   newFilterHandler(command: string) {
+    console.log('command', command)
     this.showFilterModal[command] = true;
   }
 

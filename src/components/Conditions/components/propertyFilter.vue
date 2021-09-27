@@ -135,7 +135,7 @@ export default class extends Vue {
   // };
   private secondPropertyReadOnly = false;
 
-  items = {
+  private items = {
     propertyFirst: {
       displayName: '',
       value: null
@@ -207,10 +207,10 @@ export default class extends Vue {
     this.$emit("update:dialogVisible", val);
   }
 
-  @Watch("data", { immediate: true, deep: true })
-  private setItems(val: any) {
-    this.items = { ...val };
-  }
+  // @Watch("data", { immediate: true, deep: true })
+  // private setItems(val: any) {
+  //   this.items = { ...val };
+  // }
 
   selectInputMethod(command: string) {
     this.items.propertySecond = "";
