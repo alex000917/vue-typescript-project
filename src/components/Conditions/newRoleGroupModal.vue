@@ -44,10 +44,8 @@
         <el-tree
           :data="currentAuthTree.root.children"
           accordion
-          :props="defaultTreeProps"
           default-expand-all
           class="tree-container"
-          @node-click="handleNodeClick"
         >
           <span
             slot-scope="{node, data}"
@@ -185,7 +183,7 @@ export default class extends Vue {
   }
 
   private addEveryoneRoleGroup() {
-    const nodeNames = null
+    const nodeNames = "Everyone"
     const name = this.lpmInstance.getLocalizedString(
       this.languagesPresentationModel.EVERYONE
     )
