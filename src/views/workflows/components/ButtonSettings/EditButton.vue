@@ -39,7 +39,7 @@
       </el-tab-pane>
       <el-tab-pane label="Viewed By">
         <SettingItemWrapper icon-name="viewed-by32x32" title="Viewed By">
-          <Conditions :data="[]" :visible-conditions="['state']"></Conditions>
+          <Conditions :data="[]" :visible-conditions="[]"></Conditions>
         </SettingItemWrapper>
       </el-tab-pane>
       <el-tab-pane label="Note">

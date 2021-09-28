@@ -60,6 +60,7 @@
                 v-for="condition in conditionsList"
                 :key="condition.id"
                 :command="condition.id"
+
               >
                 {{ condition.label }} Conditions...
               </el-dropdown-item>
@@ -131,6 +132,9 @@
       :dialogVisible.sync="showFilterModal['workflow']"
       @onWorkflowComplete="resultWorkflow"
     />
+  <entity-condition
+      :dialogVisible.sync="showFilterModal['entityCategory']"
+    />
   </div>
 </template>
 <script lang="ts">
@@ -143,6 +147,7 @@ import { LanguagesPresentationModel } from "@/models/Utils/LanguagesPresentation
 import PropertyFilter from "./components/propertyFilter.vue";
 import ItemsetCondition from "./components/itemSet.vue";
 import WorkflowCondition from "./components/workflow.vue";
+import EntityCondition from "./components/entityFilter.vue";
 
 interface ITreeRole {
   label: String;
@@ -157,6 +162,7 @@ interface ITreeRole {
     PropertyFilter,
     ItemsetCondition,
     WorkflowCondition,
+    EntityCondition
   },
 })
 export default class extends Vue {
@@ -177,7 +183,7 @@ export default class extends Vue {
     property: {
       propertyFirst: {
         displayName: "",
-        value: null,
+        value: [],
       },
       propertySecond: {
         displayName: "",
@@ -258,12 +264,16 @@ export default class extends Vue {
     visible: false,
   };
 
+  private itemSelected: boolean = false;
+
+  private statusDatta: any = {};
+
   get showFiltersButton() {
     return !!this.visibleFilters.length;
   }
 
   get showConditionsButton() {
-    return !!this.visibleConditions.length;
+    return !!this.visibleConditions.length || this.itemSelected;
   }
 
   get languagesPresentationModel() {
@@ -286,7 +296,7 @@ export default class extends Vue {
 
     if (oldData && data) {
       if (this.treeItems?.length === 0) {
-        this.treeItems.push({ label: "everyone", children: [] });
+        this.treeItems.push({ label: "everyone", key: 'newRole', children: [] });
       }
 
       if (data.property !== oldData.property) {
@@ -294,17 +304,19 @@ export default class extends Vue {
           label: data.property.label,
           key: "property",
           children: data.property.children,
+          value: data.property
         });
       }
 
-      if (data.workflow !== oldData.workflow) { console.log('watch workflow', data.workflow)
+      if (data.workflow !== oldData.workflow) { 
         let str: string = "";
         if (data.workflow.property.displayName) str += data.workflow.property.displayName;
         if (data.workflow.condition) str += " " + data.workflow.condition;
         if (data.workflow.step) str += " " + data.step;
         this.treeItems[0].children.push({
           label: str,
-          key: "workflow"
+          key: "workflow",
+          value: data.overflow
         });
       }
     }
@@ -315,13 +327,13 @@ export default class extends Vue {
   }
 
   resultPropertyFilter(items: any) {
-    if (items) {
+    if (items) { console.log('items',items)
       this.propertyFilterData = { ...items };
       this.filterData.property.label = "";
       if (items.propertyFirst)
         this.filterData.property.label +=
           this.propertyFilterData.propertyFirst.displayName;
-      if (items.conditio)
+      if (items.condition)
         this.filterData.property.label +=
           " " + this.propertyFilterData.condition;
       if (items.propertySecond)
@@ -334,7 +346,8 @@ export default class extends Vue {
           });
         }
       }
-      console.log("this.filterData", this.filterData);
+      let temp = this.filterData.property;
+      this.filterData.property = {...temp,...items}
     }
   }
 
@@ -347,7 +360,13 @@ export default class extends Vue {
     }
   }
 
+  resultStatus(items: any) {
+    
+  }
+
   handleNodeClick(data: any) {
+    console.log(data)
+    this.itemSelected = true;
     this.selectedFilterKey = data.key;
   }
 
