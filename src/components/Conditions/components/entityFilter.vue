@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    width="25%"
+    width="40%"
     title="Entity Category Condition"
     :visible.sync="showModal"
     custom-class="entity-filter"
@@ -10,8 +10,8 @@
   >
     <el-form ref="form" label-position="left" :model="items" :rules="formRules">
       <el-row class="entity-filter__row" type="flex">
-        <el-col :span="8">Entity Category of the:</el-col>
-        <el-col :span="16">
+        <el-col :md="8" :sm="24">Entity Category of the:</el-col>
+        <el-col :md="16" :sm="24">
           <el-row>
             <el-select
               v-model="items.condition"
@@ -45,23 +45,23 @@
         </el-col>
       </el-row>
       <el-row class="entity-filter__row" type="flex">
-        <el-col :span="18" class="entity-filter__row--list">
+        <el-col :md="18" :sm="24" class="entity-filter__row--list">
           <el-row v-for="(item, index) in items.status" :key="index">
             {{ item }}
           </el-row>
         </el-col>
       </el-row>
       <el-row class="entity-filter__row" type="flex">
-        <el-col :span="15">
+        <el-col :md="15" :sm="12">
           <el-input
             v-model="items.autoCompleteText"
-            style="width: 200px;"
+            style="width: 100%"
             placeholder="Enter Entity Category"
             value-key="displayName"
             clearable
           />
         </el-col>
-        <el-col :span="7" class="entity-filter__row--sibling">
+        <el-col :md="7" sm="12" class="entity-filter__row--sibling">
           <el-button @click="handleSelect">Browse</el-button>
         </el-col>
       </el-row>
@@ -206,7 +206,7 @@ $borderColor: #dcdfe6;
       margin-left: 15px;
 
       button {
-        padding: 5px 30px;
+        width: 100%;
         font-weight: bold;
         font-size: 16px;
         border: 1px solid gray;
@@ -236,11 +236,5 @@ $borderColor: #dcdfe6;
       }
     }
   }
-}
-</style>
-
-<style lang="scss">
-.el-dialog__footer {
-  border: none !important;
 }
 </style>

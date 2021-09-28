@@ -135,6 +135,8 @@
   <entity-condition
       :dialogVisible.sync="showFilterModal['entityCategory']"
     />
+    <attachment-condition :dialogVisible.sync="showFilterModal['attachement']"
+    />
   </div>
 </template>
 <script lang="ts">
@@ -148,6 +150,7 @@ import PropertyFilter from "./components/propertyFilter.vue";
 import ItemsetCondition from "./components/itemSet.vue";
 import WorkflowCondition from "./components/workflow.vue";
 import EntityCondition from "./components/entityFilter.vue";
+import AttachmentCondition from "./components/attachmentFilter.vue"
 
 interface ITreeRole {
   label: String;
@@ -162,7 +165,8 @@ interface ITreeRole {
     PropertyFilter,
     ItemsetCondition,
     WorkflowCondition,
-    EntityCondition
+    EntityCondition,
+    AttachmentCondition
   },
 })
 export default class extends Vue {
@@ -252,6 +256,7 @@ export default class extends Vue {
     sql: false,
     itemset: false,
     workflow: false,
+    attachement: false
   };
 
   private filterData = this.defaultFilterData;
@@ -486,4 +491,15 @@ export default class extends Vue {
     height: 50px;
   }
 }
+</style>
+
+
+
+<style lang="scss">
+.el-dialog__footer {
+  border: none !important;
+  align-items: center;
+}
+
+
 </style>

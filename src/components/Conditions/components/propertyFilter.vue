@@ -247,7 +247,6 @@ export default class extends Vue {
 
   dataType = 1;
   async resultHandler(result: KeyValue[]) {
-    console.log("resultHandler", result);
     let str = "";
     let newItems = Object.assign({}, this.items);
     if (result.length > 1) {
@@ -266,7 +265,6 @@ export default class extends Vue {
     this.items = { ...newItems };
     if (this.selectPropertyModal.key === "first") {
       const lastpart = result[result.length - 1];
-      console.log("lastpart", lastpart?.value?.dataType?.value);
       this.dataType = parseInt(lastpart?.value?.dataType?.value);
     }
   }
