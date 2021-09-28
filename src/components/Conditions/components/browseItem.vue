@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     width="55%"
-    title="Logged in User role Filter"
+    title="Browse"
     :visible.sync="showModal"
     destroy-on-close
     :close-on-click-modal="false"
@@ -13,7 +13,7 @@
         filterable
         filter-placeholder="search items"
         :data="data"
-        :titles="['Source', 'Target']"
+        :titles="['Filter Items', 'Filter selected']"
 
         :props="{
           key: 'displayName',
