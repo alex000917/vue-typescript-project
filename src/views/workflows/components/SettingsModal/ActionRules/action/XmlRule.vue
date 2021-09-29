@@ -3,7 +3,7 @@
     :visible.sync="showModal"
     :before-close="cancelHandler"
     title="New Action Rule Wizard"
-    width="45%"
+    width="50%"
     center
     class="xml-rule"
     append-to-body

@@ -180,6 +180,7 @@
         <attachment-condition :dialogVisible.sync="attachConditionVisible" />
 
         <xml-action :dialogVisible.sync="newActionListVisible['xml']" />
+        <set-property-action :dialogVisible.sync="newActionListVisible['property']" />
       </el-form>
     </el-container>
     <div slot="footer" class="footer">
@@ -213,6 +214,7 @@ import EntityCondition from "@/components/Conditions/components/entityFilter.vue
 import AttachmentCondition from "@/components/Conditions/components/attachmentFilter.vue";
 
 import XmlAction from './action/XmlRule.vue';
+import SetPropertyAction from './action/setProperty.vue'
 
 @Component({
   name: "",
@@ -222,7 +224,8 @@ import XmlAction from './action/XmlRule.vue';
     EntityCondition,
     AttachmentCondition,
 
-    XmlAction
+    XmlAction,
+    SetPropertyAction
   },
 })
 export default class extends Vue {
