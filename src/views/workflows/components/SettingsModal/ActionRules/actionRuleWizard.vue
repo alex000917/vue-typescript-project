@@ -5,111 +5,195 @@
     title="New Action Rule Wizard"
     width="45%"
     center
-    custom-class="dialogX"
+    class="action-rule"
     append-to-body
   >
     <el-container direction="vertical">
-      <el-row>
-        <el-col>
-          <h3>Step 1/3 - Triggering conditions</h3>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col>
-          <span> The rule will be applied only if these condition are met.</span
-          ><br />
-          <span>
-            For Example, the rule will be applied when the item is
-            cancelled.</span
+      <el-form label-position="left" label-width="100px">
+        <el-row class="action-rule__row">
+          <el-col>
+            <h3 v-if="currentStep === 0">Step 1/3 - Triggering conditions</h3>
+            <h3 v-else-if="currentStep === 1">Step 2/3 - Actions</h3>
+            <h3 v-else-if="currentStep === 2">Step 3/3 - Name</h3>
+          </el-col>
+        </el-row>
+        <el-row class="action-rule__row">
+          <el-col v-if="currentStep === 0">
+            <span>
+              The rule will be applied only if these condition are met.</span
+            ><br />
+            <span>
+              For Example, the rule will be applied when the item is
+              cancelled.</span
+            >
+          </el-col>
+          <el-col v-if="currentStep === 1">
+            <span>
+              Specify which actions to perform when rule is triggered.</span
+            ><br />
+            <span> For Example, cancel all child items.</span>
+          </el-col>
+          <el-col v-if="currentStep === 2">
+            <el-form-item label="Rule name">
+              <el-input v-model="ruleName" class="action-rule__row--input"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row v-if="currentStep !== 2" class="action-rule__row">
+          <el-col :span="6" v-if="currentStep === 0">
+            <el-button type="text" @click="onAddEveryone()">
+              <i class="el-icon-user-solid"></i>
+              Add Everyone
+            </el-button>
+          </el-col>
+          <el-col :span="6">
+            <el-button type="text"> </el-button>
+
+            <el-dropdown
+              v-if="currentStep === 0"
+              trigger="click"
+              @command="onNewConditionSelect"
+              placement="bottom-start"
+            >
+              <span class="el-dropdown-link">
+                <el-button type="text"> New Condition </el-button>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="transitionConditionVisible"
+                  >Transition Condition...</el-dropdown-item
+                >
+                <el-dropdown-item command="propertyChange"
+                  >Property Change Condition...</el-dropdown-item
+                >
+                <el-dropdown-item disabled
+                  >--------------------------------------</el-dropdown-item
+                >
+                <el-dropdown-item>Property Condition...</el-dropdown-item>
+                <el-dropdown-item>Item Set Condition...</el-dropdown-item>
+                <el-dropdown-item command="workflowConditionVisible"
+                  >Workflow Condition...</el-dropdown-item
+                >
+                <el-dropdown-item command="entityConditionVisible"
+                  >Entity category Condition...</el-dropdown-item
+                >
+                <el-dropdown-item>Javascript Condition...</el-dropdown-item>
+                <el-dropdown-item command="attachConditionVisible"
+                  >Attachment Condition...</el-dropdown-item
+                >
+              </el-dropdown-menu>
+            </el-dropdown>
+
+            <el-dropdown
+              v-else
+              trigger="click"
+              @command="onNewActionSelect"
+              placement="bottom-start"
+            >
+              <span class="el-dropdown-link">
+                <el-button type="text"> New Action </el-button>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item
+                  v-for="newAction in newActionList"
+                  :key="newAction.id"
+                  :command="newAction.id"
+                  >{{ newAction.value }}</el-dropdown-item
+                >
+              </el-dropdown-menu>
+            </el-dropdown>
+          </el-col>
+          <el-col :span="6">
+            <el-button
+              type="text"
+              @click="onEdit()"
+              :disabled="!selectedCondition"
+            >
+              <i class="el-icon-edit"></i>
+              Edit
+            </el-button>
+          </el-col>
+          <el-col :span="6">
+            <el-button type="text">
+              <i class="el-icon-delete-solid"></i>
+              Delete
+            </el-button>
+          </el-col>
+        </el-row>
+        <el-row
+          v-if="currentStep === 0"
+          class="action-rule__row action-rule__row--last"
+        >
+          <el-col class="action-rule__row--detail">
+            <el-tree
+              ref="elTree"
+              class="tree-content"
+              :data="conditionsTree"
+              node-key="systemName"
+              default-expand-all
+              highlight-current
+              :expand-on-click-node="false"
+              @node-click="onNodeClick"
+            ></el-tree>
+          </el-col>
+        </el-row>
+
+        <el-row
+          v-if="currentStep === 1"
+          class="action-rule__row action-rule__row--last"
+        >
+          <el-col class="action-rule__row--detail">
+            <el-tree
+              ref="elTree"
+              class="tree-content"
+              :data="conditionsTree"
+              node-key="systemName"
+              default-expand-all
+              highlight-current
+              :expand-on-click-node="false"
+              @node-click="onNodeClick"
+            ></el-tree>
+            <div class="action-rule__row--text">Drag items to re-order</div>
+          </el-col>
+        </el-row>
+
+        <el-row
+          v-if="currentStep === 2"
+          class="action-rule__row action-rule__row--last"
+        >
+          <el-collapse accordion value="workWeekDays">
+            <el-collapse-item title="Advanced settings" name="workWeekDays"
+              >
+                {{`System name ${ruleName}`}}
+              </el-collapse-item
+            ></el-collapse
           >
-        </el-col>
-      </el-row>
-      <el-row style="margin-top: 20px">
-        <el-col :span="6">
-          <el-button type="text" @click="onAddEveryone()">
-            <i class="el-icon-user-solid"></i>
-            Add Everyone
-          </el-button>
-        </el-col>
-        <el-col :span="6">
-          <el-button type="text"> </el-button>
+        </el-row>
 
-          <el-dropdown trigger="click" @command="onNewConditionSelect">
-            <span class="el-dropdown-link">
-              <el-button type="text"> New Condition </el-button>
-            </span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="transitionConditionVisible"
-                >Transition Condition...</el-dropdown-item
-              >
-              <el-dropdown-item command="propertyChange"
-                >Property Change Condition...</el-dropdown-item
-              >
-              <el-dropdown-item disabled
-                >--------------------------------------</el-dropdown-item
-              >
-              <el-dropdown-item>Property Condition...</el-dropdown-item>
-              <el-dropdown-item>Item Set Condition...</el-dropdown-item>
-              <el-dropdown-item command="workflowConditionVisible"
-                >Workflow Condition...</el-dropdown-item
-              >
-              <el-dropdown-item command="entityConditionVisible"
-                >Entity category Condition...</el-dropdown-item
-              >
-              <el-dropdown-item>Javascript Condition...</el-dropdown-item>
-              <el-dropdown-item command="attachConditionVisible"
-                >Attachment Condition...</el-dropdown-item
-              >
-            </el-dropdown-menu>
-          </el-dropdown>
-        </el-col>
-        <el-col :span="6">
-          <el-button
-            type="text"
-            @click="onEdit()"
-            :disabled="!selectedCondition"
-          >
-            <i class="el-icon-edit"></i>
-            Edit
-          </el-button>
-        </el-col>
-        <el-col :span="6">
-          <el-button type="text">
-            <i class="el-icon-delete-solid"></i>
-            Delete
-          </el-button>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col style="max-height: 200px; border: 1px solid; overflow-x: auto">
-          <el-tree
-            ref="elTree"
-            class="tree-content"
-            :data="conditionsTree"
-            node-key="systemName"
-            default-expand-all
-            highlight-current
-            :expand-on-click-node="false"
-            @node-click="onNodeClick"
-          ></el-tree>
-        </el-col>
-      </el-row>
+        <transition
+          :visible-transition.sync="transitionConditionVisible"
+          :condition.sync="selectedCondition"
+        ></transition>
+        <new-property-change
+          :dialogVisible.sync="propertyChangeVisible"
+        ></new-property-change>
+        <entity-condition :dialogVisible.sync="entityConditionVisible" />
+        <attachment-condition :dialogVisible.sync="attachConditionVisible" />
 
-      <transition
-        :visible-transition.sync="transitionConditionVisible"
-        :condition.sync="selectedCondition"
-      ></transition>
-      <new-property-change
-        :dialogVisible.sync="propertyChangeVisible"
-      ></new-property-change>
-      <entity-condition :dialogVisible.sync="entityConditionVisible" />
-
-      <attachment-condition :dialogVisible.sync="attachConditionVisible" />
+        <xml-action :dialogVisible.sync="newActionListVisible['xml']" />
+      </el-form>
     </el-container>
-    <span slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="onNext()">Next</el-button>
-      <el-button @click="handleClose">Cancel</el-button>
-    </span>
+    <div slot="footer" class="footer">
+      <el-button v-if="currentStep > 0" type="primary" @click="onPrev()"
+        >Back</el-button
+      >
+      <el-button v-if="currentStep < 2" type="primary" @click="onNext()"
+        >Next</el-button
+      >
+      <el-button v-if="currentStep === 2" type="primary" @click="onOk()"
+        >Ok</el-button
+      >
+      <el-button @click="handleClose" type="text">Cancel</el-button>
+    </div>
   </el-dialog>
 </template>
 <script lang="ts">
@@ -128,6 +212,8 @@ import WorkflowCondition from "@/components/Conditions/components/workflow.vue";
 import EntityCondition from "@/components/Conditions/components/entityFilter.vue";
 import AttachmentCondition from "@/components/Conditions/components/attachmentFilter.vue";
 
+import XmlAction from './action/XmlRule.vue';
+
 @Component({
   name: "",
   components: {
@@ -135,6 +221,8 @@ import AttachmentCondition from "@/components/Conditions/components/attachmentFi
     NewPropertyChange,
     EntityCondition,
     AttachmentCondition,
+
+    XmlAction
   },
 })
 export default class extends Vue {
@@ -148,6 +236,26 @@ export default class extends Vue {
 
   conditionsTree: any[] = [];
   selectedCondition: any = null;
+
+  private newActionList = [
+    { id: "property", value: "Set property value" },
+    { id: "moveWorkflow", value: "Move workflow" },
+    { id: "xml", value: "XML action" },
+    { id: "itemset", value: "Item set action" },
+    { id: "integration", value: "Integration Operation" },
+  ];
+
+  private newActionListVisible: any = {
+    property: false,
+    moveWorkflow: false,
+    xml: false,
+    itemset: false,
+    integration: false,
+  };
+
+  private currentStep: number = 0;
+
+  private ruleName: string = "";
 
   get CurrentWorkflow() {
     return WorkflowModule.ActiveWorkflow;
@@ -245,6 +353,7 @@ export default class extends Vue {
 
   handleClose() {
     this.$emit("update:visibleWizard", false);
+    this.currentStep == 0;
   }
 
   onAddEveryone() {
@@ -259,6 +368,11 @@ export default class extends Vue {
     (this as any)[command] = true;
   }
 
+  onNewActionSelect(command: string) {
+    console.log(command);
+    this.newActionListVisible[command] = true;
+  }
+
   onEdit() {
     if (!this.selectedCondition) return;
     switch (this.selectedCondition.myspType) {
@@ -268,7 +382,15 @@ export default class extends Vue {
     }
   }
 
-  onNext() {}
+  onNext() {
+    this.currentStep++;
+  }
+
+  onPrev() {
+    this.currentStep--;
+  }
+
+  onOk() {}
 
   onNodeClick(node: any, props: any, tree: any) {
     if (node && node.label != "Everyone") {
@@ -304,8 +426,66 @@ export default class extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-.dialogX {
-  padding: 0 20px;
+<style lang="scss">
+$border-color: #cacaca;
+
+.action-rule {
+  .el-dialog {
+    &__body {
+      padding: 0 15px;
+      border-bottom: 1px soild $border-color;
+      height: 60vh;
+
+      .el-container {
+        height: 100%;
+      }
+    }
+
+    &__footer {
+      padding: 0 15px;
+      align-items: center;
+
+      .footer {
+        height: 70px;
+        border-top: 1px solid $border-color;
+        align-items: center;
+
+        .el-button {
+          width: 120px;
+          margin: 20px 10px;
+
+          &--text {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+
+  &__row {
+    margin-top: 10px;
+
+    &--detail {
+      border: 1px solid $border-color;
+      height: 30vh;
+    }
+
+    &--text {
+      height: 20px;
+      color: #e4e4e4;
+      position: absolute;
+      bottom: 0;
+      font-style: italic;
+    }
+
+    &--last {
+      height: calc(30vh + 20px);
+      padding-bottom: 20px;
+    }
+
+    &--input {
+      width: 50%;
+    }
+  }
 }
 </style>
