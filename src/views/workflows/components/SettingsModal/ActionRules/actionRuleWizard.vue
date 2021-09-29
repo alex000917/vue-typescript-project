@@ -434,7 +434,7 @@ $border-color: #cacaca;
     &__body {
       padding: 0 15px;
       border-bottom: 1px soild $border-color;
-      height: 60vh;
+      height: 48vh;
 
       .el-container {
         height: 100%;
