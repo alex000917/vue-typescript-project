@@ -42,16 +42,24 @@
               <el-dropdown-item command="transitionConditionVisible"
                 >Transition Condition...</el-dropdown-item
               >
-              <el-dropdown-item command="propertyChange">Property Change Condition...</el-dropdown-item>
+              <el-dropdown-item command="propertyChange"
+                >Property Change Condition...</el-dropdown-item
+              >
               <el-dropdown-item disabled
                 >--------------------------------------</el-dropdown-item
               >
               <el-dropdown-item>Property Condition...</el-dropdown-item>
               <el-dropdown-item>Item Set Condition...</el-dropdown-item>
-              <el-dropdown-item>Workflow Condition...</el-dropdown-item>
-              <el-dropdown-item>Entity category Condition...</el-dropdown-item>
+              <el-dropdown-item command="workflowConditionVisible"
+                >Workflow Condition...</el-dropdown-item
+              >
+              <el-dropdown-item command="entityConditionVisible"
+                >Entity category Condition...</el-dropdown-item
+              >
               <el-dropdown-item>Javascript Condition...</el-dropdown-item>
-              <el-dropdown-item>Attachment Condition...</el-dropdown-item>
+              <el-dropdown-item command="attachConditionVisible"
+                >Attachment Condition...</el-dropdown-item
+              >
             </el-dropdown-menu>
           </el-dropdown>
         </el-col>
@@ -92,9 +100,11 @@
         :condition.sync="selectedCondition"
       ></transition>
       <new-property-change
-        :dialogVisible.sync="propertyChange"
+        :dialogVisible.sync="propertyChangeVisible"
       ></new-property-change>
+      <entity-condition :dialogVisible.sync="entityConditionVisible" />
 
+      <attachment-condition :dialogVisible.sync="attachConditionVisible" />
     </el-container>
     <span slot="footer" class="dialog-footer">
       <el-button type="primary" @click="onNext()">Next</el-button>
@@ -111,18 +121,31 @@ import { debug } from "node:console";
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 
 import transition from "./Conditions/transition.vue";
-import NewPropertyChange from "./Conditions/newPropertyChange.vue"
+import NewPropertyChange from "./Conditions/newPropertyChange.vue";
+import PropertyCondition from "@/components/Conditions/components/propertyFilter.vue";
+import ItemsetCondition from "@/components/Conditions/components/itemSet.vue";
+import WorkflowCondition from "@/components/Conditions/components/workflow.vue";
+import EntityCondition from "@/components/Conditions/components/entityFilter.vue";
+import AttachmentCondition from "@/components/Conditions/components/attachmentFilter.vue";
 
 @Component({
   name: "",
-  components: { transition, NewPropertyChange },
+  components: {
+    transition,
+    NewPropertyChange,
+    EntityCondition,
+    AttachmentCondition,
+  },
 })
 export default class extends Vue {
   @Prop({ required: true }) visibleWizard!: string;
   @Prop({ required: true }) ruleSysname!: string;
 
   transitionConditionVisible = false;
-  propertyChange = false;
+  propertyChangeVisible = false;
+  entityConditionVisible = false;
+  attachConditionVisible = false;
+
   conditionsTree: any[] = [];
   selectedCondition: any = null;
 
@@ -261,15 +284,15 @@ export default class extends Vue {
     console.log("=======================>", this.rule);
     if (!this.selectedCondition) return;
 
-      this.rule?.conditions?.roleGroups.forEach((group) => {
-        if (group) {
-          group.conditions.forEach((condition) => {
-            if (condition["uniqueIdx"] == this.selectedCondition["uniqueIdx"]) {
-              condition = this.selectedCondition;
-            }
-          });
-        }
-      });
+    this.rule?.conditions?.roleGroups.forEach((group) => {
+      if (group) {
+        group.conditions.forEach((condition) => {
+          if (condition["uniqueIdx"] == this.selectedCondition["uniqueIdx"]) {
+            condition = this.selectedCondition;
+          }
+        });
+      }
+    });
 
     this.CurrentWorkflow?.actionWorkflowRules?.forEach((rule) => {
       if (rule && rule.systemName == this.ruleSysname) {
