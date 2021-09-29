@@ -42,7 +42,7 @@
               <el-dropdown-item command="transitionConditionVisible"
                 >Transition Condition...</el-dropdown-item
               >
-              <el-dropdown-item>Property Change Condition...</el-dropdown-item>
+              <el-dropdown-item command="propertyChange">Property Change Condition...</el-dropdown-item>
               <el-dropdown-item disabled
                 >--------------------------------------</el-dropdown-item
               >
@@ -91,6 +91,10 @@
         :visible-transition.sync="transitionConditionVisible"
         :condition.sync="selectedCondition"
       ></transition>
+      <new-property-change
+        :dialogVisible.sync="propertyChange"
+      ></new-property-change>
+
     </el-container>
     <span slot="footer" class="dialog-footer">
       <el-button type="primary" @click="onNext()">Next</el-button>
@@ -107,16 +111,18 @@ import { debug } from "node:console";
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 
 import transition from "./Conditions/transition.vue";
+import NewPropertyChange from "./Conditions/newPropertyChange.vue"
 
 @Component({
   name: "",
-  components: { transition },
+  components: { transition, NewPropertyChange },
 })
 export default class extends Vue {
   @Prop({ required: true }) visibleWizard!: string;
   @Prop({ required: true }) ruleSysname!: string;
 
   transitionConditionVisible = false;
+  propertyChange = false;
   conditionsTree: any[] = [];
   selectedCondition: any = null;
 
