@@ -181,6 +181,7 @@
 
         <xml-action :dialogVisible.sync="newActionListVisible['xml']" />
         <set-property-action :dialogVisible.sync="newActionListVisible['property']" />
+        <move-workflow-action :dialogVisible.sync="newActionListVisible['moveWorkflow']" />
       </el-form>
     </el-container>
     <div slot="footer" class="footer">
@@ -215,6 +216,7 @@ import AttachmentCondition from "@/components/Conditions/components/attachmentFi
 
 import XmlAction from './action/XmlRule.vue';
 import SetPropertyAction from './action/setProperty.vue'
+import MoveWorkflowAction from './action/moveToWorkflow.vue'
 
 @Component({
   name: "",
@@ -225,7 +227,8 @@ import SetPropertyAction from './action/setProperty.vue'
     AttachmentCondition,
 
     XmlAction,
-    SetPropertyAction
+    SetPropertyAction,
+    MoveWorkflowAction
   },
 })
 export default class extends Vue {
@@ -437,7 +440,6 @@ $border-color: #cacaca;
     &__body {
       padding: 0 15px;
       border-bottom: 1px soild $border-color;
-      height: 48vh;
 
       .el-container {
         height: 100%;
