@@ -182,6 +182,8 @@
         <xml-action :dialogVisible.sync="newActionListVisible['xml']" />
         <set-property-action :dialogVisible.sync="newActionListVisible['property']" />
         <move-workflow-action :dialogVisible.sync="newActionListVisible['moveWorkflow']" />
+        <itemset-condition :dialogVisible.sync="newActionListVisible['itemset']" />
+        <new-integraion-action :dialogVisible.sync="newActionListVisible['integration']" />
       </el-form>
     </el-container>
     <div slot="footer" class="footer">
@@ -203,7 +205,6 @@ import { TransitionCondition } from "@/models/Conditions";
 import { ActionWorkflowRule } from "@/models/Workflows/ActionWorkflowRule";
 import { WorkflowModule } from "@/store/modules/WorkflowMod";
 import { forEach } from "lodash";
-import { debug } from "node:console";
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 
 import transition from "./Conditions/transition.vue";
@@ -217,6 +218,7 @@ import AttachmentCondition from "@/components/Conditions/components/attachmentFi
 import XmlAction from './action/XmlRule.vue';
 import SetPropertyAction from './action/setProperty.vue'
 import MoveWorkflowAction from './action/moveToWorkflow.vue'
+import NewIntegraionAction from './action/newIntegraion.vue'
 
 @Component({
   name: "",
@@ -225,10 +227,12 @@ import MoveWorkflowAction from './action/moveToWorkflow.vue'
     NewPropertyChange,
     EntityCondition,
     AttachmentCondition,
+    ItemsetCondition,
 
     XmlAction,
     SetPropertyAction,
-    MoveWorkflowAction
+    MoveWorkflowAction,
+    NewIntegraionAction
   },
 })
 export default class extends Vue {
