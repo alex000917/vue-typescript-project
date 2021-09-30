@@ -9,7 +9,13 @@
     append-to-body
   >
     <el-container direction="vertical">
-      <el-form label-position="left" label-width="100px">
+      <el-form
+        label-position="left"
+        label-width="100px"
+        :model="items"
+        :rules="formRules"
+        ref="form"
+      >
         <el-row>
           <el-col> Move workflow to a specific step. </el-col>
         </el-row>
@@ -19,7 +25,6 @@
               v-model="items.property.displayName"
               type="text"
               class="move-workflow__row--input"
-              readonly
             />
           </el-form-item>
           <el-button
@@ -52,7 +57,7 @@
         </el-row>
         <el-row class="move-workflow__row">
           <el-col>
-            <el-form-item prop="workflow" label="Step:">
+            <el-form-item prop="step" label="Step:">
               <el-select
                 v-model="items.step"
                 size="mini"
@@ -88,6 +93,7 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { WorkflowModule } from "@/store/modules/WorkflowMod";
 import { KeyValue } from "@/models/KeyValue";
 import SelectPropertyModel from "@/components/PropertySelector/index.vue";
+import { ElForm } from "element-ui/types/form";
 
 @Component({
   name: "move-workflow-action",
@@ -101,8 +107,8 @@ export default class extends Vue {
       displayName: "",
       value: null,
     },
-    workflow: '',
-    step: ''
+    workflow: "",
+    step: "",
   } as any;
 
   private defaultItems = {
@@ -110,22 +116,42 @@ export default class extends Vue {
       displayName: "",
       value: null,
     },
-    workflow: '',
-    step: ''
+    workflow: "",
+    step: "",
   } as any;
+
+  private formRules = {
+    property: [
+      {
+        required: true,
+        message: "Please type name",
+        trigger: "blur",
+      }
+    ],
+    workflow: [
+      {
+        required: true,
+        message: "Please type the description",
+        trigger: "blur",
+      },
+    ],
+    step: [
+      {
+        required: true,
+        message: "Please type the description",
+        trigger: "blur",
+      },
+    ]
+  };
 
   private selectPropertyModal: any = {
     show: false,
     key: "first",
   };
 
-  private workflowOptions = [
-    {id: 'agile', value: 'Agile Task'}
-  ];
+  private workflowOptions = [{ id: "agile", value: "Agile Task" }];
 
-  private stepOptions = [
-    {id: 'accept', value: 'Acceptence' }
-  ]
+  private stepOptions = [{ id: "accept", value: "Acceptence" }];
 
   get activeWorkflow() {
     return WorkflowModule.activeWorkflow;
@@ -140,7 +166,7 @@ export default class extends Vue {
   }
 
   onShowPropertySelector() {
-    this.selectPropertyModal.show = true
+    this.selectPropertyModal.show = true;
   }
 
   async resultHandler(result: KeyValue[]) {
@@ -154,8 +180,14 @@ export default class extends Vue {
   }
 
   okHandler() {
-    this.$emit("onAttachmentComplete", this.items);
-    this.showModal = false;
+    (this.$refs.form as ElForm).validate((valid: boolean) => {
+      if (valid) {
+        this.$emit("onAttachmentComplete", this.items);
+        this.showModal = false;
+      } else {
+        return false;
+      }
+    });
   }
 
   cancelHandler() {

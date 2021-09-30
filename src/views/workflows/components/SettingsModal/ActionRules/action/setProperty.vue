@@ -9,7 +9,13 @@
     append-to-body
   >
     <el-container direction="vertical">
-      <el-form label-position="top" label-width="100px">
+      <el-form
+        label-position="top"
+        label-width="100px"
+        :model="items"
+        :rules="formRules"
+        ref="form"
+      >
         <el-row style="margin-top: 20px; align-items: center" type="flex">
           <el-form-item prop="propertyFirst" label="Property to set value to">
             <el-input
@@ -80,6 +86,7 @@ import { KeyValue } from "@/models/KeyValue";
 import { ApplicationPreference } from "@/models/ApplicationPreference";
 import SelectPropertyModel from "@/components/PropertySelector/index.vue";
 import prefModel from "@/components/Preferences/prefModel.vue";
+import { ElForm } from "element-ui/types/form";
 
 @Component({
   name: "set-property-action",
@@ -98,6 +105,23 @@ export default class extends Vue {
       value: null,
     },
   } as any;
+
+  private formRules = {
+    propertyFirst: [
+      {
+        required: true,
+        message: "Please select the property",
+        trigger: "blur",
+      }
+    ],
+    propertySecond: [
+      {
+        required: true,
+        message: "Please select the property",
+        trigger: "blur",
+      },
+    ],
+  };
 
   private selectPropertyModal: any = {
     show: false,
@@ -123,7 +147,7 @@ export default class extends Vue {
   onShowPropertySelector() {
     this.selectPropertyModal.show = true;
     this.selectPropertyModal.key = "first";
-    console.log('this.selectProperty', this.selectPropertyModal)
+    console.log("this.selectProperty", this.selectPropertyModal);
   }
 
   selectInputMethod(command: string) {
@@ -169,8 +193,14 @@ export default class extends Vue {
   }
 
   okHandler() {
-    this.$emit("onAttachmentComplete", this.items);
-    this.showModal = false;
+    (this.$refs.form as ElForm).validate((valid: boolean) => {
+      if (valid) {
+        this.$emit("onAttachmentComplete", this.items);
+        this.showModal = false;
+      } else {
+        return false;
+      }
+    });
   }
 
   cancelHandler() {

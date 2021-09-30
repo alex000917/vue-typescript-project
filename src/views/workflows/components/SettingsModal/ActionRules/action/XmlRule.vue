@@ -9,10 +9,16 @@
     append-to-body
   >
     <el-container direction="vertical">
-      <el-form label-position="top" label-width="100px">
+      <el-form
+        label-position="top"
+        label-width="100px"
+        :model="items"
+        :rules="formRules"
+        ref="form"
+      >
         <el-row class="xml-rule__row">
           <el-col>
-            <el-form-item label="Action name:">
+            <el-form-item label="Action name:" prop="name">
               <el-input v-model="items.name" class="xml-rule__row--input" />
             </el-form-item>
           </el-col>
@@ -20,7 +26,7 @@
         <el-row class="xml-rule__row">
           <el-col>
             <div>
-              <el-form-item label="Xml:">
+              <el-form-item label="Xml:" prop="xml">
                 <el-input
                   v-model="items.xml"
                   type="textarea"
@@ -28,9 +34,9 @@
                 />
               </el-form-item>
               <div class="xml-rule__row--hint">
-                Add [Creteria], [ActionsOnTrue] or [ActionsOnFalse] XML elements.
-              They will be automatically be placed inside a [Condition] XML
-              element.
+                Add [Creteria], [ActionsOnTrue] or [ActionsOnFalse] XML
+                elements. They will be automatically be placed inside a
+                [Condition] XML element.
               </div>
             </div>
           </el-col>
@@ -45,6 +51,7 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { ElForm } from "element-ui/types/form";
 
 @Component({
   name: "xml-action",
@@ -54,13 +61,31 @@ export default class extends Vue {
   @Prop({ required: true }) dialogVisible!: boolean;
 
   private defaultItems: any = {
-    name: '',
-    xml: '',
+    name: "",
+    xml: "",
   };
 
   private items: any = {
-    name: '',
-    xml: '',
+    name: "",
+    xml: "",
+  };
+
+  private formRules = {
+    name: [
+      {
+        required: true,
+        message: "Please type name",
+        trigger: "blur",
+      },
+      { min: 3, max: 5, message: "Length should be 3 to 5", trigger: "blur" },
+    ],
+    xml: [
+      {
+        required: true,
+        message: "Please type the description",
+        trigger: "blur",
+      },
+    ],
   };
 
   get showModal() {
@@ -72,8 +97,14 @@ export default class extends Vue {
   }
 
   okHandler() {
-    this.$emit("onAttachmentComplete", this.items);
-    this.showModal = false;
+    (this.$refs.form as ElForm).validate((valid: boolean) => {
+      if (valid) {
+        this.$emit("onAttachmentComplete", this.items);
+        this.showModal = false;
+      } else {
+        return false;
+      }
+    });
   }
 
   cancelHandler() {

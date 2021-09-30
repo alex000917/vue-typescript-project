@@ -13,7 +13,7 @@
         label-position="top"
         label-width="100px"
         :model="items"
-        :rule="formRules"
+        :rules="formRules"
         ref="form"
       >
         <el-row>
@@ -58,17 +58,17 @@
                 class="integration__row--radio-group"
               >
                 <div>
-                  <el-radio v-model="items.runType" label="1" border
+                  <el-radio v-model="items.runType" label="1" 
                     >Reoccurring</el-radio
                   >
                 </div>
                 <div>
-                  <el-radio v-model="items.runType" label="2" border
+                  <el-radio v-model="items.runType" label="2" 
                     >One time</el-radio
                   >
                 </div>
                 <div class="integration__row--group">
-                  <el-radio v-model="items.runType" label="3" border
+                  <el-radio v-model="items.runType" label="3" 
                     >Custom</el-radio
                   >
                   <div class="integration__row--group-input">
@@ -149,7 +149,7 @@ export default class extends Vue {
       {
         required: true,
         message: "Please type name",
-        trigger: "change",
+        trigger: "blur",
       },
       { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
     ],
@@ -157,21 +157,21 @@ export default class extends Vue {
       {
         required: true,
         message: "Please type the description",
-        trigger: "change",
+        trigger: "blur",
       },
     ],
     javascript: [
       {
         required: true,
         message: "Please type the description",
-        trigger: "change",
+        trigger: "blur",
       },
     ],
     runType: [
       {
         required: true,
         message: "Please select the run type",
-        trigger: "change",
+        trigger: "blur",
       },
     ],
   };
@@ -200,13 +200,11 @@ export default class extends Vue {
   }
 
   okHandler() {
-    console.log(this.items);
     (this.$refs.form as ElForm).validate((valid: boolean) => {
       if (valid) {
         this.$emit("onAttachmentComplete", this.items);
         this.showModal = false;
       } else {
-        console.log("error submit!!");
         return false;
       }
     });
@@ -261,9 +259,6 @@ $border-color: #cacaca;
     &--radio-group {
       div {
         margin-top: 5px;
-        label {
-          border: none;
-        }
       }
     }
 
