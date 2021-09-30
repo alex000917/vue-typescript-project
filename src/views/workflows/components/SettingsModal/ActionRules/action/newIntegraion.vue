@@ -4,8 +4,8 @@
     :before-close="cancelHandler"
     title="New Integraion Operation"
     width="40%"
-    center
     class="integration"
+    center
     append-to-body
   >
     <el-container direction="vertical">
@@ -219,13 +219,13 @@ export default class extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 $border-color: #cacaca;
 
 .integration {
   .el-dialog {
     &__body {
-      padding: 0 15px;
+      padding: 10px 25px;
       border-bottom: 1px soild $border-color;
     }
 
