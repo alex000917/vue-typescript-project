@@ -200,8 +200,8 @@ export default class extends Vue {
   }
 
   get origEntityId() {
-    // return 'com.msp.dao.entities.cse.custom.Cse_DemandActivity';
-    return this.entityId;
+    return 'com.msp.dao.entities.cse.custom.Cse_DemandActivity';
+    // return this.entityId;
   }
 
   get origEntity() {
@@ -311,7 +311,7 @@ export default class extends Vue {
 
   okHandler() {
     if (this.IsSelectionValid()) {
-      this.resultHandler(this.displayPaths);
+      this.resultHandler(this.propertyPath);
       this.onCancelClick();
     } else {
       this.$message("Please select a Property Type ");
@@ -478,7 +478,7 @@ export default class extends Vue {
         this.propertyPath.splice(this.propertyPath.length - 1, 1);
       }
       this.displayPaths.push(new KeyValue(data.displayName, data));
-      this.propertyPath.push(new KeyValue(data.systemName, null));
+      this.propertyPath.push(new KeyValue(data.systemName, data.entityId));
     }
     this.IsSelectionValid();
   }
