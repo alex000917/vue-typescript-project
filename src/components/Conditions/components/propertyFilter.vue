@@ -30,7 +30,7 @@
         </el-button>
       </el-row>
       <el-row style="margin-top: 20px" type="flex">
-        <el-select v-model="items.condition" placeholder="Select">
+        <el-select v-model="items.operator" placeholder="Select">
           <el-option
             v-for="item in options"
             :key="item.key"
@@ -71,12 +71,13 @@
           </el-dropdown-menu>
         </el-dropdown>
       </el-row>
-      <el-checkbox-group style="margin-top: 20px" v-model="items.skipCheckList">
+      <el-checkbox-group style="margin-top: 20px" v-model="items.skipConditionIfMainOperandIsEmpty">
         <el-checkbox label="propertyFirst">
           Skip this condition if{{ items.propertyFirst.displayName }} is empty
         </el-checkbox>
         <el-checkbox
           v-if="selectPropertyModal.key === 'second'"
+          v-model="items.skipConditionIfSecondaryOperandIsEmpty"
           label="propertySecond"
         >
           Skip this condition if[{{ items.propertySecond.displayName }}] is
@@ -119,13 +120,14 @@ import propertyselectorVue from "@/views/forms/components/propertyselector.vue";
 import { PropertyCondition } from "@/models/Conditions";
 import { ElForm } from "element-ui/types/form";
 import prefModel from "@/components/Preferences/prefModel.vue";
+
 @Component({
   name: "property-filter",
   components: { SelectPropertyModel, prefModel },
 })
 export default class extends Vue {
   @Prop({ required: true }) dialogVisible!: boolean;
-  @Prop({ required: true }) propertyFilterData!: any;
+  @Prop({ required: true }) condition!: PropertyCondition;
 
   private secondPropertyReadOnly = false;
 
@@ -138,8 +140,11 @@ export default class extends Vue {
       displayName: "",
       value: null,
     },
-    condition: "",
-    skipCheckList: [],
+    operator: "",
+    secondOperandIsApplicationPreference: false,
+    secondOperandIsProperty: false,
+    skipConditionIfMainOperandIsEmpty: false,
+    skipConditionIfSecondaryOperandIsEmpty: false,
   } as any;
 
   get entity() {
@@ -216,9 +221,11 @@ export default class extends Vue {
       this.secondPropertyReadOnly = false;
       this.items.propertySecond = { displayName: "" };
     } else if (command === "selectPreference") {
+      this.items.secondOperandIsApplicationPreference = true;
       this.showPref = true;
     } else {
       if (command === "selectProperty") {
+        this.items.secondOperandIsProperty = true;
         this.selectPropertyModal = {
           show: true,
           key: "second",
@@ -231,7 +238,24 @@ export default class extends Vue {
   okHandler() {
     (this.$refs.form as ElForm).validate((valid: boolean) => {
       if (valid) {
-        this.$emit("onPropertyFilterComplete", this.items);
+        var propertyCondition = new PropertyCondition();
+        propertyCondition.mainOperand = this.items.propertyFirst.value;
+        if (this.items.propertySecond.secondOperandIsApplicationPreference)
+          propertyCondition.secondaryOperand = this.items.propertySecond;
+        else
+          propertyCondition.secondaryOperand = this.items.propertySecond.value;
+
+        propertyCondition.skipConditionIfSecondaryOperandIsEmpty =
+          this.items.skipConditionIfSecondaryOperandIsEmpty;
+        propertyCondition.skipConditionIfMainOperandIsEmpty =
+          this.items.skipConditionIfMainOperandIsEmpty;
+        propertyCondition.operator = this.items.operator;
+        propertyCondition.secondOperandIsProperty =
+          this.items.secondOperandIsProperty;
+        propertyCondition.secondOperandIsApplicationPreference =
+          this.items.secondOperandIsApplicationPreference;
+        this.$emit("update:condition", propertyCondition);
+        this.$emit("onSave", propertyCondition);
         this.showModal = false;
       } else {
         console.log("error submit!!");
@@ -252,7 +276,6 @@ export default class extends Vue {
     if (result.length > 1) {
       str += `[Workflow(${result[0].key}): ${result[1].key}]`;
     }
-    console.log("str", str);
     if (this.selectPropertyModal.key === "first") {
       newItems.propertyFirst = {};
       newItems.propertyFirst.displayName = str;

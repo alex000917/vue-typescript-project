@@ -121,21 +121,27 @@
     />
     <property-filter
       :dialogVisible.sync="showFilterModal['property']"
-      @onPropertyFilterComplete="resultPropertyFilter"
-      :propertyFilterData="propertyFilterData"
+      :condition = "propertyCondition"
+      @onSave = "onSave"
     />
-    <itemset-condition
+    <itemset-condition-modal
       :dialogVisible.sync="showFilterModal['itemset']"
-      @onItemsetComplete="resultItemset"
+      :condition = "propertyCondition"
+      @onSave = "onSave"
     />
-    <workflow-condition
+    <workflow-condition-modal
       :dialogVisible.sync="showFilterModal['workflow']"
-      @onWorkflowComplete="resultWorkflow"
+      :condition = "propertyCondition"
+      @onSave = "onSave"
     />
-  <entity-condition
+  <entity-condition-modal
       :dialogVisible.sync="showFilterModal['entityCategory']"
+      :condition = "propertyCondition"
+      @onSave = "onSave"
     />
-    <attachment-condition :dialogVisible.sync="showFilterModal['attachement']"
+    <attachment-condition-modal :dialogVisible.sync="showFilterModal['attachement']"
+    :condition = "propertyCondition"
+      @onSave = "onSave"
     />
   </div>
 </template>
@@ -147,10 +153,12 @@ import { Restriction } from "@/models/Restriction";
 import { AuthorizationTree } from "@/models/authorizations/AuthorizationTree";
 import { LanguagesPresentationModel } from "@/models/Utils/LanguagesPresentationModel";
 import PropertyFilter from "./components/propertyFilter.vue";
-import ItemsetCondition from "./components/itemSet.vue";
-import WorkflowCondition from "./components/workflow.vue";
-import EntityCondition from "./components/entityFilter.vue";
-import AttachmentCondition from "./components/attachmentFilter.vue"
+import ItemsetConditionModal from "./components/itemSet.vue";
+import WorkflowConditionModal from "./components/workflow.vue";
+import EntityConditionModal from "./components/entityFilter.vue";
+import AttachmentConditionModal from "./components/attachmentFilter.vue"
+
+import {PropertyCondition, EntityCategoryCondition, AttachmentCondition, PropertyChangeCondition, RoleCondition, StateCondition} from "@/models/Conditions"
 
 interface ITreeRole {
   label: String;
@@ -163,10 +171,10 @@ interface ITreeRole {
   components: {
     NewRoleGroupModal,
     PropertyFilter,
-    ItemsetCondition,
-    WorkflowCondition,
-    EntityCondition,
-    AttachmentCondition
+    ItemsetConditionModal,
+    WorkflowConditionModal,
+    EntityConditionModal,
+    AttachmentConditionModal
   },
 })
 export default class extends Vue {
@@ -176,6 +184,13 @@ export default class extends Vue {
   @Prop({ required: false, default: () => [] })
   private visibleConditions!: string[];
   @Prop({ required: false }) conditionsDivHeight!: boolean;
+
+  private propertyCondition: PropertyCondition = new PropertyCondition()
+  private entityCategoryCondition: EntityCategoryCondition = new EntityCategoryCondition()
+  private AttachmentCondition: AttachmentCondition = new AttachmentCondition()
+  private propertyChangeCondition: PropertyChangeCondition = new PropertyChangeCondition()
+  private roleCondition: RoleCondition = new RoleCondition()
+  private stateCondition: StateCondition = new StateCondition()
 
   private defaultFilterData: any = {
     state: [],
@@ -331,42 +346,8 @@ export default class extends Vue {
     return Object.assign({}, this.filterData);
   }
 
-  resultPropertyFilter(items: any) {
-    if (items) { console.log('items',items)
-      this.propertyFilterData = { ...items };
-      this.filterData.property.label = "";
-      if (items.propertyFirst)
-        this.filterData.property.label +=
-          this.propertyFilterData.propertyFirst.displayName;
-      if (items.condition)
-        this.filterData.property.label +=
-          " " + this.propertyFilterData.condition;
-      if (items.propertySecond)
-        this.filterData.property.label +=
-          " " + this.propertyFilterData.propertySecond.displayName;
-      if (items?.skipCheckList?.length > 0) {
-        for (let value of items.skipCheckList) {
-          this.filterData.property.children.push({
-            label: `Skip if ${items[value].displayName} is empty`,
-          });
-        }
-      }
-      let temp = this.filterData.property;
-      this.filterData.property = {...temp,...items}
-    }
-  }
-
-  resultItemset(items: any) {}
-
-  resultWorkflow(items: any) {
-    if (items) {
-      this.filterData.workflow = { ...items };
-      console.log('workflow',this.filterData)
-    }
-  }
-
-  resultStatus(items: any) {
-    
+  onSave(condition: any) {
+    console.log('condition',condition)
   }
 
   handleNodeClick(data: any) {
