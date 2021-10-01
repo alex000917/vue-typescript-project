@@ -82,7 +82,7 @@ export default class extends Vue {
     xml: [
       {
         required: true,
-        message: "Please type the description",
+        message: "Please type the xml",
         trigger: "blur",
       },
     ],

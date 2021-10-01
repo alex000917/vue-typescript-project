@@ -126,7 +126,6 @@ import NumericInput from "./numericInput.vue";
 import ChooseOptions from "./chooseOptions.vue";
 import { ChoiceDataType } from "@/models/DataTypes";
 import { ChoiceOption } from "@/models/ChoiceOption";
-import { delete } from "vue/types/umd";
 import { KeyValue } from "@/models/KeyValue";
 @Component({
   name: "ChoiceProperty",

@@ -27,6 +27,7 @@
         size="small"
         placement="bottom-start"
         style="margin-right: 8px;"
+        @command="onNewStopRule"
       >
         <el-button type="text">
           <el-row
@@ -38,7 +39,7 @@
               src="/assets/img/stop-rule-16x16.png"
               style="padding-right: 5px"
             />
-            New action rule
+            New stop rule
           </el-row>
         </el-button>
         <el-dropdown-menu
@@ -47,9 +48,10 @@
         >
           <el-dropdown-item
             v-for="dropdown in newStopRuleDropDowns"
-            :key="dropdown"
+            :key="dropdown.id"
+            :command="dropdown.id"
           >
-            {{ dropdown }}
+            {{ dropdown.value }}
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -106,18 +108,38 @@
       <el-image src="/assets/img/information-32x32.png" />
       <span style="padding-left: 5px; font-weight: 600;">Stop rules are triggered after action rules.</span>
     </el-row>
+    <attach-stop-rule :dialogVisible.sync="stopRuleVisible['attachStop']" />
+    <xml-stop-rule :dialogVisible.sync="stopRuleVisible['xmlRule']" />
+    <stop-rule-wizard :visible-wizard.sync="stopRuleVisible['stopRule']"
+      :ruleSysname.sync="selectedRule" />
   </el-container>
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
 import Draggable from "vuedraggable"
+import AttachStopRule from './StopRules/attachmentStopRule.vue'
+import XmlStopRule from './StopRules/XmlRule.vue'
+import StopRuleWizard from './StopRules/StopRuleWizard.vue'
 
 @Component({
   name: "",
-  components: { Draggable }
+  components: { Draggable, AttachStopRule, XmlStopRule, StopRuleWizard }
 })
 export default class extends Vue {
-  newStopRuleDropDowns = ["Attachment Stop Rule", "Stop Rule Wizard", "Xml Rule"]
+  newStopRuleDropDowns = [
+    { id: "attachStop", value: "Attachment Stop Rule"},
+    { id: "stopRule", value: "Stop Rule Wizard"} ,
+    { id: "xmlRule", value:  "Xml Rule"}
+  ]
+
+  selectedRule: string | null = null;
+
+  private stopRuleVisible: any = {
+    attachStop: false,
+    stopRule: false,
+    xmlRule: false
+  }
+
   myArray = [
     {
       name: "vue.draggable",
@@ -160,6 +182,11 @@ export default class extends Vue {
       fixed: false
     }
   ]
+
+  onNewStopRule(command: string) {
+    this.stopRuleVisible[command] = true;    
+    console.log(command,this.stopRuleVisible[command])
+  }
 }
 </script>
 

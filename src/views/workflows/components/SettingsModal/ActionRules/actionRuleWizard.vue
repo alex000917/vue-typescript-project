@@ -35,7 +35,10 @@
           </el-col>
           <el-col v-if="currentStep === 2">
             <el-form-item label="Rule name">
-              <el-input v-model="ruleName" class="action-rule__row--input"></el-input>
+              <el-input
+                v-model="ruleName"
+                class="action-rule__row--input"
+              ></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -56,20 +59,22 @@
               placement="bottom-start"
             >
               <span class="el-dropdown-link">
-                <el-button type="text"> New Condition </el-button>
+                <el-button type="text" :disabled="disableCondition">
+                  New Condition
+                </el-button>
               </span>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item command="transitionConditionVisible"
                   >Transition Condition...</el-dropdown-item
                 >
-                <el-dropdown-item command="propertyChange"
+                <el-dropdown-item command="propertyChangeVisible"
                   >Property Change Condition...</el-dropdown-item
                 >
                 <el-dropdown-item disabled
                   >--------------------------------------</el-dropdown-item
                 >
-                <el-dropdown-item>Property Condition...</el-dropdown-item>
-                <el-dropdown-item>Item Set Condition...</el-dropdown-item>
+                <el-dropdown-item command="propertyConditionVisible">Property Condition...</el-dropdown-item>
+                <el-dropdown-item command="itemsetConditionVisible">Item Set Condition...</el-dropdown-item>
                 <el-dropdown-item command="workflowConditionVisible"
                   >Workflow Condition...</el-dropdown-item
                 >
@@ -161,11 +166,9 @@
           class="action-rule__row action-rule__row--last"
         >
           <el-collapse accordion value="workWeekDays">
-            <el-collapse-item title="Advanced settings" name="workWeekDays"
-              >
-                {{`System name ${ruleName}`}}
-              </el-collapse-item
-            ></el-collapse
+            <el-collapse-item title="Advanced settings" name="workWeekDays">
+              {{ `System name ${ruleName}` }}
+            </el-collapse-item></el-collapse
           >
         </el-row>
 
@@ -178,12 +181,24 @@
         ></new-property-change>
         <entity-condition :dialogVisible.sync="entityConditionVisible" />
         <attachment-condition :dialogVisible.sync="attachConditionVisible" />
+        <property-condition :dialogVisible.sync="propertyConditionVisible" :propertyFilterData="items.propertyCondition"/>
+        <itemset-condition :dialogVisible.sync="itemsetConditionVisible" :condition.sync="itemCondition"/>
+        <workflow-condition :dialogVisible.sync="workflowConditionVisible" />
 
         <xml-action :dialogVisible.sync="newActionListVisible['xml']" />
-        <set-property-action :dialogVisible.sync="newActionListVisible['property']" />
-        <move-workflow-action :dialogVisible.sync="newActionListVisible['moveWorkflow']" />
-        <itemset-condition :dialogVisible.sync="newActionListVisible['itemset']" />
-        <new-integraion-action :dialogVisible.sync="newActionListVisible['integration']" />
+        <set-property-action
+          :dialogVisible.sync="newActionListVisible['property']"
+        />
+        <move-workflow-action
+          :dialogVisible.sync="newActionListVisible['moveWorkflow']"
+        />
+        <itemset-condition
+          :dialogVisible.sync="newActionListVisible['itemset']"
+          :condition.sync="itemCondition"
+        />
+        <new-integraion-action
+          :dialogVisible.sync="newActionListVisible['integration']"
+        />
       </el-form>
     </el-container>
     <div slot="footer" class="footer">
@@ -206,19 +221,20 @@ import { ActionWorkflowRule } from "@/models/Workflows/ActionWorkflowRule";
 import { WorkflowModule } from "@/store/modules/WorkflowMod";
 import { forEach } from "lodash";
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { ItemSetCondition } from "@/models/Conditions";
 
 import transition from "./Conditions/transition.vue";
 import NewPropertyChange from "./Conditions/newPropertyChange.vue";
 import PropertyCondition from "@/components/Conditions/components/propertyFilter.vue";
-import ItemsetCondition from "@/components/Conditions/components/itemSet.vue";
+import ItemsetCondition from "@/components/Conditions/components/itemSetCondition.vue";
 import WorkflowCondition from "@/components/Conditions/components/workflow.vue";
 import EntityCondition from "@/components/Conditions/components/entityFilter.vue";
 import AttachmentCondition from "@/components/Conditions/components/attachmentFilter.vue";
 
-import XmlAction from './action/XmlRule.vue';
-import SetPropertyAction from './action/setProperty.vue'
-import MoveWorkflowAction from './action/moveToWorkflow.vue'
-import NewIntegraionAction from './action/newIntegraion.vue'
+import XmlAction from "./action/XmlRule.vue";
+import SetPropertyAction from "./action/setProperty.vue";
+import MoveWorkflowAction from "./action/moveToWorkflow.vue";
+import NewIntegraionAction from "./action/newIntegraion.vue";
 
 @Component({
   name: "",
@@ -228,11 +244,13 @@ import NewIntegraionAction from './action/newIntegraion.vue'
     EntityCondition,
     AttachmentCondition,
     ItemsetCondition,
+    PropertyCondition,
+    WorkflowCondition,
 
     XmlAction,
     SetPropertyAction,
     MoveWorkflowAction,
-    NewIntegraionAction
+    NewIntegraionAction,
   },
 })
 export default class extends Vue {
@@ -243,9 +261,14 @@ export default class extends Vue {
   propertyChangeVisible = false;
   entityConditionVisible = false;
   attachConditionVisible = false;
+  propertyConditionVisible = false;
+  itemsetConditionVisible = false;
+  workflowConditionVisible = false;
 
   conditionsTree: any[] = [];
   selectedCondition: any = null;
+
+  disableCondition = true;
 
   private newActionList = [
     { id: "property", value: "Set property value" },
@@ -266,6 +289,13 @@ export default class extends Vue {
   private currentStep: number = 0;
 
   private ruleName: string = "";
+  
+  itemCondition: ItemSetCondition = new ItemSetCondition();
+
+  private items = {
+    transition: {},
+    propertyCondition: {}
+  }
 
   get CurrentWorkflow() {
     return WorkflowModule.ActiveWorkflow;
@@ -403,6 +433,8 @@ export default class extends Vue {
   onOk() {}
 
   onNodeClick(node: any, props: any, tree: any) {
+    console.log(node.data)
+    this.disableCondition = false;
     if (node && node.label != "Everyone") {
       this.selectedCondition = node.data;
     } else {
@@ -477,6 +509,7 @@ $border-color: #cacaca;
     &--detail {
       border: 1px solid $border-color;
       height: 30vh;
+      overflow-y: auto;
     }
 
     &--text {
