@@ -72,11 +72,18 @@
         </el-dropdown>
       </el-row>
       <div style="margin-top: 20px">
-        <el-checkbox label="propertyFirst"  v-model="items.skipConditionIfMainOperandIsEmpty">
+        <el-checkbox
+          label="propertyFirst"
+          v-if="!!items.propertyFirst.displayName"
+          v-model="items.skipConditionIfMainOperandIsEmpty"
+        >
           Skip this condition if{{ items.propertyFirst.displayName }} is empty
         </el-checkbox>
         <el-checkbox
-          v-if="selectPropertyModal.key === 'second'"
+          v-if="
+            !!items.propertySecond.displayName &&
+            selectPropertyModal.key === 'second'
+          "
           v-model="items.skipConditionIfSecondaryOperandIsEmpty"
           label="propertySecond"
         >
@@ -130,6 +137,22 @@ export default class extends Vue {
   @Prop({ required: true }) condition!: PropertyCondition;
 
   private secondPropertyReadOnly = false;
+
+  private defaultItems = {
+    propertyFirst: {
+      displayName: "",
+      value: null,
+    },
+    propertySecond: {
+      displayName: "",
+      value: null,
+    },
+    operator: "",
+    secondOperandIsApplicationPreference: false,
+    secondOperandIsProperty: false,
+    skipConditionIfMainOperandIsEmpty: false,
+    skipConditionIfSecondaryOperandIsEmpty: false,
+  } as any;
 
   private items = {
     propertyFirst: {
@@ -212,7 +235,10 @@ export default class extends Vue {
   // }
 
   selectInputMethod(command: string) {
-    this.items.propertySecond = "";
+    this.items.propertySecond = {
+      displayName: "",
+      value: null,
+    };
     if (command === "typeText") {
       this.selectPropertyModal = {
         show: false,
@@ -256,22 +282,22 @@ export default class extends Vue {
           this.items.secondOperandIsApplicationPreference;
         this.$emit("update:condition", propertyCondition);
         this.$emit("onSave", propertyCondition);
-        this.showModal = false;
       } else {
         console.log("error submit!!");
         return false;
       }
     });
+    this.cancelHandler();
   }
 
   cancelHandler() {
-    (this.$refs.form as ElForm).resetFields();
+    this.items = this.defaultItems;
     this.showModal = false;
   }
 
   dataType = 1;
-  async resultHandler(displayPaths: KeyValue[],result: KeyValue[]) {
-    console.log('ressult', displayPaths)
+  async resultHandler(displayPaths: KeyValue[], result: KeyValue[]) {
+    console.log("ressult", displayPaths);
     let str = "";
     let newItems = Object.assign({}, this.items);
     if (result.length > 1) {

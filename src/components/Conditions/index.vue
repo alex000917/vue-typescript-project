@@ -83,7 +83,7 @@
         :class="conditionsDivHeight ? 'table-container-small' : ''"
       >
         <el-tree
-          :data="treeItems"
+          :data="getTreeItems"
           accordion
           :props="defaultTreeProps"
           default-expand-all
@@ -240,6 +240,9 @@ export default class extends Vue {
     { id: "sql", label: "SQL" },
   ];
 
+  //Total Data
+  private roleGroups: RoleGroup[] = [];
+  //Tree Data
   private treeItems: any[] = [];
   private defaultTreeProps = {
     children: "children",
@@ -248,20 +251,8 @@ export default class extends Vue {
 
   private authorizationTree: AuthorizationTree = new AuthorizationTree();
   private currentRoleGroup: RoleGroup | null = new RoleGroup();
+  private selectedRoleGroupIndex = -1;
   private allowedNodeTypes = [];
-
-  private propertyFilterData = {
-    propertyFirst: {
-      displayName: "",
-      value: null,
-    },
-    propertySecond: {
-      displayName: "",
-      value: null,
-    },
-    condition: "",
-    skipCheckList: [],
-  };
 
   private showFilterModal: any = {
     state: false,
@@ -286,8 +277,6 @@ export default class extends Vue {
 
   private itemSelected: boolean = false;
 
-  private statusDatta: any = {};
-
   get showFiltersButton() {
     return !!this.visibleFilters.length;
   }
@@ -302,57 +291,14 @@ export default class extends Vue {
 
   private lpmInstance = LanguagesPresentationModel.getInstance();
 
-  @Watch("getFilterData", { deep: true, immediate: true })
-  private changeTreeData(data: any, oldData: any) {
-    const stateLabel = "State is ";
-    this.updateTreeChildren("state", data, stateLabel);
-
-    const userRoleLabel = "Logged in user is assigned to role ";
-    this.updateTreeChildren("userRole", data, userRoleLabel);
-
-    const newData = Object.assign({}, data);
-    newData.sql = data.sql.displayName ? [data.sql.displayName] : [];
-    this.updateTreeChildren("sql", newData, "");
-
-    if (oldData && data) {
-      if (this.treeItems?.length === 0) {
-        this.treeItems.push({ label: "everyone", key: 'newRole', children: [] });
-      }
-
-      if (data.property !== oldData.property) {
-        this.treeItems[0].children.push({
-          label: data.property.label,
-          key: "property",
-          children: data.property.children,
-          value: data.property
-        });
-      }
-
-      if (data.workflow !== oldData.workflow) { 
-        let str: string = "";
-        if (data.workflow.property.displayName) str += data.workflow.property.displayName;
-        if (data.workflow.condition) str += " " + data.workflow.condition;
-        if (data.workflow.step) str += " " + data.step;
-        this.treeItems[0].children.push({
-          label: str,
-          key: "workflow",
-          value: data.overflow
-        });
-      }
-    }
-  }
-
-  get getFilterData() {
-    return Object.assign({}, this.filterData);
-  }
-
   onSave(condition: any) {
     console.log('condition',condition)
   }
 
   handleNodeClick(data: any) {
-    console.log(data)
     this.itemSelected = true;
+    this.selectedRoleGroupIndex = data.index;
+    this.currentRoleGroup = this.roleGroups[data.index]
     this.selectedFilterKey = data.key;
   }
 
@@ -389,7 +335,6 @@ export default class extends Vue {
 
     if (state === "new") {
       this.currentRoleGroup = new RoleGroup();
-      this.currentRoleGroup = null;
     }
 
     this.newRoleGroupModalData.visible = true;
@@ -400,10 +345,11 @@ export default class extends Vue {
   }
 
   addNewRoleGroup(roleGroupName: string | null, nodeSystemNames: any[]): void {
-    if (this.currentRoleGroup) {
+    if (this.selectedRoleGroupIndex !== -1 && this.currentRoleGroup) {
       this.currentRoleGroup.authorizationNodeNames = nodeSystemNames;
       this.currentRoleGroup.title = roleGroupName;
-    } else if (this.checkIfNewRoleGroup(roleGroupName)) {
+      this.treeItems[this.selectedRoleGroupIndex].label = roleGroupName;
+    } else if (this.selectedRoleGroupIndex === -1 && this.checkIfNewRoleGroup(roleGroupName)) {
       const newRoleGroup: RoleGroup = new RoleGroup();
 
       if (roleGroupName === "Everyone" && !nodeSystemNames) {
@@ -414,9 +360,15 @@ export default class extends Vue {
 
       newRoleGroup.conditions = [];
       newRoleGroup.title = roleGroupName;
-      this.treeItems.push({ label: roleGroupName, children: [] });
-      console.log(this.treeItems);
+      this.currentRoleGroup = newRoleGroup;
+      this.selectedRoleGroupIndex = this.roleGroups.length;
+      this.roleGroups.push(newRoleGroup)
+      this.treeItems.push({ label: roleGroupName, children: [], index: this.selectedRoleGroupIndex });
     }
+  }
+
+  get getTreeItems() {
+    return this.treeItems;
   }
 
   newFilterHandler(command: string) {
@@ -446,7 +398,7 @@ export default class extends Vue {
   }
 
   created() {
-    this.filterData = this.defaultFilterData;
+    
   }
 }
 </script>

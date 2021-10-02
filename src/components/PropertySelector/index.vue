@@ -200,8 +200,8 @@ export default class extends Vue {
   }
 
   get origEntityId() {
-    return "com.msp.dao.entities.cse.custom.Cse_DemandActivity";
-    // return this.entityId;
+    // return "com.msp.dao.entities.cse.custom.Cse_DemandActivity";
+    return this.entityId;
   }
 
   get origEntity() {
