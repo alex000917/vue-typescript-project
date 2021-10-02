@@ -105,7 +105,14 @@
     /> -->
     <prefModel :is-open.sync="showPref" :result-handler="onPrefSelected" />
     <select-property-model
+      key="first"
       :dialog-visible.sync="selectPropertyModal.show"
+      @selectPropertyComplete="resultHandler"
+      :entity-id="activeWorkflow.entityId"
+    />
+    <select-property-model
+      key="second"
+      :dialog-visible.sync="selectPropertySecondModal"
       @selectPropertyComplete="resultHandler"
       :entity-id="activeWorkflow.entityId"
     />
@@ -137,6 +144,8 @@ export default class extends Vue {
   @Prop({ required: true }) condition!: PropertyCondition;
 
   private secondPropertyReadOnly = false;
+  private currentPaths: KeyValue[] = [];
+  private selectPropertySecondModal = false;
 
   private defaultItems = {
     propertyFirst: {
@@ -252,8 +261,9 @@ export default class extends Vue {
     } else {
       if (command === "selectProperty") {
         this.items.secondOperandIsProperty = true;
+        this.selectPropertySecondModal = true;
         this.selectPropertyModal = {
-          show: true,
+          show: false,
           key: "second",
         };
       }

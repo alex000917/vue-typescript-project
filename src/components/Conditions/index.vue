@@ -72,7 +72,7 @@
           </el-button>
         </el-col>
         <el-col :span="2" class="command-button">
-          <el-button type="text" icon="el-icon-delete" @click="deleteHandler">
+          <el-button type="text" icon="el-icon-delete">
             <span class="button-text">Delete</span>
           </el-button>
         </el-col>
@@ -306,20 +306,6 @@ export default class extends Vue {
     if (!this.currentRoleGroup) this.currentRoleGroup = new RoleGroup();
 
     let children: any = [];
-    if (condition.myspType === "PropertyCondition") {
-      if (condition.skipConditionIfMainOperandIsEmpty)
-        children.push({
-          label: condition.getSkipMailOperandAlert(),
-          key: "",
-          index: "",
-        });
-      if (condition.skipConditionIfSecondaryOperandIsEmpty)
-        children.push({
-          label: condition.getSkipSecondOperandAlert(),
-          key: "",
-          index: "",
-        });
-    }
 
     if (this.selectedConditionIndex === -1) {
       this.currentRoleGroup.conditions.push(condition);
@@ -334,14 +320,31 @@ export default class extends Vue {
         key: "",
         label: condition.getDisplayName(),
         index: index,
-        children: children ? children : []
+        children: children ? children : [],
       });
+      if (condition.myspType === "PropertyCondition") {
+        if (condition.skipConditionIfMainOperandIsEmpty)
+          children.push({
+            label: condition.getSkipMailOperandAlert(),
+            key: "",
+            index: index,
+          });
+        if (condition.skipConditionIfSecondaryOperandIsEmpty)
+          children.push({
+            label: condition.getSkipSecondOperandAlert(),
+            key: "",
+            index: index,
+          });
+      }
     } else {
       let index: string =
         "" +
         this.selectedRoleGroupIndex +
         "-" +
         this.currentRoleGroup.conditions.length;
+      console.log("groupIndex", this.selectedRoleGroupIndex);
+      console.log("conIndex", this.selectedConditionIndex);
+      console.log("treeItems", this.treeItems);
       this.currentRoleGroup.conditions[this.selectedConditionIndex] = condition;
       this.treeItems[this.selectedRoleGroupIndex].children[
         this.selectedConditionIndex
@@ -349,14 +352,37 @@ export default class extends Vue {
       this.treeItems[this.selectedRoleGroupIndex].children[
         this.selectedConditionIndex
       ].children = children ? children : [];
+      if (condition.myspType === "PropertyCondition") {
+        if (condition.skipConditionIfMainOperandIsEmpty)
+          children.push({
+            label: condition.getSkipMailOperandAlert(),
+            key: "",
+            index: index,
+          });
+        if (condition.skipConditionIfSecondaryOperandIsEmpty)
+          children.push({
+            label: condition.getSkipSecondOperandAlert(),
+            key: "",
+            index: index,
+          });
+      }
     }
   }
 
   handleNodeClick(data: any) {
+    console.log(data);
     this.itemSelected = true;
-    this.selectedRoleGroupIndex = data.index;
-    this.currentRoleGroup = this.roleGroups[data.index];
-    this.selectedFilterKey = data.key;
+    if (data.index) {
+      let ids = data.index.split("-");
+      this.selectedRoleGroupIndex = ids[0];
+      this.currentRoleGroup = this.roleGroups[data.index];
+      if (ids.length > 1) {
+        this.selectedConditionIndex = ids[1];
+      } else {
+        this.selectedConditionIndex = -1;
+      }
+      this.selectedFilterKey = data.key;
+    }
   }
 
   updateTreeChildren(key: string, childNodeData: any, initialLabel: string) {
@@ -437,6 +463,7 @@ export default class extends Vue {
 
   newFilterHandler(command: string) {
     console.log("command", command);
+    this.selectedConditionIndex = -1;
     this.showFilterModal[command] = true;
   }
 
