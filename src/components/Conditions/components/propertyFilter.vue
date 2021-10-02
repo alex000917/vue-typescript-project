@@ -106,7 +106,7 @@
     <prefModel :is-open.sync="showPref" :result-handler="onPrefSelected" />
     <select-property-model
       :dialog-visible.sync="selectPropertyModal.show"
-      :result-handler="resultHandler"
+      @selectPropertyComplete="resultHandler"
       :entity-id="activeWorkflow.entityId"
     />
   </el-dialog>
@@ -141,11 +141,11 @@ export default class extends Vue {
   private defaultItems = {
     propertyFirst: {
       displayName: "",
-      value: null,
+      value: [],
     },
     propertySecond: {
       displayName: "",
-      value: null,
+      value: [],
     },
     operator: "",
     secondOperandIsApplicationPreference: false,
@@ -265,11 +265,12 @@ export default class extends Vue {
     (this.$refs.form as ElForm).validate((valid: boolean) => {
       if (valid) {
         var propertyCondition = new PropertyCondition();
-        propertyCondition.mainOperand = this.items.propertyFirst.value;
+        console.log('propertypathlength',this.items.propertyFirst.value.length)
+        propertyCondition.mainOperand = [...this.items.propertyFirst.value];
         if (this.items.propertySecond.secondOperandIsApplicationPreference)
-          propertyCondition.secondaryOperand = this.items.propertySecond;
+          propertyCondition.secondaryOperand = [...this.items.propertySecond.value];
         else
-          propertyCondition.secondaryOperand = this.items.propertySecond.value;
+          propertyCondition.secondaryOperand = [...this.items.propertySecond.value];
 
         propertyCondition.skipConditionIfSecondaryOperandIsEmpty =
           this.items.skipConditionIfSecondaryOperandIsEmpty;
@@ -296,8 +297,8 @@ export default class extends Vue {
   }
 
   dataType = 1;
-  async resultHandler(displayPaths: KeyValue[], result: KeyValue[]) {
-    console.log("ressult", displayPaths);
+  resultHandler(displayPaths: KeyValue[], result: KeyValue[]) {
+    console.log('result',result)
     let str = "";
     let newItems = Object.assign({}, this.items);
     if (result.length > 1) {

@@ -16,6 +16,38 @@ export class PropertyCondition extends BaseCondition {
   skipConditionIfSecondaryOperandIsEmpty = false;
   secondOperandIsProperty = false;
   secondOperandIsApplicationPreference = false;
+  
+  getDisplayName() : string | any {
+    let str: string = '';
+    if (this.mainOperand && this.mainOperand.length >= 0) {
+      str += `[Workflow(${this.mainOperand[0].displayName}): ${this.mainOperand[1].displayName}]`;
+    }
+    if (this.operator && (this.secondOperandIsApplicationPreference || this.secondOperandIsProperty)) {
+      str += ' ' + this.operator;
+
+      if (this.secondOperandIsProperty && this.secondaryOperand && this.secondaryOperand.length >= 0) {
+        str += `[Workflow(${this.secondaryOperand[0].displayName}): ${this.secondaryOperand[1].displayName}]`;
+      } else if (this.secondOperandIsApplicationPreference && this.secondaryOperand) {
+
+      }
+    }
+    return str;
+  }
+
+  getSkipMailOperandAlert(): string | any {
+    if (this.skipConditionIfMainOperandIsEmpty && this.mainOperand && this.mainOperand.length >= 0) {
+      return `Skip if [Form (${this.mainOperand[0].displayName}): ${this.mainOperand[1].displayName}] is empty`;
+    } else 
+      return '';
+  }
+
+  getSkipSecondOperandAlert(): string | any {
+    if (this.skipConditionIfSecondaryOperandIsEmpty && this.secondaryOperand && this.secondaryOperand.length >= 0) {
+      return `Skip if [Form (${this.secondaryOperand[0].displayName}): ${this.secondaryOperand[1].displayName}] is empty`;
+    } else 
+      return '';
+  }
+
 }
 export class EntityCategoryCondition extends PropertyCondition {
   myspType= "EntityCategoryCondition"

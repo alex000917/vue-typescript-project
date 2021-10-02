@@ -175,7 +175,6 @@ import { StringUtils } from "@/models/Utils/StringUtils";
 export default class extends Vue {
   @Prop({ required: true }) dialogVisible!: boolean;
   @Prop({ required: true }) entityId!: string;
-  @Prop({ required: true }) resultHandler!: any;
   @Prop({ required: false }) allowedProperties!: string[];
   @Prop({ required: false }) allowedEntityName!: string;
   @Prop({ required: false }) path!: KeyValue[];
@@ -311,7 +310,8 @@ export default class extends Vue {
 
   okHandler() {
     if (this.IsSelectionValid()) {
-      this.resultHandler(this.displayPaths, this.propertyPath);
+      console.log('propertypath',this.propertyPath)
+      this.$emit("selectPropertyComplete",this.displayPaths, this.propertyPath);
       this.onCancelClick();
     } else {
       this.$message("Please select a Property Type ");
@@ -319,8 +319,8 @@ export default class extends Vue {
   }
 
   onCancelClick() {
-    this.displayPaths.splice(1);
-    this.propertyPath.splice(1);
+    // this.displayPaths.splice(1);
+    // this.propertyPath.splice(1);
     this.showModal = false;
     this.$emit("update:dialogVisible", false);
   }
@@ -387,7 +387,7 @@ export default class extends Vue {
     var rs = await EntitiesModule.getEntity(entityName);
     this.currentEntity = rs;
     this.propertyPath = [];
-    this.propertyPath.push(new KeyValue(ConditionUtils.TBL, this.origEntityId));
+    this.propertyPath.push(new KeyValue(ConditionUtils.TBL, this.origEntityId, rs.displayName));
     this.displayPaths = [];
     this.displayPaths.push(
       new KeyValue(
@@ -411,11 +411,11 @@ export default class extends Vue {
         const lastProp = this.propertyPath[this.propertyPath.length - 1];
         console.log("lastprop", lastProp);
         if (lastProp?.value === null && this.propertyPath.length > 1) {
-          this.displayPaths.splice(this.displayPaths.length - 1, 1);
-          this.propertyPath.splice(this.propertyPath.length - 1, 1);
+          this.displayPaths.pop();
+          this.propertyPath.pop();
         }
         if (isRoot) return;
-        this.propertyPath.push(new KeyValue(data.systemName, entityId));
+        this.propertyPath.push(new KeyValue(data.systemName, entityId, displayName));
         this.displayPaths.push(new KeyValue(displayName, data));
         this.IsSelectionValid();
       }
@@ -424,6 +424,7 @@ export default class extends Vue {
         this.loading = false;
       });
     }
+    console.log("step3", this.propertyPath, data)
   }
 
   addPropertyToDisplayPath(data: any) {
@@ -479,7 +480,7 @@ export default class extends Vue {
         this.propertyPath.splice(this.propertyPath.length - 1, 1);
       }
       this.displayPaths.push(new KeyValue(data.displayName, data));
-      this.propertyPath.push(new KeyValue(data.systemName, data.entityId));
+      this.propertyPath.push(new KeyValue(data.systemName, data.entityId, data.displayName));
     }
     this.IsSelectionValid();
   }
