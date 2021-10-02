@@ -200,7 +200,7 @@ export default class extends Vue {
   }
 
   get origEntityId() {
-    return 'com.msp.dao.entities.cse.custom.Cse_DemandActivity';
+    return "com.msp.dao.entities.cse.custom.Cse_DemandActivity";
     // return this.entityId;
   }
 
@@ -311,7 +311,7 @@ export default class extends Vue {
 
   okHandler() {
     if (this.IsSelectionValid()) {
-      this.resultHandler(this.propertyPath);
+      this.resultHandler(this.displayPaths, this.propertyPath);
       this.onCancelClick();
     } else {
       this.$message("Please select a Property Type ");
@@ -319,6 +319,8 @@ export default class extends Vue {
   }
 
   onCancelClick() {
+    this.displayPaths.splice(1);
+    this.propertyPath.splice(1);
     this.showModal = false;
     this.$emit("update:dialogVisible", false);
   }
@@ -407,7 +409,8 @@ export default class extends Vue {
         var rs = await EntitiesModule.getEntity(entityId);
         this.currentEntity = rs;
         const lastProp = this.propertyPath[this.propertyPath.length - 1];
-        if (lastProp.value === null && this.propertyPath.length > 1) {
+        console.log("lastprop", lastProp);
+        if (lastProp?.value === null && this.propertyPath.length > 1) {
           this.displayPaths.splice(this.displayPaths.length - 1, 1);
           this.propertyPath.splice(this.propertyPath.length - 1, 1);
         }
@@ -427,9 +430,7 @@ export default class extends Vue {
     this.displayPaths.push(new KeyValue(data.displayName, data));
   }
 
-  filterNode() {
-
-  }
+  filterNode() {}
 
   onBreadCrumClick(value: any) {
     const index = this.displayPaths.findIndex((x) => x.key === value.key);

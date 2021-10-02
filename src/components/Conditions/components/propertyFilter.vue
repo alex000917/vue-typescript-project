@@ -71,8 +71,8 @@
           </el-dropdown-menu>
         </el-dropdown>
       </el-row>
-      <el-checkbox-group style="margin-top: 20px" v-model="items.skipConditionIfMainOperandIsEmpty">
-        <el-checkbox label="propertyFirst">
+      <div style="margin-top: 20px">
+        <el-checkbox label="propertyFirst"  v-model="items.skipConditionIfMainOperandIsEmpty">
           Skip this condition if{{ items.propertyFirst.displayName }} is empty
         </el-checkbox>
         <el-checkbox
@@ -83,7 +83,7 @@
           Skip this condition if[{{ items.propertySecond.displayName }}] is
           empty
         </el-checkbox>
-      </el-checkbox-group>
+      </div>
     </el-form>
     <div slot="footer">
       <el-button style="margin-right: 20px" @click="okHandler"> Ok </el-button>
@@ -270,11 +270,12 @@ export default class extends Vue {
   }
 
   dataType = 1;
-  async resultHandler(result: KeyValue[]) {
+  async resultHandler(displayPaths: KeyValue[],result: KeyValue[]) {
+    console.log('ressult', displayPaths)
     let str = "";
     let newItems = Object.assign({}, this.items);
     if (result.length > 1) {
-      str += `[Workflow(${result[0].key}): ${result[1].key}]`;
+      str += `[Workflow(${displayPaths[0].key}): ${displayPaths[1].key}]`;
     }
     if (this.selectPropertyModal.key === "first") {
       newItems.propertyFirst = {};
@@ -287,7 +288,7 @@ export default class extends Vue {
     }
     this.items = { ...newItems };
     if (this.selectPropertyModal.key === "first") {
-      const lastpart = result[result.length - 1];
+      const lastpart = displayPaths[result.length - 1];
       this.dataType = parseInt(lastpart?.value?.dataType?.value);
     }
   }
