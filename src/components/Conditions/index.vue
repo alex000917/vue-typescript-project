@@ -67,7 +67,7 @@
           </el-dropdown>
         </el-col>
         <el-col :span="2" class="command-button">
-          <el-button type="text" icon="el-icon-edit-outline">
+          <el-button type="text" icon="el-icon-edit-outline" @click="editCondition">
             <span class="button-text">Edit</span>
           </el-button>
         </el-col>
@@ -119,28 +119,28 @@
       @onClickAddEveryOne="addNewRoleGroup"
     />
     <property-filter
-      :dialogVisible.sync="showFilterModal['property']"
-      :condition="propertyCondition"
+      :dialogVisible.sync="showFilterModal['PropertyCondition']"
+      :condition.sync="currentCondition"
       @onSave="onSave"
     />
     <itemset-condition-modal
-      :dialogVisible.sync="showFilterModal['itemset']"
-      :condition="propertyCondition"
+      :dialogVisible.sync="showFilterModal['ItemSetCondition']"
+      :condition.sync="currentCondition"
       @onSave="onSave"
     />
     <workflow-condition-modal
-      :dialogVisible.sync="showFilterModal['workflow']"
-      :condition="propertyCondition"
+      :dialogVisible.sync="showFilterModal['WorkflowCondition']"
+      :condition.sync="currentCondition"
       @onSave="onSave"
     />
     <entity-condition-modal
-      :dialogVisible.sync="showFilterModal['entityCategory']"
-      :condition="propertyCondition"
+      :dialogVisible.sync="showFilterModal['EntityCategoryCondition']"
+      :condition.sync="currentCondition"
       @onSave="onSave"
     />
     <attachment-condition-modal
-      :dialogVisible.sync="showFilterModal['attachement']"
-      :condition="propertyCondition"
+      :dialogVisible.sync="showFilterModal['AttachmentCondition']"
+      :condition.sync="currentCondition"
       @onSave="onSave"
     />
   </div>
@@ -159,12 +159,17 @@ import EntityConditionModal from "./components/entityFilter.vue";
 import AttachmentConditionModal from "./components/attachmentFilter.vue";
 
 import {
+  BaseCondition,
   PropertyCondition,
   EntityCategoryCondition,
   AttachmentCondition,
   PropertyChangeCondition,
   RoleCondition,
   StateCondition,
+  WorkflowCondition,
+  StatusCondition,
+  ItemSetCondition,
+  JavascriptCondition
 } from "@/models/Conditions";
 
 interface ITreeRole {
@@ -192,14 +197,7 @@ export default class extends Vue {
   private visibleConditions!: string[];
   @Prop({ required: false }) conditionsDivHeight!: boolean;
 
-  private propertyCondition: PropertyCondition = new PropertyCondition();
-  private entityCategoryCondition: EntityCategoryCondition =
-    new EntityCategoryCondition();
-  private AttachmentCondition: AttachmentCondition = new AttachmentCondition();
-  private propertyChangeCondition: PropertyChangeCondition =
-    new PropertyChangeCondition();
-  private roleCondition: RoleCondition = new RoleCondition();
-  private stateCondition: StateCondition = new StateCondition();
+  private currentCondition: BaseCondition | any = null;
 
   private defaultFilterData: any = {
     state: [],
@@ -232,13 +230,13 @@ export default class extends Vue {
   };
 
   private conditionsList = [
-    { id: "property", label: "Property" },
-    { id: "itemset", label: "Item Set" },
-    { id: "workflow", label: "Workflow" },
-    { id: "status", label: "Status" },
-    { id: "entityCategory", label: "Entity category" },
-    { id: "javascript", label: "Javscript" },
-    { id: "attachement", label: "Attachment" },
+    { id: "PropertyCondition", label: "Property" },
+    { id: "ItemSetCondition", label: "Item Set" },
+    { id: "WorkflowCondition", label: "Workflow" },
+    { id: "StatusCondition", label: "Status" },
+    { id: "EntityCategoryCondition", label: "Entity category" },
+    { id: "JavascriptCondition", label: "Javscript" },
+    { id: "AttachmentCondition", label: "Attachment" },
   ];
 
   private filtersList = [
@@ -265,14 +263,14 @@ export default class extends Vue {
   private allowedNodeTypes = [];
 
   private showFilterModal: any = {
-    state: false,
-    entityCategory: false,
+    StateCondition: false,
+    EntityCategoryCondition: false,
     userRole: false,
-    property: false,
+    PropertyCondition: false,
     sql: false,
-    itemset: false,
-    workflow: false,
-    attachement: false,
+    ItemSetCondition: false,
+    WorkflowCondition: false,
+    AttachmentCondition: false,
   };
 
   private filterData = this.defaultFilterData;
@@ -308,14 +306,14 @@ export default class extends Vue {
     let children: any = [];
 
     if (this.selectedConditionIndex === -1) {
+      this.selectedConditionIndex = this.currentRoleGroup.conditions.length;
       this.currentRoleGroup.conditions.push(condition);
       this.roleGroups[this.selectedRoleGroupIndex] = this.currentRoleGroup;
-      this.selectedConditionIndex = this.currentRoleGroup.conditions.length;
       let index: string =
         "" +
         this.selectedRoleGroupIndex +
         "-" +
-        this.currentRoleGroup.conditions.length;
+        this.selectedConditionIndex;
       this.treeItems[this.selectedRoleGroupIndex].children.push({
         key: "",
         label: condition.getDisplayName(),
@@ -342,9 +340,6 @@ export default class extends Vue {
         this.selectedRoleGroupIndex +
         "-" +
         this.currentRoleGroup.conditions.length;
-      console.log("groupIndex", this.selectedRoleGroupIndex);
-      console.log("conIndex", this.selectedConditionIndex);
-      console.log("treeItems", this.treeItems);
       this.currentRoleGroup.conditions[this.selectedConditionIndex] = condition;
       this.treeItems[this.selectedRoleGroupIndex].children[
         this.selectedConditionIndex
@@ -367,10 +362,11 @@ export default class extends Vue {
           });
       }
     }
+
+    this.currentCondition = condition;
   }
 
   handleNodeClick(data: any) {
-    console.log(data);
     this.itemSelected = true;
     if (data.index) {
       let ids = data.index.split("-");
@@ -383,6 +379,42 @@ export default class extends Vue {
       }
       this.selectedFilterKey = data.key;
     }
+  }
+
+  newFilterHandler(command: string) {
+    console.log("command", command);
+    this.selectedConditionIndex = -1;
+    switch(command) {
+      case 'PropertyCondition':
+        this.currentCondition = new PropertyCondition();
+        break;
+      case 'ItemSetCondition':
+        this.currentCondition = new ItemSetCondition();
+        break;
+      case 'WorkflowCondition':
+        this.currentCondition = new WorkflowCondition();
+        break;
+      case 'StatusCondition':
+        this.currentCondition = new StatusCondition();
+        break;
+      case 'EntityCategoryCondition':
+        this.currentCondition = new EntityCategoryCondition();
+        break;
+      case 'JavascriptCondition':
+        this.currentCondition = new JavascriptCondition();
+        break;
+      case 'AttachmentCondition':
+        this.currentCondition = new AttachmentCondition();
+        break;
+      default: 
+        break;
+    }
+    this.editCondition();
+  }
+
+  editCondition() {
+    this.showFilterModal[this.currentCondition.myspType] = true;
+    console.log(this.currentCondition.myspType,this.showFilterModal[this.currentCondition.myspType]);
   }
 
   updateTreeChildren(key: string, childNodeData: any, initialLabel: string) {
@@ -459,12 +491,6 @@ export default class extends Vue {
 
   get getTreeItems() {
     return this.treeItems;
-  }
-
-  newFilterHandler(command: string) {
-    console.log("command", command);
-    this.selectedConditionIndex = -1;
-    this.showFilterModal[command] = true;
   }
 
   deleteHandler() {

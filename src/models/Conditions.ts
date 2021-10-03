@@ -93,6 +93,10 @@ export class StatusCondition extends PropertyCondition {
   myspType= "StatusCondition"
 }
 
+export class JavascriptCondition extends PropertyCondition {
+  myspType= "JavascriptCondition"
+}
+
 export class TransitionCondition extends BaseCondition {
   myspType= "TransitionCondition"
   type: number | null = null;
@@ -107,6 +111,7 @@ export class TransitionCondition extends BaseCondition {
 export class WorkflowCondition extends PropertyCondition {
   myspType= "WorkflowCondition"
   workflowId: string | null = null;
+  step: string | null = null;
 }
 
 export class WorksheetCondition extends BaseCondition {

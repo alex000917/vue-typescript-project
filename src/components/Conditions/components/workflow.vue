@@ -34,15 +34,15 @@
         <el-col :span="6"></el-col>
         <el-col :span="12">
           <el-select
-            v-model="items.condition"
+            v-model="items.operator"
             placeholder="Select"
             style="width: 100%"
           >
             <el-option
-              v-for="item in conditionOptions"
-              :key="item"
-              :label="item"
-              :value="item"
+              v-for="item in operatorOptions"
+              :key="item.key"
+              :label="item.key"
+              :value="item.value"
               style="width: 100%"
             />
           </el-select>
@@ -59,9 +59,9 @@
           >
             <el-option
               v-for="item in workflowOptions"
-              :key="item"
-              :label="item"
-              :value="item"
+              :key="item.itemId"
+              :label="item.displayName"
+              :value="item.displayName"
               style="width: 100%"
             />
           </el-select>
@@ -105,7 +105,7 @@
     </div>
     <select-property-model
       :dialog-visible.sync="selectPropertyModal.show"
-      :result-handler="resultHandler"
+      @selectPropertyComplete="resultHandler"
       :entity-id="activeWorkflow.entityId"
     />
   </el-dialog>
@@ -116,6 +116,10 @@ import { Component, Prop, Watch, Vue } from "vue-property-decorator";
 import { KeyValue } from "@/models/KeyValue";
 import { WorkflowModule } from "@/store/modules/WorkflowMod";
 import SelectPropertyModel from "@/components/PropertySelector/index.vue";
+import { EntitiesModule } from "@/store/modules/entitiesMod";
+import { FormsModule } from "@/store/modules/FormsStore";
+import { ElForm } from "element-ui/types/form";
+import { WorkflowCondition } from "@/models/Conditions";
 
 @Component({
   name: "workflow-condition",
@@ -123,16 +127,23 @@ import SelectPropertyModel from "@/components/PropertySelector/index.vue";
 })
 export default class extends Vue {
   @Prop({ required: true }) dialogVisible!: boolean;
+  @Prop({ required: true }) condition!: any;
 
   private items = {
     property: {
       displayName: "",
-      value: null,
+      value: [],
     },
-    condition: "",
-    workflow: "",
+    operator: "",
+    workflow: null as any,
     step: "",
   } as any;
+
+  private dataType: number = 1;
+
+  private lastPath: KeyValue | any = null;
+  private entityId: string = "";
+  private systemName: string = "";
 
   private formRules = {
     property: [
@@ -142,7 +153,21 @@ export default class extends Vue {
         trigger: "blur",
       },
     ],
-    propertySecond: [
+    operator: [
+      {
+        required: true,
+        message: "Please select entity property",
+        trigger: "blur",
+      },
+    ],
+    workflow: [
+      {
+        required: true,
+        message: "Please select entity property",
+        trigger: "blur",
+      },
+    ],
+    step: [
       {
         required: true,
         message: "Please select entity property",
@@ -151,29 +176,37 @@ export default class extends Vue {
     ],
   };
 
-  private conditionOptions = [
-    "Is at or beyond step",
-    "Is beyond step",
-    "Is at or before step",
-    "Is before step",
-    "Is equal to",
-    "Is not equal to",
-  ];
+  private operatorOptions: KeyValue[] = [];
 
-  private workflowOptions = [
-    "Agile Task",
-    "Badget Change Request",
-    "Badget Request",
-    "Business Requirement",
-    "Project Change Request",
-    "Epic",
-  ];
+  private workflowOptions: any[] = [];
 
   private stepOptions = ["Approved", "Awaiting approval", "Draft", "Start"];
 
   private selectPropertyModal = {
     show: false,
   };
+
+  @Watch("dialogVisible", { deep: true, immediate: true })
+  setUp(val: boolean) {
+    if (val) {
+      if (this.condition) {
+        console.log("workflowCondition", this.condition);
+        this.items.property.value = this.condition.mainOperand;
+        if (this.items.property?.value?.length > 0) {
+          this.items.property.displayName += `[Workflow(${this.items.property.value[0].displayName}): ${this.items.property.value[1].displayName}]`;
+          this.lastPath =
+            this.items.property.value[this.items.property.value.length - 1];
+        }
+        this.items.operator = this.condition.operator;
+        if (
+          this.condition.secondaryOperand &&
+          this.condition.secondaryOperand.length > 0
+        )
+          this.items.workflow = this.condition.secondaryOperand[0].displayName;
+        this.items.step = this.condition.step;
+      }
+    }
+  }
 
   get activeWorkflow() {
     return WorkflowModule.activeWorkflow;
@@ -187,12 +220,63 @@ export default class extends Vue {
     this.$emit("update:dialogVisible", val);
   }
 
-  resultHandler(result: KeyValue[]) {
+  @Watch("lastPath", { deep: true, immediate: true })
+  async setOperatorsAndWorkflows(propertyPath: KeyValue) {
+    if (propertyPath) {
+      this.entityId = propertyPath.value;
+      var rs = await EntitiesModule.getEntity(this.entityId);
+      this.systemName = rs.systemName;
+      if (propertyPath.key === "tbl") {
+        this.dataType = 1;
+      } else {
+        if (rs && rs.properties.length > 0) {
+          let property = rs.properties.find(
+            (property) => property.systemName === propertyPath.key
+          );
+          this.dataType = property?.dataType?.value;
+        }
+      }
+    }
+  }
+
+  @Watch("dataType", { immediate: true })
+  private async loadOptions(datatype: number, old: number) {
+    if (datatype !== old)
+      await FormsModule.getOperatorsByDataType(datatype).then((rs) => {
+        console.log("rs", rs);
+        if (rs?.length) {
+          let pair: KeyValue;
+          for (pair of rs) {
+            this.operatorOptions.push(pair);
+          }
+        }
+      });
+  }
+
+  @Watch("systemName", { immediate: true })
+  private loadWorkflowOptions(systemName: string, oldName: string) {
+    console.log("systemName", systemName, oldName);
+    if (systemName !== oldName) {
+      let workflows = WorkflowModule.Workflows;
+      console.log(workflows);
+      if (workflows?.length > 0) {
+        this.workflowOptions = workflows.filter(
+          (workflow: any) => workflow.entitySystemName === systemName
+        );
+      }
+    }
+  }
+
+  resultHandler(displayPaths: KeyValue[], result: KeyValue[]) {
     let str: string = "";
-    if (result?.length > 0)
-      str += `[Workflow(${result[0].key}): ${result[1].key}]`;
+    if (result.length > 1) {
+      str += `[Workflow(${result[0].displayName}): ${result[1].displayName}]`;
+    }
     this.items.property.displayName = str;
-    this.items.property.value = result[0];
+    this.items.property.value = result;
+    if (result.length > 1) {
+      this.lastPath = result[result.length - 1];
+    }
   }
 
   onShowPropertySelector() {
@@ -201,8 +285,33 @@ export default class extends Vue {
   }
 
   okHandler() {
-    this.$emit("onWorkflowComplete", this.items);
-    this.showModal = false;
+    (this.$refs.form as ElForm).validate((valid: boolean) => {
+      if (valid) {
+        var workflowCondition = new WorkflowCondition();
+        workflowCondition.mainOperand = [...this.items.property.value];
+        if (this.items.workflow) {
+          console.log('wf',this.items.workflow)
+          let workflow = this.workflowOptions.find(workflow => workflow.displayName === this.items.workflow)
+          console.log('workflowOptions', this.workflowOptions);
+          console.log('workflow', workflow);
+          workflowCondition.secondaryOperand = [
+            new KeyValue(
+              workflow.myspType,
+              workflow.entitySystemName,
+              workflow.displayName
+            ),
+          ];
+        }
+        workflowCondition.operator = this.items.operator;
+        workflowCondition.step = this.items.step;
+        workflowCondition.workflowId = this.items.workflow.itemId;
+        this.$emit("onSave", workflowCondition);
+      } else {
+        console.log("error submit!!");
+        return false;
+      }
+    });
+    this.cancelHandler();
   }
 
   cancelHandler() {

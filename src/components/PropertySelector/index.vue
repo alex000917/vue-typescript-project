@@ -29,7 +29,7 @@
         <scroll-pane ref="scrollPane" class="tags-view-wrapper">
           <el-breadcrumb separator="|">
             <el-breadcrumb-item
-              v-for="(path, index) in propertyPath"
+              v-for="(path, index) in displayPaths"
               :key="index"
               type="flex"
             >
@@ -38,7 +38,7 @@
                 type="text"
                 @click="onBreadCrumClick(path)"
               >
-                {{ path.displayName }}
+                {{ path.key }}
               </el-button>
             </el-breadcrumb-item>
           </el-breadcrumb>
@@ -157,7 +157,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import { EntitiesModule } from "@/store/modules/entitiesMod";
 import { KeyValue } from "@/models/KeyValue";
 import ScrollPane from "@/components/Tags/ScrollPane.vue";
@@ -297,11 +297,6 @@ export default class extends Vue {
     return this.allowedProperties;
   }
 
-  @Watch("path", {deep: true, immediate: true})
-  changePropertyPath(val: KeyValue[]) {
-    this.propertyPath = val;
-  }
-
   selectInputMethod(command: string) {
     console.log("display name from inputmethod.");
     // const key = command === "user" ? "Logged in user" : this.origEntity.key.split("_")[1] as string
@@ -315,7 +310,6 @@ export default class extends Vue {
 
   okHandler() {
     if (this.IsSelectionValid()) {
-      console.log('propertypath',this.propertyPath)
       this.$emit("selectPropertyComplete",this.displayPaths, this.propertyPath);
       this.onCancelClick();
     } else {
@@ -369,7 +363,6 @@ export default class extends Vue {
       this.message = ".";
       result = true;
     }
-
     return result;
   }
 
@@ -414,12 +407,13 @@ export default class extends Vue {
         var rs = await EntitiesModule.getEntity(entityId);
         this.currentEntity = rs;
         const lastProp = this.propertyPath[this.propertyPath.length - 1];
-        console.log("lastprop", lastProp);
         if (lastProp?.value === null && this.propertyPath.length > 1) {
+          this.displayPaths.pop();
           this.propertyPath.pop();
         }
         if (isRoot) return;
         this.propertyPath.push(new KeyValue(data.systemName, entityId, displayName));
+        this.displayPaths.push(new KeyValue(displayName, data));
         this.IsSelectionValid();
       }
     } finally {
@@ -436,18 +430,20 @@ export default class extends Vue {
   filterNode() {}
 
   onBreadCrumClick(value: any) {
-    const index = this.propertyPath.findIndex((x) => x.key === value.key);
+    const index = this.displayPaths.findIndex((x) => x.key === value.key);
 
-    let lastItemIndex = this.propertyPath.length - 1;
+    let lastItemIndex = this.displayPaths.length - 1;
     while (index < lastItemIndex) {
       this.propertyPath.pop();
-      lastItemIndex = this.propertyPath.length - 1;
+      this.displayPaths.pop();
+      lastItemIndex = this.displayPaths.length - 1;
     }
 
-    this.setCurrentEntity(value.displayName, value?.value, index == 0);
-    const lastProp = this.propertyPath[this.propertyPath.length - 1];
-    if (lastProp.key === value.key && this.propertyPath.length > 1) {
+    this.setCurrentEntity(value.key, value?.value, index == 0);
+    const lastProp = this.displayPaths[this.displayPaths.length - 1];
+    if (lastProp.key === value.key && this.displayPaths.length > 1) {
       this.propertyPath.pop();
+      this.displayPaths.pop();
     }
   }
 

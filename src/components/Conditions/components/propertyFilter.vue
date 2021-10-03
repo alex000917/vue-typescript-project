@@ -275,7 +275,6 @@ export default class extends Vue {
     (this.$refs.form as ElForm).validate((valid: boolean) => {
       if (valid) {
         var propertyCondition = new PropertyCondition();
-        console.log('propertypathlength',this.items.propertyFirst.value.length)
         propertyCondition.mainOperand = [...this.items.propertyFirst.value];
         if (this.items.propertySecond.secondOperandIsApplicationPreference)
           propertyCondition.secondaryOperand = [...this.items.propertySecond.value];
