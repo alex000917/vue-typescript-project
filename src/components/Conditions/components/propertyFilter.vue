@@ -179,6 +179,10 @@ export default class extends Vue {
     skipConditionIfSecondaryOperandIsEmpty: false,
   } as any;
 
+  private lastPath: KeyValue | any = null;
+  private entityId: string = "";
+  private systemName: string = "";
+
   get entity() {
     return EntitiesModule.currentEntity;
   }
@@ -238,10 +242,55 @@ export default class extends Vue {
     this.$emit("update:dialogVisible", val);
   }
 
-  // @Watch("data", { immediate: true, deep: true })
-  // private setItems(val: any) {
-  //   this.items = { ...val };
-  // }
+  @Watch("dialogVisible", { deep: true, immediate: true })
+  setUp(val: boolean) {
+    if (val) {
+      if (this.condition?.mainOperand) {
+        console.log(this.condition)
+        this.items = {...this.condition};
+        this.items.propertyFirst = {
+          displayName: '',
+          value: []
+        }
+        this.items.propertyFirst.value = this.condition.mainOperand;
+        if (this.items.propertyFirst?.value?.length > 0) {
+          this.items.propertyFirst.displayName += `[Workflow(${this.items.propertyFirst.value[0].displayName}): ${this.items.propertyFirst.value[1].displayName}]`;
+          this.lastPath =
+            this.items.propertyFirst.value[this.items.propertyFirst.value.length - 1];
+        }
+        this.items.propertySecond = {
+          displayName: '',
+          value: []
+        }
+        this.items.propertySecond.value = this.condition.secondaryOperand;
+        if (this.items.propertySecond?.value?.length > 0 && this.items.secondOperandIsProperty) {
+          this.items.propertySecond.displayName += `[Workflow(${this.items.propertySecond.value[0].displayName}): ${this.items.propertySecond.value[1].displayName}]`;
+        }    
+        console.log('items', this.items)
+      }
+    }
+  }
+
+  @Watch("lastPath", { deep: true, immediate: true })
+  async setOperatorsAndWorkflows(propertyPath: KeyValue) {
+    if (propertyPath) {
+      this.entityId = propertyPath.value;
+      var rs = await EntitiesModule.getEntity(this.entityId);
+      this.systemName = rs.systemName;
+      if (propertyPath.key === "tbl") {
+        this.dataType = 1;
+      } else {
+        if (rs && rs.properties.length > 0) {
+          let property = rs.properties.find(
+            (property) => property.systemName === propertyPath.key
+          );
+          this.dataType = property?.dataType?.value;
+        }
+      }
+    }
+  }
+
+
 
   selectInputMethod(command: string) {
     this.items.propertySecond = {

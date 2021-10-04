@@ -133,7 +133,12 @@
       :condition.sync="currentCondition"
       @onSave="onSave"
     />
-    <entity-condition-modal
+    <entity-condition-modal key="status"
+      :dialogVisible.sync="showFilterModal['StatusCondition']"
+      :condition.sync="currentCondition"
+      @onSave="onSave"
+    />
+    <entity-condition-modal key="entityCategory"
       :dialogVisible.sync="showFilterModal['EntityCategoryCondition']"
       :condition.sync="currentCondition"
       @onSave="onSave"
@@ -371,14 +376,17 @@ export default class extends Vue {
     if (data.index) {
       let ids = data.index.split("-");
       this.selectedRoleGroupIndex = ids[0];
-      this.currentRoleGroup = this.roleGroups[data.index];
+      this.currentRoleGroup = this.roleGroups[this.selectedRoleGroupIndex];
       if (ids.length > 1) {
         this.selectedConditionIndex = ids[1];
+        this.currentCondition = this.currentRoleGroup.conditions[this.selectedConditionIndex];
       } else {
         this.selectedConditionIndex = -1;
+        this.currentCondition = null;
       }
       this.selectedFilterKey = data.key;
     }
+    console.log('currentCon', this.currentCondition)
   }
 
   newFilterHandler(command: string) {

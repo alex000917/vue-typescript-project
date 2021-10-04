@@ -46,7 +46,7 @@
       </el-row>
       <el-row class="entity-filter__row" type="flex">
         <el-col :md="18" :sm="24" class="entity-filter__row--list">
-          <el-row v-for="(item, index) in items.status" :key="index">
+          <el-row v-for="(item, index) in browseItems" :key="index">
             {{ item }}
           </el-row>
         </el-col>
@@ -61,7 +61,7 @@
             clearable
           />
         </el-col>
-        <el-col :md="7" sm="12" class="entity-filter__row--sibling">
+        <el-col :md="7" :sm="12" class="entity-filter__row--sibling">
           <el-button @click="handleSelect">Browse</el-button>
         </el-col>
       </el-row>
@@ -70,7 +70,7 @@
       <el-button @click="okHandler"> Ok </el-button>
       <el-button class="underline" type="text" @click="cancelHandler"> cancel </el-button>
     </div>
-    <browse-item :dialogVisible.sync="showBrowseDialog" :result="items.status"/>
+    <browse-item :dialogVisible.sync="showBrowseDialog" :result.sync="items.status"/>
   </el-dialog>
 </template>
 
@@ -88,6 +88,7 @@ export default class extends Vue {
   @Prop({ required: true }) dialogVisible!: boolean;
 
   private showBrowseDialog: boolean = false;
+  private status: any[] = [];
 
   private items = {
     property: {
@@ -141,6 +142,10 @@ export default class extends Vue {
     show: false,
   };
 
+  get browseItems() {
+    return this.items.status;
+  }
+
   get activeWorkflow() {
     return WorkflowModule.activeWorkflow;
   }
@@ -181,6 +186,7 @@ export default class extends Vue {
   }
 
   cancelHandler() {
+    console.log('cancel', this.showModal)
     this.showModal = false;
   }
 }

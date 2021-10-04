@@ -64,8 +64,20 @@ export class ItemSetCondition extends BaseCondition {
 
   skipConditionIfSetIsEmpty = false;
 }
-export class AttachmentCondition extends ItemSetCondition {
+export class AttachmentCondition extends PropertyCondition {
   myspType= "AttachmentCondition"
+  contains: number = 0
+  attachmentType = ''
+
+  getDisplayName() {
+    let str = '';
+    if (this.mainOperand && this.mainOperand.length > 1) {
+      str += `[Workflow(${this.mainOperand[0].displayName}): ${this.mainOperand[1].displayName}]`; 
+    }
+    str += ' ' + (!this.contains ? 'does not contain' : 'contains');
+    if (this.attachmentType) str += ' ' + this.attachmentType;
+    return str;
+  }
 }
 export class FreeTextCondition extends BaseCondition {
   myspType= "FreeTextCondition"

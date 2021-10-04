@@ -190,7 +190,6 @@ export default class extends Vue {
   setUp(val: boolean) {
     if (val) {
       if (this.condition) {
-        console.log("workflowCondition", this.condition);
         this.items.property.value = this.condition.mainOperand;
         if (this.items.property?.value?.length > 0) {
           this.items.property.displayName += `[Workflow(${this.items.property.value[0].displayName}): ${this.items.property.value[1].displayName}]`;
@@ -243,7 +242,6 @@ export default class extends Vue {
   private async loadOptions(datatype: number, old: number) {
     if (datatype !== old)
       await FormsModule.getOperatorsByDataType(datatype).then((rs) => {
-        console.log("rs", rs);
         if (rs?.length) {
           let pair: KeyValue;
           for (pair of rs) {
@@ -255,10 +253,8 @@ export default class extends Vue {
 
   @Watch("systemName", { immediate: true })
   private loadWorkflowOptions(systemName: string, oldName: string) {
-    console.log("systemName", systemName, oldName);
     if (systemName !== oldName) {
       let workflows = WorkflowModule.Workflows;
-      console.log(workflows);
       if (workflows?.length > 0) {
         this.workflowOptions = workflows.filter(
           (workflow: any) => workflow.entitySystemName === systemName
@@ -280,7 +276,6 @@ export default class extends Vue {
   }
 
   onShowPropertySelector() {
-    console.log("first clicked");
     this.selectPropertyModal.show = true;
   }
 
@@ -290,10 +285,7 @@ export default class extends Vue {
         var workflowCondition = new WorkflowCondition();
         workflowCondition.mainOperand = [...this.items.property.value];
         if (this.items.workflow) {
-          console.log('wf',this.items.workflow)
           let workflow = this.workflowOptions.find(workflow => workflow.displayName === this.items.workflow)
-          console.log('workflowOptions', this.workflowOptions);
-          console.log('workflow', workflow);
           workflowCondition.secondaryOperand = [
             new KeyValue(
               workflow.myspType,

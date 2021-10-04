@@ -57,7 +57,7 @@
     </div>
     <select-property-model
       :dialog-visible.sync="selectPropertyModal"
-      :result-handler="resultHandler"
+      @selectPropertyComplete="resultHandler"
       :entity-id="activeWorkflow.entityId"
     />
   </el-dialog>
@@ -68,6 +68,8 @@ import { Component, Prop, Watch, Vue } from "vue-property-decorator";
 import { WorkflowModule } from "@/store/modules/WorkflowMod";
 import { KeyValue } from "@/models/KeyValue";
 import SelectPropertyModel from "@/components/PropertySelector/index.vue";
+import { AttachmentCondition } from "@/models/Conditions";
+import { ElForm } from "element-ui/types/form";
 
 @Component({
   name: "attachment-condition",
@@ -75,13 +77,14 @@ import SelectPropertyModel from "@/components/PropertySelector/index.vue";
 })
 export default class extends Vue {
   @Prop({ required: true }) dialogVisible!: boolean;
+  @Prop({ required: true }) condition!: AttachmentCondition;
 
   private defaultItems: any = {
     property: {
       displayName: "",
       value: null,
     },
-    contains: 1,
+    contains: 0,
     attachmentType: "",
   };
 
@@ -105,7 +108,7 @@ export default class extends Vue {
     attachmentType: {
       required: true,
       message: "Please enter the attachment type.",
-      trigger: "blur",
+      trigger: "change",
     },
   };
 
@@ -123,27 +126,52 @@ export default class extends Vue {
     return WorkflowModule.activeWorkflow;
   }
 
+  @Watch("dialogVisible", { deep: true, immediate: true })
+  setUp(val: boolean) {
+    if (val) {
+      if (this.condition?.mainOperand) {
+        this.items.property = this.condition.mainOperand;
+      }
+      if (this.items.property?.value?.length > 0) {
+          this.items.property.displayName += `[Workflow(${this.items.property.value[0].displayName}): ${this.items.property.value[1].displayName}]`;
+        }
+      if (this.condition.contains) this.items.contains = this.condition.contains;
+      if (this.condition.attachmentType) this.items.attachmentType = this.condition.attachmentType
+    }
+  }
+
   onShowPropertySelector() {
     this.selectPropertyModal = true;
   }
 
-  resultHandler(result: KeyValue[]) {
-    console.log("propertyReulst", result);
+  resultHandler(displayPaths: KeyValue[], result: KeyValue[]) {
     let str = "";
     if (result.length > 1) {
-      str += `[Workflow(${result[0].key}): ${result[1].key}]`;
+      str += `[Workflow(${result[0].displayName}): ${result[1].displayName}]`;
       this.items.property.displayName = str;
       this.items.property.value = result;
     }
   }
 
   okHandler() {
-    this.$emit("onAttachmentComplete", this.items);
-    this.showModal = false;
+    (this.$refs.form as ElForm).validate((valid: boolean) => {
+      if (valid) {
+        let attachmentCondition = new AttachmentCondition();
+        attachmentCondition.attachmentType = this.items.attachmentType;
+        attachmentCondition.contains = this.items.contains;
+        attachmentCondition.mainOperand = this.items.property.value;
+        
+        this.$emit("update:condition", attachmentCondition);
+        this.$emit("onSave", attachmentCondition);
+      } else {
+        console.log("error submit!!");
+        return false;
+      }
+    });
+    this.cancelHandler();
   }
 
   cancelHandler() {
-    this.items = {...this.defaultItems}
     this.showModal = false;
   }
 }
