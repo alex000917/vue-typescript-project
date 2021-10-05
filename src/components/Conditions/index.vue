@@ -2,8 +2,14 @@
   <div>
     <div class="outer-modal-container">
       <slot name="description" />
-      <el-row type="flex" class="command-container">
-        <el-col :span="5" class="command-button">
+      <el-row
+        type="flex"
+        class="command-container"
+      >
+        <el-col
+          :span="5"
+          class="command-button"
+        >
           <el-button
             type="text"
             icon="el-icon-user"
@@ -13,24 +19,36 @@
               )
             "
           >
-            <span class="button-text" @click="showRoleGroupPopup('new')">{{
+            <span
+              class="button-text"
+              @click="showRoleGroupPopup('new')"
+            >{{
               lpmInstance.getLocalizedString(
                 languagesPresentationModel.NEW_ROLE_GROUP
               )
             }}</span>
           </el-button>
         </el-col>
-        <el-col v-if="showFiltersButton" class="command-button">
+        <el-col
+          v-if="showFiltersButton"
+          class="command-button"
+        >
           <el-dropdown
             trigger="click"
             size="small"
             placement="bottom-start"
             @command="newFilterHandler"
           >
-            <el-button type="text" icon="el-icon-brush">
+            <el-button
+              type="text"
+              icon="el-icon-brush"
+            >
               <span class="button-text">New Filter</span>
             </el-button>
-            <el-dropdown-menu slot="dropdown" style="margin-top: 0">
+            <el-dropdown-menu
+              slot="dropdown"
+              style="margin-top: 0"
+            >
               <el-dropdown-item
                 v-for="filter in filtersList"
                 :key="filter.id"
@@ -41,7 +59,10 @@
             </el-dropdown-menu>
           </el-dropdown>
         </el-col>
-        <el-col :span="5" class="command-button">
+        <el-col
+          :span="5"
+          class="command-button"
+        >
           <el-dropdown
             trigger="click"
             size="small"
@@ -55,7 +76,10 @@
             >
               <span class="button-text">New Condition </span>
             </el-button>
-            <el-dropdown-menu slot="dropdown" style="margin-top: 0">
+            <el-dropdown-menu
+              slot="dropdown"
+              style="margin-top: 0"
+            >
               <el-dropdown-item
                 v-for="condition in conditionsList"
                 :key="condition.id"
@@ -66,13 +90,26 @@
             </el-dropdown-menu>
           </el-dropdown>
         </el-col>
-        <el-col :span="2" class="command-button">
-          <el-button type="text" icon="el-icon-edit-outline" @click="editCondition">
+        <el-col
+          :span="2"
+          class="command-button"
+        >
+          <el-button
+            type="text"
+            icon="el-icon-edit-outline"
+            @click="editCondition"
+          >
             <span class="button-text">Edit</span>
           </el-button>
         </el-col>
-        <el-col :span="2" class="command-button">
-          <el-button type="text" icon="el-icon-delete">
+        <el-col
+          :span="2"
+          class="command-button"
+        >
+          <el-button
+            type="text"
+            icon="el-icon-delete"
+          >
             <span class="button-text">Delete</span>
           </el-button>
         </el-col>
@@ -89,7 +126,10 @@
           class="tree-container"
           @node-click="handleNodeClick"
         >
-          <span slot-scope="{ node, data }" class="custom-tree-node">
+          <span
+            slot-scope="{ node, data }"
+            class="custom-tree-node"
+          >
             <div style="display: flex; align-items: center">
               <el-image
                 style="width: 20px; height: 20px"
@@ -133,12 +173,14 @@
       :condition.sync="currentCondition"
       @onSave="onSave"
     />
-    <entity-condition-modal key="status"
+    <entity-condition-modal
+      key="status"
       :dialogVisible.sync="showFilterModal['StatusCondition']"
       :condition.sync="currentCondition"
       @onSave="onSave"
     />
-    <entity-condition-modal key="entityCategory"
+    <entity-condition-modal
+      key="entityCategory"
       :dialogVisible.sync="showFilterModal['EntityCategoryCondition']"
       :condition.sync="currentCondition"
       @onSave="onSave"
@@ -148,20 +190,28 @@
       :condition.sync="currentCondition"
       @onSave="onSave"
     />
+    <javascript-condition-modal
+      :dialogVisible.sync="showFilterModal['JavascriptCondition']"
+      :condition.sync="currentCondition"
+      @onSave="onSave"
+    />
   </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import NewRoleGroupModal from "./newRoleGroupModal.vue";
+import NewRoleGroupModal from "@/components/Conditions/newRoleGroupModal.vue";
 import { RoleGroup } from "@/models/RoleGroup";
 import { Restriction } from "@/models/Restriction";
 import { AuthorizationTree } from "@/models/authorizations/AuthorizationTree";
 import { LanguagesPresentationModel } from "@/models/Utils/LanguagesPresentationModel";
-import PropertyFilter from "./components/propertyFilter.vue";
-import ItemsetConditionModal from "./components/itemSet.vue";
-import WorkflowConditionModal from "./components/workflow.vue";
-import EntityConditionModal from "./components/entityFilter.vue";
-import AttachmentConditionModal from "./components/attachmentFilter.vue";
+import PropertyFilter from "@/components/Conditions/components/propertyFilter.vue";
+import ItemsetConditionModal from "@/components/Conditions/components/itemSet.vue";
+import WorkflowConditionModal from "@/components/Conditions/components/workflow.vue";
+import EntityConditionModal from "@/components/Conditions/components/entityFilter.vue";
+import AttachmentConditionModal from "@/components/Conditions/components/attachmentFilter.vue";
+import JavascriptConditionModal from "@/components/Conditions/components/javascriptCondition.vue";
+
+import lodash from "lodash"
 
 import {
   BaseCondition,
@@ -174,7 +224,7 @@ import {
   WorkflowCondition,
   StatusCondition,
   ItemSetCondition,
-  JavascriptCondition
+  JavascriptCondition,
 } from "@/models/Conditions";
 
 interface ITreeRole {
@@ -192,14 +242,15 @@ interface ITreeRole {
     WorkflowConditionModal,
     EntityConditionModal,
     AttachmentConditionModal,
+    JavascriptConditionModal,
   },
 })
 export default class extends Vue {
-  @Prop({ required: true }) private data!: any;
+  @Prop({ required: true }) private data!: RoleGroup[] | any[];
   @Prop({ required: false, default: () => [] })
-  private visibleFilters!: string[];
+  private visibleFilters!: any[];
   @Prop({ required: false, default: () => [] })
-  private visibleConditions!: string[];
+  private visibleConditions!: any[];
   @Prop({ required: false }) conditionsDivHeight!: boolean;
 
   private currentCondition: BaseCondition | any = null;
@@ -276,6 +327,7 @@ export default class extends Vue {
     ItemSetCondition: false,
     WorkflowCondition: false,
     AttachmentCondition: false,
+    JavascriptCondition: false,
   };
 
   private filterData = this.defaultFilterData;
@@ -289,6 +341,54 @@ export default class extends Vue {
   };
 
   private itemSelected: boolean = false;
+
+  @Watch("visibleConditions", { deep: true, immediate: true })
+  setUp(val: any[], old: any[]) {
+    if (val) {
+      if (val.length > 0) this.conditionsList = val;
+      if (this.data && this.data.length > 0) {
+        this.roleGroups = this.data;
+      }
+    }
+  }
+
+  @Watch("roleGroups", { deep: true, immediate: true })
+  setUpTree(newValue: RoleGroup[], oldValue: RoleGroup[]) {
+    if (newValue && !lodash.isEqual(newValue, oldValue)  && newValue.length > 0) {
+      newValue.forEach((roleGroup, rIndex) => {
+        this.treeItems.push({
+          index: "" + rIndex,
+          label: roleGroup.title,
+          children: [],
+        });
+        if (roleGroup.conditions && roleGroup.conditions.length > 0) {
+          roleGroup.conditions.forEach((condition, cIndex) => {
+            let index = rIndex + "-" + cIndex;
+            let label = condition.getDisplayName();
+            let children: any[] = [];
+            if (condition.myspType === "PropertyCondition") {
+              if (condition.myspType === "PropertyCondition") {
+                if (condition.skipConditionIfMainOperandIsEmpty)
+                  children.push({
+                    label: condition.getSkipMailOperandAlert(),
+                    key: "",
+                    index: index,
+                  });
+                if (condition.skipConditionIfSecondaryOperandIsEmpty)
+                  children.push({
+                    label: condition.getSkipSecondOperandAlert(),
+                    key: "",
+                    index: index,
+                  });
+              }
+            }
+            this.treeItems[rIndex].push({index, label, children})
+          });
+        }
+      });
+      this.data = newValue;
+    }
+  }
 
   get showFiltersButton() {
     return !!this.visibleFilters.length;
@@ -315,10 +415,7 @@ export default class extends Vue {
       this.currentRoleGroup.conditions.push(condition);
       this.roleGroups[this.selectedRoleGroupIndex] = this.currentRoleGroup;
       let index: string =
-        "" +
-        this.selectedRoleGroupIndex +
-        "-" +
-        this.selectedConditionIndex;
+        "" + this.selectedRoleGroupIndex + "-" + this.selectedConditionIndex;
       this.treeItems[this.selectedRoleGroupIndex].children.push({
         key: "",
         label: condition.getDisplayName(),
@@ -379,42 +476,43 @@ export default class extends Vue {
       this.currentRoleGroup = this.roleGroups[this.selectedRoleGroupIndex];
       if (ids.length > 1) {
         this.selectedConditionIndex = ids[1];
-        this.currentCondition = this.currentRoleGroup.conditions[this.selectedConditionIndex];
+        this.currentCondition =
+          this.currentRoleGroup.conditions[this.selectedConditionIndex];
       } else {
         this.selectedConditionIndex = -1;
         this.currentCondition = null;
       }
       this.selectedFilterKey = data.key;
     }
-    console.log('currentCon', this.currentCondition)
+    console.log("currentCon", this.currentCondition);
   }
 
   newFilterHandler(command: string) {
     console.log("command", command);
     this.selectedConditionIndex = -1;
-    switch(command) {
-      case 'PropertyCondition':
+    switch (command) {
+      case "PropertyCondition":
         this.currentCondition = new PropertyCondition();
         break;
-      case 'ItemSetCondition':
+      case "ItemSetCondition":
         this.currentCondition = new ItemSetCondition();
         break;
-      case 'WorkflowCondition':
+      case "WorkflowCondition":
         this.currentCondition = new WorkflowCondition();
         break;
-      case 'StatusCondition':
+      case "StatusCondition":
         this.currentCondition = new StatusCondition();
         break;
-      case 'EntityCategoryCondition':
+      case "EntityCategoryCondition":
         this.currentCondition = new EntityCategoryCondition();
         break;
-      case 'JavascriptCondition':
+      case "JavascriptCondition":
         this.currentCondition = new JavascriptCondition();
         break;
-      case 'AttachmentCondition':
+      case "AttachmentCondition":
         this.currentCondition = new AttachmentCondition();
         break;
-      default: 
+      default:
         break;
     }
     this.editCondition();
@@ -422,7 +520,10 @@ export default class extends Vue {
 
   editCondition() {
     this.showFilterModal[this.currentCondition.myspType] = true;
-    console.log(this.currentCondition.myspType,this.showFilterModal[this.currentCondition.myspType]);
+    console.log(
+      this.currentCondition.myspType,
+      this.showFilterModal[this.currentCondition.myspType]
+    );
   }
 
   updateTreeChildren(key: string, childNodeData: any, initialLabel: string) {

@@ -22,14 +22,16 @@ export class PropertyCondition extends BaseCondition {
     if (this.mainOperand && this.mainOperand.length >= 0) {
       str += `[Workflow(${this.mainOperand[0].displayName}): ${this.mainOperand[1].displayName}]`;
     }
-    if (this.operator && (this.secondOperandIsApplicationPreference || this.secondOperandIsProperty)) {
+    if (this.operator) {
       str += ' ' + this.operator;
+    }
 
-      if (this.secondOperandIsProperty && this.secondaryOperand && this.secondaryOperand.length >= 0) {
-        str += `[Workflow(${this.secondaryOperand[0].displayName}): ${this.secondaryOperand[1].displayName}]`;
-      } else if (this.secondOperandIsApplicationPreference && this.secondaryOperand) {
-
-      }
+    if (this.secondOperandIsProperty && this.secondaryOperand && this.secondaryOperand.length >= 0) {
+      str += `[Workflow(${this.secondaryOperand[0].displayName}): ${this.secondaryOperand[1].displayName}]`;
+    } else if (this.secondOperandIsApplicationPreference && this.secondaryOperand) {
+      str += ` ${this.secondaryOperand[0].displayName}`;
+    } else if (this.secondaryOperand && this.secondaryOperand.length === 1){
+      str += ` ${this.secondaryOperand[0]}`;
     }
     return str;
   }
@@ -43,7 +45,14 @@ export class PropertyCondition extends BaseCondition {
 
   getSkipSecondOperandAlert(): string | any {
     if (this.skipConditionIfSecondaryOperandIsEmpty && this.secondaryOperand && this.secondaryOperand.length >= 0) {
-      return `Skip if [Form (${this.secondaryOperand[0].displayName}): ${this.secondaryOperand[1].displayName}] is empty`;
+      if (this.secondOperandIsProperty)
+        return `Skip if [Form (${this.secondaryOperand[0].displayName}): ${this.secondaryOperand[1].displayName}] is empty`;
+      else if (this.secondOperandIsApplicationPreference) {
+        return `Skip if [Form (${this.secondaryOperand[0].displayName})] is empty`;
+      }
+      else {
+        return `Skip if [Form (${this.secondaryOperand[0]})] is empty`;
+      }
     } else 
       return '';
   }
@@ -107,6 +116,15 @@ export class StatusCondition extends PropertyCondition {
 
 export class JavascriptCondition extends PropertyCondition {
   myspType= "JavascriptCondition"
+  displayName = ''
+  code = ''
+
+  getDisplayName() {
+    let str = ''
+    if (this.displayName)
+      str += this.displayName;
+    return str;
+  }
 }
 
 export class TransitionCondition extends BaseCondition {
@@ -124,6 +142,24 @@ export class WorkflowCondition extends PropertyCondition {
   myspType= "WorkflowCondition"
   workflowId: string | null = null;
   step: string | null = null;
+
+  getDisplayName() : string | any {
+    let str: string = '';
+    if (this.mainOperand && this.mainOperand.length >= 0) {
+      str += `[Workflow(${this.mainOperand[0].displayName}): ${this.mainOperand[1].displayName}]`;
+    }
+    if (this.operator) {
+      str += ' ' + this.operator;
+    }
+
+    // if (this.secondaryOperand && this.secondaryOperand.length >= 0) {
+    //   str += ` ${this.secondaryOperand[0].displayName}`;
+    // } 
+    if (this.step) {
+      str += ' ' + this.step;
+    }
+    return str;
+  }
 }
 
 export class WorksheetCondition extends BaseCondition {

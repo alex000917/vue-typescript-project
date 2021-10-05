@@ -8,14 +8,26 @@
     :close-on-click-modal="false"
     append-to-body
   >
-    <el-form ref="form" :model="items" :rules="formRules" label-position="top">
-      <el-row class="filter-container__row" type="flex">
+    <el-form
+      ref="form"
+      :model="items"
+      :rules="formRules"
+      label-position="top"
+    >
+      <el-row
+        class="filter-container__row"
+        type="flex"
+      >
         <el-form-item
           prop="property"
           label="Item:"
           class="filter-container__row--form-item"
         >
-          <el-input v-model="items.property.displayName" type="text" readonly />
+          <el-input
+            v-model="items.property.displayName"
+            type="text"
+            readonly
+          />
         </el-form-item>
         <el-button
           type="text"
@@ -29,12 +41,16 @@
       <el-row class="filter-container__row">
         <el-col>
           <el-row class="filter-container__row--detail">
-            <el-radio v-model="items.contains" label="1">Contains</el-radio>
+            <el-radio
+              v-model="items.contains"
+              label="1"
+            >Contains</el-radio>
           </el-row>
           <el-row class="filter-container__row--detail">
-            <el-radio v-model="items.contains" label="0"
-              >Does not contains</el-radio
-            >
+            <el-radio
+              v-model="items.contains"
+              label="0"
+            >Does not contains</el-radio>
           </el-row>
         </el-col>
       </el-row>
@@ -49,9 +65,16 @@
         </el-form-item>
       </el-row>
     </el-form>
-    <div slot="footer" class="filter-container__footer">
+    <div
+      slot="footer"
+      class="filter-container__footer"
+    >
       <el-button @click="okHandler"> Add </el-button>
-      <el-button class="underline" type="text" @click="cancelHandler">
+      <el-button
+        class="underline"
+        type="text"
+        @click="cancelHandler"
+      >
         cancel
       </el-button>
     </div>
@@ -91,7 +114,7 @@ export default class extends Vue {
   private items: any = {
     property: {
       displayName: "",
-      value: null,
+      value: [],
     },
     contains: 1,
     attachmentType: "",
@@ -129,14 +152,18 @@ export default class extends Vue {
   @Watch("dialogVisible", { deep: true, immediate: true })
   setUp(val: boolean) {
     if (val) {
-      if (this.condition?.mainOperand) {
-        this.items.property = this.condition.mainOperand;
-      }
-      if (this.items.property?.value?.length > 0) {
-          this.items.property.displayName += `[Workflow(${this.items.property.value[0].displayName}): ${this.items.property.value[1].displayName}]`;
+      if (this.condition) {
+        if (this.condition.mainOperand && this.condition.mainOperand.length > 0) {
+          this.items.property.value = this.condition.mainOperand;
         }
-      if (this.condition.contains) this.items.contains = this.condition.contains;
-      if (this.condition.attachmentType) this.items.attachmentType = this.condition.attachmentType
+        if (this.items.property?.value?.length > 0) {
+          this.items.property.displayName = `[Workflow(${this.items.property.value[0].displayName}): ${this.items.property.value[1].displayName}]`;
+        }
+        if (this.condition.contains)
+          this.items.contains = this.condition.contains;
+        if (this.condition.attachmentType)
+          this.items.attachmentType = this.condition.attachmentType;
+      }
     }
   }
 
@@ -160,7 +187,7 @@ export default class extends Vue {
         attachmentCondition.attachmentType = this.items.attachmentType;
         attachmentCondition.contains = this.items.contains;
         attachmentCondition.mainOperand = this.items.property.value;
-        
+
         this.$emit("update:condition", attachmentCondition);
         this.$emit("onSave", attachmentCondition);
       } else {

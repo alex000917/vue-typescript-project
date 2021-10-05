@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    width="40%"
+    width="30%"
     title="Entity Category Condition"
     :visible.sync="showModal"
     custom-class="entity-filter"
@@ -79,6 +79,7 @@ import { Component, Prop, Watch, Vue } from "vue-property-decorator";
 import { KeyValue } from "@/models/KeyValue";
 import { WorkflowModule } from "@/store/modules/WorkflowMod";
 import BrowseItem from "./browseItem.vue";
+import { EntityCategoryCondition } from "@/models/Conditions";
 
 @Component({
   name: "entity-condition",
@@ -86,6 +87,7 @@ import BrowseItem from "./browseItem.vue";
 })
 export default class extends Vue {
   @Prop({ required: true }) dialogVisible!: boolean;
+  @Prop({ required: true }) condition!: EntityCategoryCondition;
 
   private showBrowseDialog: boolean = false;
   private status: any[] = [];
@@ -158,6 +160,25 @@ export default class extends Vue {
     this.$emit("update:dialogVisible", val);
   }
 
+  @Watch("dialogVisible", { deep: true, immediate: true })
+  setUp(val: boolean) {
+    if (val) {
+      if (this.condition) {
+      //   this.items.property.value = this.condition.mainOperand;
+      //   if (this.items.property?.value?.length > 0) {
+      //     this.items.property.displayName += `[Workflow(${this.items.property.value[0].displayName}): ${this.items.property.value[1].displayName}]`;
+      //   }
+      //   this.items.operator = this.condition.operator;
+      //   if (
+      //     this.condition.secondaryOperand &&
+      //     this.condition.secondaryOperand.length > 0
+      //   )
+      //     this.items.workflow = this.condition.secondaryOperand[0].displayName;
+      //   this.items.step = this.condition.step;
+      }
+    }
+  }
+
   querySearch() {
     return "";
   }
@@ -206,6 +227,8 @@ $borderColor: #dcdfe6;
     &--list {
       height: 250px;
       border: 2px solid $borderColor;
+      line-height: 1.5;
+      padding-left: 15px;
     }
 
     &--sibling {

@@ -42,7 +42,7 @@
               v-for="item in operatorOptions"
               :key="item.key"
               :label="item.key"
-              :value="item.value"
+              :value="item.key"
               style="width: 100%"
             />
           </el-select>
@@ -127,7 +127,7 @@ import { WorkflowCondition } from "@/models/Conditions";
 })
 export default class extends Vue {
   @Prop({ required: true }) dialogVisible!: boolean;
-  @Prop({ required: true }) condition!: any;
+  @Prop({ required: true }) condition!: WorkflowCondition;
 
   private items = {
     property: {
