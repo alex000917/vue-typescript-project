@@ -19,8 +19,14 @@
         <el-row>
           <el-col> Move workflow to a specific step. </el-col>
         </el-row>
-        <el-row class="move-workflow__row" type="flex">
-          <el-form-item prop="property" label="Item:">
+        <el-row
+          class="move-workflow__row"
+          type="flex"
+        >
+          <el-form-item
+            prop="property"
+            label="Item:"
+          >
             <el-input
               v-model="items.property.displayName"
               type="text"
@@ -37,9 +43,12 @@
         </el-row>
         <el-row class="move-workflow__row">
           <el-col>
-            <el-form-item prop="workflow" label="Workflow:">
+            <el-form-item
+              prop="workflow"
+              label="Workflow:"
+            >
               <el-select
-                v-model="items.workflow"
+                v-model="items.workflowSystemName"
                 size="mini"
                 placeholder="Select workflow"
                 class="move-workflow__row--input"
@@ -47,9 +56,9 @@
               >
                 <el-option
                   v-for="item in workflowOptions"
-                  :key="item.key"
-                  :label="item.key"
-                  :value="item.value"
+                  :key="item.itemId"
+                  :label="item.displayName"
+                  :value="item.displayName"
                 />
               </el-select>
             </el-form-item>
@@ -57,19 +66,22 @@
         </el-row>
         <el-row class="move-workflow__row">
           <el-col>
-            <el-form-item prop="step" label="Step:">
+            <el-form-item
+              prop="step"
+              label="Step:"
+            >
               <el-select
-                v-model="items.step"
+                v-model="items.stepSystemName"
                 size="mini"
                 placeholder="Select the step"
                 class="move-workflow__row--input"
                 clearable
               >
                 <el-option
-                  v-for="item in stepOptions"
+                  v-for="item in activeWorkflow.flowSteps"
                   :key="item.key"
-                  :label="item.key"
-                  :value="item.value"
+                  :label="item.displayName"
+                  :value="item.displayName"
                 />
               </el-select>
             </el-form-item>
@@ -77,13 +89,22 @@
         </el-row>
       </el-form>
     </el-container>
-    <div slot="footer" class="footer">
-      <el-button type="primary" @click="okHandler()">Ok</el-button>
-      <el-button @click="cancelHandler" type="text">Cancel</el-button>
+    <div
+      slot="footer"
+      class="footer"
+    >
+      <el-button
+        type="primary"
+        @click="okHandler()"
+      >Ok</el-button>
+      <el-button
+        @click="cancelHandler"
+        type="text"
+      >Cancel</el-button>
     </div>
     <select-property-model
       :dialog-visible.sync="selectPropertyModal.show"
-      :result-handler="resultHandler"
+      @selectPropertyComplete="resultHandler"
       :entity-id="activeWorkflow.entityId"
     />
   </el-dialog>
@@ -94,21 +115,25 @@ import { WorkflowModule } from "@/store/modules/WorkflowMod";
 import { KeyValue } from "@/models/KeyValue";
 import SelectPropertyModel from "@/components/PropertySelector/index.vue";
 import { ElForm } from "element-ui/types/form";
+import { MoveWorkflowAction } from "@/models/Workflows/Actions";
+import { EntitiesModule } from "@/store/modules/entitiesMod";
+import { FormsModule } from "@/store/modules/FormsStore";
 
 @Component({
-  name: "move-workflow-action",
+  name: "move-workflow-action-modal",
   components: { SelectPropertyModel },
 })
 export default class extends Vue {
   @Prop({ required: true }) dialogVisible!: boolean;
+  @Prop({ required: true }) action!: MoveWorkflowAction;
 
   private items = {
     property: {
       displayName: "",
       value: null,
     },
-    workflow: "",
-    step: "",
+    workflowSystemName: "",
+    stepSystemName: "",
   } as any;
 
   private defaultItems = {
@@ -116,8 +141,8 @@ export default class extends Vue {
       displayName: "",
       value: null,
     },
-    workflow: "",
-    step: "",
+    workflowSystemName: "",
+    stepSystemName: "",
   } as any;
 
   private formRules = {
@@ -126,22 +151,22 @@ export default class extends Vue {
         required: true,
         message: "Please type name",
         trigger: "blur",
-      }
+      },
     ],
-    workflow: [
+    workflowSystemName: [
       {
         required: true,
         message: "Please type the description",
         trigger: "blur",
       },
     ],
-    step: [
+    stepSystemName: [
       {
         required: true,
         message: "Please type the description",
         trigger: "blur",
       },
-    ]
+    ],
   };
 
   private selectPropertyModal: any = {
@@ -149,9 +174,12 @@ export default class extends Vue {
     key: "first",
   };
 
-  private workflowOptions = [{ id: "agile", value: "Agile Task" }];
+  private entityId: string = "";
+  private systemName: string = "";
+  private lastPath: KeyValue | any = null;
+  dataType = 1;
 
-  private stepOptions = [{ id: "accept", value: "Acceptence" }];
+  private workflowOptions: any = [];
 
   get activeWorkflow() {
     return WorkflowModule.activeWorkflow;
@@ -165,24 +193,82 @@ export default class extends Vue {
     this.$emit("update:dialogVisible", val);
   }
 
+  @Watch("dialogVisible", { immediate: true })
+  setUp(val: boolean) {
+    console.log('moveAction',this.action)
+    if (val) {
+      if (this.action && this.action.item.length > 0) {
+        this.items.property.value = this.action.item;
+        if (this.action.item.length > 1) {
+          this.items.property.displayName = `[Workflow(${this.items.property.value[0].displayName}): ${this.items.property.value[1].displayName}]`;
+          this.lastPath = this.items.property.value[1];
+        }
+        this.items.workflowSystemName = this.action.workflowSystemName;
+        this.items.stepSystemName = this.action.stepSystemName;
+      } else {
+        this.items = {...this.defaultItems};
+      }
+    }
+  }
+
+  @Watch("lastPath", { deep: true, immediate: true })
+  async setOperatorsAndWorkflows(propertyPath: KeyValue) {
+    if (propertyPath) {
+      this.entityId = propertyPath.value;
+      var rs = await EntitiesModule.getEntity(this.entityId);
+      this.systemName = rs.systemName;
+      if (propertyPath.key === "tbl") {
+        this.dataType = 1;
+      } else {
+        if (rs && rs.properties.length > 0) {
+          let property = rs.properties.find(
+            (property) => property.systemName === propertyPath.key
+          );
+          this.dataType = property?.dataType?.value;
+        }
+      }
+    }
+  }
+
+  @Watch("systemName", { immediate: true })
+  private loadWorkflowOptions(systemName: string, oldName: string) {
+    if (systemName !== oldName) {
+      let workflows = WorkflowModule.Workflows;
+      if (workflows?.length > 0) {
+        this.workflowOptions = workflows.filter(
+          (workflow: any) => workflow.entitySystemName === systemName
+        );
+      }
+    }
+  }
+
   onShowPropertySelector() {
     this.selectPropertyModal.show = true;
   }
 
-  async resultHandler(result: KeyValue[]) {
+  async resultHandler(displayPath: any[], result: KeyValue[]) {
     let str = "";
     if (result.length > 1) {
-      str += `[Workflow(${result[0].key}): ${result[1].key}]`;
+      str += `[Workflow(${result[0].displayName}): ${result[1].displayName}]`;
       this.items.property = {};
       this.items.property.displayName = str;
       this.items.property.value = result;
+    }
+    if (result.length > 1) {
+      this.lastPath = result[result.length - 1];
     }
   }
 
   okHandler() {
     (this.$refs.form as ElForm).validate((valid: boolean) => {
       if (valid) {
-        this.$emit("onAttachmentComplete", this.items);
+        let workflowAction = new MoveWorkflowAction();
+        workflowAction.item = this.items.property.value;
+        workflowAction.workflowSystemName = this.items.workflowSystemName;
+        workflowAction.stepSystemName = this.items.stepSystemName;
+
+        this.$emit("update:action", workflowAction)
+        this.$emit("onSave", workflowAction);
         this.showModal = false;
       } else {
         return false;

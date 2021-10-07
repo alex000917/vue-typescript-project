@@ -302,8 +302,8 @@ class AuthorizationMod extends VuexModule {
   @Action
   public async getProductsList() {
     const rs = await getProducts();
-    this.context.commit("SET_CURRENT_ENTITY", rs);
-
+    // this.context.commit("SET_CURRENT_ENTITY", rs);
+    this.context.commit("SET_PRODUCTS", rs);
   }
 
   @Action

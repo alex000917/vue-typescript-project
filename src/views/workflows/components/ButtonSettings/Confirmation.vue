@@ -121,8 +121,8 @@ export default class extends Vue {
     if (value) {
       this.form = {
         useCustomMessage: this.info.specificConfirmationMessage,
-        enMessage: this.info.languageTranslations ? this.info.languageTranslations[0].displayName : "",
-        heMessage: this.info.languageTranslations ? this.info.languageTranslations[1].displayName : ""
+        enMessage: this.info.languageTranslations && this.info.languageTranslations?.length ? this.info.languageTranslations[0].displayName : "",
+        heMessage: this.info.languageTranslations &&  this.info.languageTranslations?.length > 1 ? this.info.languageTranslations[1].displayName : ""
       }
     }
   }

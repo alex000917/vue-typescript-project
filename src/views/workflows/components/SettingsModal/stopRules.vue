@@ -10,7 +10,7 @@
       />
       <span style="font-size: 18px; margin-left: 5px">Action Rules</span>
     </el-row>
-    <el-row style="margin-top: 30px">
+    <el-row style="margin-top: 10px">
       <el-row>
         Action rules modify or move item's workflow. <br>
         For example: when item cancelled, cancel all child items as well.
@@ -20,7 +20,7 @@
       type="flex"
       justify="start"
       align="middle"
-      style="margin-top: 20px"
+      style="margin-top: 5px"
     >
       <el-dropdown
         trigger="click"
@@ -55,7 +55,7 @@
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <el-button type="text">
+      <el-button type="text" @click="onEdit()">
         <el-row
           type="flex"
           justify="center"
@@ -68,7 +68,7 @@
           Edit
         </el-row>
       </el-button>
-      <el-button type="text">
+      <el-button type="text" @click="onDelete()">
         <el-row
           type="flex"
           justify="center"
@@ -92,9 +92,8 @@
             v-for="element in myArray"
             :key="element.order"
           >
-            <el-button
-              style="width: 100%; text-align: left;"
-            >
+            <el-button style="width: 100%; text-align: left;" 
+             @click="selectNode(element.order)">
               {{ element.name }}
             </el-button>
           </el-row>
@@ -104,88 +103,126 @@
     <p class="require-content">
       Drag items to re-order
     </p>
-    <el-row type="flex" align="middle" style="margin-top: 20px;">
+    <el-row
+      type="flex"
+      align="middle"
+      style="margin-top: 20px;"
+    >
       <el-image src="/assets/img/information-32x32.png" />
       <span style="padding-left: 5px; font-weight: 600;">Stop rules are triggered after action rules.</span>
     </el-row>
-    <attach-stop-rule :dialogVisible.sync="stopRuleVisible['attachStop']" />
-    <xml-stop-rule :dialogVisible.sync="stopRuleVisible['xmlRule']" />
-    <stop-rule-wizard :visible-wizard.sync="stopRuleVisible['stopRule']"
-      :ruleSysname.sync="selectedRule" />
+    <attach-stop-rule
+      :dialogVisible.sync="stopRuleVisible['AttachmentAction']"
+      @onSave="onSave"
+      :action.sync="currentAction"
+    />
+    <xml-stop-rule
+      :dialogVisible.sync="stopRuleVisible['XMLAction']"
+      @onSave="onSave"
+      :action.sync="currentAction"
+    />
+    <stop-rule-wizard
+      :visible-wizard.sync="stopRuleVisible['StopRuleAction']"
+      :ruleSysname.sync="selectedRule"
+    />
   </el-container>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
-import Draggable from "vuedraggable"
-import AttachStopRule from './StopRules/attachmentStopRule.vue'
-import XmlStopRule from './StopRules/XmlRule.vue'
-import StopRuleWizard from './StopRules/StopRuleWizard.vue'
+import { Component, Vue, Watch } from "vue-property-decorator";
+import Draggable from "vuedraggable";
+import AttachStopRule from "./StopRules/attachmentStopRule.vue";
+import XmlStopRule from "./StopRules/XmlRule.vue";
+import StopRuleWizard from "./StopRules/StopRuleWizard.vue";
+import {
+  BaseAction,
+  XMLAction,
+  AttachmentAction,
+  StopRuleAction,
+} from "@/models/Workflows/Actions";
 
 @Component({
   name: "",
-  components: { Draggable, AttachStopRule, XmlStopRule, StopRuleWizard }
+  components: { Draggable, AttachStopRule, XmlStopRule, StopRuleWizard },
 })
 export default class extends Vue {
   newStopRuleDropDowns = [
-    { id: "attachStop", value: "Attachment Stop Rule"},
-    { id: "stopRule", value: "Stop Rule Wizard"} ,
-    { id: "xmlRule", value:  "Xml Rule"}
-  ]
+    { id: "AttachmentAction", value: "Attachment Stop Rule" },
+    { id: "StopRuleAction", value: "Stop Rule Wizard" },
+    { id: "XMLAction", value: "Xml Rule" },
+  ];
 
   selectedRule: string | null = null;
 
   private stopRuleVisible: any = {
-    attachStop: false,
-    stopRule: false,
-    xmlRule: false
+    AttachmentAction: false,
+    StopRuleAction: false,
+    XMLAction: false,
+  };
+
+  private actions: BaseAction[] = [];
+  private currentAction: BaseAction = new BaseAction();
+
+  private selectedActionIndex = -1;
+
+  myArray: any[] = [];
+
+  private xmlAcion = new XMLAction();
+
+  @Watch("currentAction", { deep: true, immediate: true })
+  refreshTree(val: BaseAction) {
+    this.myArray = [];
+    if (this.actions.length > 0) {      
+      this.actions.forEach((action: any) => {
+        this.myArray.push({
+          name: action.getDisplayName(),
+          order: this.myArray.length,
+          fixed: false,
+        });
+      });
+    }
   }
 
-  myArray = [
-    {
-      name: "vue.draggable",
-      order: 1,
-      fixed: false
-    },
-    {
-      name: "draggable",
-      order: 2,
-      fixed: false
-    },
-    {
-      name: "component",
-      order: 3,
-      fixed: false
-    },
-    {
-      name: "for",
-      order: 4,
-      fixed: false
-    },
-    {
-      name: "vue.js 2.0",
-      order: 5,
-      fixed: false
-    },
-    {
-      name: "based",
-      order: 6,
-      fixed: false
-    },
-    {
-      name: "on",
-      order: 7,
-      fixed: false
-    },
-    {
-      name: "Sortablejs",
-      order: 8,
-      fixed: false
+  onSave(action: any) {
+    if (this.selectedActionIndex === -1) {
+      this.actions.push(action);
+    } else {
+      this.actions[this.selectedActionIndex] = action;
     }
-  ]
+  }
 
   onNewStopRule(command: string) {
-    this.stopRuleVisible[command] = true;    
-    console.log(command,this.stopRuleVisible[command])
+    this.selectedActionIndex = -1;
+    switch(command) {
+      case "AttachmentAction":
+        this.currentAction = new AttachmentAction();
+        break;
+      case "StopRuleAction":
+        this.currentAction = new StopRuleAction();
+        break;
+      case "XMLAction":
+        this.currentAction = new XMLAction();
+        break;
+    }
+    this.stopRuleVisible[command] = true;
+  }
+
+  onEdit() {
+    this.stopRuleVisible[this.currentAction.myspType] = true;
+  }
+
+  onDelete() {
+    if (this.selectedActionIndex !== -1) {
+      this.actions.splice(this.selectedActionIndex, 1);
+    } else {
+      this.actions.splice(this.actions.length - 1, 1);
+    }
+    this.currentAction = new BaseAction();
+  }
+
+  selectNode(index: number) {
+    console.log(index)
+    this.selectedActionIndex = index;
+    this.currentAction = this.actions[index];
   }
 }
 </script>
@@ -194,5 +231,6 @@ export default class extends Vue {
 .draggable-list {
   border: 1px solid rgb(142 145 152);
   padding: 5px;
+  min-height: 130px;
 }
 </style>

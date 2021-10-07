@@ -12,7 +12,7 @@ import {
   getReportableEntitiesOrder,
   getVirtualEntityProperties
 } from "@/api/entitiesApi"
-import { getEntityById, saveEntities } from "@/api/mainApi"
+import { getEntityById, getEntityCategoriesOfEntity, saveEntities } from "@/api/mainApi"
 import { Node } from "@/models/Node"
 import _ from "lodash"
 import { EventBus } from "@/utils/event-bus"
@@ -188,7 +188,6 @@ class EntitiesMod extends VuexModule implements IEntitiesState {
 
   @Action
   public async Upload() {
-    debugger;
     const entities: Entity[] = []
     if (!this.dirtyEntities) {
       return
@@ -249,7 +248,7 @@ class EntitiesMod extends VuexModule implements IEntitiesState {
   @Action
   public async getEntity(entityId: string): Promise<Entity> {
     let entity: any = this.TempEntityCache.get(entityId) as Entity
-    console.log("getting entity to cache " + entityId);
+    // console.log("getting entity to cache " + entityId);
     if (!entity) {
       entity = await this.getAndCacheEntity(entityId);
       // for(const p of entity.properties){
@@ -297,6 +296,11 @@ class EntitiesMod extends VuexModule implements IEntitiesState {
   async getSqlQueryFields(connection: string, query: string) {
     const rs = await getVirtualEntityProperties(connection, query)
     return rs as any
+  }
+
+  @Action
+  async getEntityCategories(entityId:string):Promise<any>{
+    return await getEntityCategoriesOfEntity(entityId);
   }
 }
 

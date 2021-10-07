@@ -2,7 +2,7 @@
   <el-dialog
     :visible.sync="showModal"
     :before-close="cancelHandler"
-    title="New Action Rule Wizard"
+    title="New Xml Rule"
     width="50%"
     center
     class="xml-rule"
@@ -44,7 +44,7 @@
       </el-form>
     </el-container>
     <div slot="footer" class="footer">
-      <el-button type="primary" @click="okHandler()">Ok</el-button>
+      <el-button type="primary" @click="okHandler()">Add</el-button>
       <el-button @click="cancelHandler" type="text">Cancel</el-button>
     </div>
   </el-dialog>
@@ -52,6 +52,7 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { ElForm } from "element-ui/types/form";
+import { XMLAction } from "@/models/Workflows/Actions";
 
 @Component({
   name: "xml-stop-rule",
@@ -59,6 +60,7 @@ import { ElForm } from "element-ui/types/form";
 })
 export default class extends Vue {
   @Prop({ required: true }) dialogVisible!: boolean;
+  @Prop({ required: true }) action!: XMLAction;
 
   private defaultItems: any = {
     name: "",
@@ -77,7 +79,7 @@ export default class extends Vue {
         message: "Please type name",
         trigger: "blur",
       },
-      { min: 3, max: 5, message: "Length should be 3 to 5", trigger: "blur" },
+      { min: 3, message: "Length should be 3 to 5", trigger: "blur" },
     ],
     xml: [
       {
@@ -87,6 +89,17 @@ export default class extends Vue {
       },
     ],
   };
+
+  @Watch("dialogVisible", {deep: true, immediate: true})
+  setUp(val: boolean) {
+    if (val) {
+      if (this.action.name) {
+        this.items = {...this.action}
+      } else {
+        this.items = {...this.defaultItems}
+      }
+    }
+  }
 
   get showModal() {
     return this.dialogVisible;
@@ -99,16 +112,20 @@ export default class extends Vue {
   okHandler() {
     (this.$refs.form as ElForm).validate((valid: boolean) => {
       if (valid) {
-        this.$emit("onAttachmentComplete", this.items);
+        let action = new XMLAction()
+        action.xml = this.items.xml;
+        action.name = this.items.name;
+        this.$emit("onSave", action);
+        this.$emit("update:action", action)
         this.showModal = false;
       } else {
         return false;
       }
     });
+    this.showModal = false;
   }
 
   cancelHandler() {
-    this.items = { ...this.defaultItems };
     this.showModal = false;
   }
 }

@@ -74,19 +74,26 @@
       :ruleSysname.sync="selectedRule"
     >
     </ActionRuleWizard>
+    <xml-action-modal
+      :dialogVisible.sync="showXmlActionModal"
+      :action="xmlAction"
+      @onSave="saveXml"
+    />
   </el-container>
 </template>
 
 <script lang="ts">
+import { XMLAction } from "@/models/Workflows/Actions";
 import { ActionWorkflowRule } from "@/models/Workflows/ActionWorkflowRule";
 import { WorkflowModule } from "@/store/modules/WorkflowMod";
 import { Component, Vue } from "vue-property-decorator";
 import Draggable from "vuedraggable";
-import ActionRuleWizard from "../SettingsModal/ActionRules/actionRuleWizard.vue";
+import ActionRuleWizard from "./ActionRules/actionRuleWizard.vue";
+import XmlActionModal from "./ActionRules/action/XmlRule.vue";
 
 @Component({
   name: "",
-  components: { Draggable, ActionRuleWizard },
+  components: { Draggable, ActionRuleWizard, XmlActionModal },
 })
 export default class extends Vue {
   rulesTree: ActionWorkflowRule[] = [];
@@ -100,6 +107,12 @@ export default class extends Vue {
   }
 
   selectedRule: string | null = null;
+  xmlAction: XMLAction = new XMLAction();
+  showXmlActionModal: boolean = false;
+
+  saveXml(action: XMLAction) {
+    this.xmlAction = action;
+  }
 
   mounted() {
     var rules = this.CurrentWorkflow?.actionWorkflowRules;
@@ -124,6 +137,7 @@ export default class extends Vue {
         this.actionRuleWizard = true;
         break;
       case "XmlRule":
+        this.showXmlActionModal = true;
         break;
     }
   }

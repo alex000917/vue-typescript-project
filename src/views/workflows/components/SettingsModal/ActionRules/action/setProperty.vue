@@ -16,8 +16,14 @@
         :rules="formRules"
         ref="form"
       >
-        <el-row style="margin-top: 20px; align-items: center" type="flex">
-          <el-form-item prop="propertyFirst" label="Property to set value to">
+        <el-row
+          style="margin-top: 20px; align-items: center"
+          type="flex"
+        >
+          <el-form-item
+            prop="propertyFirst"
+            label="Property to set value to"
+          >
             <el-input
               v-model="items.propertyFirst.displayName"
               type="text"
@@ -33,7 +39,10 @@
             <el-image src="/assets/img/form-document-16x16.png" />
           </el-button>
         </el-row>
-        <el-row style="margin-top: 20px" type="flex">
+        <el-row
+          style="margin-top: 20px"
+          type="flex"
+        >
           <el-form-item prop="propertySecond">
             <el-input
               v-model="items.propertySecond.displayName"
@@ -48,11 +57,19 @@
             placement="bottom-start"
             style="display: flex; align-items: center"
             @command="selectInputMethod"
+            ref="dropdown"
           >
-            <el-button type="text" style="padding: 0">
+            <el-button
+              type="text"
+              style="padding: 0"
+              @click="handleChange"
+            >
               <el-image src="/assets/img/down_arrow.png" />
             </el-button>
-            <el-dropdown-menu slot="dropdown" style="margin-top: 0">
+            <el-dropdown-menu
+              slot="dropdown"
+              style="margin-top: 0"
+            >
               <el-dropdown-item command="typeText">
                 Type text...
               </el-dropdown-item>
@@ -67,14 +84,26 @@
         </el-row>
       </el-form>
     </el-container>
-    <div slot="footer" class="footer">
-      <el-button type="primary" @click="okHandler()">Ok</el-button>
-      <el-button @click="cancelHandler" type="text">Cancel</el-button>
+    <div
+      slot="footer"
+      class="footer"
+    >
+      <el-button
+        type="primary"
+        @click="okHandler()"
+      >Ok</el-button>
+      <el-button
+        @click="cancelHandler"
+        type="text"
+      >Cancel</el-button>
     </div>
-    <prefModel :is-open.sync="showPref" :result-handler="onPrefSelected" />
+    <prefModel
+      :is-open.sync="showPref"
+      :result-handler="onPrefSelected"
+    />
     <select-property-model
       :dialog-visible.sync="selectPropertyModal.show"
-      :result-handler="resultHandler"
+      @selectPropertyComplete="resultHandler"
       :entity-id="activeWorkflow.entityId"
     />
   </el-dialog>
@@ -87,6 +116,7 @@ import { ApplicationPreference } from "@/models/ApplicationPreference";
 import SelectPropertyModel from "@/components/PropertySelector/index.vue";
 import prefModel from "@/components/Preferences/prefModel.vue";
 import { ElForm } from "element-ui/types/form";
+import { PropertyCondition } from "@/models/Conditions";
 
 @Component({
   name: "set-property-action",
@@ -94,27 +124,36 @@ import { ElForm } from "element-ui/types/form";
 })
 export default class extends Vue {
   @Prop({ required: true }) dialogVisible!: boolean;
+  @Prop({ required: true }) condition!: PropertyCondition;
 
   private items = {
     propertyFirst: {
       displayName: "",
-      value: null,
+      value: [],
     },
     propertySecond: {
       displayName: "",
       value: null,
     },
+    secondOperandIsApplicationPreference: false,
+    secondOperandIsProperty: false,
+  } as any;
+
+  private defaultItems = {
+    propertyFirst: {
+      displayName: "",
+      value: [],
+    },
+    propertySecond: {
+      displayName: "",
+      value: null,
+    },
+    secondOperandIsApplicationPreference: false,
+    secondOperandIsProperty: false,
   } as any;
 
   private formRules = {
     propertyFirst: [
-      {
-        required: true,
-        message: "Please select the property",
-        trigger: "blur",
-      }
-    ],
-    propertySecond: [
       {
         required: true,
         message: "Please select the property",
@@ -144,6 +183,45 @@ export default class extends Vue {
     this.$emit("update:dialogVisible", val);
   }
 
+  @Watch("dialogVisible", { immediate: true })
+  setUp(val: boolean) {
+    if (val) {
+      if (
+        this.condition.mainOperand &&
+        this.condition.mainOperand?.length > 0
+      ) {
+        this.items = { ...this.condition };
+        this.items.propertyFirst = {
+          displayName: "",
+          value: [],
+        };
+        this.items.propertyFirst.value = this.condition.mainOperand;
+        if (this.items.propertyFirst?.value?.length > 0) {
+          this.items.propertyFirst.displayName += `[Workflow(${this.items.propertyFirst.value[0].displayName}): ${this.items.propertyFirst.value[1].displayName}]`;
+        }
+        this.items.propertySecond = {
+          displayName: "",
+          value: [],
+        };
+        this.items.propertySecond.value = this.condition.secondaryOperand;
+        if (this.items.propertySecond?.value?.length > 0) {
+          this.secondPropertyReadOnly = true;
+          if (this.items.secondOperandIsProperty)
+            this.items.propertySecond.displayName += `[Workflow(${this.items.propertySecond.value[0].displayName}): ${this.items.propertySecond.value[1].displayName}]`;
+          else if (this.items.secondOperandIsApplicationPreference)
+            this.items.propertySecond.displayName += `${this.items.propertySecond.value[0].displayName}`;
+          else {
+            this.secondPropertyReadOnly = false;
+            this.items.propertySecond.displayName =
+              this.items.propertySecond.value[0];
+          }
+        }
+      } else {
+        this.items = { ...this.defaultItems };
+      }
+    }
+  }
+
   onShowPropertySelector() {
     this.selectPropertyModal.show = true;
     this.selectPropertyModal.key = "first";
@@ -151,51 +229,95 @@ export default class extends Vue {
   }
 
   selectInputMethod(command: string) {
-    this.items.propertySecond = "";
+    this.items.propertySecond = {
+      displayName: "",
+      value: null,
+    };
+    console.log(command)
     if (command === "typeText") {
       this.selectPropertyModal = {
         show: false,
         key: "first",
       };
+      this.items.skipConditionIfSecondaryOperandIsEmpty = false;
       this.secondPropertyReadOnly = false;
       this.items.propertySecond = { displayName: "" };
+      this.items.secondOperandIsApplicationPreference = false;
+      this.items.secondOperandIsProperty = false;
     } else if (command === "selectPreference") {
+      this.items.secondOperandIsApplicationPreference = true;
       this.showPref = true;
-    } else {
-      if (command === "selectProperty") {
-        this.selectPropertyModal = {
-          show: true,
-          key: "second",
-        };
-      }
+      this.secondPropertyReadOnly = true;
+    } else if (command === "selectProperty") {
+      this.items.secondOperandIsProperty = true;
+      this.selectPropertyModal = {
+        show: true,
+        key: "second",
+      };
       this.secondPropertyReadOnly = true;
     }
   }
 
-  async resultHandler(result: KeyValue[]) {
+  handleChange() {
+    this.$nextTick(() => {
+      this.$refs.dropdown.show();
+    });
+  }
+
+  resultHandler(displayPaths: KeyValue[], result: KeyValue[]) {
+    console.log("result", result);
     let str = "";
+    let newItems = Object.assign({}, this.items);
     if (result.length > 1) {
-      str += `[Workflow(${result[0].key}): ${result[1].key}]`;
+      str += `[Workflow(${displayPaths[0].key}): ${displayPaths[1].key}]`;
     }
     if (this.selectPropertyModal.key === "first") {
-      this.items.propertyFirst = {};
-      this.items.propertyFirst.displayName = str;
-      this.items.propertyFirst.value = result;
+      newItems.propertyFirst = {};
+      newItems.propertyFirst.displayName = str;
+      newItems.propertyFirst.value = result;
     } else {
-      this.items.propertySecond = {};
-      this.items.propertySecond.displayName = str;
-      this.items.propertySecond.value = result;
+      this.items.secondOperandIsProperty = true;
+      newItems.propertySecond = {};
+      newItems.propertySecond.displayName = str;
+      newItems.propertySecond.value = result;
     }
+    this.items = { ...newItems };
   }
 
   onPrefSelected(value: ApplicationPreference) {
-    this.items.propertySecond = value;
+    this.items.secondOperandIsApplicationPreference = true;
+    this.items.propertySecond.value = [];
+    this.items.propertySecond.value.push(value);
+    if (value?.displayName)
+      this.items.propertySecond.displayName = value.displayName;
+    console.log("propertySe", this.items.propertySecond);
   }
 
   okHandler() {
     (this.$refs.form as ElForm).validate((valid: boolean) => {
       if (valid) {
-        this.$emit("onAttachmentComplete", this.items);
+        var propertyCondition = new PropertyCondition();
+        propertyCondition.mainOperand = [...this.items.propertyFirst.value];
+        if (this.items.secondOperandIsApplicationPreference && this.items.propertySecond.value.length > 0) {
+          propertyCondition.secondaryOperand = [
+            ...this.items.propertySecond.value,
+          ];
+        } else if (this.items.secondOperandIsProperty && this.items.propertySecond.value.length > 0)
+          propertyCondition.secondaryOperand = [
+            ...this.items.propertySecond.value,
+          ];
+        else
+          propertyCondition.secondaryOperand = [
+            this.items.propertySecond.displayName,
+          ];
+
+        propertyCondition.operator = this.items.operator;
+        propertyCondition.secondOperandIsProperty =
+          this.items.secondOperandIsProperty;
+        propertyCondition.secondOperandIsApplicationPreference =
+          this.items.secondOperandIsApplicationPreference;
+
+        this.$emit("onSave", propertyCondition);
         this.showModal = false;
       } else {
         return false;

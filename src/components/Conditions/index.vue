@@ -77,6 +77,7 @@
               <span class="button-text">New Condition </span>
             </el-button>
             <el-dropdown-menu
+              v-if="!isAction"
               slot="dropdown"
               style="margin-top: 0"
             >
@@ -84,6 +85,20 @@
                 v-for="condition in conditionsList"
                 :key="condition.id"
                 :command="condition.id"
+              >
+                {{ condition.label }} Conditions...
+              </el-dropdown-item>
+            </el-dropdown-menu>
+            <el-dropdown-menu
+              v-else
+              slot="dropdown"
+              style="margin-top: 0"
+            >
+              <el-dropdown-item
+                v-for="condition in actionsList"
+                :key="condition.id"
+                :command="condition.id"
+                :disabled="condition.disabled"
               >
                 {{ condition.label }} Conditions...
               </el-dropdown-item>
@@ -173,7 +188,7 @@
       :condition.sync="currentCondition"
       @onSave="onSave"
     />
-    <entity-condition-modal
+    <status-condition-modal
       key="status"
       :dialogVisible.sync="showFilterModal['StatusCondition']"
       :condition.sync="currentCondition"
@@ -195,6 +210,16 @@
       :condition.sync="currentCondition"
       @onSave="onSave"
     />
+    <property-change-modal
+      :dialogVisible.sync="showFilterModal['PropertyChangeCondition']"
+      :condition.sync="currentCondition"
+      @onSave="onSave"
+    />
+    <transition-condition-modal
+      :visibleTransition.sync="showFilterModal['TransitionCondition']"
+      :condition.sync="currentCondition"
+      @onSave="onSave"
+    />
   </div>
 </template>
 <script lang="ts">
@@ -207,11 +232,14 @@ import { LanguagesPresentationModel } from "@/models/Utils/LanguagesPresentation
 import PropertyFilter from "@/components/Conditions/components/propertyFilter.vue";
 import ItemsetConditionModal from "@/components/Conditions/components/itemSet.vue";
 import WorkflowConditionModal from "@/components/Conditions/components/workflow.vue";
-import EntityConditionModal from "@/components/Conditions/components/entityFilter.vue";
+import EntityConditionModal from "@/components/Conditions/components/entityCategoryFilter.vue";
 import AttachmentConditionModal from "@/components/Conditions/components/attachmentFilter.vue";
 import JavascriptConditionModal from "@/components/Conditions/components/javascriptCondition.vue";
+import StatusConditionModal from "@/components/Conditions/components/statusFilter.vue";
+import PropertyChangeModal from "@/components/Conditions/components/newPropertyChange.vue";
+import TransitionConditionModal from "@/components/Conditions/components/transition.vue";
 
-import lodash from "lodash"
+import lodash from "lodash";
 
 import {
   BaseCondition,
@@ -225,7 +253,9 @@ import {
   StatusCondition,
   ItemSetCondition,
   JavascriptCondition,
+  TransitionCondition,
 } from "@/models/Conditions";
+import { emit } from "cluster";
 
 interface ITreeRole {
   label: String;
@@ -234,7 +264,7 @@ interface ITreeRole {
 }
 
 @Component({
-  name: "",
+  name: "condition-tree",
   components: {
     NewRoleGroupModal,
     PropertyFilter,
@@ -243,6 +273,9 @@ interface ITreeRole {
     EntityConditionModal,
     AttachmentConditionModal,
     JavascriptConditionModal,
+    StatusConditionModal,
+    PropertyChangeModal,
+    TransitionConditionModal,
   },
 })
 export default class extends Vue {
@@ -252,6 +285,7 @@ export default class extends Vue {
   @Prop({ required: false, default: () => [] })
   private visibleConditions!: any[];
   @Prop({ required: false }) conditionsDivHeight!: boolean;
+  @Prop({ required: false, default: false }) isAction!: boolean;
 
   private currentCondition: BaseCondition | any = null;
 
@@ -295,6 +329,27 @@ export default class extends Vue {
     { id: "AttachmentCondition", label: "Attachment" },
   ];
 
+  private actionsList = [
+    {
+      id: "PropertyChangeCondition",
+      label: "Property Change",
+      disabled: false,
+    },
+    { id: "TransitionCondition", label: "Transition", disabled: false },
+    { id: "", label: "-----------------------", disabled: true },
+
+    { id: "PropertyCondition", label: "Property", disabled: false },
+    { id: "ItemSetCondition", label: "Item Set", disabled: false },
+    { id: "WorkflowCondition", label: "Workflow", disabled: false },
+    {
+      id: "EntityCategoryCondition",
+      label: "Entity category",
+      disabled: false,
+    },
+    { id: "JavascriptCondition", label: "Javscript", disabled: false },
+    { id: "AttachmentCondition", label: "Attachment", disabled: false },
+  ];
+
   private filtersList = [
     { id: "state", label: "State" },
     { id: "entityCategory", label: "Entity category" },
@@ -328,6 +383,8 @@ export default class extends Vue {
     WorkflowCondition: false,
     AttachmentCondition: false,
     JavascriptCondition: false,
+    PropertyChangeCondition: false,
+    TransitionCondition: false,
   };
 
   private filterData = this.defaultFilterData;
@@ -352,9 +409,10 @@ export default class extends Vue {
     }
   }
 
-  @Watch("roleGroups", { deep: true, immediate: true })
+  @Watch("data", { deep: true, immediate: true })
   setUpTree(newValue: RoleGroup[], oldValue: RoleGroup[]) {
-    if (newValue && !lodash.isEqual(newValue, oldValue)  && newValue.length > 0) {
+    if (newValue && newValue.length > 0) {
+      this.treeItems = [];
       newValue.forEach((roleGroup, rIndex) => {
         this.treeItems.push({
           index: "" + rIndex,
@@ -382,11 +440,48 @@ export default class extends Vue {
                   });
               }
             }
-            this.treeItems[rIndex].push({index, label, children})
+            this.treeItems[rIndex].children.push({ index, label, children });
           });
         }
       });
-      this.data = newValue;
+    }
+  }
+
+  @Watch("currentCondition", { deep: true, immediate: true })
+  setUpTree1(newValue: BaseCondition) {
+    if (newValue) {
+      this.treeItems = [];
+      this.data.forEach((roleGroup, rIndex) => {
+        this.treeItems.push({
+          index: "" + rIndex,
+          label: roleGroup.title,
+          children: [],
+        });
+        if (roleGroup.conditions && roleGroup.conditions.length > 0) {
+          roleGroup.conditions.forEach((condition: any, cIndex: any) => {
+            let index = rIndex + "-" + cIndex;
+            let label = condition.getDisplayName();
+            let children: any[] = [];
+            if (condition.myspType === "PropertyCondition") {
+              if (condition.myspType === "PropertyCondition") {
+                if (condition.skipConditionIfMainOperandIsEmpty)
+                  children.push({
+                    label: condition.getSkipMailOperandAlert(),
+                    key: "",
+                    index: index,
+                  });
+                if (condition.skipConditionIfSecondaryOperandIsEmpty)
+                  children.push({
+                    label: condition.getSkipSecondOperandAlert(),
+                    key: "",
+                    index: index,
+                  });
+              }
+            }
+            this.treeItems[rIndex].children.push({ index, label, children });
+          });
+        }
+      });
     }
   }
 
@@ -408,87 +503,49 @@ export default class extends Vue {
     console.log("condition", condition);
     if (!this.currentRoleGroup) this.currentRoleGroup = new RoleGroup();
 
+    if (this.selectedRoleGroupIndex === -1)
+      this.selectedRoleGroupIndex = this.roleGroups.length;
+
     let children: any = [];
 
     if (this.selectedConditionIndex === -1) {
       this.selectedConditionIndex = this.currentRoleGroup.conditions.length;
       this.currentRoleGroup.conditions.push(condition);
-      this.roleGroups[this.selectedRoleGroupIndex] = this.currentRoleGroup;
-      let index: string =
-        "" + this.selectedRoleGroupIndex + "-" + this.selectedConditionIndex;
-      this.treeItems[this.selectedRoleGroupIndex].children.push({
-        key: "",
-        label: condition.getDisplayName(),
-        index: index,
-        children: children ? children : [],
-      });
-      if (condition.myspType === "PropertyCondition") {
-        if (condition.skipConditionIfMainOperandIsEmpty)
-          children.push({
-            label: condition.getSkipMailOperandAlert(),
-            key: "",
-            index: index,
-          });
-        if (condition.skipConditionIfSecondaryOperandIsEmpty)
-          children.push({
-            label: condition.getSkipSecondOperandAlert(),
-            key: "",
-            index: index,
-          });
-      }
     } else {
-      let index: string =
-        "" +
-        this.selectedRoleGroupIndex +
-        "-" +
-        this.currentRoleGroup.conditions.length;
       this.currentRoleGroup.conditions[this.selectedConditionIndex] = condition;
-      this.treeItems[this.selectedRoleGroupIndex].children[
-        this.selectedConditionIndex
-      ].label = condition.getDisplayName();
-      this.treeItems[this.selectedRoleGroupIndex].children[
-        this.selectedConditionIndex
-      ].children = children ? children : [];
-      if (condition.myspType === "PropertyCondition") {
-        if (condition.skipConditionIfMainOperandIsEmpty)
-          children.push({
-            label: condition.getSkipMailOperandAlert(),
-            key: "",
-            index: index,
-          });
-        if (condition.skipConditionIfSecondaryOperandIsEmpty)
-          children.push({
-            label: condition.getSkipSecondOperandAlert(),
-            key: "",
-            index: index,
-          });
-      }
     }
-
+    this.roleGroups[this.selectedRoleGroupIndex] = this.currentRoleGroup;
     this.currentCondition = condition;
+    this.$emit("update:data", this.roleGroups);
   }
 
   handleNodeClick(data: any) {
+    console.log('index',data.index)
     this.itemSelected = true;
-    if (data.index) {
-      let ids = data.index.split("-");
-      this.selectedRoleGroupIndex = ids[0];
+    let index = "" + data.index;
+    // if (data.index) {
+      let ids = index.split("-");
+      this.selectedRoleGroupIndex = +ids[0];
       this.currentRoleGroup = this.roleGroups[this.selectedRoleGroupIndex];
       if (ids.length > 1) {
-        this.selectedConditionIndex = ids[1];
+        this.selectedConditionIndex = +ids[1];
         this.currentCondition =
           this.currentRoleGroup.conditions[this.selectedConditionIndex];
+        this.isEditCondition = true;
       } else {
+        this.isEditCondition = false;
         this.selectedConditionIndex = -1;
         this.currentCondition = null;
       }
       this.selectedFilterKey = data.key;
-    }
+    // }
     console.log("currentCon", this.currentCondition);
   }
-
+  //
+  private isEditCondition = false;
   newFilterHandler(command: string) {
-    console.log("command", command);
+    this.isEditCondition = true;
+
     this.selectedConditionIndex = -1;
     switch (command) {
       case "PropertyCondition":
@@ -512,6 +569,12 @@ export default class extends Vue {
       case "AttachmentCondition":
         this.currentCondition = new AttachmentCondition();
         break;
+      case "PropertyChangeCondition":
+        this.currentCondition = new PropertyChangeCondition();
+        break;
+      case "TransitionCondition":
+        this.currentCondition = new TransitionCondition();
+        break;
       default:
         break;
     }
@@ -519,11 +582,19 @@ export default class extends Vue {
   }
 
   editCondition() {
-    this.showFilterModal[this.currentCondition.myspType] = true;
-    console.log(
-      this.currentCondition.myspType,
-      this.showFilterModal[this.currentCondition.myspType]
-    );
+    console.log('isCon', this.isEditCondition)
+    if (this.isEditCondition) {
+      this.showFilterModal[this.currentCondition.myspType] = true;
+      console.log(
+        this.currentCondition.myspType,
+        this.showFilterModal[this.currentCondition.myspType]
+      );
+    } else {
+      console.log('roleIn',this.selectedRoleGroupIndex)
+      if (this.selectedRoleGroupIndex !== -1) {
+        this.showRoleGroupPopup("new");
+      }
+    }
   }
 
   updateTreeChildren(key: string, childNodeData: any, initialLabel: string) {
@@ -553,6 +624,8 @@ export default class extends Vue {
   }
 
   showRoleGroupPopup(state: string, authNodesSystemNames: [] = []): void {
+    this.isEditCondition = false;
+    this.selectedRoleGroupIndex = -1
     const shouldShowEveryoneButton: boolean = this.checkIfNewRoleGroup(
       this.lpmInstance.getLocalizedString(LanguagesPresentationModel.EVERYONE)
     );
@@ -579,7 +652,7 @@ export default class extends Vue {
     ) {
       const newRoleGroup: RoleGroup = new RoleGroup();
 
-      if (roleGroupName === "Everyone" && !nodeSystemNames) {
+      if (roleGroupName === "Everyone") {
         newRoleGroup.everyone = true;
       } else {
         newRoleGroup.authorizationNodeNames = nodeSystemNames;
@@ -616,8 +689,8 @@ export default class extends Vue {
   }
 
   private checkIfNewRoleGroup(roleGroupName: string | null): boolean {
-    const duplicatedTreeItems = this.treeItems.filter((roleGroup) => {
-      return roleGroup.label === roleGroupName && !roleGroup.everyone;
+    const duplicatedTreeItems = this.roleGroups.filter((roleGroup) => {
+      return roleGroup.title === roleGroupName && !roleGroup.everyone;
     });
 
     return !duplicatedTreeItems.length;
@@ -645,7 +718,7 @@ export default class extends Vue {
     overflow: auto;
   }
   .table-container-small {
-    height: 50px;
+    height: 100px;
   }
 }
 </style>

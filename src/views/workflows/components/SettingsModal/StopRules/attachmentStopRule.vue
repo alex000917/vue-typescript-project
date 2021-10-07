@@ -23,9 +23,9 @@
           </el-col>
         </el-row>
         <el-row class="attach-stop__row" type="flex">
-          <el-form-item prop="type" label="Attachment of type:">
+          <el-form-item prop="attachmentType" label="Attachment of type:">
             <el-input
-              v-model="items.type"
+              v-model="items.attachmentType"
               type="text"
               class="attach-stop__row--input"
             />
@@ -84,6 +84,7 @@ import { WorkflowModule } from "@/store/modules/WorkflowMod";
 import { KeyValue } from "@/models/KeyValue";
 import SelectPropertyModel from "@/components/PropertySelector/index.vue";
 import { ElForm } from "element-ui/types/form";
+import { AttachmentAction } from "@/models/Workflows/Actions";
 
 @Component({
   name: "attach-stop-rule",
@@ -91,29 +92,30 @@ import { ElForm } from "element-ui/types/form";
 })
 export default class extends Vue {
   @Prop({ required: true }) dialogVisible!: boolean;
+  @Prop({ required: true }) action!: AttachmentAction;
 
   private defaultItems = {
-    type: '',
+    attachmentType: '',
     step: '',
     ruleName: '',
     systemName: ''
   };
 
   private items = {
-    type: '',
+    attachmentType: '',
     step: '',
     ruleName: '',
     systemName: ''
   };
 
   private formRules = {
-    type: [
+    attachmentType: [
       {
         required: true,
         message: "Please type name",
         trigger: "blur",
       },
-      { min: 3, max: 5, message: "Length should be 3 to 5", trigger: "blur" },
+      { min: 3, message: "Length should be more than 3", trigger: "blur" },
     ],
     step: [
       {
@@ -147,10 +149,28 @@ export default class extends Vue {
     this.$emit("update:dialogVisible", val);
   }
 
+  @Watch("dialogVisible", {immediate: true})
+  setUp(val: boolean) {
+    if (val) {
+      if (this.action.getDisplayName()) {
+        this.items = {...this.action};
+      } else {
+        this.items = {...this.defaultItems}
+      }
+    }
+  }
+
   okHandler() {
     (this.$refs.form as ElForm).validate((valid: boolean) => {
       if (valid) {
-        this.$emit("onAttachmentComplete", this.items);
+        let action = new AttachmentAction();
+        action.attachmentType = this.items.attachmentType;
+        action.step = this.items.step;
+        action.ruleName = this.items.ruleName;
+        action.systemName = this.items.systemName;
+
+        this.$emit("onSave", action);
+        this.$emit("update:action", action);
         this.showModal = false;
       } else {
         return false;

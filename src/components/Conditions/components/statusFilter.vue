@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     width="30%"
-    title="Entity Category Condition"
+    title="Status Condition"
     :visible.sync="showModal"
     destroy-on-close
     :close-on-click-modal="false"
@@ -12,7 +12,7 @@
       class="select-container"
       style=""
     >
-      <div class="select-label">Entity Category of the:</div>
+      <div class="select-label">Status of the:</div>
       <el-select
         v-model="entityScope.name"
         placeholder="Select"
@@ -44,7 +44,7 @@
         <el-button
           v-for="(item, index) in entityScope.secondaryOperand"
           :key="item.key"
-          @click="deleteItem(index)"
+          @click = "deleteItem(index)"
           class="list-item"
         >
           {{ item.key }}
@@ -57,7 +57,7 @@
           v-model="autoCompleteText"
           style="width: 200px"
           :fetch-suggestions="querySearch"
-          placeholder="Enter Entity Category"
+          placeholder="Enter Status"
           value-key="displayName"
           clearable
           @select="handleSelect"
@@ -84,10 +84,10 @@
     <browse-item
       v-if="showBrowseDialog"
       :dialogVisible.sync="showBrowseDialog"
-      :itemList="EntityCategories"
-      :result.sync="selectedCategory"
-      keyName="key"
-      @onUpdate="onListUpdate"
+      :itemList="Status"
+      :selectedItems="selectedStatus"
+      keyName="systemName"
+      @onUpdate="onStatusUpdate"
     />
   </el-dialog>
 </template>
@@ -99,10 +99,9 @@ import { EntitiesModule } from "@/store/modules/entitiesMod";
 import BrowseItem from "./browseItem.vue";
 import { KeyValue } from "@/models/KeyValue";
 import { Status } from "@/models/Status";
-import { WorkflowModule } from "@/store/modules/WorkflowMod";
 
 @Component({
-  name: "entity-category-condition-modal",
+  name: "status-condition-modal",
   components: {
     BrowseItem,
   },
@@ -115,10 +114,8 @@ export default class extends Vue {
     return [new KeyValue(this.Entity?.id, this.Entity?.displayName)];
   }
 
-  private get EntityCategories() {
-    return this._categories.map((c) => {
-      return { key: c.key, displayName: c.value };
-    });
+  private get Status() {
+    return this.Entity?.status;
   }
 
   private get Entity() {
@@ -128,7 +125,8 @@ export default class extends Vue {
   private entityScope = {
     mainOperand: [],
     secondaryOperand: [],
-    operator: "1",
+    operator: "",
+    name: "",
   } as any;
 
   private autoCompleteText = "";
@@ -152,51 +150,38 @@ export default class extends Vue {
     this.$emit("update:dialogVisible", val);
   }
 
-  _categories: any[] = [];
-
   @Watch("dialogVisible", { deep: true, immediate: true })
   setUp(val: boolean) {
-    if (this.condition && this.condition.mainOperand?.length) {
-      this.entityScope = { ...this.condition };
-      if (
-        this.entityScope.mainOperand &&
-        this.entityScope.mainOperand.length > 1
-      ) {
-        this.entityScope.name = this.entityScope.mainOperand[1].value;
-      }
-    } else {
-      if (this.Entity)
-        EntitiesModule.getEntityCategories(this.Entity.id).then(
-          (categories: any[]) => {
-            this._categories = categories;
-          }
-        );
-
-      this.entityScope.mainOperand = this.Entity?.defaultColumns.find(
-        (c) => c.key == "CATEGORY"
-      )?.value;
-
-      if (this.condition) {
-        this.entityScope.operator = this.condition.operator;
-
-        if (this.condition.secondaryOperand) {
-          this.entityScope.secondaryOperand = this.condition.secondaryOperand;
-          this.selectedCategory = this.condition.secondaryOperand.map(
-            (c) => c.key
-          );
-
-          console.log(this.condition.secondaryOperand);
+    if (val)
+      if (this.condition?.mainOperand?.length) {
+        this.entityScope = { ...this.condition };
+        if (
+          this.entityScope.mainOperand &&
+          this.entityScope.mainOperand.length > 1
+        ) {
+          this.entityScope.name = this.entityScope.mainOperand[1].value;
         }
+      } else {
+        let status = this.Entity?.defaultColumns.find((c) => c.key == "STATUS");
+        console.log(status);
+        if (status) this.entityScope.mainOperand = status.value;
+
+        this.entityScope.mainOperand = this.Entity?.defaultColumns.find(
+          (c) => c.key == "STATUS"
+        )?.value;
+        console.log("status", this.entityScope.mainOperand);
+        this.entityScope.name = "";
+        this.entityScope.operator = "";
+        this.entityScope.secondaryOperand = [];
       }
-    }
   }
 
   mounted() {}
 
   querySearch(queryString: string, cb: any) {
     const items = queryString
-      ? this.EntityCategories?.filter(this.createFilter(queryString))
-      : this.EntityCategories;
+      ? this.Status?.filter(this.createFilter(queryString))
+      : this.Status;
     cb(items);
   }
 
@@ -227,8 +212,7 @@ export default class extends Vue {
     this.entityScope.secondaryOperand.splice(key, 1);
   }
 
-  handleSelect(item: any) {
-    console.log(item);
+  handleSelect(item: Status) {
     this.entityScope.secondaryOperand.push(
       new KeyValue(item.displayName, item.systemName, item.displayName)
     );
@@ -236,8 +220,8 @@ export default class extends Vue {
   }
 
   async okHandler() {
-    let entityCategoryCondition = new EntityCategoryCondition();
-    entityCategoryCondition.operator = this.entityScope.operator;
+    let statusCondition = new StatusCondition();
+    statusCondition.operator = this.entityScope.operator;
     if (
       this.entityScope.mainOperand &&
       this.entityScope.mainOperand.length > 1
@@ -251,11 +235,10 @@ export default class extends Vue {
       );
       this.entityScope.mainOperand[1].displayName = rs.displayName;
     }
-    entityCategoryCondition.mainOperand = this.entityScope.mainOperand;
-    entityCategoryCondition.secondaryOperand =
-      this.entityScope.secondaryOperand;
+    statusCondition.mainOperand = this.entityScope.mainOperand;
+    statusCondition.secondaryOperand = this.entityScope.secondaryOperand;
 
-    this.$emit("onSave", entityCategoryCondition);
+    this.$emit("onSave", statusCondition);
     this.showModal = false;
   }
 
@@ -263,16 +246,18 @@ export default class extends Vue {
     this.showModal = false;
   }
 
-  selectedCategory: any[] = [];
+  selectedStatus: any[] = [];
 
-  _selectedCategory = [];
-  onListUpdate(result: any) {
-    this.entityScope.secondaryOperand = this._categories?.filter((c) =>
-      result.includes(c.key)
-    );
+  _selectedStatus = [];
+  onStatusUpdate(result: any) {
+    this.entityScope.secondaryOperand = this.Status?.filter((c) =>
+      result.includes(c.systemName)
+    ).map((d) => {
+      return new KeyValue(d.displayName, d.systemName, d.displayName);
+    }) as any;
 
-    this._selectedCategory = result;
-    this.selectedCategory = this._selectedCategory;
+    this._selectedStatus = result;
+    this.selectedStatus = this._selectedStatus;
   }
 }
 </script>
@@ -282,6 +267,7 @@ export default class extends Vue {
   margin-top: 20px;
 }
 .filter-container {
+  z-index: 3000;
   .select-container {
     display: flex;
     align-items: center;

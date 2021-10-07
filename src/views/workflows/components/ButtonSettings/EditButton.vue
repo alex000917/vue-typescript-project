@@ -39,7 +39,7 @@
       </el-tab-pane>
       <el-tab-pane label="Viewed By">
         <SettingItemWrapper icon-name="viewed-by32x32" title="Viewed By">
-          <Conditions :data="[]" :visible-conditions="[]"></Conditions>
+          <Conditions :data.sync="conditionData" :visible-conditions="[]"></Conditions>
         </SettingItemWrapper>
       </el-tab-pane>
       <el-tab-pane label="Note">
@@ -108,6 +108,16 @@ export default class extends Vue {
   mandatory = true;
   dialogInfo: any = {};
 
+  private conditionData = [];
+
+  get showModal() {
+    return this.dialogVisible;
+  }
+
+  set showModal(val: boolean) {
+    this.$emit("update:dialogVisible", val);
+  }
+
   get originButonInfo() {
     const ribbon = WorkflowModule.ActiveWorkflow?.ribbons?.find(ribbon =>
       ribbon.systemName === this.ribbonSysName
@@ -133,11 +143,11 @@ export default class extends Vue {
     originActiveWorkflow["ribbons"][ribbonIndex]["buttons"][buttonIndex] = this.dialogInfo
 
     this.$store.commit("SET_ACTIVE_WORKFLOW", originActiveWorkflow)
-    this.$emit("update:dialogVisible", false)
+    this.showModal = false;
   }
 
   handleClose() {
-    this.$emit("update:dialogVisible", false)
+    this.showModal = false;
   }
 
   @Watch("dialogVisible", { deep: true, immediate: true })

@@ -80,10 +80,10 @@
             style="width: 100%"
           >
             <el-option
-              v-for="item in stepOptions"
-              :key="item"
-              :label="item"
-              :value="item"
+              v-for="item in activeWorkflow.flowSteps"
+              :key="item.key"
+              :label="item.displayName"
+              :value="item.displayName"
               style="width: 100%"
             />
           </el-select>

@@ -9,9 +9,9 @@ export class BaseCondition {
 }
 export class PropertyCondition extends BaseCondition {
   myspType= "PropertyCondition"
-  mainOperand: KeyValue[] | null = null;
-  secondaryOperand: KeyValue[] | null = null;
-  operator: string | null = null;
+  mainOperand: KeyValue[] | null = [];
+  secondaryOperand: KeyValue[] | null = [];
+  operator: string | null = '';
   skipConditionIfMainOperandIsEmpty = false;
   skipConditionIfSecondaryOperandIsEmpty = false;
   secondOperandIsProperty = false;
@@ -27,7 +27,7 @@ export class PropertyCondition extends BaseCondition {
     }
 
     if (this.secondOperandIsProperty && this.secondaryOperand && this.secondaryOperand.length >= 0) {
-      str += `[Workflow(${this.secondaryOperand[0].displayName}): ${this.secondaryOperand[1].displayName}]`;
+      str += ` [Workflow(${this.secondaryOperand[0].displayName}): ${this.secondaryOperand[1].displayName}]`;
     } else if (this.secondOperandIsApplicationPreference && this.secondaryOperand) {
       str += ` ${this.secondaryOperand[0].displayName}`;
     } else if (this.secondaryOperand && this.secondaryOperand.length === 1){
@@ -60,6 +60,24 @@ export class PropertyCondition extends BaseCondition {
 }
 export class EntityCategoryCondition extends PropertyCondition {
   myspType= "EntityCategoryCondition"
+
+  getDisplayName() {
+    let str: string = '';
+    if (this.mainOperand && this.mainOperand.length >= 0) {
+      str += `[Workflow(${this.mainOperand[0].displayName}): Category : ${this.mainOperand[1].displayName}]`;
+    }
+    if (this.operator) {
+      str += ' ' + this.operator;
+    }
+
+    if (this.secondaryOperand && this.secondaryOperand?.length > 0) {
+      this.secondaryOperand.map( (value) => {
+        str += ' ' + value.displayName;
+      })
+    }
+    
+    return str;
+  }
 }
 export class ItemSetCondition extends BaseCondition {
   myspType= "ItemSetCondition"
@@ -72,6 +90,18 @@ export class ItemSetCondition extends BaseCondition {
   itemSetConditionType: number | null = null;
 
   skipConditionIfSetIsEmpty = false;
+
+  getPropertyDisplayName() {
+    let str = '';
+    if (this.property && this.property.length > 1) {
+      str += `[Workflow(${this.property[0].displayName}): ${this.property[1].displayName}]`; 
+    }
+    return str;
+  }
+
+  getDisplayName() {
+    return this.displayName;
+  }
 }
 export class AttachmentCondition extends PropertyCondition {
   myspType= "AttachmentCondition"
@@ -100,6 +130,19 @@ export class PropertyChangeCondition extends BaseCondition {
   property: any[] | null = null;
 
   newValueCanBeEmpty = false;
+
+  getDisplayName() {
+    let str = '';
+    if (this.property) {
+      str += `[Workflow(${this.property[0].displayName}): ${this.property[1].displayName}] is about to change`;
+    }
+    if (this.newValueCanBeEmpty) {
+      str += ' a empty value';
+    } else {
+      str += ' a non-empty value';
+    }
+    return str;
+  }
 }
 export class RoleCondition extends PropertyCondition {
   myspType= "RoleCondition"
@@ -112,9 +155,27 @@ export class StateCondition extends PropertyCondition {
 
 export class StatusCondition extends PropertyCondition {
   myspType= "StatusCondition"
+
+  getDisplayName() {
+    let str: string = '';
+    if (this.mainOperand && this.mainOperand.length >= 0) {
+      str += `[Workflow(${this.mainOperand[0].displayName}): Status : ${this.mainOperand[1].displayName}]`;
+    }
+    if (this.operator) {
+      str += ' ' + this.operator;
+    }
+
+    if (this.secondaryOperand && this.secondaryOperand?.length > 0) {
+      this.secondaryOperand.map( (value) => {
+        str += ' ' + value.displayName;
+      })
+    }
+    
+    return str;
+  }
 }
 
-export class JavascriptCondition extends PropertyCondition {
+export class JavascriptCondition extends BaseCondition {
   myspType= "JavascriptCondition"
   displayName = ''
   code = ''
@@ -136,6 +197,12 @@ export class TransitionCondition extends BaseCondition {
   restrictToPreviousOrLaterStep = false;
 
   stepSystemName: string | null = null;
+
+  getDisplayName() {
+    let str = 'Workflow is about to Progress ';
+    if (this.stepSystemName) str += "'" + this.stepSystemName + "'";
+    return str;
+  }
 }
 
 export class WorkflowCondition extends PropertyCondition {

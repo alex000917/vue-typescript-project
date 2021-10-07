@@ -941,6 +941,7 @@ export default class extends Vue {
           if (entity) {
             console.log(entity);
             this._status = entity.status;
+            EntitiesModule.setCurrentEntity(entity);
           }
         }
       );

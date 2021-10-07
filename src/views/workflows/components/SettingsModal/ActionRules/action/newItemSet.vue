@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     width="50%"
-    title="New Itemset Condition"
+    title="New Item Set Action"
     :visible.sync="showModal"
     class="filter-container"
     destroy-on-close
@@ -36,27 +36,13 @@
         </el-button>
       </el-row>
       <el-row>
-        <condition-tree :visibleConditions="conditionsList" :data.sync = "roleGroups"/>
+        <condition-tree :visibleConditions="conditionsList" :data.sync = "roleGroups" :conditionsDivHeight="true"/>
       </el-row>
-      <el-row style="margin-top: 10px;">
-        <el-col :span="8">This item set conditoin passes when:</el-col>
-        <el-col :span="12">
-          <el-select
-            v-model="items.itemSetConditionType"
-            placeholder="Select"
-            style="width: 100%;"
-          >
-            <el-option
-              v-for="item in options"
-              :key="item"
-              :label="item"
-              :value="item"
-              style="width:100%;"
-            />
-          </el-select>
-        </el-col>
+      <el-row>
+        Specify actions to be performed for each of the items in the set:
+        <actionTree key="new-item-action-tree" :data.sync="actionRules" :conditionsDivHeight="true"/>
       </el-row>
-      <el-row style="margin-top: 10px"> Item set name:</el-row>
+      <el-row style="margin-top: 10px"> Item set action name:</el-row>
       <el-row
         style="margin-right: 15px; margin-top: 10px; align-items: center"
         type="flex"
@@ -106,7 +92,6 @@ import { KeyValue } from "@/models/KeyValue";
 import { WorkflowModule } from "@/store/modules/WorkflowMod";
 import { LanguagesPresentationModel } from "@/models/Utils/LanguagesPresentationModel";
 import prefModel from "@/components/Preferences/prefModel.vue";
-import SelectPropertyModel from "@/components/PropertySelector/index.vue";
 import { RoleGroup } from "@/models/RoleGroup";
 
 import {
@@ -115,11 +100,12 @@ import {
 import { Restriction } from "@/models/Restriction";
 
 @Component({
-  name: "itemset-condition",
+  name: "itemset-action-modal",
   components: {
-    SelectPropertyModel,
+    SelectPropertyModel: () => import("@/components/PropertySelector/index.vue"),
     prefModel,
     conditionTree: () => import("@/components/Conditions/index.vue"),
+    actionTree: () => import("@/views/workflows/components/SettingsModal/ActionRules/action/index.vue"),
   },
 })
 export default class extends Vue {
@@ -139,6 +125,7 @@ export default class extends Vue {
 
   //Total Data
   private roleGroups: RoleGroup[] | any = [];
+  private actionRules: any[] = [];
   //Tree Data
   private treeItems: any[] = [];
 

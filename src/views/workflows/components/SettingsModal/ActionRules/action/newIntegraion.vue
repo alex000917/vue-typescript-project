@@ -114,6 +114,7 @@ import { WorkflowModule } from "@/store/modules/WorkflowMod";
 import { KeyValue } from "@/models/KeyValue";
 import SelectPropertyModel from "@/components/PropertySelector/index.vue";
 import { ElForm } from "element-ui/types/form";
+import { IntegrationAction } from "@/models/Workflows/Actions";
 
 @Component({
   name: "new-integraion-action",
@@ -121,6 +122,7 @@ import { ElForm } from "element-ui/types/form";
 })
 export default class extends Vue {
   @Prop({ required: true }) dialogVisible!: boolean;
+  @Prop({ required: true }) action!: IntegrationAction;
 
   private defaultItems = {
     name: "",
@@ -151,7 +153,7 @@ export default class extends Vue {
         message: "Please type name",
         trigger: "blur",
       },
-      { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
+      { min: 3, message: 'Length should be 3 to 5', trigger: 'blur' }
     ],
     description: [
       {
@@ -176,16 +178,23 @@ export default class extends Vue {
     ],
   };
 
+  @Watch('dialogVisible', {immediate: true})
+  setUp(val:boolean) {
+    if (val) {
+      if (this.action && this.action.name) {
+        this.items = {...this.action}
+      } else {
+        this.items = {...this.defaultItems };
+      }
+    }
+  }
+
   @Watch("items.runType", { immediate: true })
   clearCustomValue() {
     this.items.custom.workflow = "";
     this.items.custom.button = "";
   }
 
-  private selectPropertyModal: any = {
-    show: false,
-    key: "first",
-  };
 
   get showModal() {
     return this.dialogVisible;
@@ -195,14 +204,16 @@ export default class extends Vue {
     this.$emit("update:dialogVisible", val);
   }
 
-  onShowPropertySelector() {
-    this.selectPropertyModal.show = true;
-  }
-
   okHandler() {
     (this.$refs.form as ElForm).validate((valid: boolean) => {
       if (valid) {
-        this.$emit("onAttachmentComplete", this.items);
+        let action: any = new IntegrationAction();
+        action.name = this.items.name;
+        action.description = this.items.description;
+        action.javascript = this.items.javascript;
+        action.custom = this.items.custom;
+        this.$emit("update:action", action);
+        this.$emit("onSave", action);
         this.showModal = false;
       } else {
         return false;

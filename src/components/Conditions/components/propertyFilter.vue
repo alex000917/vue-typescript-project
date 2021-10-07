@@ -246,7 +246,6 @@ export default class extends Vue {
   setUp(val: boolean) {
     if (val) {
       if (this.condition?.mainOperand) {
-        console.log(this.condition);
         this.items = { ...this.condition };
         this.items.propertyFirst = {
           displayName: "",
@@ -344,11 +343,9 @@ export default class extends Vue {
         var propertyCondition = new PropertyCondition();
         propertyCondition.mainOperand = [...this.items.propertyFirst.value];
         if (this.items.secondOperandIsApplicationPreference) {
-          console.log("appPre", this.items.propertySecond.value);
           propertyCondition.secondaryOperand = [
             ...this.items.propertySecond.value,
           ];
-          console.log("secO", propertyCondition.secondaryOperand);
         } else if (this.items.secondOperandIsProperty)
           propertyCondition.secondaryOperand = [
             ...this.items.propertySecond.value,
