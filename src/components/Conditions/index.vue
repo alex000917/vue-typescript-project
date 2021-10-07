@@ -224,9 +224,14 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import NewRoleGroupModal from "@/components/Conditions/newRoleGroupModal.vue";
+import { WorkflowModule } from "@/store/modules/WorkflowMod";
+import { EntitiesModule } from "@/store/modules/entitiesMod";
+
 import { RoleGroup } from "@/models/RoleGroup";
 import { Restriction } from "@/models/Restriction";
+import { ApplicationPreference } from "@/models/ApplicationPreference";
+
+import NewRoleGroupModal from "@/components/Conditions/newRoleGroupModal.vue";
 import { AuthorizationTree } from "@/models/authorizations/AuthorizationTree";
 import { LanguagesPresentationModel } from "@/models/Utils/LanguagesPresentationModel";
 import PropertyFilter from "@/components/Conditions/components/propertyFilter.vue";
@@ -410,78 +415,302 @@ export default class extends Vue {
   }
 
   @Watch("data", { deep: true, immediate: true })
-  setUpTree(newValue: RoleGroup[], oldValue: RoleGroup[]) {
-    if (newValue && newValue.length > 0) {
+  setUpTree() {
+    this.roleGroups = this.data;
+  }
+
+  @Watch("currentCondition", { deep: true, immediate: true })
+  async setUpTree1() {
+    if (this.roleGroups && this.roleGroups.length > 0) {
       this.treeItems = [];
-      newValue.forEach((roleGroup, rIndex) => {
+      this.roleGroups.forEach((roleGroup, rIndex) => {
         this.treeItems.push({
           index: "" + rIndex,
           label: roleGroup.title,
           children: [],
         });
         if (roleGroup.conditions && roleGroup.conditions.length > 0) {
-          roleGroup.conditions.forEach((condition, cIndex) => {
-            let index = rIndex + "-" + cIndex;
-            let label = condition.getDisplayName();
-            let children: any[] = [];
-            if (condition.myspType === "PropertyCondition") {
+          roleGroup.conditions.forEach(
+            async (condition: any, cIndex: number) => {
+              let index = rIndex + "-" + cIndex;
+              let label = await this.getDisplayName(condition);
+              let children: any[] = [];
               if (condition.myspType === "PropertyCondition") {
-                if (condition.skipConditionIfMainOperandIsEmpty)
-                  children.push({
-                    label: condition.getSkipMailOperandAlert(),
-                    key: "",
-                    index: index,
-                  });
-                if (condition.skipConditionIfSecondaryOperandIsEmpty)
-                  children.push({
-                    label: condition.getSkipSecondOperandAlert(),
-                    key: "",
-                    index: index,
-                  });
+                if (condition.myspType === "PropertyCondition") {
+                  if (condition.skipConditionIfMainOperandIsEmpty)
+                    children.push({
+                      label: this.getSkipMailOperandAlert(condition),
+                      key: "",
+                      index: index,
+                    });
+                  if (condition.skipConditionIfSecondaryOperandIsEmpty)
+                    children.push({
+                      label: this.getSkipSecondOperandAlert(condition),
+                      key: "",
+                      index: index,
+                    });
+                }
               }
+              this.treeItems[rIndex].children.push({ index, label, children });
             }
-            this.treeItems[rIndex].children.push({ index, label, children });
-          });
+          );
         }
       });
     }
   }
 
-  @Watch("currentCondition", { deep: true, immediate: true })
-  setUpTree1(newValue: BaseCondition) {
-    if (newValue) {
-      this.treeItems = [];
-      this.data.forEach((roleGroup, rIndex) => {
-        this.treeItems.push({
-          index: "" + rIndex,
-          label: roleGroup.title,
-          children: [],
-        });
-        if (roleGroup.conditions && roleGroup.conditions.length > 0) {
-          roleGroup.conditions.forEach((condition: any, cIndex: any) => {
-            let index = rIndex + "-" + cIndex;
-            let label = condition.getDisplayName();
-            let children: any[] = [];
-            if (condition.myspType === "PropertyCondition") {
-              if (condition.myspType === "PropertyCondition") {
-                if (condition.skipConditionIfMainOperandIsEmpty)
-                  children.push({
-                    label: condition.getSkipMailOperandAlert(),
-                    key: "",
-                    index: index,
-                  });
-                if (condition.skipConditionIfSecondaryOperandIsEmpty)
-                  children.push({
-                    label: condition.getSkipSecondOperandAlert(),
-                    key: "",
-                    index: index,
-                  });
-              }
-            }
-            this.treeItems[rIndex].children.push({ index, label, children });
-          });
+  get currentWorkflow() {
+    return WorkflowModule.ActiveWorkflow;
+  }
+
+  get flowSteps() {
+    return this.currentWorkflow?.flowSteps;
+  }
+
+  async getDisplayName(condition: any) {
+    switch (condition.myspType) {
+      case "PropertyChangeCondition":
+        return await this.getPropertyChangeName(condition);
+      case "TransitionCondition":
+        return "Workflow is about to " + this.getTransitionName(condition);
+      case "PropertyCondition":
+        return await this.getPropertyName(condition);
+      case "ItemSetCondition":
+        return await this.getItemsetName(condition);
+      case "WorkflowCondition":
+        return await this.getWorkflowName(condition);
+      case "StatusCondition":
+        return await this.getStatusName(condition);
+      case "EntityCategoryCondition":
+        return await this.getEntityName(condition);
+      case "JavascriptCondition":
+        return this.getJavascriptName(condition);
+      case "AttachmentCondition":
+        return this.getAttachmentName(condition);
+      default:
+        return "";
+    }
+  }
+
+  async getAttachmentName(condition: AttachmentCondition | any) {
+    let str = "";
+    if (condition?.mainOperand && condition.mainOperand.length >= 0) {
+      let rs = await EntitiesModule.getEntity(condition.mainOperand[0].value);
+      let property = rs.properties.find(
+        (prop: any) => prop.systemName === condition.mainOperand[1].key
+      );
+      str += `[Workflow(${rs.displayName}): ${property?.displayName}]`;
+    }
+    if (condition.step) {
+      str += " " + condition.step;
+    }
+    str += " " + (!condition.contains ? "does not contain" : "contains");
+    if (condition.attachmentType) str += " " + condition.attachmentType;
+    return str;
+  }
+
+  getJavascriptName(condition: JavascriptCondition | any) {
+    let str = "";
+    if (condition.displayName) str += condition.displayName;
+    return str;
+  }
+  async getEntityName(condition: EntityCategoryCondition | any) {
+    let str: string = "";
+    let rs: any = null;
+    let property: any = null;
+    if (condition?.mainOperand && condition.mainOperand.length >= 0) {
+      rs = await EntitiesModule.getEntity(condition.mainOperand[0].value);
+      let property = rs.properties.find(
+        (prop: any) => prop.systemName === condition.mainOperand[1].key
+      );
+      str += `[Workflow(${rs.displayName}): Category : ${property.displayName}]`;
+    }
+    if (condition.operator) {
+      str += " " + condition.operator;
+    }
+
+    if (
+      condition.secondOperandIsProperty &&
+      condition.secondaryOperand &&
+      condition.secondaryOperand.length > 0
+    ) {
+      str += ` [Workflow(${condition.secondaryOperand[0].key}): ${condition.secondaryOperand[1].key}]`;
+    }
+    return str;
+  }
+
+  async getWorkflowName(condition: WorkflowCondition | any) {
+    let str: string = "";
+    if (condition?.mainOperand && condition.mainOperand.length >= 0) {
+      let rs = await EntitiesModule.getEntity(condition.mainOperand[0].value);
+      let property = rs.properties.find(
+        (prop: any) => prop.systemName === condition.mainOperand[1].key
+      );
+      str += `[Workflow(${rs.displayName}): ${property?.displayName}]`;
+    }
+    if (condition.step) {
+      str += " " + condition.step;
+    }
+    return str;
+  }
+
+  async getStatusName(condition: WorkflowCondition | any) {
+    let str: string = "";
+    if (condition?.mainOperand && condition.mainOperand.length >= 0) {
+      let rs = await EntitiesModule.getEntity(condition.mainOperand[0].value);
+      let property = rs.properties.find(
+        (prop: any) => prop.systemName === condition.mainOperand[1].key
+      );
+      str += `[Workflow(${rs.displayName}): Status: ${property?.displayName}]`;
+    }
+    if (condition.step) {
+      str += " " + condition.step;
+    }
+    return str;
+  }
+
+  async getItemsetName(condition: ItemSetCondition | any) {
+    let str = "";
+    if (condition?.property?.length > 1) {
+      let rs = await EntitiesModule.getEntity(condition.property[0].value);
+      let property: any = rs.properties.find(
+        (prop: any) => prop.systemName === condition.property[1].key
+      );
+      str += `[Workflow(${rs.displayName}): ${property.displayName}] is about to change`;
+    }
+    return str;
+  }
+
+  async getPropertyChangeName(condition: PropertyChangeCondition | any) {
+    let str = "";
+    if (condition?.property?.length > 1) {
+      let rs = await EntitiesModule.getEntity(condition.property[0].value);
+      let property: any = rs.properties.find(
+        (prop: any) => prop.systemName === condition.property[1].key
+      );
+      str += `[Workflow(${rs.displayName}): ${property.displayName}] is about to change`;
+    }
+    if (condition.newValueCanBeEmpty) {
+      str += " a empty value";
+    } else {
+      str += " a non-empty value";
+    }
+    return str;
+  }
+
+  async getPropertyName(condition: PropertyCondition | any) {
+    let str: string = "";
+    let rs: any = null;
+    let property: any = null;
+    if (condition?.mainOperand && condition.mainOperand.length >= 0) {
+      rs = await EntitiesModule.getEntity(condition.mainOperand[0].value);
+      let property = rs.properties.find(
+        (prop: any) => prop.systemName === condition.mainOperand[1].key
+      );
+      str += `[Workflow(${rs.displayName}): ${property.displayName}]`;
+    }
+    if (condition.operator) {
+      str += " " + condition.operator;
+    }
+
+    if (
+      condition.secondOperandIsProperty &&
+      condition.secondaryOperand &&
+      condition.secondaryOperand.length > 0
+    ) {
+      property = rs.properties.find(
+        (prop: any) => prop.systemName === condition.secondaryOperand[1].key
+      );
+      str += ` [Workflow(${rs.displayName}): ${property.displayName}]`;
+    } else if (
+      condition.secondOperandIsApplicationPreference &&
+      condition.secondaryOperand
+    ) {
+      str += ` ${condition.secondaryOperand[0].displayName}`;
+    } else if (
+      condition.secondaryOperand &&
+      condition.secondaryOperand.length === 1
+    ) {
+      str += ` ${condition.secondaryOperand[0]}`;
+    }
+    return str;
+  }
+
+  async getSkipMailOperandAlert(condition: PropertyCondition | any) {
+    if (
+      condition.skipConditionIfMainOperandIsEmpty &&
+      condition.mainOperand &&
+      condition.mainOperand.length > 0
+    ) {
+      let rs = await EntitiesModule.getEntity(condition.mainOperand[0].value);
+      let property = rs.properties.find(
+        (prop: any) => prop.systemName === condition.mainOperand[1].key
+      );
+      return `Skip if [Form (${condition.mainOperand[0].displayName}): ${condition.mainOperand[1].displayName}] is empty`;
+    } else return "";
+  }
+
+  getSkipSecondOperandAlert(condition: PropertyCondition | any): string | any {
+    if (
+      condition.skipConditionIfSecondaryOperandIsEmpty &&
+      condition.secondaryOperand &&
+      condition.secondaryOperand.length >= 0
+    ) {
+      if (condition.secondOperandIsProperty)
+        return `Skip if [Form (${condition.secondaryOperand[0].displayName}): ${condition.secondaryOperand[1].displayName}] is empty`;
+      else if (condition.secondOperandIsApplicationPreference) {
+        return `Skip if [Form (${condition.secondaryOperand[0].displayName})] is empty`;
+      } else {
+        return `Skip if [Form (${condition.secondaryOperand[0]})] is empty`;
+      }
+    } else return "";
+  }
+
+  getTransitionName(step: TransitionCondition) {
+    let flowstep = this.flowSteps?.find(
+      (flow) => flow.statusSystemName === step.stepSystemName
+    );
+    let displayName = flowstep?.displayName ? flowstep?.displayName : "";
+
+    switch (step.type) {
+      case 0:
+        switch (step.stepsToIncludeType) {
+          case 0:
+            return "Progress";
+          case 2:
+            return `Progress to step ${displayName} or beyound it.`;
+          case 3:
+            return `Progress to step ${displayName} or before it.`;
         }
-      });
+        break;
+      case 1:
+        switch (step.stepsToIncludeType) {
+          case 0:
+            return "Regress";
+          case 2:
+            return `Regress to step ${displayName} or beyound it.`;
+          case 3:
+            return `Regress to step ${displayName} or before it.`;
+        }
+        break;
+      case 2:
+        switch (step.stepsToIncludeType) {
+          case 0:
+            return "Move to side step.";
+          case 1:
+            return `Move to side step ${displayName}.`;
+        }
+        break;
+      case 3:
+        switch (step.stepsToIncludeType) {
+          case 0:
+            return "Return to main flow";
+          case 2:
+            return `Return to step ${displayName} or beyound it.`;
+          case 3:
+            return `Return to step ${displayName} or before it.`;
+        }
+        break;
     }
   }
 
@@ -520,24 +749,24 @@ export default class extends Vue {
   }
 
   handleNodeClick(data: any) {
-    console.log('index',data.index)
+    console.log("index", data.index);
     this.itemSelected = true;
     let index = "" + data.index;
     // if (data.index) {
-      let ids = index.split("-");
-      this.selectedRoleGroupIndex = +ids[0];
-      this.currentRoleGroup = this.roleGroups[this.selectedRoleGroupIndex];
-      if (ids.length > 1) {
-        this.selectedConditionIndex = +ids[1];
-        this.currentCondition =
-          this.currentRoleGroup.conditions[this.selectedConditionIndex];
-        this.isEditCondition = true;
-      } else {
-        this.isEditCondition = false;
-        this.selectedConditionIndex = -1;
-        this.currentCondition = null;
-      }
-      this.selectedFilterKey = data.key;
+    let ids = index.split("-");
+    this.selectedRoleGroupIndex = +ids[0];
+    this.currentRoleGroup = this.roleGroups[this.selectedRoleGroupIndex];
+    if (ids.length > 1) {
+      this.selectedConditionIndex = +ids[1];
+      this.currentCondition =
+        this.currentRoleGroup.conditions[this.selectedConditionIndex];
+      this.isEditCondition = true;
+    } else {
+      this.isEditCondition = false;
+      this.selectedConditionIndex = -1;
+      this.currentCondition = null;
+    }
+    this.selectedFilterKey = data.key;
     // }
     console.log("currentCon", this.currentCondition);
   }
@@ -582,7 +811,7 @@ export default class extends Vue {
   }
 
   editCondition() {
-    console.log('isCon', this.isEditCondition)
+    console.log("isCon", this.isEditCondition);
     if (this.isEditCondition) {
       this.showFilterModal[this.currentCondition.myspType] = true;
       console.log(
@@ -590,7 +819,7 @@ export default class extends Vue {
         this.showFilterModal[this.currentCondition.myspType]
       );
     } else {
-      console.log('roleIn',this.selectedRoleGroupIndex)
+      console.log("roleIn", this.selectedRoleGroupIndex);
       if (this.selectedRoleGroupIndex !== -1) {
         this.showRoleGroupPopup("new");
       }
@@ -625,7 +854,7 @@ export default class extends Vue {
 
   showRoleGroupPopup(state: string, authNodesSystemNames: [] = []): void {
     this.isEditCondition = false;
-    this.selectedRoleGroupIndex = -1
+    this.selectedRoleGroupIndex = -1;
     const shouldShowEveryoneButton: boolean = this.checkIfNewRoleGroup(
       this.lpmInstance.getLocalizedString(LanguagesPresentationModel.EVERYONE)
     );

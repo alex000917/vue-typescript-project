@@ -193,9 +193,8 @@ export default class extends Vue {
           idx++;
         });
 
-        // this.roleGroups = this.rule.conditions?.roleGroups;
-
-        console.log(this.conditionsTree);
+        this.roleGroups = this.rule.conditions?.roleGroups;
+        console.log(this.roleGroups)
       }
     } else {
       this.onAddEveryone();
