@@ -32,7 +32,10 @@
         </el-button>
       </el-col>
       <el-col :span="6">
-        <el-button type="text">
+        <el-button
+          type="text"
+          @click="onDelete"
+        >
           <i class="el-icon-delete-solid"></i>
           Delete
         </el-button>
@@ -106,6 +109,7 @@
 <script lang="ts">
 import { ActionWorkflowRule } from "@/models/Workflows/ActionWorkflowRule";
 import { WorkflowModule } from "@/store/modules/WorkflowMod";
+import { EntitiesModule } from "@/store/modules/entitiesMod";
 import { forEach } from "lodash";
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 
@@ -160,12 +164,17 @@ export default class extends Vue {
 
   private actionsTree: any[] = [];
 
-  @Watch("data", { deep: true, immediate: true })
-  setUp(data: any[]) {
-    if (data.length > 0) {
-      this.actionsTree = [];
-      data.forEach((action, index) => {
-        let label = action.getDisplayName();
+  // @Watch("data", { deep: true, immediate: true })
+  // setUp() {
+  //   this.refresh();
+  // }
+
+  @Watch("currentAction", { deep: true, immediate: true })
+  refresh() {
+    this.actionsTree = [];
+    if (this.data.length > 0) {
+      this.data.forEach(async (action, index) => {
+        let label = await this.getDisplayName(action);
         this.actionsTree.push({
           label: label,
           index: index,
@@ -174,18 +183,86 @@ export default class extends Vue {
     }
   }
 
-  @Watch("currentAction", { deep: true, immediate: true })
-  refresh(val: BaseCondition) {
-    if (this.data.length > 0) {
-      this.actionsTree = [];
-      this.data.forEach((action, index) => {
-        let label = action.getDisplayName();
-        this.actionsTree.push({
-          label: label,
-          index: index,
-        });
-      });
+  async getDisplayName(action: any) {
+    switch (action.myspType) {
+      case "XMLAction":
+        return this.getXMLActionName(action);
+      case "MoveWorkflowAction":
+        return await this.getMoveWorkflowActionName(action);
+      case "IntegrationAction":
+        return this.getIntegrationActionName(action);
+      case "ItemsetAction":
+        return this.getItemsetActionName(action);
+      case "PropertyCondition":
+        return await this.getPropertyName(action);
+      default:
+        return "";
     }
+  }
+
+  async getPropertyName(condition: PropertyCondition | any) {
+    let str: string = "";
+    let rs: any = null;
+    let property: any = null;
+    if (condition?.mainOperand && condition.mainOperand.length >= 0) {
+      rs = await EntitiesModule.getEntity(condition.mainOperand[0].value);
+      let property = rs.properties.find(
+        (prop: any) => prop.systemName === condition.mainOperand[1].key
+      );
+      str += `[Workflow(${rs.displayName}): ${property.displayName}]`;
+    }
+    if (condition.operator) {
+      str += " " + condition.operator;
+    }
+
+    if (
+      condition.secondOperandIsProperty &&
+      condition.secondaryOperand &&
+      condition.secondaryOperand.length > 0
+    ) {
+      property = rs.properties.find(
+        (prop: any) => prop.systemName === condition.secondaryOperand[1].key
+      );
+      str += ` [Workflow(${rs.displayName}): ${property.displayName}]`;
+    } else if (
+      condition.secondOperandIsApplicationPreference &&
+      condition.secondaryOperand
+    ) {
+      str += ` ${condition.secondaryOperand[0].displayName}`;
+    } else if (
+      condition.secondaryOperand &&
+      condition.secondaryOperand.length === 1
+    ) {
+      str += ` ${condition.secondaryOperand[0]}`;
+    }
+    return str;
+  }
+
+  getItemsetActionName(action: ItemsetAction) {
+    return action.name ? action.name : "";
+  }
+
+  async getMoveWorkflowActionName(action: MoveWorkflowAction) {
+    let str: string = "";
+    if (action.item.length > 0) {
+      let rs = await EntitiesModule.getEntity(action.item[0].value);
+      str += "Move workflow of item [Workflow" + rs.displayName + "]";
+    }
+    if (action.stepSystemName)
+      str += "to Step ['" + action.stepSystemName + "']";
+    return str;
+  }
+
+  getIntegrationActionName(action: IntegrationAction) {
+    let str: string = "";
+    if (action.name) str += action.name;
+    return str;
+  }
+
+  getXMLActionName(action: XMLAction) {
+    let str: string = "";
+    if (action.name) str += action.name;
+    return action.name;
   }
 
   onNodeClick(data: any) {
@@ -200,6 +277,17 @@ export default class extends Vue {
     } else {
       this.data[this.selectedAction] = action;
     }
+  }
+
+  onDelete() {
+    if (this.data.length > 0) {
+      if (this.selectedAction === -1) {
+        this.data.splice(this.data.length - 1, 1);
+      } else {
+        this.data.splice(this.selectedAction, 1);
+      }
+    }
+    this.currentAction = new BaseCondition();
   }
 
   onNewActionSelect(command: string) {

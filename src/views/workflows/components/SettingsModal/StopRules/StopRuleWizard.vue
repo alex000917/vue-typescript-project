@@ -258,7 +258,7 @@ export default class extends Vue {
   onSysNameChange() {
     if (this.ruleSysname) {
       this.conditionsTree = [];
-      this.rule = this.CurrentWorkflow?.actionWorkflowRules?.find(
+      this.rule = this.CurrentWorkflow?.stopWorkflowRules?.find(
         (c) => c.systemName == this.ruleSysname
       );
       if (this.rule) {

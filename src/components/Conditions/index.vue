@@ -2,14 +2,8 @@
   <div>
     <div class="outer-modal-container">
       <slot name="description" />
-      <el-row
-        type="flex"
-        class="command-container"
-      >
-        <el-col
-          :span="5"
-          class="command-button"
-        >
+      <el-row type="flex" class="command-container">
+        <el-col :span="5" class="command-button">
           <el-button
             type="text"
             icon="el-icon-user"
@@ -19,36 +13,24 @@
               )
             "
           >
-            <span
-              class="button-text"
-              @click="showRoleGroupPopup('new')"
-            >{{
+            <span class="button-text" @click="showRoleGroupPopup('new')">{{
               lpmInstance.getLocalizedString(
                 languagesPresentationModel.NEW_ROLE_GROUP
               )
             }}</span>
           </el-button>
         </el-col>
-        <el-col
-          v-if="showFiltersButton"
-          class="command-button"
-        >
+        <el-col v-if="showFiltersButton" class="command-button">
           <el-dropdown
             trigger="click"
             size="small"
             placement="bottom-start"
             @command="newFilterHandler"
           >
-            <el-button
-              type="text"
-              icon="el-icon-brush"
-            >
+            <el-button type="text" icon="el-icon-brush">
               <span class="button-text">New Filter</span>
             </el-button>
-            <el-dropdown-menu
-              slot="dropdown"
-              style="margin-top: 0"
-            >
+            <el-dropdown-menu slot="dropdown" style="margin-top: 0;">
               <el-dropdown-item
                 v-for="filter in filtersList"
                 :key="filter.id"
@@ -59,10 +41,7 @@
             </el-dropdown-menu>
           </el-dropdown>
         </el-col>
-        <el-col
-          :span="5"
-          class="command-button"
-        >
+        <el-col :span="5" class="command-button">
           <el-dropdown
             trigger="click"
             size="small"
@@ -79,7 +58,7 @@
             <el-dropdown-menu
               v-if="!isAction"
               slot="dropdown"
-              style="margin-top: 0"
+              style="margin-top: 0;"
             >
               <el-dropdown-item
                 v-for="condition in conditionsList"
@@ -89,11 +68,7 @@
                 {{ condition.label }} Conditions...
               </el-dropdown-item>
             </el-dropdown-menu>
-            <el-dropdown-menu
-              v-else
-              slot="dropdown"
-              style="margin-top: 0"
-            >
+            <el-dropdown-menu v-else slot="dropdown" style="margin-top: 0;">
               <el-dropdown-item
                 v-for="condition in actionsList"
                 :key="condition.id"
@@ -105,10 +80,7 @@
             </el-dropdown-menu>
           </el-dropdown>
         </el-col>
-        <el-col
-          :span="2"
-          class="command-button"
-        >
+        <el-col :span="2" class="command-button">
           <el-button
             type="text"
             icon="el-icon-edit-outline"
@@ -117,14 +89,8 @@
             <span class="button-text">Edit</span>
           </el-button>
         </el-col>
-        <el-col
-          :span="2"
-          class="command-button"
-        >
-          <el-button
-            type="text"
-            icon="el-icon-delete"
-          >
+        <el-col :span="2" class="command-button">
+          <el-button type="text" icon="el-icon-delete" @click="onDelete">
             <span class="button-text">Delete</span>
           </el-button>
         </el-col>
@@ -141,20 +107,17 @@
           class="tree-container"
           @node-click="handleNodeClick"
         >
-          <span
-            slot-scope="{ node, data }"
-            class="custom-tree-node"
-          >
-            <div style="display: flex; align-items: center">
+          <span slot-scope="{ node, data }" class="custom-tree-node">
+            <div style="display: flex; align-items: center;">
               <el-image
-                style="width: 20px; height: 20px"
+                style="width: 20px; height: 20px;"
                 :src="
                   data.key === `everyone`
                     ? `/assets/img/approved-by-32x32.png`
                     : `/assets/img/User-set-in-an-application-preference16x16.png`
                 "
               />
-              <span style="margin-left: 5px">
+              <span style="margin-left: 5px;">
                 {{ node.label }}
               </span>
             </div>
@@ -373,7 +336,7 @@ export default class extends Vue {
   };
 
   private authorizationTree: AuthorizationTree = new AuthorizationTree();
-  private currentRoleGroup: RoleGroup | null = new RoleGroup();
+  private currentRoleGroup: RoleGroup | any = new RoleGroup();
   private selectedRoleGroupIndex = -1;
   private selectedConditionIndex = -1;
   private allowedNodeTypes = [];
@@ -758,8 +721,9 @@ export default class extends Vue {
     this.currentRoleGroup = this.roleGroups[this.selectedRoleGroupIndex];
     if (ids.length > 1) {
       this.selectedConditionIndex = +ids[1];
-      this.currentCondition =
-        this.currentRoleGroup.conditions[this.selectedConditionIndex];
+      this.currentCondition = this.currentRoleGroup.conditions[
+        this.selectedConditionIndex
+      ];
       this.isEditCondition = true;
     } else {
       this.isEditCondition = false;
@@ -826,6 +790,28 @@ export default class extends Vue {
     }
   }
 
+  onDelete() {
+    let index = -1;
+    if (this.isEditCondition) {
+      if (this.selectedConditionIndex === -1 && this.currentRoleGroup) {
+        this.currentRoleGroup.conditions.splice(
+          this.currentRoleGroup.conditions.length - 1,
+          1
+        );
+      } else if (this.selectedConditionIndex !== -1 && this.currentRoleGroup) {
+        this.currentRoleGroup.conditions.splice(this.selectedConditionIndex, 1);
+      }
+      this.roleGroups[this.selectedRoleGroupIndex] = this.currentRoleGroup;
+    } else {
+      if (this.selectedRoleGroupIndex === -1) {
+        this.roleGroups.splice(this.roleGroups.length - 1, 1);
+      } else {
+        this.roleGroups.splice(this.selectedRoleGroupIndex, 1);
+      }
+    }
+    this.currentCondition = new BaseCondition();
+  }
+
   updateTreeChildren(key: string, childNodeData: any, initialLabel: string) {
     if (this.treeItems?.length === 0) return;
     let label = initialLabel;
@@ -865,8 +851,7 @@ export default class extends Vue {
 
     this.newRoleGroupModalData.visible = true;
     this.newRoleGroupModalData.state = state;
-    this.newRoleGroupModalData.shouldShowEveryoneButton =
-      shouldShowEveryoneButton;
+    this.newRoleGroupModalData.shouldShowEveryoneButton = shouldShowEveryoneButton;
     this.newRoleGroupModalData.authNodesSystemNames = authNodesSystemNames;
   }
 
@@ -898,6 +883,7 @@ export default class extends Vue {
         index: this.selectedRoleGroupIndex,
       });
     }
+    this.isEditCondition = false;
   }
 
   get getTreeItems() {
@@ -908,8 +894,9 @@ export default class extends Vue {
     if (this.selectedFilterKey === "everyone") {
       this.filterData = this.defaultFilterData;
     } else {
-      this.filterData[this.selectedFilterKey] =
-        this.defaultFilterData[this.selectedFilterKey];
+      this.filterData[this.selectedFilterKey] = this.defaultFilterData[
+        this.selectedFilterKey
+      ];
     }
   }
 
@@ -951,8 +938,6 @@ export default class extends Vue {
   }
 }
 </style>
-
-
 
 <style lang="scss">
 .el-dialog__footer {

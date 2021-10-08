@@ -77,7 +77,7 @@
                 title="Advanced settings"
                 name="workWeekDays"
               >
-                {{ `System name ${ruleName}` }}
+                {{ `System name ${advancedRuleName}` }}
               </el-collapse-item>
             </el-collapse>
           </el-row>
@@ -122,6 +122,8 @@ import { ItemSetCondition } from "@/models/Conditions";
 
 import ConditionTree from "@/components/Conditions/index.vue";
 import ActionTree from "./action/index.vue";
+import { Restriction } from "@/models/Restriction";
+import { ActionGroup } from "@/models/Workflows/ActionGroup";
 
 @Component({
   name: "",
@@ -131,12 +133,12 @@ import ActionTree from "./action/index.vue";
   },
 })
 export default class extends Vue {
-  @Prop({ required: true }) visibleWizard!: string;
+  @Prop({ required: true }) visibleWizard!: boolean;
   @Prop({ required: true }) ruleSysname!: string;
 
   conditionsTree: any[] = [];
 
-  private actionGroups: any[] = [];
+  private actionGroups: any[] | any= [];
 
   private currentStep: number = 0;
 
@@ -148,6 +150,24 @@ export default class extends Vue {
     transition: {},
     propertyCondition: {},
   };
+
+  get showModal() {
+    return this.visibleWizard;
+  }
+
+  set showModal(val: boolean) {
+    this.$emit("update:visibleWizard", val);
+  }
+
+  get advancedRuleName() {
+    let name = this.ruleName;
+    let out = "";
+    name.split(" ").forEach(function (el, idx) {
+        var add = el.toLowerCase();
+        out += (idx === 0 ? add : add[0].toUpperCase() + add.slice(1));
+    });
+    return out ? "cse_" + out : "";
+  }
 
   get CurrentWorkflow() {
     return WorkflowModule.ActiveWorkflow;
@@ -193,8 +213,11 @@ export default class extends Vue {
           idx++;
         });
 
+        this.ruleName = this.rule.displayName;
         this.roleGroups = this.rule.conditions?.roleGroups;
-        console.log(this.roleGroups)
+        this.actionGroups = this.rule.actionGroup?.actions;
+        console.log(this.actionGroups);
+        console.log(this.rule)
       }
     } else {
       this.onAddEveryone();
@@ -269,7 +292,17 @@ export default class extends Vue {
     this.currentStep--;
   }
 
-  onOk() {}
+  onOk() {
+    if (!this.rule) this.rule = new ActionWorkflowRule();
+    if(this.rule && !this.rule.conditions) this.rule.conditions = new Restriction();
+    this.rule.conditions.roleGroups = this.roleGroups;
+    if (this.rule && !this.rule.actionGroup) this.rule.actionGroup = new ActionGroup();
+    this.rule.actionGroup.actions = this.actionGroups;
+    this.rule.systemName = this.advancedRuleName;
+    this.rule.displayName = this.ruleName;
+    this.$emit("onSave", this.rule)
+    this.showModal = false;
+  }
 }
 </script>
 

@@ -56,10 +56,10 @@
     <el-row>
       <draggable v-model="rulesTree" class="draggable-list">
         <transition-group>
-          <el-row v-for="element in rulesTree" :key="element.systemName">
+          <el-row v-for="(element, index) in rulesTree" :key="element.systemName">
             <el-button
               style="width: 100%; text-align: left"
-              @click="onItemClick(element.systemName)"
+              @click="onItemClick(element.systemName, index)"
             >
               {{ element.displayName }}
             </el-button>
@@ -72,6 +72,7 @@
     <ActionRuleWizard
       :visible-wizard.sync="actionRuleWizard"
       :ruleSysname.sync="selectedRule"
+      @onSave="onSave"
     >
     </ActionRuleWizard>
     <xml-action-modal
@@ -110,6 +111,8 @@ export default class extends Vue {
   xmlAction: XMLAction = new XMLAction();
   showXmlActionModal: boolean = false;
 
+  selectedIndex = -1;
+
   saveXml(action: XMLAction) {
     this.xmlAction = action;
   }
@@ -142,12 +145,23 @@ export default class extends Vue {
     }
   }
 
-  onItemClick(sysName: string) {
+  onItemClick(sysName: string, index: number) {
     console.log(sysName);
+    this.selectedIndex = index;
     this.selectedRule = sysName;
     this.disableEdit = false;
     console.log(this.selectedRule);
   }
+
+  onSave(rule: ActionWorkflowRule) {
+    console.log('rule', rule)
+    if (this.selectedIndex === -1) {
+      this.rulesTree.push(rule);
+    } else {
+      this.rulesTree[this.selectedIndex] = rule;
+    }
+  }
+
 }
 </script>
 
