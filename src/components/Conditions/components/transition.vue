@@ -257,7 +257,7 @@ export default class extends Vue {
   returnMainFlowType = "0";
   returnStepBeyond = null;
   returnStepBefore = null;
-  conditionType = "0";
+  conditionType: string = "0";
 
   get currentWorkflow() {
     return WorkflowModule.ActiveWorkflow;
@@ -282,8 +282,7 @@ export default class extends Vue {
   @Watch("condition", { immediate: true })
   onCondition() {
     if (this.condition) {
-      this.conditionType = this.condition.type+'';
-
+      this.conditionType = this.condition.type ? this.condition.type +'': "0";
       switch (this.conditionType) {
         case "0":
           this.progressType = this.condition.stepsToIncludeType+'';
@@ -317,7 +316,7 @@ export default class extends Vue {
              this.returnStepBefore = this.condition.stepSystemName as any;
           break;
       }
-    }
+    } 
   }
 
   onAdd() {

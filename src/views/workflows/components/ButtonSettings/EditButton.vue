@@ -108,7 +108,7 @@ export default class extends Vue {
   mandatory = true;
   dialogInfo: any = {};
 
-  private conditionData = [];
+  private conditionData: any[] | any = [];
 
   get showModal() {
     return this.dialogVisible;
@@ -141,6 +141,16 @@ export default class extends Vue {
 
     this.dialogInfo.displayName = this.dialogInfo.languageTranslations[0].displayName
     originActiveWorkflow["ribbons"][ribbonIndex]["buttons"][buttonIndex] = this.dialogInfo
+    if (this.conditionData?.length > 0) {
+      if (!originActiveWorkflow["ribbons"][ribbonIndex]["buttons"][buttonIndex]['viewByRestriction']) {
+        originActiveWorkflow["ribbons"][ribbonIndex]["buttons"][buttonIndex]['viewByRestriction'] = {
+          roleGroups : []
+        }
+      }
+      originActiveWorkflow["ribbons"][ribbonIndex]["buttons"][buttonIndex]['viewByRestriction']['roleGroups'] = this.conditionData;
+    }
+    
+    
 
     this.$store.commit("SET_ACTIVE_WORKFLOW", originActiveWorkflow)
     this.showModal = false;
@@ -154,6 +164,7 @@ export default class extends Vue {
   setUp(value: Boolean) {
     if (value) {
       this.dialogInfo = cloneDeep(this.originButonInfo)
+      this.conditionData = this.originButonInfo?.viewByRestriction?.roleGroups?.length ? this.originButonInfo?.viewByRestriction?.roleGroups : [];
     }
   }
 }

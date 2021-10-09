@@ -31,16 +31,21 @@
 
       <el-row class="filter-container__row filter-container__row--last">
         <el-col>
+          <el-radio-group
+              v-model="newValueCanBeEmpty"
+              @change="changeRadio"
+            >
           <el-row class="filter-container__row--detail">
-            <el-radio v-model="items.newValueCanBeEmpty" label="1"
+            <el-radio label="1"
               >New value cannot be empty</el-radio
             >
           </el-row>
           <el-row class="filter-container__row--detail">
-            <el-radio v-model="items.newValueCanBeEmpty" label="0"
+            <el-radio label="0"
               >New value can be empty</el-radio
             >
           </el-row>
+          </el-radio-group>
         </el-col>
       </el-row>
     </el-form>
@@ -79,16 +84,20 @@ export default class extends Vue {
       displayName: "",
       value: null,
     },
-    newValueCanBeEmpty: 0
+    newValueCanBeEmpty: 1
   };
 
-  private items: any = {
+
+
+  items: any = {
     property: {
       displayName: "",
       value: null,
     },
     newValueCanBeEmpty: 1,
   };
+
+  newValueCanBeEmpty: string = "1";
 
   private formRules = {
     property: [
@@ -129,6 +138,10 @@ export default class extends Vue {
 
   get activeWorkflow() {
     return WorkflowModule.activeWorkflow;
+  }
+
+  changeRadio(val: string) {
+    this.items.newValueCanBeEmpty = parseInt(val);
   }
 
   onShowPropertySelector() {

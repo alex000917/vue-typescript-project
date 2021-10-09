@@ -179,6 +179,11 @@ export default class extends Vue {
 
   rule: ActionWorkflowRule | undefined;
 
+  @Watch("visibleWizard", {immediate: true})
+  setUp(val: boolean) {
+    if (val) this.currentStep = 0
+  }
+
   @Watch("ruleSysname", { immediate: true })
   onSysNameChange() {
     if (this.ruleSysname) {
@@ -216,12 +221,12 @@ export default class extends Vue {
         this.ruleName = this.rule.displayName;
         this.roleGroups = this.rule.conditions?.roleGroups;
         this.actionGroups = this.rule.actionGroup?.actions;
-        console.log(this.actionGroups);
-        console.log(this.rule)
+  
       }
     } else {
       this.onAddEveryone();
     }
+    this.currentStep = 0;
   }
 
   getMessage(step: any) {

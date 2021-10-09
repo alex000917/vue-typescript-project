@@ -180,6 +180,8 @@ import prefModel from "@/components/Preferences/prefModel.vue";
 import SelectPropertyModel from "@/components/PropertySelector/index.vue";
 import { RoleGroup } from "@/models/RoleGroup";
 import { ApplicationPreference } from "@/models/ApplicationPreference";
+import { Restriction } from "@/models/Restriction";
+import { ActionGroup } from "@/models/Workflows/ActionGroup";
 
 @Component({
   name: "stoprule-wizard",
@@ -210,6 +212,8 @@ export default class extends Vue {
       value: [],
     },
   };
+
+  private actionGroups: any[] | any= [];
 
   private roleGroups: RoleGroup[] | any = [];
 
@@ -246,6 +250,11 @@ export default class extends Vue {
   }
 
   rule: ActionWorkflowRule | undefined;
+
+  @Watch("visibleWizard", {immediate: true})
+  setUp(val: boolean) {
+    if (val) this.currentStep = 0
+  }
 
   @Watch("ruleName", {immediate: true})
   setAdvancedRuleName() {
@@ -288,7 +297,13 @@ export default class extends Vue {
           idx++;
         });
 
-        console.log(this.conditionsTree);
+        this.ruleName = this.rule.displayName;
+        this.roleGroups = this.rule.conditions?.roleGroups;
+        this.actionGroups = this.rule.actionGroup?.actions;
+        this.items.propertyFirst.value = []
+        this.items.propertyFirst.displayName = ""
+        this.items.propertySecond.value = []
+        this.items.propertySecond.displayName = ""
       }
     } else {
       this.onAddEveryone();
@@ -434,7 +449,17 @@ export default class extends Vue {
     this.currentStep--;
   }
 
-  onOk() {}
+  onOk() {
+    if (!this.rule) this.rule = new ActionWorkflowRule();
+    if(this.rule && !this.rule.conditions) this.rule.conditions = new Restriction();
+    this.rule.conditions.roleGroups = this.roleGroups;
+    if (this.rule && !this.rule.actionGroup) this.rule.actionGroup = new ActionGroup();
+    this.rule.actionGroup.actions = this.actionGroups;
+    this.rule.systemName = this.advancedRuleName;
+    this.rule.displayName = this.ruleName;
+    
+    this.$emit("update:visibleWizard", false);
+  }
 
   onNodeClick(node: any, props: any, tree: any) {
     if (node && node.label != "Everyone") {

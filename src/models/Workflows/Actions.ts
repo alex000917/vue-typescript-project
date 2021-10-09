@@ -16,6 +16,7 @@ export class XMLAction extends BaseAction{
     myspType = "XMLAction";
     xml:string | null = '';
     name:string | null = '';
+    displayName: string | any = ""
 
     getDisplayName() {
         let str: string = '';
@@ -82,6 +83,7 @@ export class AttachmentAction extends BaseAction {
     step: string = "";
     ruleName: string = "";
     systemName: string = "";
+    displayName = "";
 
     getDisplayName() {
         return this.ruleName;

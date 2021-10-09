@@ -46,7 +46,8 @@
           <el-form-item prop="propertySecond">
             <el-input
               v-model="items.propertySecond.displayName"
-              type="text"
+              :type="isNumber ? 'number' : 'text'"
+              :disabled="isBlank"
               style="padding-right: 30px"
               :readonly="secondPropertyReadOnly"
             />
@@ -71,11 +72,14 @@
               style="margin-top: 0"
             >
               <el-dropdown-item command="typeText">
-                Type text...
+                Type a Number
               </el-dropdown-item>
               <el-dropdown-item command="selectProperty">
                 Select propery...
               </el-dropdown-item>
+              <el-dropdown-item command="blank">
+                Blank ...
+              </el-dropdown-item>              
               <el-dropdown-item command="selectPreference">
                 Select application Preference...
               </el-dropdown-item>
@@ -160,6 +164,9 @@ export default class extends Vue {
         trigger: "blur",
       },
     ],
+    propertySecond : [
+      { type: 'number', message: 'Field must be a number',trigger: 'blur'}
+    ]
   };
 
   private selectPropertyModal: any = {
@@ -228,6 +235,9 @@ export default class extends Vue {
     console.log("this.selectProperty", this.selectPropertyModal);
   }
 
+  isNumber = false;
+  isBlank = false;
+
   selectInputMethod(command: string) {
     this.items.propertySecond = {
       displayName: "",
@@ -235,6 +245,8 @@ export default class extends Vue {
     };
     console.log(command)
     if (command === "typeText") {
+      this.isNumber = true;
+      this.isBlank = false;
       this.selectPropertyModal = {
         show: false,
         key: "first",
@@ -255,6 +267,12 @@ export default class extends Vue {
         key: "second",
       };
       this.secondPropertyReadOnly = true;
+      this.isNumber = false;
+      this.isBlank = false;
+    } else if (command === "blank") {
+      this.items.propertySecond.displayName = ""
+      this.isBlank = true;
+      this.isNumber = false;
     }
   }
 
@@ -262,6 +280,10 @@ export default class extends Vue {
     this.$nextTick(() => {
       this.$refs.dropdown.show();
     });
+  }
+
+  onIsNumber(e: any) {
+    console.log(e)
   }
 
   resultHandler(displayPaths: KeyValue[], result: KeyValue[]) {

@@ -42,13 +42,13 @@
         <el-col>
           <el-row class="filter-container__row--detail">
             <el-radio
-              v-model="items.contains"
+              v-model="contains"
               label="1"
             >Contains</el-radio>
           </el-row>
           <el-row class="filter-container__row--detail">
             <el-radio
-              v-model="items.contains"
+              v-model="contains"
               label="0"
             >Does not contains</el-radio>
           </el-row>
@@ -119,6 +119,13 @@ export default class extends Vue {
     contains: 1,
     attachmentType: "",
   };
+
+  private contains: string = "1";
+
+  @Watch("contains", {immediate: true})
+  changeRadio(val: string) {
+    this.items.contains = parseInt(val);
+  }
 
   private formRules = {
     property: [

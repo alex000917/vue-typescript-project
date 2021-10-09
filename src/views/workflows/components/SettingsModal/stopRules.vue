@@ -122,7 +122,7 @@
       :action.sync="currentAction"
     />
     <stop-rule-wizard
-      :visible-wizard.sync="stopRuleVisible['StopRuleAction']"
+      :visible-wizard.sync="stopRuleVisible['StopWorkflowRule']"
       :ruleSysname.sync="selectedRule"
     />
   </el-container>
@@ -137,8 +137,9 @@ import {
   BaseAction,
   XMLAction,
   AttachmentAction,
-  StopRuleAction,
 } from "@/models/Workflows/Actions";
+import { WorkflowModule } from "@/store/modules/WorkflowMod";
+import { StopWorkflowRule } from "@/models/Workflows/StopWorkflowRule"
 
 @Component({
   name: "",
@@ -147,20 +148,23 @@ import {
 export default class extends Vue {
   newStopRuleDropDowns = [
     { id: "AttachmentAction", value: "Attachment Stop Rule" },
-    { id: "StopRuleAction", value: "Stop Rule Wizard" },
+    { id: "StopWorkflowRule", value: "Stop Rule Wizard" },
     { id: "XMLAction", value: "Xml Rule" },
   ];
+
+  ruleTree: StopWorkflowRule[] | any = [];
+  disableEdit = true;
 
   selectedRule: string | null = null;
 
   private stopRuleVisible: any = {
     AttachmentAction: false,
-    StopRuleAction: false,
+    StopWorkflowRule: false,
     XMLAction: false,
   };
 
   private actions: BaseAction[] = [];
-  private currentAction: BaseAction = new BaseAction();
+  private currentAction: BaseAction | any = new BaseAction();
 
   private selectedActionIndex = -1;
 
@@ -168,14 +172,34 @@ export default class extends Vue {
 
   private xmlAcion = new XMLAction();
 
+  get CurrentWorkflow() {
+    return WorkflowModule.ActiveWorkflow;
+  }
+
+  mounted() {
+    this.ruleTree = this.CurrentWorkflow?.stopWorkflowRules;
+
+    if (this.ruleTree) {
+      this.ruleTree.forEach((rule: any, key: number) => {
+        this.myArray.push({
+          name: rule.displayName,
+          order: key,
+          fixed: false
+        });
+      });
+    }
+    console.log('myarray',this.myArray)
+    console.log(this.disableEdit);
+  }
+
   @Watch("currentAction", { deep: true, immediate: true })
   refreshTree(val: BaseAction) {
-    this.myArray = [];
-    if (this.actions.length > 0) {      
-      this.actions.forEach((action: any) => {
+    this.myArray = []
+    if (this.ruleTree.length > 0) {      
+      this.ruleTree.forEach((action: any, key: number) => {
         this.myArray.push({
-          name: action.getDisplayName(),
-          order: this.myArray.length,
+          name: action.displayName,
+          order: key,
           fixed: false,
         });
       });
@@ -184,9 +208,9 @@ export default class extends Vue {
 
   onSave(action: any) {
     if (this.selectedActionIndex === -1) {
-      this.actions.push(action);
+      this.ruleTree.push(action);
     } else {
-      this.actions[this.selectedActionIndex] = action;
+      this.ruleTree[this.selectedActionIndex] = action;
     }
   }
 
@@ -196,33 +220,35 @@ export default class extends Vue {
       case "AttachmentAction":
         this.currentAction = new AttachmentAction();
         break;
-      case "StopRuleAction":
-        this.currentAction = new StopRuleAction();
+      case "StopWorkflowRule":
+        this.currentAction = new StopWorkflowRule();
         break;
       case "XMLAction":
         this.currentAction = new XMLAction();
         break;
     }
-    this.stopRuleVisible[command] = true;
+    this.onEdit();
   }
 
   onEdit() {
+    if (this.currentAction.myspType === "StopWorkflowRule") {
+      this.selectedRule = this.currentAction.systemName;
+    }
     this.stopRuleVisible[this.currentAction.myspType] = true;
   }
 
   onDelete() {
     if (this.selectedActionIndex !== -1) {
-      this.actions.splice(this.selectedActionIndex, 1);
+      this.ruleTree.splice(this.selectedActionIndex, 1);
     } else {
-      this.actions.splice(this.actions.length - 1, 1);
+      this.ruleTree.splice(this.ruleTree.length - 1, 1);
     }
     this.currentAction = new BaseAction();
   }
 
   selectNode(index: number) {
-    console.log(index)
     this.selectedActionIndex = index;
-    this.currentAction = this.actions[index];
+    this.currentAction = this.ruleTree[index];
   }
 }
 </script>

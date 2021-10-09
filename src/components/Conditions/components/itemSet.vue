@@ -147,7 +147,7 @@ export default class extends Vue {
       displayName: "",
       value: null,
     },
-    itemSetConditionType: 0,
+    itemSetConditionType: "",
     skipConditionIfSetIsEmpty: 0,
     displayName: "",
   } as any;

@@ -1,7 +1,13 @@
 <template>
   <el-container direction="vertical">
-    <el-row type="flex" align="middle">
-      <el-image src="/assets/img/stop-rule-32x32.png" fit="fill" />
+    <el-row
+      type="flex"
+      align="middle"
+    >
+      <el-image
+        src="/assets/img/stop-rule-32x32.png"
+        fit="fill"
+      />
       <span style="font-size: 18px; margin-left: 5px">Action Rules</span>
     </el-row>
     <el-row style="margin-top: 10px">
@@ -10,7 +16,12 @@
         For example: when item cancelled, cancel all child items as well.
       </el-row>
     </el-row>
-    <el-row type="flex" justify="start" align="middle" style="margin-top: 5px">
+    <el-row
+      type="flex"
+      justify="start"
+      align="middle"
+      style="margin-top: 5px"
+    >
       <el-dropdown
         trigger="click"
         size="small"
@@ -19,7 +30,11 @@
         style="margin-right: 8px"
       >
         <el-button type="text">
-          <el-row type="flex" justify="center" align="middle">
+          <el-row
+            type="flex"
+            justify="center"
+            align="middle"
+          >
             <el-image
               src="/assets/img/stop-rule-16x16.png"
               style="padding-right: 5px"
@@ -27,15 +42,26 @@
             New action rule
           </el-row>
         </el-button>
-        <el-dropdown-menu slot="dropdown" style="margin-top: 0">
-          <el-dropdown-item command="ActionRuleWizard">
+        <el-dropdown-menu
+          slot="dropdown"
+          style="margin-top: 0"
+        >
+          <el-dropdown-item command="ActionWorkflowRule">
             Action Rule Wizard
           </el-dropdown-item>
           <el-dropdown-item command="XmlRule"> Xml Rule </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <el-button type="text" @click="onEdit" :disabled="disableEdit">
-        <el-row type="flex" justify="center" align="middle">
+      <el-button
+        type="text"
+        @click="onEdit"
+        :disabled="disableEdit"
+      >
+        <el-row
+          type="flex"
+          justify="center"
+          align="middle"
+        >
           <el-image
             src="/assets/img/edit16x16.png"
             style="padding-right: 5px"
@@ -43,8 +69,12 @@
           Edit
         </el-row>
       </el-button>
-      <el-button type="text">
-        <el-row type="flex" justify="center" align="middle">
+      <el-button type="text" @click="onDelete">
+        <el-row
+          type="flex"
+          justify="center"
+          align="middle"
+        >
           <el-image
             src="/assets/img/delete-16x16.png"
             style="padding-right: 5px"
@@ -54,14 +84,20 @@
       </el-button>
     </el-row>
     <el-row>
-      <draggable v-model="rulesTree" class="draggable-list">
+      <draggable
+        v-model="rulesTree"
+        class="draggable-list"
+      >
         <transition-group>
-          <el-row v-for="(element, index) in rulesTree" :key="element.systemName">
+          <el-row
+            v-for="(element, index) in rulesTree"
+            :key="index"
+          >
             <el-button
               style="width: 100%; text-align: left"
-              @click="onItemClick(element.systemName, index)"
+              @click="onItemClick(index)"
             >
-              {{ element.displayName }}
+              {{ element.myspType === "ActionWorkflowRule" ? element.displayName : element.name }}
             </el-button>
           </el-row>
         </transition-group>
@@ -78,7 +114,7 @@
     <xml-action-modal
       :dialogVisible.sync="showXmlActionModal"
       :action="xmlAction"
-      @onSave="saveXml"
+      @onSave="onSave"
     />
   </el-container>
 </template>
@@ -101,21 +137,17 @@ export default class extends Vue {
   actionRuleWizard = false;
   disableEdit = true;
 
-  ruleActions: any = ["ActionRuleWizard", "XmlRule"];
+  ruleActions: any = ["ActionWorkflowRule", "XmlRule"];
 
   get CurrentWorkflow() {
     return WorkflowModule.ActiveWorkflow;
   }
 
   selectedRule: string | null = null;
-  xmlAction: XMLAction = new XMLAction();
+  xmlAction: XMLAction | any = new XMLAction();
   showXmlActionModal: boolean = false;
 
   selectedIndex = -1;
-
-  saveXml(action: XMLAction) {
-    this.xmlAction = action;
-  }
 
   mounted() {
     var rules = this.CurrentWorkflow?.actionWorkflowRules;
@@ -130,38 +162,52 @@ export default class extends Vue {
   }
 
   onEdit() {
+    if (this.rulesTree[this.selectedIndex].myspType === "ActionWorkflowRule") {
+      this.selectedRule = this.rulesTree[this.selectedIndex].systemName;
+      this.actionRuleWizard = true;
+    } else {
+      this.xmlAction = this.rulesTree[this.selectedIndex];
+      this.showXmlActionModal = true;
+    }
     this.actionRuleWizard = true;
   }
 
   newActionRule(command: string) {
     switch (command) {
-      case "ActionRuleWizard":
+      case "ActionWorkflowRule":
+        this.selectedRule = '';
         this.selectedRule = null;
         this.actionRuleWizard = true;
         break;
       case "XmlRule":
+        this.xmlAction = new XMLAction();
         this.showXmlActionModal = true;
         break;
     }
   }
 
-  onItemClick(sysName: string, index: number) {
-    console.log(sysName);
-    this.selectedIndex = index;
-    this.selectedRule = sysName;
-    this.disableEdit = false;
-    console.log(this.selectedRule);
+  onItemClick(index: number) {
+    this.selectedIndex = index;    
+      this.disableEdit = false;
   }
 
-  onSave(rule: ActionWorkflowRule) {
-    console.log('rule', rule)
+  onSave(rule: any) {
     if (this.selectedIndex === -1) {
       this.rulesTree.push(rule);
     } else {
       this.rulesTree[this.selectedIndex] = rule;
     }
+    if (WorkflowModule.ActiveWorkflow) WorkflowModule.ActiveWorkflow.actionWorkflowRules = this.rulesTree;
   }
 
+  onDelete() {
+    if (this.selectedIndex === -1) {
+      this.rulesTree.splice(this.rulesTree.length - 1, 1);
+    } else {
+      this.rulesTree.splice(this.selectedIndex, 1)
+      this.selectedIndex = -1;
+    }
+  }
 }
 </script>
 

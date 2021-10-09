@@ -75,7 +75,7 @@
                 :command="condition.id"
                 :disabled="condition.disabled"
               >
-                {{ condition.label }} Conditions...
+                {{ condition.label }}
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
@@ -206,6 +206,7 @@ import JavascriptConditionModal from "@/components/Conditions/components/javascr
 import StatusConditionModal from "@/components/Conditions/components/statusFilter.vue";
 import PropertyChangeModal from "@/components/Conditions/components/newPropertyChange.vue";
 import TransitionConditionModal from "@/components/Conditions/components/transition.vue";
+import { FormsModule } from "@/store/modules/FormsStore";
 
 import lodash from "lodash";
 
@@ -300,22 +301,22 @@ export default class extends Vue {
   private actionsList = [
     {
       id: "PropertyChangeCondition",
-      label: "Property Change",
+      label: "Property Change  Conditions...",
       disabled: false,
     },
-    { id: "TransitionCondition", label: "Transition", disabled: false },
+    { id: "TransitionCondition", label: "Transition  Conditions...", disabled: false },
     { id: "", label: "-----------------------", disabled: true },
 
-    { id: "PropertyCondition", label: "Property", disabled: false },
-    { id: "ItemSetCondition", label: "Item Set", disabled: false },
-    { id: "WorkflowCondition", label: "Workflow", disabled: false },
+    { id: "PropertyCondition", label: "Property  Conditions...", disabled: false },
+    { id: "ItemSetCondition", label: "Item Set  Conditions...", disabled: false },
+    { id: "WorkflowCondition", label: "Workflow  Conditions...", disabled: false },
     {
       id: "EntityCategoryCondition",
-      label: "Entity category",
+      label: "Entity category  Conditions...",
       disabled: false,
     },
-    { id: "JavascriptCondition", label: "Javscript", disabled: false },
-    { id: "AttachmentCondition", label: "Attachment", disabled: false },
+    { id: "JavascriptCondition", label: "Javscript  Conditions...", disabled: false },
+    { id: "AttachmentCondition", label: "Attachment  Conditions...", disabled: false },
   ];
 
   private filtersList = [
@@ -378,14 +379,15 @@ export default class extends Vue {
   }
 
   @Watch("data", { deep: true, immediate: true })
-  setUpTree() {
+  setUpTree() { console.log("conditionData", this.data)
     this.roleGroups = this.data;
+    this.currentCondition = new BaseCondition();
   }
 
   @Watch("currentCondition", { deep: true, immediate: true })
   async setUpTree1() {
+    this.treeItems = [];
     if (this.roleGroups && this.roleGroups.length > 0) {
-      this.treeItems = [];
       this.roleGroups.forEach((roleGroup, rIndex) => {
         this.treeItems.push({
           index: "" + rIndex,
@@ -419,6 +421,7 @@ export default class extends Vue {
           );
         }
       });
+      this.$emit("update:data", this.roleGroups);
     }
   }
 
@@ -567,13 +570,17 @@ export default class extends Vue {
     let property: any = null;
     if (condition?.mainOperand && condition.mainOperand.length >= 0) {
       rs = await EntitiesModule.getEntity(condition.mainOperand[0].value);
-      let property = rs.properties.find(
+      property = rs.properties.find(
         (prop: any) => prop.systemName === condition.mainOperand[1].key
       );
       str += `[Workflow(${rs.displayName}): ${property.displayName}]`;
     }
     if (condition.operator) {
-      str += " " + condition.operator;
+      let dataType = 1;
+      if (property) dataType = property?.dataType?.value;
+      let operators = await FormsModule.getOperatorsByDataType(parseInt(dataType));
+      let operator = operators.find( x => x.value === condition.operator);
+      str += " " + (operator?.key ? operator?.key: "");
     }
 
     if (
@@ -581,6 +588,7 @@ export default class extends Vue {
       condition.secondaryOperand &&
       condition.secondaryOperand.length > 0
     ) {
+      rs = await EntitiesModule.getEntity(condition.mainOperand[0].value);
       property = rs.properties.find(
         (prop: any) => prop.systemName === condition.secondaryOperand[1].key
       );
@@ -594,7 +602,7 @@ export default class extends Vue {
       condition.secondaryOperand &&
       condition.secondaryOperand.length === 1
     ) {
-      str += ` ${condition.secondaryOperand[0]}`;
+      str += ` ${condition.secondaryOperand[0].value}`;
     }
     return str;
   }

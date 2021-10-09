@@ -8,11 +8,19 @@
     :close-on-click-modal="false"
     append-to-body
   >
-    <el-form ref="form" label-position="left" :model="items" :rules="formRules">
+    <el-form
+      ref="form"
+      label-position="left"
+      :model="items"
+      :rules="formRules"
+    >
       <el-row>
         Compare a property to another property or to a given value
       </el-row>
-      <el-row style="margin-top: 20px; align-items: center" type="flex">
+      <el-row
+        style="margin-top: 20px; align-items: center"
+        type="flex"
+      >
         <el-form-item prop="propertyFirst">
           <el-input
             v-model="items.propertyFirst.displayName"
@@ -29,17 +37,26 @@
           <el-image src="/assets/img/form-document-16x16.png" />
         </el-button>
       </el-row>
-      <el-row style="margin-top: 20px" type="flex">
-        <el-select v-model="items.operator" placeholder="Select">
+      <el-row
+        style="margin-top: 20px"
+        type="flex"
+      >
+        <el-select
+          v-model="items.operator"
+          placeholder="Select"
+        >
           <el-option
             v-for="item in options"
             :key="item.key"
             :label="item.key"
-            :value="item.key"
+            :value="item.value"
           />
         </el-select>
       </el-row>
-      <el-row style="margin-top: 20px" type="flex">
+      <el-row
+        style="margin-top: 20px"
+        type="flex"
+      >
         <el-form-item prop="propertySecond">
           <el-input
             v-model="items.propertySecond.displayName"
@@ -56,10 +73,17 @@
           style="display: flex; align-items: center"
           @command="selectInputMethod"
         >
-          <el-button type="text" style="padding: 0" @click="handleChange">
+          <el-button
+            type="text"
+            style="padding: 0"
+            @click="handleChange"
+          >
             <el-image src="/assets/img/down_arrow.png" />
           </el-button>
-          <el-dropdown-menu slot="dropdown" style="margin-top: 0">
+          <el-dropdown-menu
+            slot="dropdown"
+            style="margin-top: 0"
+          >
             <el-dropdown-item command="typeText">
               Type text...
             </el-dropdown-item>
@@ -93,9 +117,15 @@
       </div>
     </el-form>
     <div slot="footer">
-      <el-button style="margin-right: 20px" @click="okHandler"> Ok </el-button>
+      <el-button
+        style="margin-right: 20px"
+        @click="okHandler"
+      > Ok </el-button>
 
-      <el-button style="margin-right: 20px" @click="cancelHandler">
+      <el-button
+        style="margin-right: 20px"
+        @click="cancelHandler"
+      >
         Cancel
       </el-button>
     </div>
@@ -103,7 +133,10 @@
       :result-handler="resultHandler"
       :dialog-visible.sync="selectPropertyModal.show"
     /> -->
-    <prefModel :is-open.sync="showPref" :result-handler="onPrefSelected" />
+    <prefModel
+      :is-open.sync="showPref"
+      :result-handler="onPrefSelected"
+    />
     <select-property-model
       key="first"
       :dialog-visible.sync="selectPropertyModal.show"
@@ -202,6 +235,7 @@ export default class extends Vue {
   @Watch("dataType", { immediate: true })
   private async loadOptions(datatype: number) {
     await FormsModule.getOperatorsByDataType(datatype).then((rs) => {
+      console.log(rs);
       this.options = [];
       if (rs?.length) {
         let pair: any = null;
@@ -243,21 +277,32 @@ export default class extends Vue {
   }
 
   @Watch("dialogVisible", { deep: true, immediate: true })
-  setUp(val: boolean) {
+  async setUp(val: boolean) {
     if (val) {
+      this.items.skipConditionIfSecondaryOperandIsEmpty =
+        this.condition.skipConditionIfSecondaryOperandIsEmpty;
+      this.items.skipConditionIfMainOperandIsEmpty =
+        this.condition.skipConditionIfMainOperandIsEmpty;
+      this.items.operator = this.condition.operator;
+      this.items.secondOperandIsProperty =
+        this.condition.secondOperandIsProperty;
+      this.items.secondOperandIsApplicationPreference =
+        this.condition.secondOperandIsApplicationPreference;
       if (this.condition?.mainOperand) {
-        this.items = { ...this.condition };
         this.items.propertyFirst = {
           displayName: "",
           value: [],
         };
         this.items.propertyFirst.value = this.condition.mainOperand;
         if (this.items.propertyFirst?.value?.length > 0) {
-          this.items.propertyFirst.displayName += `[Workflow(${this.items.propertyFirst.value[0].displayName}): ${this.items.propertyFirst.value[1].displayName}]`;
-          this.lastPath =
-            this.items.propertyFirst.value[
-              this.items.propertyFirst.value.length - 1
-            ];
+          let rs = await EntitiesModule.getEntity(
+            this.condition.mainOperand[0].value
+          );
+          let property = rs.properties.find(
+            (prop: any) => prop.systemName === this.condition.mainOperand[1].key
+          );
+          this.items.propertyFirst.displayName += `[Workflow(${rs.displayName}): ${property.displayName}]`;
+          this.lastPath = new KeyValue(property?.systemName, property.entityId);
         }
         this.items.propertySecond = {
           displayName: "",
@@ -266,17 +311,24 @@ export default class extends Vue {
         this.items.propertySecond.value = this.condition.secondaryOperand;
         if (this.items.propertySecond?.value?.length > 0) {
           this.secondPropertyReadOnly = true;
-          if (this.items.secondOperandIsProperty)
-            this.items.propertySecond.displayName += `[Workflow(${this.items.propertySecond.value[0].displayName}): ${this.items.propertySecond.value[1].displayName}]`;
-          else if (this.items.secondOperandIsApplicationPreference)
+          if (this.items.secondOperandIsProperty) {
+            let rs = await EntitiesModule.getEntity(
+              this.condition.secondaryOperand[0].value
+            );
+            let property = rs.properties.find(
+              (prop: any) =>
+                prop.systemName === this.condition.secondaryOperand[1].key
+            );
+            this.items.propertySecond.displayName += `[Workflow(${rs.displayName}): ${property.displayName}]`;
+          } else if (this.items.secondOperandIsApplicationPreference) {
             this.items.propertySecond.displayName += `${this.items.propertySecond.value[0].displayName}`;
-          else {
+          } else {
             this.secondPropertyReadOnly = false;
             this.items.propertySecond.displayName =
-              this.items.propertySecond.value[0];
+              this.items.propertySecond.value[0].value;
           }
         }
-
+        this.items.operator = this.condition.operator;
         console.log("items", this.items);
       }
     }
@@ -295,7 +347,7 @@ export default class extends Vue {
           let property = rs.properties.find(
             (property) => property.systemName === propertyPath.key
           );
-          this.dataType = property?.dataType?.value;
+          this.dataType = parseInt(property?.dataType?.value);
         }
       }
     }
@@ -341,19 +393,13 @@ export default class extends Vue {
     (this.$refs.form as ElForm).validate((valid: boolean) => {
       if (valid) {
         var propertyCondition = new PropertyCondition();
-        propertyCondition.mainOperand = [...this.items.propertyFirst.value];
-        if (this.items.secondOperandIsApplicationPreference) {
+        propertyCondition.mainOperand = this.items.propertyFirst.value;
+        propertyCondition.secondaryOperand = this.items.propertySecond.value;
+        if (!this.items.secondOperandIsProperty && !this.items.secondOperandIsApplicationPreference) {
           propertyCondition.secondaryOperand = [
-            ...this.items.propertySecond.value,
-          ];
-        } else if (this.items.secondOperandIsProperty)
-          propertyCondition.secondaryOperand = [
-            ...this.items.propertySecond.value,
-          ];
-        else
-          propertyCondition.secondaryOperand = [
-            this.items.propertySecond.displayName,
-          ];
+            {value: this.items.propertySecond.displayName}
+          ]
+        }
 
         propertyCondition.skipConditionIfSecondaryOperandIsEmpty =
           this.items.skipConditionIfSecondaryOperandIsEmpty;
@@ -429,7 +475,7 @@ export default class extends Vue {
   onPrefSelected(value: ApplicationPreference) {
     console.log("appPreference", value);
     this.items.secondOperandIsApplicationPreference = true;
-    this.items.propertySecond.value = [];
+    this.items.propertySecond = { value: [], displayName: "" };
     this.items.propertySecond.value.push(value);
     if (value?.displayName)
       this.items.propertySecond.displayName = value.displayName;

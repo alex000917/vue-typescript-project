@@ -172,7 +172,7 @@ export default class extends Vue {
   @Watch("currentAction", { deep: true, immediate: true })
   refresh() {
     this.actionsTree = [];
-    if (this.data.length > 0) {
+    if (this.data?.length > 0) {
       this.data.forEach(async (action, index) => {
         let label = await this.getDisplayName(action);
         this.actionsTree.push({
