@@ -1,18 +1,6 @@
 import { BaseContent } from "../BaseContent";
 import { Restriction } from "../Restriction";
-import { ActionGroup } from "./ActionGroup";
-
-export class StopWorkflowRule extends BaseContent {
-  myspType = "StopWorkflowRule";
-  conditions: Restriction | null = null;
-  description: string = "";
-  descriptionLanguageKey: string = "";
-  displayName: string = "";
-  displayNameLanguageKey: string = "";
-  languageTranslations: any[] = [];
-  message: any[] = [];
-  systemName: string = "";
-}
+import {TextAssembly} from "../TextAssembly";
 
 // conditions:Object
 // description:null
@@ -24,3 +12,14 @@ export class StopWorkflowRule extends BaseContent {
 // myspType:"StopWorkflowRule"
 // notes:null
 // systemName:"cse_pendingapprovalpleaseresolve"
+export class StopWorkflowRule extends BaseContent {
+  myspType = "StopWorkflowRule";
+  conditions: Restriction | null = null;
+  description: string = "";
+  descriptionLanguageKey: string = "";
+  displayName: string = "";
+  displayNameLanguageKey: string = "";
+  languageTranslations: any[] = [];
+  systemName: string = "";
+  message: TextAssembly[] = [];
+}

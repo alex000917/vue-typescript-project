@@ -57,7 +57,7 @@
               <div class="message__detail--tags">
                 <el-tag
                   type="info"
-                  v-show="items.propertyFirst.value.length > 0"
+                  v-show="items.propertyFirst.value"
                   closable
                   @close="closeFirstTag"
                 >{{ items.propertyFirst.displayName }}</el-tag>
@@ -78,7 +78,7 @@
               <div class="message__detail--tags">
                 <el-tag
                   type="info"
-                  v-show="items.propertySecond.value.length > 0"
+                  v-show="items.propertySecond.value"
                   closable
                   @close="closeSecondTag"
                 >{{ items.propertySecond.displayName }}</el-tag>
@@ -119,9 +119,7 @@
                 title="Advanced settings"
                 name="workWeekDays"
               >
-                <el-input
-                  v-model="advancedRuleName"
-                ></el-input>
+                <el-input v-model="advancedRuleName"></el-input>
               </el-collapse-item>
             </el-collapse>
           </el-row>
@@ -182,6 +180,7 @@ import { RoleGroup } from "@/models/RoleGroup";
 import { ApplicationPreference } from "@/models/ApplicationPreference";
 import { Restriction } from "@/models/Restriction";
 import { ActionGroup } from "@/models/Workflows/ActionGroup";
+import { TextAssembly } from "@/models/TextAssembly";
 
 @Component({
   name: "stoprule-wizard",
@@ -205,15 +204,15 @@ export default class extends Vue {
   private items: any = {
     propertyFirst: {
       displayName: "",
-      value: [],
+      value: null,
     },
     propertySecond: {
       displayName: "",
-      value: [],
+      value: null,
     },
   };
 
-  private actionGroups: any[] | any= [];
+  private actionGroups: any[] | any = [];
 
   private roleGroups: RoleGroup[] | any = [];
 
@@ -251,16 +250,17 @@ export default class extends Vue {
 
   rule: ActionWorkflowRule | undefined;
 
-  @Watch("visibleWizard", {immediate: true})
+  @Watch("visibleWizard", { immediate: true })
   setUp(val: boolean) {
-    if (val) this.currentStep = 0
+    if (val) this.currentStep = 0;
   }
 
-  @Watch("ruleName", {immediate: true})
+  @Watch("ruleName", { immediate: true })
   setAdvancedRuleName() {
     if (this.ruleName) {
-      this.ruleName = this.ruleName.toUpperCase()
-      this.advancedRuleName = "cse_" + this.ruleName;}
+      this.ruleName = this.ruleName.toUpperCase();
+      this.advancedRuleName = "cse_" + this.ruleName;
+    }
   }
 
   @Watch("ruleSysname", { immediate: true })
@@ -300,13 +300,35 @@ export default class extends Vue {
         this.ruleName = this.rule.displayName;
         this.roleGroups = this.rule.conditions?.roleGroups;
         this.actionGroups = this.rule.actionGroup?.actions;
-        this.items.propertyFirst.value = []
-        this.items.propertyFirst.displayName = ""
-        this.items.propertySecond.value = []
-        this.items.propertySecond.displayName = ""
+        this.items.propertyFirst.value = [];
+        this.items.propertyFirst.displayName = "";
+        this.items.propertySecond.value = [];
+        this.items.propertySecond.displayName = "";
+        let message = this.rule.message;
+        if (message?.length > 1) {
+          if (message[0].myspType === "TextAssemblyTranslation") {
+            let text = new TextAssembly();
+            text.parts = message[0].textAssembly.parts;
+            this.items.propertyFirst.value = text;
+            this.items.propertyFirst.displayName = text.parts[0];
+          }
+
+          if (message[1].myspType === "TextAssemblyTranslation") {
+            let text = new TextAssembly();
+            text.parts = message[1].textAssembly.parts;
+            this.items.propertySecond.value = text;
+            this.items.propertySecond.displayName = text.parts[0];
+          }
+        }
+        console.log("message", message);
       }
     } else {
       this.onAddEveryone();
+    }
+  }
+
+  display(property: any) {
+    if (property.myspType === "TextAssembly") {
     }
   }
 
@@ -385,25 +407,29 @@ export default class extends Vue {
 
   onPrefSelected(value: ApplicationPreference) {
     console.log(this.showProperty.id);
-    if (this.showPreference) {
-      this.items.propertySecond.value = [];
-      this.items.propertySecond.value.push(value);
+    if (this.showPreference.id) {
+      let text = new TextAssembly();
+      text.parts.push(value.displayName);
+      this.items.propertySecond.value = text;
       if (value?.displayName)
         this.items.propertySecond.displayName = value.displayName;
     } else {
-      this.items.propertyFirst.value = [];
-      this.items.propertyFirst.value.push(value);
+      let text = new TextAssembly();
+      text.parts.push(value.displayName);
+      this.items.propertyFirst.value = text;
       if (value?.displayName)
         this.items.propertyFirst.displayName = value.displayName;
     }
   }
 
   closeFirstTag() {
-    this.items.propertyFirst.value = [];
+    this.items.propertyFirst.value = null;
+    this.items.propertyFirst.displayName = "";
   }
 
   closeSecondTag() {
-    this.items.propertySecond.value = [];
+    this.items.propertySecond.value = null;
+    this.items.propertySecond.displayName = null;
     console.log("second", this.items.propertySecond.value);
   }
 
@@ -420,11 +446,13 @@ export default class extends Vue {
         str += "[" + rs.displayName + ":" + property.displayName + "]";
       }
     }
+    let text = new TextAssembly();
+    text.parts.push(str);
     if (this.showProperty.id) {
-      this.items.propertySecond.value = value;
+      this.items.propertySecond.value = text;
       this.items.propertySecond.displayName = str;
     } else {
-      this.items.propertyFirst.value = value;
+      this.items.propertyFirst.value = text;
       this.items.propertyFirst.displayName = str;
     }
   }
@@ -451,13 +479,28 @@ export default class extends Vue {
 
   onOk() {
     if (!this.rule) this.rule = new ActionWorkflowRule();
-    if(this.rule && !this.rule.conditions) this.rule.conditions = new Restriction();
+    if (this.rule && !this.rule.conditions)
+      this.rule.conditions = new Restriction();
     this.rule.conditions.roleGroups = this.roleGroups;
-    if (this.rule && !this.rule.actionGroup) this.rule.actionGroup = new ActionGroup();
+    if (this.rule && !this.rule.actionGroup)
+      this.rule.actionGroup = new ActionGroup();
     this.rule.actionGroup.actions = this.actionGroups;
     this.rule.systemName = this.advancedRuleName;
     this.rule.displayName = this.ruleName;
+    this.rule.message = [];
     
+    this.rule.message.push({
+      language: "en",
+      myspType: "TextAssemblyTranslation",
+      textAssembly: this.items.propertyFirst.value,
+    });
+
+    this.rule.message.push({
+      language: "he",
+      myspType: "TextAssemblyTranslation",
+      textAssembly: this.items.propertySecond.value,
+    });
+
     this.$emit("update:visibleWizard", false);
   }
 
