@@ -79,7 +79,7 @@
               </el-dropdown-item>
               <el-dropdown-item command="blank">
                 Blank ...
-              </el-dropdown-item>              
+              </el-dropdown-item>
               <el-dropdown-item command="selectPreference">
                 Select application Preference...
               </el-dropdown-item>
@@ -115,12 +115,14 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { WorkflowModule } from "@/store/modules/WorkflowMod";
+import { EntitiesModule } from "@/store/modules/entitiesMod";
 import { KeyValue } from "@/models/KeyValue";
 import { ApplicationPreference } from "@/models/ApplicationPreference";
 import SelectPropertyModel from "@/components/PropertySelector/index.vue";
 import prefModel from "@/components/Preferences/prefModel.vue";
 import { ElForm } from "element-ui/types/form";
 import { PropertyCondition } from "@/models/Conditions";
+import { ServerAction } from "@/models/Workflows/Actions";
 
 @Component({
   name: "set-property-action",
@@ -128,7 +130,7 @@ import { PropertyCondition } from "@/models/Conditions";
 })
 export default class extends Vue {
   @Prop({ required: true }) dialogVisible!: boolean;
-  @Prop({ required: true }) condition!: PropertyCondition;
+  @Prop({ required: true }) condition!: ServerAction;
 
   private items = {
     propertyFirst: {
@@ -164,9 +166,13 @@ export default class extends Vue {
         trigger: "blur",
       },
     ],
-    propertySecond : [
-      { type: 'number', message: 'Field must be a number',trigger: 'blur'}
-    ]
+    propertySecond: [
+      {
+        required: true,
+        message: "Please select the property",
+        trigger: "blur",
+      },
+    ],
   };
 
   private selectPropertyModal: any = {
@@ -191,36 +197,53 @@ export default class extends Vue {
   }
 
   @Watch("dialogVisible", { immediate: true })
-  setUp(val: boolean) {
+  async setUp(val: boolean) {
     if (val) {
       if (
-        this.condition.mainOperand &&
-        this.condition.mainOperand?.length > 0
+        this.condition.leftOperand &&
+        this.condition.leftOperand?.length > 0
       ) {
-        this.items = { ...this.condition };
+        // this.items = { ...this.condition };
         this.items.propertyFirst = {
           displayName: "",
           value: [],
         };
-        this.items.propertyFirst.value = this.condition.mainOperand;
+        this.items.propertyFirst.value = this.condition.leftOperand;
+        console.log(this.items.propertyFirst.value);
+        let rs: any = null;
+        let property: any = null;
+        let str = "";
         if (this.items.propertyFirst?.value?.length > 0) {
-          this.items.propertyFirst.displayName += `[Workflow(${this.items.propertyFirst.value[0].displayName}): ${this.items.propertyFirst.value[1].displayName}]`;
+          rs = await EntitiesModule.getEntity(
+            this.condition.leftOperand[0].value
+          );
+          property = rs.properties.find(
+            (prop: any) => prop.systemName === this.condition.leftOperand[1].key
+          );
+          str += `[Workflow(${rs.displayName}): ${property.displayName}]`;
+          this.items.propertyFirst.displayName += str;
         }
         this.items.propertySecond = {
           displayName: "",
           value: [],
         };
-        this.items.propertySecond.value = this.condition.secondaryOperand;
-        if (this.items.propertySecond?.value?.length > 0) {
-          this.secondPropertyReadOnly = true;
-          if (this.items.secondOperandIsProperty)
-            this.items.propertySecond.displayName += `[Workflow(${this.items.propertySecond.value[0].displayName}): ${this.items.propertySecond.value[1].displayName}]`;
-          else if (this.items.secondOperandIsApplicationPreference)
-            this.items.propertySecond.displayName += `${this.items.propertySecond.value[0].displayName}`;
-          else {
-            this.secondPropertyReadOnly = false;
-            this.items.propertySecond.displayName =
-              this.items.propertySecond.value[0];
+        this.items.propertySecond.value = this.condition.rightOperand;
+        console.log("se", this.items.propertySecond);
+        this.items.propertySecond.value = this.condition.rightOperand;
+        if (this.condition.rightOperand?.length > 0) {
+          if (this.condition.rightOperand?.length > 1) {
+            this.secondPropertyReadOnly = true;
+            this.items.secondOperandIsProperty = true;
+            property = rs.properties.find(
+              (prop: any) =>
+                prop.systemName === this.condition.leftOperand[1].key
+            );
+            this.items.propertySecond.displayName += `[Workflow(${rs.displayName}): ${property.displayName}]`;
+          } else if (this.condition.rightOperand?.length === 1) {
+            if (this.items.propertySecond.value[0].key) {
+              this.items.propertySecond.displayName =
+                this.items.propertySecond.value[0].value;
+            }
           }
         }
       } else {
@@ -243,7 +266,7 @@ export default class extends Vue {
       displayName: "",
       value: null,
     };
-    console.log(command)
+    console.log(command);
     if (command === "typeText") {
       this.isNumber = true;
       this.isBlank = false;
@@ -270,7 +293,7 @@ export default class extends Vue {
       this.isNumber = false;
       this.isBlank = false;
     } else if (command === "blank") {
-      this.items.propertySecond.displayName = ""
+      this.items.propertySecond.displayName = "";
       this.isBlank = true;
       this.isNumber = false;
     }
@@ -283,7 +306,7 @@ export default class extends Vue {
   }
 
   onIsNumber(e: any) {
-    console.log(e)
+    console.log(e);
   }
 
   resultHandler(displayPaths: KeyValue[], result: KeyValue[]) {
@@ -309,7 +332,9 @@ export default class extends Vue {
   onPrefSelected(value: ApplicationPreference) {
     this.items.secondOperandIsApplicationPreference = true;
     this.items.propertySecond.value = [];
-    this.items.propertySecond.value.push(value);
+    this.items.propertySecond.value.push(
+      new KeyValue(value.systemName, value.displayName)
+    );
     if (value?.displayName)
       this.items.propertySecond.displayName = value.displayName;
     console.log("propertySe", this.items.propertySecond);
@@ -318,27 +343,23 @@ export default class extends Vue {
   okHandler() {
     (this.$refs.form as ElForm).validate((valid: boolean) => {
       if (valid) {
-        var propertyCondition = new PropertyCondition();
-        propertyCondition.mainOperand = [...this.items.propertyFirst.value];
-        if (this.items.secondOperandIsApplicationPreference && this.items.propertySecond.value.length > 0) {
-          propertyCondition.secondaryOperand = [
-            ...this.items.propertySecond.value,
-          ];
-        } else if (this.items.secondOperandIsProperty && this.items.propertySecond.value.length > 0)
-          propertyCondition.secondaryOperand = [
-            ...this.items.propertySecond.value,
-          ];
+        var propertyCondition = new ServerAction();
+        propertyCondition.leftOperand = [...this.items.propertyFirst.value];
+        if (
+          this.items.secondOperandIsApplicationPreference &&
+          this.items.propertySecond.value.length > 0
+        ) {
+          propertyCondition.rightOperand = [...this.items.propertySecond.value];
+        } else if (
+          this.items.secondOperandIsProperty &&
+          this.items.propertySecond.value.length > 0
+        )
+          propertyCondition.rightOperand = [...this.items.propertySecond.value];
         else
-          propertyCondition.secondaryOperand = [
-            this.items.propertySecond.displayName,
+          propertyCondition.rightOperand = [
+            new KeyValue("text", this.items.propertySecond.displayName),
           ];
-
-        propertyCondition.operator = this.items.operator;
-        propertyCondition.secondOperandIsProperty =
-          this.items.secondOperandIsProperty;
-        propertyCondition.secondOperandIsApplicationPreference =
-          this.items.secondOperandIsApplicationPreference;
-
+          
         this.$emit("onSave", propertyCondition);
         this.showModal = false;
       } else {

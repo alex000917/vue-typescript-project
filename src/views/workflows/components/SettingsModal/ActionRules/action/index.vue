@@ -84,7 +84,7 @@
       @onSave="onSave"
     />
     <set-property-action-modal
-      :dialogVisible.sync="newActionListVisible['PropertyCondition']"
+      :dialogVisible.sync="newActionListVisible['ServerAction']"
       :condition="currentAction"
       @onSave="onSave"
     />
@@ -125,8 +125,9 @@ import {
   MoveWorkflowAction,
   IntegrationAction,
   ItemsetAction,
+  ServerAction
 } from "@/models/Workflows/Actions";
-import { PropertyCondition, BaseCondition } from "@/models/Conditions";
+import { BaseCondition } from "@/models/Conditions";
 
 @Component({
   name: "action-tree",
@@ -143,7 +144,7 @@ export default class extends Vue {
   @Prop({ required: false }) conditionsDivHeight!: boolean;
 
   private newActionList = [
-    { id: "PropertyCondition", value: "Set property value" },
+    { id: "ServerAction", value: "Set property value" },
     { id: "MoveWorkflowAction", value: "Move workflow" },
     { id: "XMLAction", value: "XML action" },
     { id: "ItemsetAction", value: "Item set action" },
@@ -151,7 +152,7 @@ export default class extends Vue {
   ];
 
   private newActionListVisible: any = {
-    PropertyCondition: false,
+    ServerAction: false,
     MoveWorkflowAction: false,
     XMLAction: false,
     ItemsetAction: false,
@@ -193,14 +194,40 @@ export default class extends Vue {
         return this.getIntegrationActionName(action);
       case "ItemsetAction":
         return this.getItemsetActionName(action);
-      case "PropertyCondition":
-        return await this.getPropertyName(action);
+      // case "ServerAction":
+      //   return await this.getPropertyName(action);
+      case "ServerAction":
+        return await this.getServerActionName(action);
       default:
-        return "";
+        return action.displayName;
     }
   }
 
-  async getPropertyName(condition: PropertyCondition | any) {
+  async getServerActionName(action: any) {
+    let str: string = "";
+    let rs: any = null;
+    let property: any = null;
+    if (action?.leftOperand?.length > 1) {
+      rs = await EntitiesModule.getEntity(action.leftOperand[0].value);
+      property = rs.properties.find(
+        (prop: any) => prop.systemName === action.leftOperand[1].key
+      );
+      str += `[Workflow(${rs.displayName}): ${property.displayName}]`;
+    }
+    if (action?.rightOperand?.length > 1) {
+      property = rs.properties.find(
+        (prop: any) => prop.systemName === action.rightOperand[1].key
+      );
+      str += ` [Workflow(${rs.displayName}): ${property.displayName}]`;
+    } else if (action?.rightOperand?.length === 1) {
+      if (action.rightOperand[0].key) {
+        str += ` ${action.rightOperand[0].value}`;
+      }
+    }
+    return str;
+  }
+
+  async getPropertyName(condition: ServerAction | any) {
     let str: string = "";
     let rs: any = null;
     let property: any = null;
@@ -295,8 +322,8 @@ export default class extends Vue {
     this.selectedAction = -1;
 
     switch (command) {
-      case "PropertyCondition":
-        this.currentAction = new PropertyCondition();
+      case "ServerAction":
+        this.currentAction = new ServerAction();
         break;
       case "MoveWorkflowAction":
         this.currentAction = new MoveWorkflowAction();
@@ -321,7 +348,7 @@ export default class extends Vue {
     this.newActionListVisible[this.currentAction.myspType] = true;
     console.log(
       this.currentAction.myspType,
-      this.newActionListVisible["ItemsetAction"]
+      this.newActionListVisible[this.currentAction.myspType]
     );
   }
 }
