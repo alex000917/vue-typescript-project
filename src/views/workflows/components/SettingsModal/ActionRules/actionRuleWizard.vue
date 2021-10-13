@@ -12,6 +12,9 @@
       <el-form
         label-position="left"
         label-width="100px"
+        :model="items"
+        :rules="formRules"
+        ref="form"
       >
         <div v-if="currentStep === 0">
           <el-row class="action-rule__row">
@@ -60,9 +63,10 @@
           </el-row>
           <el-row class="action-rule__row">
             <el-col>
-              <el-form-item label="Rule name">
+              <el-form-item label="Rule name" 
+                  prop="ruleName">
                 <el-input
-                  v-model="ruleName"
+                  v-model="items.ruleName"
                   class="action-rule__row--input"
                 ></el-input>
               </el-form-item>
@@ -119,6 +123,7 @@ import { WorkflowModule } from "@/store/modules/WorkflowMod";
 import { forEach } from "lodash";
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { ItemSetCondition } from "@/models/Conditions";
+import { ElForm } from "element-ui/types/form";
 
 import ConditionTree from "@/components/Conditions/index.vue";
 import ActionTree from "./action/index.vue";
@@ -138,17 +143,27 @@ export default class extends Vue {
 
   conditionsTree: any[] = [];
 
-  private actionGroups: any[] | any= [];
+  private actionGroups: any[] | any = [];
 
   private currentStep: number = 0;
 
   private ruleName: string = "";
 
-  private roleGroups: RoleGroup[] | any= [];
+  private roleGroups: RoleGroup[] | any = [];
 
   private items = {
-    transition: {},
-    propertyCondition: {},
+    ruleName: "",
+  };
+
+  private formRules = {
+    ruleName: [
+      {
+        required: true,
+        message: "Please type the rule name.",
+        trigger: "blur",
+      },
+      { min: 3, message: 'The rule name must be at least 3 characters.', trigger: 'blur' }
+    ],
   };
 
   get showModal() {
@@ -160,12 +175,19 @@ export default class extends Vue {
   }
 
   get advancedRuleName() {
-    let name = this.ruleName;
+    let name = this.items.ruleName;
     let out = "";
-    name.split(" ").forEach(function (el, idx) {
+    let data = name.split(" ");
+    if (data.length > 1) {
+      data.forEach(function (el, idx) {
         var add = el.toLowerCase();
-        out += (idx === 0 ? add : add[0].toUpperCase() + add.slice(1));
-    });
+        if (add[0])
+          out += idx === 0 ? add : add[0].toUpperCase() + add.slice(1);
+      });
+    } else {
+      out = name;
+    }
+
     return out ? "cse_" + out : "";
   }
 
@@ -179,9 +201,9 @@ export default class extends Vue {
 
   rule: ActionWorkflowRule | undefined;
 
-  @Watch("visibleWizard", {immediate: true})
+  @Watch("visibleWizard", { immediate: true })
   setUp(val: boolean) {
-    if (val) this.currentStep = 0
+    if (val) this.currentStep = 0;
   }
 
   @Watch("ruleSysname", { immediate: true })
@@ -218,10 +240,9 @@ export default class extends Vue {
           idx++;
         });
 
-        this.ruleName = this.rule.displayName;
+        this.items.ruleName = this.rule.displayName;
         this.roleGroups = this.rule.conditions?.roleGroups;
         this.actionGroups = this.rule.actionGroup?.actions;
-  
       }
     } else {
       this.onAddEveryone();
@@ -298,15 +319,22 @@ export default class extends Vue {
   }
 
   onOk() {
-    if (!this.rule) this.rule = new ActionWorkflowRule();
-    if(this.rule && !this.rule.conditions) this.rule.conditions = new Restriction();
-    this.rule.conditions.roleGroups = this.roleGroups;
-    if (this.rule && !this.rule.actionGroup) this.rule.actionGroup = new ActionGroup();
-    this.rule.actionGroup.actions = this.actionGroups;
-    this.rule.systemName = this.advancedRuleName;
-    this.rule.displayName = this.ruleName;
-    this.$emit("onSave", this.rule)
-    this.showModal = false;
+    (this.$refs.form as ElForm).validate((valid: boolean) => {
+      if (valid) {
+        console.log('valid', valid)
+        if (!this.rule) this.rule = new ActionWorkflowRule();
+        if (this.rule && !this.rule.conditions)
+          this.rule.conditions = new Restriction();
+        this.rule.conditions.roleGroups = this.roleGroups;
+        if (this.rule && !this.rule.actionGroup)
+          this.rule.actionGroup = new ActionGroup();
+        this.rule.actionGroup.actions = this.actionGroups;
+        this.rule.systemName = this.advancedRuleName;
+        this.rule.displayName = this.items.ruleName;
+        this.$emit("onSave", this.rule);
+        this.showModal = false;
+      }
+    });
   }
 }
 </script>

@@ -522,7 +522,7 @@ $border-color: #cacaca;
     &__body {
       padding: 0 15px;
       border-bottom: 1px soild $border-color;
-      height: 50vh;
+      height: 490px;
 
       .el-container {
         height: 100%;
@@ -533,7 +533,7 @@ $border-color: #cacaca;
         margin-top: 15px;
         padding: 10px;
         border: 1px solid $border-color;
-        height: 34vh;
+        height: 350px;
 
         &__detail {
           div {

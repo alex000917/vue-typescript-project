@@ -937,7 +937,7 @@ export default class extends Vue {
   }
   .table-container {
     width: 100%;
-    height: 250px;
+    height: 260px;
     border: 1px solid lightgrey;
     overflow: auto;
   }
