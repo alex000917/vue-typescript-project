@@ -124,6 +124,7 @@
     <stop-rule-wizard
       :visible-wizard.sync="stopRuleVisible['StopWorkflowRule']"
       :ruleSysname.sync="selectedRule"
+      @onSave="onSave"
     />
   </el-container>
 </template>
@@ -212,6 +213,7 @@ export default class extends Vue {
     } else {
       this.ruleTree[this.selectedActionIndex] = action;
     }
+    this.currentAction = action;
   }
 
   onNewStopRule(command: string) {

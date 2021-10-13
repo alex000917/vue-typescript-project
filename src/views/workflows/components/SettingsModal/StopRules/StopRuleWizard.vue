@@ -170,7 +170,7 @@
 </template>
 <script lang="ts">
 import { TransitionCondition } from "@/models/Conditions";
-import { ActionWorkflowRule } from "@/models/Workflows/ActionWorkflowRule";
+import { StopWorkflowRule } from "@/models/Workflows/StopWorkflowRule";
 import { WorkflowModule } from "@/store/modules/WorkflowMod";
 import { forEach } from "lodash";
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
@@ -270,7 +270,7 @@ export default class extends Vue {
     this.onSysNameChange();
   }
 
-  rule: ActionWorkflowRule | undefined;
+  rule: StopWorkflowRule | undefined;
 
   @Watch("visibleWizard", { immediate: true })
   setUp(val: boolean) {
@@ -502,7 +502,7 @@ export default class extends Vue {
   onOk() {
     (this.$refs.form as ElForm).validate((valid: boolean) => {
       if (valid) {
-        if (!this.rule) this.rule = new ActionWorkflowRule();
+        if (!this.rule) this.rule = new StopWorkflowRule();
         if (this.rule && !this.rule.conditions)
           this.rule.conditions = new Restriction();
         this.rule.conditions.roleGroups = this.roleGroups;
@@ -525,6 +525,7 @@ export default class extends Vue {
           textAssembly: this.items.propertySecond.value,
         });
 
+        this.$emit("onSave", this.rule);
         this.$emit("update:visibleWizard", false);
       }
     });
