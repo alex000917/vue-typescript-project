@@ -169,7 +169,6 @@ export default class extends Vue {
       this.xmlAction = this.rulesTree[this.selectedIndex];
       this.showXmlActionModal = true;
     }
-    this.actionRuleWizard = true;
   }
 
   newActionRule(command: string) {
