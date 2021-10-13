@@ -18,7 +18,7 @@
         <el-tab-pane label="Progress" key="0">
           <el-row>
             <el-col :span="16">
-              <el-radio v-model="progressType" label="0">To any step</el-radio>
+              <el-radio v-model="progressType" label="1">To any step</el-radio>
             </el-col>
           </el-row>
           <el-row style="margin-top: 15px">
@@ -241,12 +241,12 @@ export default class extends Vue {
   @Prop({ required: true }) visibleTransition!: boolean;
   @Prop({ required: false }) condition!: TransitionCondition;
 
-  progressType = "0";
+  progressType: string = "1";
   progressRestrictPreLaterStep = false;
   progressBeyondStep = null;
   progressStepBefore = null;
 
-  regressType = "0";
+  regressType: string = "0";
   regressStepBeyond = null;
   regressStepBefore = null;
   regressLaterStepOnly = false;
@@ -283,12 +283,16 @@ export default class extends Vue {
   onCondition() {
     if (this.condition) {
       this.conditionType = this.condition.type ? this.condition.type +'': "0";
+      console.log('conditionType',this.conditionType)
       switch (this.conditionType) {
         case "0":
-          this.progressType = this.condition.stepsToIncludeType+'';
+          if (this.condition.stepsToIncludeType)
+            this.progressType = this.condition.stepsToIncludeType+'';
+          else 
+            this.progressType = "1";
           this.progressRestrictPreLaterStep =
             this.condition.restrictToPreviousOrLaterStep;
-
+          
           if (this.progressType == "2")
             this.progressBeyondStep = this.condition.stepSystemName as any;
           if (this.progressType == "3")

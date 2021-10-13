@@ -321,7 +321,6 @@ export default class extends Vue {
   onOk() {
     (this.$refs.form as ElForm).validate((valid: boolean) => {
       if (valid) {
-        console.log('valid', valid)
         if (!this.rule) this.rule = new ActionWorkflowRule();
         if (this.rule && !this.rule.conditions)
           this.rule.conditions = new Restriction();

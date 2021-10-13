@@ -12,6 +12,9 @@
       <el-form
         label-position="left"
         label-width="100px"
+        :model="items"
+        :rules="formRules"
+        ref="form"
       >
         <el-row class="action-rule__row">
           <el-col>
@@ -102,9 +105,12 @@
         >
           <el-row class="action-rule__row">
             <el-col>
-              <el-form-item label="Rule name">
+              <el-form-item
+                label="Rule name"
+                prop="ruleName"
+              >
                 <el-input
-                  v-model="ruleName"
+                  v-model="items.ruleName"
                   class="action-rule__row--input"
                 ></el-input>
               </el-form-item>
@@ -210,6 +216,22 @@ export default class extends Vue {
       displayName: "",
       value: null,
     },
+    ruleName: "",
+  };
+
+  private formRules = {
+    ruleName: [
+      {
+        required: true,
+        message: "Please type the rule name.",
+        trigger: "blur",
+      },
+      {
+        min: 3,
+        message: "The rule name must be at least 3 characters.",
+        trigger: "blur",
+      },
+    ],
   };
 
   private actionGroups: any[] | any = [];
@@ -257,9 +279,9 @@ export default class extends Vue {
 
   @Watch("ruleName", { immediate: true })
   setAdvancedRuleName() {
-    if (this.ruleName) {
-      this.ruleName = this.ruleName.toUpperCase();
-      this.advancedRuleName = "cse_" + this.ruleName;
+    if (this.items.ruleName) {
+      this.items.ruleName = this.items.ruleName.toUpperCase();
+      this.advancedRuleName = "cse_" + this.items.ruleName;
     }
   }
 
@@ -297,7 +319,7 @@ export default class extends Vue {
           idx++;
         });
 
-        this.ruleName = this.rule.displayName;
+        this.items.ruleName = this.rule.displayName;
         this.roleGroups = this.rule.conditions?.roleGroups;
         this.actionGroups = this.rule.actionGroup?.actions;
         this.items.propertyFirst.value = [];
@@ -478,30 +500,34 @@ export default class extends Vue {
   }
 
   onOk() {
-    if (!this.rule) this.rule = new ActionWorkflowRule();
-    if (this.rule && !this.rule.conditions)
-      this.rule.conditions = new Restriction();
-    this.rule.conditions.roleGroups = this.roleGroups;
-    if (this.rule && !this.rule.actionGroup)
-      this.rule.actionGroup = new ActionGroup();
-    this.rule.actionGroup.actions = this.actionGroups;
-    this.rule.systemName = this.advancedRuleName;
-    this.rule.displayName = this.ruleName;
-    this.rule.message = [];
-    
-    this.rule.message.push({
-      language: "en",
-      myspType: "TextAssemblyTranslation",
-      textAssembly: this.items.propertyFirst.value,
-    });
+    (this.$refs.form as ElForm).validate((valid: boolean) => {
+      if (valid) {
+        if (!this.rule) this.rule = new ActionWorkflowRule();
+        if (this.rule && !this.rule.conditions)
+          this.rule.conditions = new Restriction();
+        this.rule.conditions.roleGroups = this.roleGroups;
+        if (this.rule && !this.rule.actionGroup)
+          this.rule.actionGroup = new ActionGroup();
+        this.rule.actionGroup.actions = this.actionGroups;
+        this.rule.systemName = this.advancedRuleName;
+        this.rule.displayName = this.items.ruleName;
+        this.rule.message = [];
 
-    this.rule.message.push({
-      language: "he",
-      myspType: "TextAssemblyTranslation",
-      textAssembly: this.items.propertySecond.value,
-    });
+        this.rule.message.push({
+          language: "en",
+          myspType: "TextAssemblyTranslation",
+          textAssembly: this.items.propertyFirst.value,
+        });
 
-    this.$emit("update:visibleWizard", false);
+        this.rule.message.push({
+          language: "he",
+          myspType: "TextAssemblyTranslation",
+          textAssembly: this.items.propertySecond.value,
+        });
+
+        this.$emit("update:visibleWizard", false);
+      }
+    });
   }
 
   onNodeClick(node: any, props: any, tree: any) {
