@@ -471,7 +471,7 @@ export default class extends Vue {
     if (this.isLookupPropertyType(data)) {
       await this.loadLookupEntity(data);
     } else {
-      if (lastProp.value === null && this.propertyPath.length > 1) {
+      if (this.propertyPath.length > 1) {
         this.displayPaths.splice(this.displayPaths.length - 1, 1);
         this.propertyPath.splice(this.propertyPath.length - 1, 1);
       }

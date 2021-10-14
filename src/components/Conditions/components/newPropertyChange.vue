@@ -8,17 +8,29 @@
     :close-on-click-modal="false"
     append-to-body
   >
-    <el-form ref="form" :model="items" :rules="formRules" label-position="top">
+    <el-form
+      ref="form"
+      :model="items"
+      :rules="formRules"
+      label-position="top"
+    >
       <el-row class="filter-container__row">
         Property Value is about to change
       </el-row>
-      <el-row class="filter-container__row" type="flex">
+      <el-row
+        class="filter-container__row"
+        type="flex"
+      >
         <el-form-item
           prop="property"
           label="Item:"
           class="filter-container__row--form-item"
         >
-          <el-input v-model="items.property.displayName" type="text" readonly />
+          <el-input
+            v-model="items.property.displayName"
+            type="text"
+            readonly
+          />
         </el-form-item>
         <el-button
           type="text"
@@ -32,26 +44,29 @@
       <el-row class="filter-container__row filter-container__row--last">
         <el-col>
           <el-radio-group
-              v-model="newValueCanBeEmpty"
-              @change="changeRadio"
-            >
-          <el-row class="filter-container__row--detail">
-            <el-radio label="1"
-              >New value cannot be empty</el-radio
-            >
-          </el-row>
-          <el-row class="filter-container__row--detail">
-            <el-radio label="0"
-              >New value can be empty</el-radio
-            >
-          </el-row>
+            v-model="newValueCanBeEmpty"
+            @change="changeRadio"
+          >
+            <el-row class="filter-container__row--detail">
+              <el-radio label="1">New value cannot be empty</el-radio>
+            </el-row>
+            <el-row class="filter-container__row--detail">
+              <el-radio label="0">New value can be empty</el-radio>
+            </el-row>
           </el-radio-group>
         </el-col>
       </el-row>
     </el-form>
-    <div slot="footer" class="filter-container__footer">
+    <div
+      slot="footer"
+      class="filter-container__footer"
+    >
       <el-button @click="okHandler"> Add </el-button>
-      <el-button class="underline" type="text" @click="cancelHandler">
+      <el-button
+        class="underline"
+        type="text"
+        @click="cancelHandler"
+      >
         cancel
       </el-button>
     </div>
@@ -68,8 +83,9 @@ import { Component, Prop, Watch, Vue } from "vue-property-decorator";
 import { WorkflowModule } from "@/store/modules/WorkflowMod";
 import { KeyValue } from "@/models/KeyValue";
 import SelectPropertyModel from "@/components/PropertySelector/index.vue";
-import {PropertyChangeCondition} from "@/models/Conditions";
+import { PropertyChangeCondition } from "@/models/Conditions";
 import { ElForm } from "element-ui/types/form";
+import { EntitiesModule } from "@/store/modules/entitiesMod";
 
 @Component({
   name: "new-property-change",
@@ -84,10 +100,8 @@ export default class extends Vue {
       displayName: "",
       value: null,
     },
-    newValueCanBeEmpty: 1
+    newValueCanBeEmpty: 1,
   };
-
-
 
   items: any = {
     property: {
@@ -117,11 +131,17 @@ export default class extends Vue {
   private selectPropertyModal: boolean = false;
 
   @Watch("dialogVisible", { deep: true, immediate: true })
-  setUp(val: boolean) {
+  async setUp(val: boolean) {
     if (val) {
-      if (this.condition.property && this.condition.property.length > 1 ) {
+      if (this.condition.property && this.condition.property.length > 1) {
         this.items.property.value = this.condition.property;
-        this.items.property.displayName = `[Workflow(${this.items.property.value[0].displayName}): ${this.items.property.value[1].displayName}]`;
+        let rs = await EntitiesModule.getEntity(
+          this.condition.property[0].value
+        );
+        let property = rs.properties.find(
+          (prop: any) => prop.systemName === this.condition.property[1].key
+        );
+        this.items.property.displayName = `[Workflow(${rs.displayName}): ${property?.displayName}]`;
         this.items.newValueCanBeEmpty = this.condition.newValueCanBeEmpty;
         console.log("items", this.items);
       }
@@ -148,11 +168,15 @@ export default class extends Vue {
     this.selectPropertyModal = true;
   }
 
-  resultHandler(displayPath: KeyValue[],result: KeyValue[]) {
+  async resultHandler(displayPath: KeyValue[], result: KeyValue[]) {
     console.log("propertyReulst", result);
     let str = "";
     if (result.length > 1) {
-      str += `[Workflow(${result[0].displayName}): ${result[1].displayName}]`;
+      let rs = await EntitiesModule.getEntity(this.condition.property[0].value);
+      let property = rs.properties.find(
+        (prop: any) => prop.systemName === this.condition.property[1].key
+      );
+      str += `[Workflow(${rs.displayName}): ${property?.displayName}]`;
       this.items.property.displayName = str;
       this.items.property.value = result;
     }
@@ -167,7 +191,7 @@ export default class extends Vue {
         this.$emit("update:condition", condition);
         this.$emit("onSave", condition);
       }
-    })
+    });
     this.cancelHandler();
   }
 

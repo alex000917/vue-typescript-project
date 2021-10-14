@@ -507,15 +507,27 @@ export default class extends Vue {
 
   async getWorkflowName(condition: WorkflowCondition | any) {
     let str: string = "";
+    let rs: any = null;
+    let property: any = null;
     if (condition?.mainOperand && condition.mainOperand.length >= 0) {
-      let rs = await EntitiesModule.getEntity(condition.mainOperand[0].value);
-      let property = rs.properties.find(
+      rs = await EntitiesModule.getEntity(condition.mainOperand[0].value);
+      property = rs.properties.find(
         (prop: any) => prop.systemName === condition.mainOperand[1].key
       );
       str += `[Workflow(${rs.displayName}): ${property?.displayName}]`;
     }
     if (condition.step) {
       str += " " + condition.step;
+    }
+    if (condition.operator) {
+      let dataType: any = 1;
+      if (property) dataType = property?.dataType?.value;
+      let operators = await FormsModule.getOperatorsByDataType(parseInt(dataType));
+      let operator = operators.find( x => x.value === condition.operator);
+      str += " " + (operator?.key ? operator?.key: "");
+    }
+    if (condition.secondaryOperand.length) {
+      str += " " + condition.secondaryOperand[0].key;
     }
     return str;
   }

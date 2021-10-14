@@ -8,18 +8,30 @@
     :close-on-click-modal="false"
     append-to-body
   >
-    <el-form ref="form" label-position="left" :model="items" :rules="formRules">
-      <el-row style="margin-top: 10px; align-items: center" type="flex">
+    <el-form
+      ref="form"
+      label-position="left"
+      :model="items"
+      :rules="formRules"
+    >
+      <el-row
+        style="margin-top: 10px; align-items: center"
+        type="flex"
+      >
         <el-col :span="6">The step of:</el-col>
-        <el-col :span="12"
-          ><el-form-item prop="propertyFirst" style="width: 100%">
+        <el-col :span="12">
+          <el-form-item
+            prop="propertyFirst"
+            style="width: 100%"
+          >
             <el-input
               v-model="items.property.displayName"
               type="text"
               style="padding-right: 30px; width: 100%"
               readonly
-            /> </el-form-item
-        ></el-col>
+            />
+          </el-form-item>
+        </el-col>
         <el-col :span="6">
           <el-button
             type="text"
@@ -30,7 +42,10 @@
           </el-button>
         </el-col>
       </el-row>
-      <el-row style="margin-top: 20px; align-items: center" type="flex">
+      <el-row
+        style="margin-top: 20px; align-items: center"
+        type="flex"
+      >
         <el-col :span="6"></el-col>
         <el-col :span="12">
           <el-select
@@ -42,14 +57,17 @@
               v-for="item in operatorOptions"
               :key="item.key"
               :label="item.key"
-              :value="item.key"
+              :value="item.value"
               style="width: 100%"
             />
           </el-select>
         </el-col>
         <el-col :span="6"> </el-col>
       </el-row>
-      <el-row style="margin-top: 20px; align-items: center" type="flex">
+      <el-row
+        style="margin-top: 20px; align-items: center"
+        type="flex"
+      >
         <el-col :span="6">Workflow</el-col>
         <el-col :span="12">
           <el-select
@@ -61,7 +79,7 @@
               v-for="item in workflowOptions"
               :key="item.itemId"
               :label="item.displayName"
-              :value="item.displayName"
+              :value="item.itemId"
               style="width: 100%"
             />
           </el-select>
@@ -91,8 +109,14 @@
         <el-col :span="6"> </el-col>
       </el-row>
     </el-form>
-    <div slot="footer" class="filter-footer">
-      <el-button class="filter-footer__button" @click="okHandler">
+    <div
+      slot="footer"
+      class="filter-footer"
+    >
+      <el-button
+        class="filter-footer__button"
+        @click="okHandler"
+      >
         Add
       </el-button>
       <el-button
@@ -187,22 +211,25 @@ export default class extends Vue {
   };
 
   @Watch("dialogVisible", { deep: true, immediate: true })
-  setUp(val: boolean) {
+  async setUp(val: boolean) {
     if (val) {
       if (this.condition) {
         this.items.property.value = this.condition.mainOperand;
         if (this.items.property?.value?.length > 0) {
-          this.items.property.displayName += `[Workflow(${this.items.property.value[0].displayName}): ${this.items.property.value[1].displayName}]`;
-          this.lastPath =
-            this.items.property.value[this.items.property.value.length - 1];
+          let rs = await EntitiesModule.getEntity(
+            this.condition.mainOperand[0].value
+          );
+          let property = rs.properties.find(
+            (prop: any) => prop.systemName === this.condition.mainOperand[1].key
+          );
+          this.items.property.displayName += `[Workflow(${rs.displayName}): ${property?.displayName}]`;
+          this.dataType = property?.dataType?.value;
+          this.workflowOptions = WorkflowModule.Workflows;
+          // this.systemName = rs.systemName;
         }
         this.items.operator = this.condition.operator;
-        if (
-          this.condition.secondaryOperand &&
-          this.condition.secondaryOperand.length > 0
-        )
-          this.items.workflow = this.condition.secondaryOperand[0].displayName;
-        this.items.step = this.condition.step;
+        this.items.workflow = this.condition.workflowId;
+        this.items.step = this.condition.secondaryOperand[0].key;
       }
     }
   }
@@ -242,6 +269,7 @@ export default class extends Vue {
   private async loadOptions(datatype: number, old: number) {
     if (datatype !== old)
       await FormsModule.getOperatorsByDataType(datatype).then((rs) => {
+        console.log('rs', rs);
         if (rs?.length) {
           let pair: KeyValue;
           for (pair of rs) {
@@ -285,18 +313,19 @@ export default class extends Vue {
         var workflowCondition = new WorkflowCondition();
         workflowCondition.mainOperand = [...this.items.property.value];
         if (this.items.workflow) {
-          let workflow = this.workflowOptions.find(workflow => workflow.displayName === this.items.workflow)
+          let workflow = this.workflowOptions.find(
+            (workflow) => workflow.itemId === this.items.workflow
+          );
           workflowCondition.secondaryOperand = [
             new KeyValue(
-              workflow.myspType,
-              workflow.entitySystemName,
-              workflow.displayName
+              this.items.step,
+              workflow.itemId + "_" + this.items.step
             ),
           ];
         }
         workflowCondition.operator = this.items.operator;
         workflowCondition.step = this.items.step;
-        workflowCondition.workflowId = this.items.workflow.itemId;
+        workflowCondition.workflowId = this.items.workflow;
         this.$emit("onSave", workflowCondition);
       } else {
         console.log("error submit!!");
