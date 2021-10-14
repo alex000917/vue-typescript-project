@@ -71,14 +71,14 @@
               slot="dropdown"
               style="margin-top: 0"
             >
-              <el-dropdown-item command="typeText">
-                Type a Number
+              <el-dropdown-item command="Yes">
+                Yes...
+              </el-dropdown-item>              
+              <el-dropdown-item command="No">
+                No...
               </el-dropdown-item>
               <el-dropdown-item command="selectProperty">
                 Select propery...
-              </el-dropdown-item>
-              <el-dropdown-item command="blank">
-                Blank ...
               </el-dropdown-item>
               <el-dropdown-item command="selectPreference">
                 Select application Preference...
@@ -243,6 +243,12 @@ export default class extends Vue {
             if (this.items.propertySecond.value[0].key) {
               this.items.propertySecond.displayName =
                 this.items.propertySecond.value[0].value;
+            } else {
+              if (this.items.propertySecond.value[0].value) {
+                this.items.propertySecond.displayName = "Yes";
+              } else {
+                this.items.propertySecond.displayName = "No";
+              }
             }
           }
         }
@@ -296,6 +302,14 @@ export default class extends Vue {
       this.items.propertySecond.displayName = "";
       this.isBlank = true;
       this.isNumber = false;
+    } else if (command === "Yes") {
+      this.items.propertySecond.displayName = "Yes";
+      this.items.propertySecond.value = [new KeyValue(null, true)];
+      this.secondPropertyReadOnly = true;
+    } else if (command === "No") {
+      this.items.propertySecond.displayName = "No";
+      this.items.propertySecond.value = [new KeyValue(null, false)];
+      this.secondPropertyReadOnly = true;
     }
   }
 
@@ -356,9 +370,7 @@ export default class extends Vue {
         )
           propertyCondition.rightOperand = [...this.items.propertySecond.value];
         else
-          propertyCondition.rightOperand = [
-            new KeyValue("text", this.items.propertySecond.displayName),
-          ];
+          propertyCondition.rightOperand = [...this.items.propertySecond.value];
           
         this.$emit("onSave", propertyCondition);
         this.showModal = false;

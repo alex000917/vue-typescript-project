@@ -212,16 +212,18 @@ export default class extends Vue {
       property = rs.properties.find(
         (prop: any) => prop.systemName === action.leftOperand[1].key
       );
-      str += `[Workflow(${rs.displayName}): ${property.displayName}]`;
+      str += `Set [Workflow(${rs.displayName}): ${property.displayName}]`;
     }
     if (action?.rightOperand?.length > 1) {
       property = rs.properties.find(
         (prop: any) => prop.systemName === action.rightOperand[1].key
       );
-      str += ` [Workflow(${rs.displayName}): ${property.displayName}]`;
+      str += ` to be [Workflow(${rs.displayName}): ${property.displayName}]`;
     } else if (action?.rightOperand?.length === 1) {
       if (action.rightOperand[0].key) {
-        str += ` ${action.rightOperand[0].value}`;
+        str += ` to be [${action.rightOperand[0].value}]`;
+      } else {
+        str += ` to be [${action.rightOperand[0].value ? "Yes" : "No"}]`;
       }
     }
     return str;
@@ -295,6 +297,7 @@ export default class extends Vue {
   onNodeClick(data: any) {
     this.selectedAction = data.index;
     this.currentAction = this.data[this.selectedAction];
+    console.log(this.currentAction)
   }
 
   onSave(action: BaseCondition) {
