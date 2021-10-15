@@ -107,7 +107,7 @@
 
     <ActionRuleWizard
       :visible-wizard.sync="actionRuleWizard"
-      :ruleSysname.sync="selectedRule"
+      :actionRule.sync="actionRule"
       @onSave="onSave"
     >
     </ActionRuleWizard>
@@ -145,6 +145,7 @@ export default class extends Vue {
 
   selectedRule: string | null = null;
   xmlAction: XMLAction | any = new XMLAction();
+  actionRule: ActionWorkflowRule | any = null;
   showXmlActionModal: boolean = false;
 
   selectedIndex = -1;
@@ -157,14 +158,13 @@ export default class extends Vue {
         this.rulesTree.push(rule);
       });
     }
-
-    console.log(this.disableEdit);
   }
 
   onEdit() {
     if (this.rulesTree[this.selectedIndex].myspType === "ActionWorkflowRule") {
       this.selectedRule = this.rulesTree[this.selectedIndex].systemName;
       this.actionRuleWizard = true;
+      this.actionRule = this.rulesTree[this.selectedIndex];
     } else {
       this.xmlAction = this.rulesTree[this.selectedIndex];
       this.showXmlActionModal = true;
@@ -174,9 +174,9 @@ export default class extends Vue {
   newActionRule(command: string) {
     switch (command) {
       case "ActionWorkflowRule":
-        this.selectedRule = '';
         this.selectedRule = null;
         this.actionRuleWizard = true;
+        this.actionRule = new ActionWorkflowRule();
         break;
       case "XmlRule":
         this.xmlAction = new XMLAction();

@@ -63,8 +63,10 @@
           </el-row>
           <el-row class="action-rule__row">
             <el-col>
-              <el-form-item label="Rule name" 
-                  prop="ruleName">
+              <el-form-item
+                label="Rule name"
+                prop="ruleName"
+              >
                 <el-input
                   v-model="items.ruleName"
                   class="action-rule__row--input"
@@ -139,7 +141,7 @@ import { ActionGroup } from "@/models/Workflows/ActionGroup";
 })
 export default class extends Vue {
   @Prop({ required: true }) visibleWizard!: boolean;
-  @Prop({ required: true }) ruleSysname!: string;
+  @Prop({ required: true }) actionRule!: ActionWorkflowRule;
 
   conditionsTree: any[] = [];
 
@@ -162,7 +164,11 @@ export default class extends Vue {
         message: "Please type the rule name.",
         trigger: "blur",
       },
-      { min: 3, message: 'The rule name must be at least 3 characters.', trigger: 'blur' }
+      {
+        min: 3,
+        message: "The rule name must be at least 3 characters.",
+        trigger: "blur",
+      },
     ],
   };
 
@@ -203,51 +209,23 @@ export default class extends Vue {
 
   @Watch("visibleWizard", { immediate: true })
   setUp(val: boolean) {
-    if (val) this.currentStep = 0;
-  }
+    if (val) {
+      this.currentStep = 0;
 
-  @Watch("ruleSysname", { immediate: true })
-  onSysNameChange() {
-    if (this.ruleSysname) {
-      this.conditionsTree = [];
-      this.rule = this.CurrentWorkflow?.actionWorkflowRules?.find(
-        (c) => c.systemName == this.ruleSysname
-      );
-      if (this.rule) {
-        let idx = 0;
-        this.rule.conditions?.roleGroups.forEach((grp) => {
-          let subIdx = 0;
-          let childRen: any[] = [];
-          grp.conditions.forEach((c) => {
-            childRen.push({
-              label: `Workflow is about to ${this.getMessage(c)}`,
-              children: [],
-              data: c,
-              uniqueIdx: idx,
-            });
-            grp.conditions[subIdx]["uniqueIdx"] = idx;
-            subIdx++;
-            idx++;
-          });
-
-          this.conditionsTree.push({
-            label: grp.title,
-            children: childRen,
-            uniqueIdx: idx,
-          });
-          (grp as any)["uniqueIdx"] = idx;
-
-          idx++;
-        });
-
+      if (this.actionRule.displayName) {
+        this.rule = this.actionRule;
         this.items.ruleName = this.rule.displayName;
         this.roleGroups = this.rule.conditions?.roleGroups;
         this.actionGroups = this.rule.actionGroup?.actions;
+      } else {
+        this.onAddEveryone();
+        this.roleGroups = [];
+        this.actionGroups = [];
+        this.items.ruleName = "";
+        this.rule = null;
       }
-    } else {
-      this.onAddEveryone();
     }
-    this.currentStep = 0;
+    
   }
 
   getMessage(step: any) {
@@ -321,16 +299,16 @@ export default class extends Vue {
   onOk() {
     (this.$refs.form as ElForm).validate((valid: boolean) => {
       if (valid) {
-        if (!this.rule) this.rule = new ActionWorkflowRule();
-        if (this.rule && !this.rule.conditions)
-          this.rule.conditions = new Restriction();
-        this.rule.conditions.roleGroups = this.roleGroups;
-        if (this.rule && !this.rule.actionGroup)
-          this.rule.actionGroup = new ActionGroup();
-        this.rule.actionGroup.actions = this.actionGroups;
-        this.rule.systemName = this.advancedRuleName;
-        this.rule.displayName = this.items.ruleName;
-        this.$emit("onSave", this.rule);
+        let rule = null;
+        if (!this.rule) rule = new ActionWorkflowRule();
+        else rule = this.rule;
+        if (rule && !rule.conditions) rule.conditions = new Restriction();
+        rule.conditions.roleGroups = this.roleGroups;
+        if (rule && !rule.actionGroup) rule.actionGroup = new ActionGroup();
+        rule.actionGroup.actions = this.actionGroups;
+        rule.systemName = this.advancedRuleName;
+        rule.displayName = this.items.ruleName;
+        this.$emit("onSave", rule);
         this.showModal = false;
       }
     });
