@@ -17,7 +17,7 @@
         Enter Javascript code that can be evaluated as true or flase
       </div>
       <el-input
-        v-model="items.code"
+        v-model="items.text"
         type="textarea"
         :autosize="{ minRows: 5 }"
       />
@@ -42,7 +42,6 @@
 <script lang='ts'>
 import { FreeTextCondition } from "@/models/Conditions";
 import { Component, Prop, Watch, Vue } from "vue-property-decorator";
-import { JavascriptCondition } from "@/models/Conditions";
 import { ElForm } from "element-ui/types/form";
 
 @Component({
@@ -51,11 +50,11 @@ import { ElForm } from "element-ui/types/form";
 })
 export default class extends Vue {
   @Prop({ required: true }) dialogVisible!: boolean;
-  @Prop({ required: true }) condition!: JavascriptCondition;
+  @Prop({ required: true }) condition!: FreeTextCondition;
 
   private items = {
     displayName: "",
-    code: "",
+    text: "",
   } as any;
 
   private formRules = {
@@ -66,7 +65,7 @@ export default class extends Vue {
         trigger: "change",
       },
     ],
-    code: [
+    text: [
       {
         required: true,
         message: "Please enter the code",
@@ -93,9 +92,9 @@ export default class extends Vue {
   okHandler() {
     // (this.$refs.form as ElForm).validate((valid: boolean) => {
     //   if (valid) {
-        let condition = new JavascriptCondition();
+        let condition = new FreeTextCondition();
         condition.displayName = this.items.displayName;
-        condition.code = this.items.code;
+        condition.text = this.items.text;
         this.$emit("onSave", condition);
         this.showModal = false;
       // } else {

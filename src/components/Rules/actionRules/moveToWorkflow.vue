@@ -58,7 +58,7 @@
                   v-for="item in workflowOptions"
                   :key="item.itemId"
                   :label="item.displayName"
-                  :value="item.itemId"
+                  :value="item.displayName"
                 />
               </el-select>
             </el-form-item>
@@ -78,10 +78,10 @@
                 clearable
               >
                 <el-option
-                  v-for="item in stepOptions"
+                  v-for="item in activeWorkflow.flowSteps"
                   :key="item.key"
                   :label="item.displayName"
-                  :value="item.systemName"
+                  :value="item.displayName"
                 />
               </el-select>
             </el-form-item>
@@ -181,14 +181,6 @@ export default class extends Vue {
 
   private workflowOptions: any = [];
 
-  get currentEntity() {
-    return EntitiesModule.currentEntity;
-  }
-
-  get stepOptions() {
-    return EntitiesModule.currentEntity?.status;
-  }
-
   get activeWorkflow() {
     return WorkflowModule.activeWorkflow;
   }
@@ -202,32 +194,19 @@ export default class extends Vue {
   }
 
   @Watch("dialogVisible", { immediate: true })
-  async setUp(val: boolean) {
+  setUp(val: boolean) {
     console.log('moveAction',this.action)
     if (val) {
       if (this.action && this.action.item.length > 0) {
         this.items.property.value = this.action.item;
-        let rs = await EntitiesModule.getEntity(
-          this.action.item[0].value
-        ); console.log('rs', rs)
-        let str = `[Workflow(${rs.displayName})`
         if (this.action.item.length > 1) {
-          let property = rs.properties.find(
-            (prop: any) => prop.systemName === this.action.item[1].key
-          );
-          str += ` : ${property.displayName}]`;
-          this.dataType = property?.dataType?.value;
-        }        
-        this.workflowOptions = WorkflowModule.Workflows;
+          this.items.property.displayName = `[Workflow(${this.items.property.value[0].displayName}): ${this.items.property.value[1].displayName}]`;
+          this.lastPath = this.items.property.value[1];
+        }
         this.items.workflowSystemName = this.action.workflowSystemName;
         this.items.stepSystemName = this.action.stepSystemName;
       } else {
-        let workflow = WorkflowModule.Workflows[0];
-        this.items.property.displayName = `[${workflow.entityName}]`;
-        this.items.property.value = [new KeyValue('tbl',this.activeWorkflow.entityId)]
-        this.workflowOptions = [...WorkflowModule.Workflows];
-        this.items.workflowSystemName = workflow.itemId;
-        this.items.stepSystemName = this.activeWorkflow.flowSteps[0].systemName;
+        this.items = {...this.defaultItems};
       }
     }
   }

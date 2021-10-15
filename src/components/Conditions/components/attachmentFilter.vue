@@ -93,6 +93,7 @@ import { KeyValue } from "@/models/KeyValue";
 import SelectPropertyModel from "@/components/PropertySelector/index.vue";
 import { AttachmentCondition } from "@/models/Conditions";
 import { ElForm } from "element-ui/types/form";
+import { EntitiesModule } from "@/store/modules/entitiesMod";
 
 @Component({
   name: "attachment-condition",
@@ -109,6 +110,7 @@ export default class extends Vue {
     },
     contains: 0,
     attachmentType: "",
+    restrictions: null
   };
 
   private items: any = {
@@ -118,11 +120,12 @@ export default class extends Vue {
     },
     contains: 1,
     attachmentType: "",
+    restrictions: null
   };
 
   private contains: string = "1";
 
-  @Watch("contains", {immediate: true})
+  @Watch("contains", { immediate: true })
   changeRadio(val: string) {
     this.items.contains = parseInt(val);
   }
@@ -157,19 +160,27 @@ export default class extends Vue {
   }
 
   @Watch("dialogVisible", { deep: true, immediate: true })
-  setUp(val: boolean) {
+  async setUp(val: boolean) {
     if (val) {
-      if (this.condition) {
-        if (this.condition.mainOperand && this.condition.mainOperand.length > 0) {
-          this.items.property.value = this.condition.mainOperand;
-        }
-        if (this.items.property?.value?.length > 0) {
-          this.items.property.displayName = `[Workflow(${this.items.property.value[0].displayName}): ${this.items.property.value[1].displayName}]`;
-        }
-        if (this.condition.contains)
-          this.items.contains = this.condition.contains;
-        if (this.condition.attachmentType)
-          this.items.attachmentType = this.condition.attachmentType;
+      if (this.condition.property.length) {
+        this.items.property.value = this.condition.property;
+        let rs = await EntitiesModule.getEntity(
+          this.condition.property[0].value
+        );
+        let property = rs.properties.find(
+          (prop: any) => prop.systemName === this.condition.property[1].key
+        );
+        let isContains = true;
+        this.items.property.displayName = `[(${rs.displayName}): ${property?.displayName}]`;
+        if (this.condition.displayName.includes("does not contain")) this.contains = "1"; 
+        else if (this.condition.displayName.includes("contain")) this.contains = "0";
+        else isContains = false;
+        
+        let splitedName = this.condition.displayName.split(" ");
+        if (isContains && !splitedName[splitedName.length - 1].includes("contain")) this.items.attachmentType = splitedName[splitedName.length - 1];
+
+      } else {
+        this.items = this.defaultItems;
       }
     }
   }
@@ -194,6 +205,9 @@ export default class extends Vue {
         attachmentCondition.attachmentType = this.items.attachmentType;
         attachmentCondition.contains = this.items.contains;
         attachmentCondition.mainOperand = this.items.property.value;
+        attachmentCondition.displayName = this.items.property.displayName;
+        attachmentCondition.displayName +=  this.items.contain === "1" ? " contains" :" does not contain";
+        attachmentCondition.displayName += " " + this.items.attachmentType;
 
         this.$emit("update:condition", attachmentCondition);
         this.$emit("onSave", attachmentCondition);

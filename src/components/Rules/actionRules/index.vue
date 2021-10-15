@@ -170,10 +170,6 @@ export default class extends Vue {
   //   this.refresh();
   // }
 
-  get currentEntity() {
-    return EntitiesModule.currentEntity;
-  }
-
   @Watch("currentAction", { deep: true, immediate: true })
   refresh() {
     this.actionsTree = [];
@@ -279,13 +275,10 @@ export default class extends Vue {
     let str: string = "";
     if (action.item.length > 0) {
       let rs = await EntitiesModule.getEntity(action.item[0].value);
-      str += "Move workflow of item [" + rs.displayName + "]";
+      str += "Move workflow of item [Workflow" + rs.displayName + "]";
     }
-    if (action.stepSystemName){
-      let state = this.currentEntity?.status.find(s => s.systemName === action.stepSystemName)
-      if (state) str += " to Step ['" + state.displayName + "']";
-    }
-      
+    if (action.stepSystemName)
+      str += "to Step ['" + action.stepSystemName + "']";
     return str;
   }
 

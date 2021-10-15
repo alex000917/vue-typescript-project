@@ -138,12 +138,18 @@ export default class extends Vue {
         let rs = await EntitiesModule.getEntity(
           this.condition.property[0].value
         );
-        let property = rs.properties.find(
-          (prop: any) => prop.systemName === this.condition.property[1].key
-        );
-        this.items.property.displayName = `[Workflow(${rs.displayName}): ${property?.displayName}]`;
+        let str = "[" + rs.displayName;
+        for (let i = 1; i < this.condition.property.length; i++) {
+          let property: any = rs.properties.find(
+            (prop: any) => prop.systemName === this.condition.property[1].key
+          );
+          if (property) str += ` : ${property.displayName}`;
+        }
+        str += "]";console.log(str);
+        this.items.property.displayName = str;
         this.items.newValueCanBeEmpty = this.condition.newValueCanBeEmpty;
-        console.log("items", this.items);
+      } else {
+        this.items = this.defaultItems;
       }
     }
   }
@@ -169,14 +175,17 @@ export default class extends Vue {
   }
 
   async resultHandler(displayPath: KeyValue[], result: KeyValue[]) {
-    console.log("propertyReulst", result);
     let str = "";
     if (result.length > 1) {
-      let rs = await EntitiesModule.getEntity(this.condition.property[0].value);
-      let property = rs.properties.find(
-        (prop: any) => prop.systemName === this.condition.property[1].key
-      );
-      str += `[Workflow(${rs.displayName}): ${property?.displayName}]`;
+      let rs = await EntitiesModule.getEntity(result[0].value);
+      let str = "[" + rs.displayName;
+      for (let i = 1; i < result.length; i++) {
+        let property: any = rs.properties.find(
+          (prop: any) => prop.systemName === result[1].key
+        );
+        if (property) str += ` : ${property.displayName}`;
+      }
+      str += "]";
       this.items.property.displayName = str;
       this.items.property.value = result;
     }

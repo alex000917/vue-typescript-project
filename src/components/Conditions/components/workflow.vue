@@ -204,7 +204,7 @@ export default class extends Vue {
 
   private workflowOptions: any[] = [];
 
-  private stepOptions = ["Approved", "Awaiting approval", "Draft", "Start"];
+  // private stepOptions = ["Approved", "Awaiting approval", "Draft", "Start"];
 
   private selectPropertyModal = {
     show: false,
@@ -213,7 +213,7 @@ export default class extends Vue {
   @Watch("dialogVisible", { deep: true, immediate: true })
   async setUp(val: boolean) {
     if (val) {
-      if (this.condition) {
+      if (this.condition.mainOperand?.length > 0) {
         this.items.property.value = this.condition.mainOperand;
         if (this.items.property?.value?.length > 0) {
           let rs = await EntitiesModule.getEntity(
@@ -230,8 +230,20 @@ export default class extends Vue {
         this.items.operator = this.condition.operator;
         this.items.workflow = this.condition.workflowId;
         this.items.step = this.condition.secondaryOperand[0].key;
+      } else {
+        this.items.property.value = [new KeyValue('tbl', this.activeWorkflow.entityId)];
+        this.items.property.displayName = `[Workflow(${this.activeWorkflow.displayName})`;
+        this.workflowOptions = WorkflowModule.Workflows;
       }
     }
+  }
+
+  get currentEntity() {
+    return EntitiesModule.currentEntity;
+  }
+
+  get stepOptions() {
+    return this.currentEntity?.status;
   }
 
   get activeWorkflow() {

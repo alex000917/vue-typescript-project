@@ -2,8 +2,14 @@
   <div>
     <div class="outer-modal-container">
       <slot name="description" />
-      <el-row type="flex" class="command-container">
-        <el-col :span="5" class="command-button">
+      <el-row
+        type="flex"
+        class="command-container"
+      >
+        <el-col
+          :span="5"
+          class="command-button"
+        >
           <el-button
             type="text"
             icon="el-icon-user"
@@ -13,24 +19,36 @@
               )
             "
           >
-            <span class="button-text" @click="showRoleGroupPopup('new')">{{
+            <span
+              class="button-text"
+              @click="showRoleGroupPopup('new')"
+            >{{
               lpmInstance.getLocalizedString(
                 languagesPresentationModel.NEW_ROLE_GROUP
               )
             }}</span>
           </el-button>
         </el-col>
-        <el-col v-if="showFiltersButton" class="command-button">
+        <el-col
+          v-if="showFiltersButton"
+          class="command-button"
+        >
           <el-dropdown
             trigger="click"
             size="small"
             placement="bottom-start"
             @command="newFilterHandler"
           >
-            <el-button type="text" icon="el-icon-brush">
+            <el-button
+              type="text"
+              icon="el-icon-brush"
+            >
               <span class="button-text">New Filter</span>
             </el-button>
-            <el-dropdown-menu slot="dropdown" style="margin-top: 0;">
+            <el-dropdown-menu
+              slot="dropdown"
+              style="margin-top: 0;"
+            >
               <el-dropdown-item
                 v-for="filter in filtersList"
                 :key="filter.id"
@@ -41,7 +59,10 @@
             </el-dropdown-menu>
           </el-dropdown>
         </el-col>
-        <el-col :span="5" class="command-button">
+        <el-col
+          :span="5"
+          class="command-button"
+        >
           <el-dropdown
             trigger="click"
             size="small"
@@ -68,7 +89,11 @@
                 {{ condition.label }} Conditions...
               </el-dropdown-item>
             </el-dropdown-menu>
-            <el-dropdown-menu v-else slot="dropdown" style="margin-top: 0;">
+            <el-dropdown-menu
+              v-else
+              slot="dropdown"
+              style="margin-top: 0;"
+            >
               <el-dropdown-item
                 v-for="condition in actionsList"
                 :key="condition.id"
@@ -80,7 +105,10 @@
             </el-dropdown-menu>
           </el-dropdown>
         </el-col>
-        <el-col :span="2" class="command-button">
+        <el-col
+          :span="2"
+          class="command-button"
+        >
           <el-button
             type="text"
             icon="el-icon-edit-outline"
@@ -89,8 +117,15 @@
             <span class="button-text">Edit</span>
           </el-button>
         </el-col>
-        <el-col :span="2" class="command-button">
-          <el-button type="text" icon="el-icon-delete" @click="onDelete">
+        <el-col
+          :span="2"
+          class="command-button"
+        >
+          <el-button
+            type="text"
+            icon="el-icon-delete"
+            @click="onDelete"
+          >
             <span class="button-text">Delete</span>
           </el-button>
         </el-col>
@@ -107,7 +142,10 @@
           class="tree-container"
           @node-click="handleNodeClick"
         >
-          <span slot-scope="{ node, data }" class="custom-tree-node">
+          <span
+            slot-scope="{ node, data }"
+            class="custom-tree-node"
+          >
             <div style="display: flex; align-items: center;">
               <el-image
                 style="width: 20px; height: 20px;"
@@ -169,7 +207,7 @@
       @onSave="onSave"
     />
     <javascript-condition-modal
-      :dialogVisible.sync="showFilterModal['JavascriptCondition']"
+      :dialogVisible.sync="showFilterModal['FreeTextCondition']"
       :condition.sync="currentCondition"
       @onSave="onSave"
     />
@@ -223,6 +261,7 @@ import {
   ItemSetCondition,
   JavascriptCondition,
   TransitionCondition,
+  FreeTextCondition,
 } from "@/models/Conditions";
 import { emit } from "cluster";
 
@@ -294,7 +333,7 @@ export default class extends Vue {
     { id: "WorkflowCondition", label: "Workflow" },
     { id: "StatusCondition", label: "Status" },
     { id: "EntityCategoryCondition", label: "Entity category" },
-    { id: "JavascriptCondition", label: "Javscript" },
+    { id: "FreeTextCondition", label: "Javscript" },
     { id: "AttachmentCondition", label: "Attachment" },
   ];
 
@@ -304,19 +343,43 @@ export default class extends Vue {
       label: "Property Change  Conditions...",
       disabled: false,
     },
-    { id: "TransitionCondition", label: "Transition  Conditions...", disabled: false },
+    {
+      id: "TransitionCondition",
+      label: "Transition  Conditions...",
+      disabled: false,
+    },
     { id: "", label: "-----------------------", disabled: true },
 
-    { id: "PropertyCondition", label: "Property  Conditions...", disabled: false },
-    { id: "ItemSetCondition", label: "Item Set  Conditions...", disabled: false },
-    { id: "WorkflowCondition", label: "Workflow  Conditions...", disabled: false },
+    {
+      id: "PropertyCondition",
+      label: "Property  Conditions...",
+      disabled: false,
+    },
+    {
+      id: "ItemSetCondition",
+      label: "Item Set  Conditions...",
+      disabled: false,
+    },
+    {
+      id: "WorkflowCondition",
+      label: "Workflow  Conditions...",
+      disabled: false,
+    },
     {
       id: "EntityCategoryCondition",
       label: "Entity category  Conditions...",
       disabled: false,
     },
-    { id: "JavascriptCondition", label: "Javscript  Conditions...", disabled: false },
-    { id: "AttachmentCondition", label: "Attachment  Conditions...", disabled: false },
+    {
+      id: "FreeTextCondition",
+      label: "Javscript  Conditions...",
+      disabled: false,
+    },
+    {
+      id: "AttachmentCondition",
+      label: "Attachment  Conditions...",
+      disabled: false,
+    },
   ];
 
   private filtersList = [
@@ -351,7 +414,7 @@ export default class extends Vue {
     ItemSetCondition: false,
     WorkflowCondition: false,
     AttachmentCondition: false,
-    JavascriptCondition: false,
+    FreeTextCondition: false,
     PropertyChangeCondition: false,
     TransitionCondition: false,
   };
@@ -379,7 +442,8 @@ export default class extends Vue {
   }
 
   @Watch("data", { deep: true, immediate: true })
-  setUpTree() { console.log("conditionData", this.data)
+  setUpTree() {
+    console.log("conditionData", this.data);
     this.roleGroups = this.data;
     this.currentCondition = new BaseCondition();
   }
@@ -404,13 +468,13 @@ export default class extends Vue {
                 if (condition.myspType === "PropertyCondition") {
                   if (condition.skipConditionIfMainOperandIsEmpty)
                     children.push({
-                      label: this.getSkipMailOperandAlert(condition),
+                      label: await this.getSkipMailOperandAlert(condition),
                       key: "",
                       index: index,
                     });
                   if (condition.skipConditionIfSecondaryOperandIsEmpty)
                     children.push({
-                      label: this.getSkipSecondOperandAlert(condition),
+                      label: await this.getSkipSecondOperandAlert(condition),
                       key: "",
                       index: index,
                     });
@@ -449,7 +513,7 @@ export default class extends Vue {
         return await this.getStatusName(condition);
       case "EntityCategoryCondition":
         return await this.getEntityName(condition);
-      case "JavascriptCondition":
+      case "FreeTextCondition":
         return this.getJavascriptName(condition);
       case "AttachmentCondition":
         return this.getAttachmentName(condition);
@@ -459,23 +523,24 @@ export default class extends Vue {
   }
 
   async getAttachmentName(condition: AttachmentCondition | any) {
-    let str = "";
-    if (condition?.mainOperand && condition.mainOperand.length >= 0) {
-      let rs = await EntitiesModule.getEntity(condition.mainOperand[0].value);
-      let property = rs.properties.find(
-        (prop: any) => prop.systemName === condition.mainOperand[1].key
-      );
-      str += `[Workflow(${rs.displayName}): ${property?.displayName}]`;
-    }
-    if (condition.step) {
-      str += " " + condition.step;
-    }
-    str += " " + (!condition.contains ? "does not contain" : "contains");
-    if (condition.attachmentType) str += " " + condition.attachmentType;
-    return str;
+    // let str = "";
+    // if (condition?.property && condition.property.length >= 0) {
+    //   let rs = await EntitiesModule.getEntity(condition.property[0].value);
+    //   let property = rs.properties.find(
+    //     (prop: any) => prop.systemName === condition.property[1].key
+    //   );
+    //   str += `[Workflow(${rs.displayName}): ${property?.displayName}]`;
+    // }
+    // if (condition.step) {
+    //   str += " " + condition.step;
+    // }
+    // str += " " + (!condition.contains ? "does not contain" : "contains");
+    // if (condition.attachmentType) str += " " + condition.attachmentType;
+    // return str;
+    return condition.displayName;
   }
 
-  getJavascriptName(condition: JavascriptCondition | any) {
+  getJavascriptName(condition: FreeTextCondition | any) {
     let str = "";
     if (condition.displayName) str += condition.displayName;
     return str;
@@ -486,21 +551,31 @@ export default class extends Vue {
     let property: any = null;
     if (condition?.mainOperand && condition.mainOperand.length >= 0) {
       rs = await EntitiesModule.getEntity(condition.mainOperand[0].value);
-      let property = rs.properties.find(
-        (prop: any) => prop.systemName === condition.mainOperand[1].key
-      );
-      str += `[Workflow(${rs.displayName}): Category : ${property.displayName}]`;
+      str += `[Workflow(${rs.displayName})`;
+      for (let i = 1; i < condition.mainOperand.length; i++) {
+        // property = rs.properties.find(
+        //   (prop: any) => prop.systemName === condition.mainOperand[1].key
+        // );
+        str += ` : ${condition.mainOperand[i].key}`;
+      }
+      str += ']';
     }
     if (condition.operator) {
-      str += " " + condition.operator;
+      let dataType = 1;
+      if (property) dataType = property?.dataType?.value;
+      let operators = await FormsModule.getOperatorsByDataType(parseInt(dataType))
+      let operator = operators.find((x) => x.value === condition.operator);
+      str += " " + (operator?.key || "");
     }
 
     if (
-      condition.secondOperandIsProperty &&
-      condition.secondaryOperand &&
       condition.secondaryOperand.length > 0
     ) {
-      str += ` [Workflow(${condition.secondaryOperand[0].key}): ${condition.secondaryOperand[1].key}]`;
+      for (let i = 0; i < condition.secondaryOperand.length; i++)
+        str +=
+          i > 0
+            ? ` or ${condition.secondaryOperand[i].key}`
+            : ` ${condition.secondaryOperand[i].key}`;
     }
     return str;
   }
@@ -516,15 +591,23 @@ export default class extends Vue {
       );
       str += `[Workflow(${rs.displayName}): ${property?.displayName}]`;
     }
-    if (condition.step) {
-      str += " " + condition.step;
-    }
+    // if (condition.step) {
+    //   str += " " + condition.step;
+    // }
     if (condition.operator) {
+      property = rs.properties.find(
+        (prop: any) =>
+          prop.systemName ===
+          condition.mainOperand[condition.mainOperand.length - 1].key
+      );
       let dataType: any = 1;
       if (property) dataType = property?.dataType?.value;
-      let operators = await FormsModule.getOperatorsByDataType(parseInt(dataType));
-      let operator = operators.find( x => x.value === condition.operator);
-      str += " " + (operator?.key ? operator?.key: "");
+      let operators = await FormsModule.getOperatorsByDataType(
+        parseInt(dataType)
+      );
+      console.log(dataType, condition.operator, operators);
+      let operator = operators.find((x) => x.value === condition.operator);
+      str += " " + (operator?.key ? operator?.key : "");
     }
     if (condition.secondaryOperand.length) {
       str += " " + condition.secondaryOperand[0].key;
@@ -534,15 +617,36 @@ export default class extends Vue {
 
   async getStatusName(condition: WorkflowCondition | any) {
     let str: string = "";
-    if (condition?.mainOperand && condition.mainOperand.length >= 0) {
+    let property: any = null;
+    if (condition?.mainOperand && condition.mainOperand.length > 0) {
       let rs = await EntitiesModule.getEntity(condition.mainOperand[0].value);
-      let property = rs.properties.find(
+      property = rs.properties.find(
         (prop: any) => prop.systemName === condition.mainOperand[1].key
       );
-      str += `[Workflow(${rs.displayName}): Status: ${property?.displayName}]`;
+      str += `[Workflow(${rs.displayName})`;
+      for (let i = 1; i < condition.mainOperand.length; i++) {
+        // let property = rs.properties.find(
+        //   (prop: any) => prop.systemName === condition.mainOperand[i].key
+        // ); console.log('pro',property)
+        str += ` : ${condition.mainOperand[i].key}`;
+      }
+      str += "]";
     }
-    if (condition.step) {
-      str += " " + condition.step;
+    if (condition.operator) {
+      let dataType: any = 1;
+      if (property) dataType = property?.dataType?.value;
+      let operators = await FormsModule.getOperatorsByDataType(
+        parseInt(dataType)
+      );
+      let operator = operators.find((x) => x.value === condition.operator);
+      str += " " + (operator?.key ? operator?.key : "");
+    }
+    if (condition.secondaryOperand.length) {
+      for (let i = 0; i < condition.secondaryOperand.length; i++)
+        str +=
+          i > 0
+            ? ` or ${condition.secondaryOperand[i].key}`
+            : ` ${condition.secondaryOperand[i].key}`;
     }
     return str;
   }
@@ -560,19 +664,23 @@ export default class extends Vue {
   }
 
   async getPropertyChangeName(condition: PropertyChangeCondition | any) {
-    let str = "";
+    let str = "[";
     if (condition?.property?.length > 1) {
       let rs = await EntitiesModule.getEntity(condition.property[0].value);
-      let property: any = rs.properties.find(
-        (prop: any) => prop.systemName === condition.property[1].key
-      );
-      str += `[Workflow(${rs.displayName}): ${property.displayName}] is about to change`;
+      str += rs.displayName;
+      for (let i = 1; i < condition.property.length; i++) {
+        let property: any = rs.properties.find(
+          (prop: any) => prop.systemName === condition.property[1].key
+        );
+        if (property) str += ` : ${property.displayName}`;
+      }
+      str += "] is about to change.";
     }
-    if (condition.newValueCanBeEmpty) {
-      str += " a empty value";
-    } else {
-      str += " a non-empty value";
-    }
+    // if (condition.newValueCanBeEmpty) {
+    //   str += " a empty value";
+    // } else {
+    //   str += " a non-empty value";
+    // }
     return str;
   }
 
@@ -590,9 +698,11 @@ export default class extends Vue {
     if (condition.operator) {
       let dataType = 1;
       if (property) dataType = property?.dataType?.value;
-      let operators = await FormsModule.getOperatorsByDataType(parseInt(dataType));
-      let operator = operators.find( x => x.value === condition.operator);
-      str += " " + (operator?.key ? operator?.key: "");
+      let operators = await FormsModule.getOperatorsByDataType(
+        parseInt(dataType)
+      );
+      let operator = operators.find((x) => x.value === condition.operator);
+      str += " " + (operator?.key ? operator?.key : "");
     }
 
     if (
@@ -629,19 +739,27 @@ export default class extends Vue {
       let property = rs.properties.find(
         (prop: any) => prop.systemName === condition.mainOperand[1].key
       );
-      return `Skip if [Form (${condition.mainOperand[0].displayName}): ${condition.mainOperand[1].displayName}] is empty`;
+      return `Skip if [Form (${rs.displayName}): ${property.displayName}] is empty`;
     } else return "";
   }
 
-  getSkipSecondOperandAlert(condition: PropertyCondition | any): string | any {
+  async getSkipSecondOperandAlert(
+    condition: PropertyCondition | any
+  ): string | any {
     if (
       condition.skipConditionIfSecondaryOperandIsEmpty &&
       condition.secondaryOperand &&
       condition.secondaryOperand.length >= 0
     ) {
-      if (condition.secondOperandIsProperty)
+      if (condition.secondOperandIsProperty) {
+        let rs = await EntitiesModule.getEntity(
+          condition.secondaryOperand[0].value
+        );
+        let property = rs.properties.find(
+          (prop: any) => prop.systemName === condition.secondaryOperand[1].key
+        );
         return `Skip if [Form (${condition.secondaryOperand[0].displayName}): ${condition.secondaryOperand[1].displayName}] is empty`;
-      else if (condition.secondOperandIsApplicationPreference) {
+      } else if (condition.secondOperandIsApplicationPreference) {
         return `Skip if [Form (${condition.secondaryOperand[0].displayName})] is empty`;
       } else {
         return `Skip if [Form (${condition.secondaryOperand[0]})] is empty`;
@@ -741,9 +859,8 @@ export default class extends Vue {
     this.currentRoleGroup = this.roleGroups[this.selectedRoleGroupIndex];
     if (ids.length > 1) {
       this.selectedConditionIndex = +ids[1];
-      this.currentCondition = this.currentRoleGroup.conditions[
-        this.selectedConditionIndex
-      ];
+      this.currentCondition =
+        this.currentRoleGroup.conditions[this.selectedConditionIndex];
       this.isEditCondition = true;
     } else {
       this.isEditCondition = false;
@@ -776,8 +893,8 @@ export default class extends Vue {
       case "EntityCategoryCondition":
         this.currentCondition = new EntityCategoryCondition();
         break;
-      case "JavascriptCondition":
-        this.currentCondition = new JavascriptCondition();
+      case "FreeTextCondition":
+        this.currentCondition = new FreeTextCondition();
         break;
       case "AttachmentCondition":
         this.currentCondition = new AttachmentCondition();
@@ -871,7 +988,8 @@ export default class extends Vue {
 
     this.newRoleGroupModalData.visible = true;
     this.newRoleGroupModalData.state = state;
-    this.newRoleGroupModalData.shouldShowEveryoneButton = shouldShowEveryoneButton;
+    this.newRoleGroupModalData.shouldShowEveryoneButton =
+      shouldShowEveryoneButton;
     this.newRoleGroupModalData.authNodesSystemNames = authNodesSystemNames;
   }
 
@@ -914,9 +1032,8 @@ export default class extends Vue {
     if (this.selectedFilterKey === "everyone") {
       this.filterData = this.defaultFilterData;
     } else {
-      this.filterData[this.selectedFilterKey] = this.defaultFilterData[
-        this.selectedFilterKey
-      ];
+      this.filterData[this.selectedFilterKey] =
+        this.defaultFilterData[this.selectedFilterKey];
     }
   }
 
