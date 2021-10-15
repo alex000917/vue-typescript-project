@@ -94,7 +94,8 @@
       @onSave="onSave"
     />
     <itemset-action-modal
-      :dialogVisible.sync="newActionListVisible['ItemsetAction']"
+      key="ItemSetCondition"
+      :dialogVisible.sync="newActionListVisible['ItemSetCondition']"
       :condition.sync="currentAction"
       @onSave="onSave"
     />
@@ -117,17 +118,16 @@ import XmlActionModal from "./XmlRule.vue";
 import SetPropertyActionModal from "./setProperty.vue";
 import MoveWorkflowActionModal from "./moveToWorkflow.vue";
 import NewIntegraionActionModal from "./newIntegraion.vue";
-import ItemsetActionModal from "./newItemSet.vue";
+import ItemsetActionModal from "@/views/workflows/components/SettingsModal/ActionRules/action/newItemSet.vue";
 
 import {
   BaseAction,
   XMLAction,
   MoveWorkflowAction,
   IntegrationAction,
-  ItemsetAction,
   ServerAction,
 } from "@/models/Workflows/Actions";
-import { BaseCondition } from "@/models/Conditions";
+import { BaseCondition, ItemSetCondition } from "@/models/Conditions";
 
 @Component({
   name: "action-tree",
@@ -136,7 +136,7 @@ import { BaseCondition } from "@/models/Conditions";
     SetPropertyActionModal,
     MoveWorkflowActionModal,
     NewIntegraionActionModal,
-    ItemsetActionModal,
+    ItemsetActionModal
   },
 })
 export default class extends Vue {
@@ -147,7 +147,7 @@ export default class extends Vue {
     { id: "ServerAction", value: "Set property value" },
     { id: "MoveWorkflowAction", value: "Move workflow" },
     { id: "XMLAction", value: "XML action" },
-    { id: "ItemsetAction", value: "Item set action" },
+    { id: "ItemSetCondition", value: "Item set action" },
     { id: "IntegrationOperationAction", value: "Integration Operation" },
   ];
 
@@ -155,7 +155,7 @@ export default class extends Vue {
     ServerAction: false,
     MoveWorkflowAction: false,
     XMLAction: false,
-    ItemsetAction: false,
+    ItemSetCondition: false,
     IntegrationOperationAction: false,
   };
 
@@ -172,6 +172,11 @@ export default class extends Vue {
 
   get currentEntity() {
     return EntitiesModule.currentEntity;
+  }
+
+  @Watch("data", {deep: true, immediate: true})
+  setUp() {
+    this.currentAction = new BaseAction();
   }
 
   @Watch("currentAction", { deep: true, immediate: true })
@@ -196,7 +201,7 @@ export default class extends Vue {
         return await this.getMoveWorkflowActionName(action);
       case "IntegrationOperationAction":
         return this.getIntegrationActionName(action);
-      case "ItemsetAction":
+      case "ItemSetCondition":
         return this.getItemsetActionName(action);
       // case "ServerAction":
       //   return await this.getPropertyName(action);
@@ -271,8 +276,8 @@ export default class extends Vue {
     return str;
   }
 
-  getItemsetActionName(action: ItemsetAction) {
-    return action.name ? action.name : "";
+  getItemsetActionName(action: ItemSetCondition) {
+    return action.displayName ? action.displayName : "";
   }
 
   async getMoveWorkflowActionName(action: MoveWorkflowAction) {
@@ -315,6 +320,7 @@ export default class extends Vue {
     } else {
       this.data[this.selectedAction] = action;
     }
+    // this.$emit("update:date",this.data);
   }
 
   onDelete() {
@@ -342,8 +348,8 @@ export default class extends Vue {
       case "XMLAction":
         this.currentAction = new XMLAction();
         break;
-      case "ItemsetAction":
-        this.currentAction = new ItemsetAction();
+      case "ItemSetCondition":
+        this.currentAction = new ItemSetCondition();
         break;
       case "IntegrationOperationAction":
         this.currentAction = new IntegrationAction();
@@ -359,7 +365,8 @@ export default class extends Vue {
     this.newActionListVisible[this.currentAction.myspType] = true;
     console.log(
       this.currentAction.myspType,
-      this.newActionListVisible[this.currentAction.myspType]
+      this.newActionListVisible[this.currentAction.myspType],
+      this.newActionListVisible['ItemSetCondition']
     );
   }
 }

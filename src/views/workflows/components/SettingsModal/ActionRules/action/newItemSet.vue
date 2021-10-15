@@ -4,7 +4,6 @@
     title="New Item Set Action"
     :visible.sync="showModal"
     class="filter-container"
-    destroy-on-close
     :close-on-click-modal="false"
     append-to-body
   >
@@ -36,11 +35,19 @@
         </el-button>
       </el-row>
       <el-row>
-        <condition-tree :visibleConditions="conditionsList" :data.sync = "roleGroups" :conditionsDivHeight="true"/>
+        <condition-tree
+          :visibleConditions="conditionsList"
+          :data.sync="roleGroups"
+          :conditionsDivHeight="true"
+        />
       </el-row>
       <el-row>
         Specify actions to be performed for each of the items in the set:
-        <actionTree key="new-item-action-tree" :data.sync="actionRules" :conditionsDivHeight="true"/>
+        <actionTree
+          key="new-item-action-tree"
+          :data.sync="actionRules"
+          :conditionsDivHeight="true"
+        />
       </el-row>
       <el-row style="margin-top: 10px"> Item set action name:</el-row>
       <el-row
@@ -91,21 +98,23 @@ import { Component, Prop, Watch, Vue } from "vue-property-decorator";
 import { KeyValue } from "@/models/KeyValue";
 import { WorkflowModule } from "@/store/modules/WorkflowMod";
 import { LanguagesPresentationModel } from "@/models/Utils/LanguagesPresentationModel";
-import prefModel from "@/components/Preferences/prefModel.vue";
 import { RoleGroup } from "@/models/RoleGroup";
+import { EntitiesModule } from "@/store/modules/entitiesMod";
 
-import {
-  ItemSetCondition,
-} from "@/models/Conditions";
+import { ItemSetCondition } from "@/models/Conditions";
 import { Restriction } from "@/models/Restriction";
 
 @Component({
   name: "itemset-action-modal",
   components: {
-    SelectPropertyModel: () => import("@/components/PropertySelector/index.vue"),
-    prefModel,
+    SelectPropertyModel: () =>
+      import("@/components/PropertySelector/index.vue"),
+    prefModel: () => import("@/components/Preferences/prefModel.vue"),
     conditionTree: () => import("@/components/Conditions/index.vue"),
-    actionTree: () => import("@/views/workflows/components/SettingsModal/ActionRules/action/index.vue"),
+    actionTree: () =>
+      import(
+        "@/views/workflows/components/SettingsModal/ActionRules/action/index.vue"
+      ),
   },
 })
 export default class extends Vue {
@@ -129,6 +138,16 @@ export default class extends Vue {
   //Tree Data
   private treeItems: any[] = [];
 
+  private defaultItems = {
+    property: {
+      displayName: "",
+      value: null,
+    },
+    itemSetConditionType: 0,
+    skipConditionIfSetIsEmpty: 0,
+    displayName: "",
+  };
+
   private items = {
     property: {
       displayName: "",
@@ -146,7 +165,7 @@ export default class extends Vue {
         message: "Please select entity property",
         trigger: "blur",
       },
-    ]
+    ],
   };
 
   private selectPropertyModal = {
@@ -193,16 +212,32 @@ export default class extends Vue {
     this.$emit("update:dialogVisible", val);
   }
 
-  @Watch('dailogVisible', {deep: true, immediate: true})
-  setUp(val: boolean) {
+  @Watch("dialogVisible", { deep: true, immediate: true })
+  async setUp(val: boolean) {
     if (val) {
-      if (this.condition) {
+      if (this.condition?.displayName) {
+        console.log("itemset", this.condition);
         this.items.property.value = this.condition.property;
-        this.items.property.displayName = this.condition.getPropertyDisplayName();
+        if (this.condition.property?.length > 1) {
+          let rs = await EntitiesModule.getEntity(this.condition.property[0].value);
+          let property = rs.properties.find(
+            (prop: any) => prop.systemName === this.condition.property[1].key
+          );
+          this.items.property.displayName = `Set [Workflow(${rs.displayName}): ${property.displayName}]`;
+        }
+
         this.items.itemSetConditionType = this.condition.itemSetConditionType;
-        this.items.skipConditionIfSetIsEmpty = this.condition.skipConditionIfSetIsEmpty;
+        this.items.skipConditionIfSetIsEmpty =
+          this.condition.skipConditionIfSetIsEmpty;
         this.items.displayName = this.condition.displayName;
         this.roleGroups = this.condition.restriction?.roleGroups;
+        this.actionRules = this.condition.restriction?.actionGroups;
+      } else {
+        this.items = this.defaultItems;
+        this.roleGroups = [];
+        this.actionRules = [];
+        this.items.property.displayName = "";
+        this.items.displayName = "";
       }
     }
   }
@@ -230,10 +265,12 @@ export default class extends Vue {
     condition.property = this.items.property.value;
     condition.restriction = new Restriction();
     condition.restriction.roleGroups = this.roleGroups;
+    condition.restriction.actionGroups = this.actionRules; console.log('action-data', this.actionRules);
     condition.displayName = this.items.displayName;
     condition.itemSetConditionType = this.items.itemSetConditionType;
-    condition.skipConditionIfSetIsEmpty = this.items.skipConditionIfSetIsEmpty
+    condition.skipConditionIfSetIsEmpty = this.items.skipConditionIfSetIsEmpty;
     this.$emit("onSave", condition);
+    this.$emit("update:condition", condition);
     this.showModal = false;
   }
 
