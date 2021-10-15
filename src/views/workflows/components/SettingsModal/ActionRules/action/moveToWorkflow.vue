@@ -203,31 +203,33 @@ export default class extends Vue {
 
   @Watch("dialogVisible", { immediate: true })
   async setUp(val: boolean) {
-    console.log('moveAction',this.action)
+    console.log("moveAction", this.action);
     if (val) {
       if (this.action && this.action.item.length > 0) {
         this.items.property.value = this.action.item;
-        let rs = await EntitiesModule.getEntity(
-          this.action.item[0].value
-        ); console.log('rs', rs)
-        let str = `[Workflow(${rs.displayName})`
+        let rs = await EntitiesModule.getEntity(this.action.item[0].value);
+        let str = `[Workflow(${rs.displayName})`;
         if (this.action.item.length > 1) {
           let property = rs.properties.find(
             (prop: any) => prop.systemName === this.action.item[1].key
           );
-          str += ` : ${property.displayName}]`;
-          this.dataType = property?.dataType?.value;
-        }        
+          str += property?.displayName ? ` : ${property?.displayName}` : "";
+        }
+        str += "]";
+        this.items.property.displayName = str;
+        this.lastPath = this.action.item[this.action.item.length - 1];
         this.workflowOptions = WorkflowModule.Workflows;
         this.items.workflowSystemName = this.action.workflowSystemName;
         this.items.stepSystemName = this.action.stepSystemName;
       } else {
         let workflow = WorkflowModule.Workflows[0];
         this.items.property.displayName = `[${workflow.entityName}]`;
-        this.items.property.value = [new KeyValue('tbl',this.activeWorkflow.entityId)]
+        this.items.property.value = [
+          new KeyValue("tbl", this.activeWorkflow.entityId),
+        ];
         this.workflowOptions = [...WorkflowModule.Workflows];
         this.items.workflowSystemName = workflow.itemId;
-        this.items.stepSystemName = this.activeWorkflow.flowSteps[0].systemName;
+        this.items.stepSystemName = this.stepOptions[0].systemName;
       }
     }
   }
@@ -236,7 +238,9 @@ export default class extends Vue {
   async setOperatorsAndWorkflows(propertyPath: KeyValue) {
     if (propertyPath) {
       this.entityId = propertyPath.value;
+      console.log("this.entityId", this.entityId);
       var rs = await EntitiesModule.getEntity(this.entityId);
+      await EntitiesModule.setCurrentEntity(rs);
       this.systemName = rs.systemName;
       if (propertyPath.key === "tbl") {
         this.dataType = 1;
@@ -288,7 +292,7 @@ export default class extends Vue {
         workflowAction.workflowSystemName = this.items.workflowSystemName;
         workflowAction.stepSystemName = this.items.stepSystemName;
 
-        this.$emit("update:action", workflowAction)
+        this.$emit("update:action", workflowAction);
         this.$emit("onSave", workflowAction);
         this.showModal = false;
       } else {

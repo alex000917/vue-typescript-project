@@ -125,7 +125,7 @@ import {
   MoveWorkflowAction,
   IntegrationAction,
   ItemsetAction,
-  ServerAction
+  ServerAction,
 } from "@/models/Workflows/Actions";
 import { BaseCondition } from "@/models/Conditions";
 
@@ -280,12 +280,15 @@ export default class extends Vue {
     if (action.item.length > 0) {
       let rs = await EntitiesModule.getEntity(action.item[0].value);
       str += "Move workflow of item [" + rs.displayName + "]";
+      if (action.stepSystemName) {
+        let rs = await EntitiesModule.getEntity(action.item[action.item.length - 1].value);
+        let state = rs?.status.find(
+          (s) => s.systemName === action.stepSystemName
+        );
+        if (state) str += " to Step ['" + state.displayName + "']";
+      }
     }
-    if (action.stepSystemName){
-      let state = this.currentEntity?.status.find(s => s.systemName === action.stepSystemName)
-      if (state) str += " to Step ['" + state.displayName + "']";
-    }
-      
+
     return str;
   }
 
@@ -304,7 +307,7 @@ export default class extends Vue {
   onNodeClick(data: any) {
     this.selectedAction = data.index;
     this.currentAction = this.data[this.selectedAction];
-    console.log(this.currentAction)
+    console.log(this.currentAction);
   }
 
   onSave(action: BaseCondition) {
