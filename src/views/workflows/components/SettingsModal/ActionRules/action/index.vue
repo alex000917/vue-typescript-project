@@ -99,7 +99,7 @@
       @onSave="onSave"
     />
     <new-integraion-action-modal
-      :dialogVisible.sync="newActionListVisible['IntegrationAction']"
+      :dialogVisible.sync="newActionListVisible['IntegrationOperationAction']"
       :action="currentAction"
       @onSave="onSave"
     />
@@ -148,7 +148,7 @@ export default class extends Vue {
     { id: "MoveWorkflowAction", value: "Move workflow" },
     { id: "XMLAction", value: "XML action" },
     { id: "ItemsetAction", value: "Item set action" },
-    { id: "IntegrationAction", value: "Integration Operation" },
+    { id: "IntegrationOperationAction", value: "Integration Operation" },
   ];
 
   private newActionListVisible: any = {
@@ -156,7 +156,7 @@ export default class extends Vue {
     MoveWorkflowAction: false,
     XMLAction: false,
     ItemsetAction: false,
-    IntegrationAction: false,
+    IntegrationOperationAction: false,
   };
 
   private currentAction = new BaseCondition();
@@ -194,7 +194,7 @@ export default class extends Vue {
         return this.getXMLActionName(action);
       case "MoveWorkflowAction":
         return await this.getMoveWorkflowActionName(action);
-      case "IntegrationAction":
+      case "IntegrationOperationAction":
         return this.getIntegrationActionName(action);
       case "ItemsetAction":
         return this.getItemsetActionName(action);
@@ -293,9 +293,7 @@ export default class extends Vue {
   }
 
   getIntegrationActionName(action: IntegrationAction) {
-    let str: string = "";
-    if (action.name) str += action.name;
-    return str;
+    return action.displayName || "";
   }
 
   getXMLActionName(action: XMLAction) {
@@ -347,7 +345,7 @@ export default class extends Vue {
       case "ItemsetAction":
         this.currentAction = new ItemsetAction();
         break;
-      case "IntegrationAction":
+      case "IntegrationOperationAction":
         this.currentAction = new IntegrationAction();
         break;
       default:

@@ -22,8 +22,14 @@
             already created) and then run.
           </el-col>
         </el-row>
-        <el-row class="integration__row" type="flex">
-          <el-form-item prop="name" label="Display name:">
+        <el-row
+          class="integration__row"
+          type="flex"
+        >
+          <el-form-item
+            prop="name"
+            label="Display name:"
+          >
             <el-input
               v-model="items.name"
               type="text"
@@ -31,8 +37,14 @@
             />
           </el-form-item>
         </el-row>
-        <el-row class="integration__row" type="flex">
-          <el-form-item prop="description" label="Description:">
+        <el-row
+          class="integration__row"
+          type="flex"
+        >
+          <el-form-item
+            prop="description"
+            label="Description:"
+          >
             <el-input
               v-model="items.description"
               type="text"
@@ -40,8 +52,14 @@
             />
           </el-form-item>
         </el-row>
-        <el-row class="integration__row" type="flex">
-          <el-form-item prop="javascript" label="Javascript Description:">
+        <el-row
+          class="integration__row"
+          type="flex"
+        >
+          <el-form-item
+            prop="javascript"
+            label="Javascript Description:"
+          >
             <el-input
               v-model="items.javascript"
               type="text"
@@ -49,7 +67,10 @@
             />
           </el-form-item>
         </el-row>
-        <el-row class="integration__row" type="flex">
+        <el-row
+          class="integration__row"
+          type="flex"
+        >
           <el-col>
             <el-row>
               <el-form-item
@@ -58,25 +79,28 @@
                 class="integration__row--radio-group"
               >
                 <div>
-                  <el-radio v-model="items.runType" label="1" 
-                    >Reoccurring</el-radio
-                  >
+                  <el-radio
+                    v-model="runType"
+                    label="1"
+                  >Reoccurring</el-radio>
                 </div>
                 <div>
-                  <el-radio v-model="items.runType" label="2" 
-                    >One time</el-radio
-                  >
+                  <el-radio
+                    v-model="runType"
+                    label="2"
+                  >One time</el-radio>
                 </div>
                 <div class="integration__row--group">
-                  <el-radio v-model="items.runType" label="3" 
-                    >Custom</el-radio
-                  >
+                  <el-radio
+                    v-model="runType"
+                    label="3"
+                  >Custom</el-radio>
                   <div class="integration__row--group-input">
                     <span>Workflow:</span>
                     <el-input
                       v-model="items.custom.workflow"
                       class="integration__row--group-input__control"
-                      :readonly="items.runType !== '3'"
+                      :readonly="runType !== '3'"
                     ></el-input>
                   </div>
                   <div class="integration__row--group-input">
@@ -93,8 +117,10 @@
           </el-col>
         </el-row>
         <el-row class="integration__row">
-          <el-alert type="info" show-icon
-            >To run this operation on a specific Orchestra, click settings from
+          <el-alert
+            type="info"
+            show-icon
+          >To run this operation on a specific Orchestra, click settings from
             the Solution designer home page,<br />
             open the Orchestrators section, and then open the Orchestrator's
             settings window.
@@ -102,9 +128,18 @@
         </el-row>
       </el-form>
     </el-container>
-    <div slot="footer" class="footer">
-      <el-button type="primary" @click="okHandler()">Ok</el-button>
-      <el-button @click="cancelHandler" type="text">Cancel</el-button>
+    <div
+      slot="footer"
+      class="footer"
+    >
+      <el-button
+        type="primary"
+        @click="okHandler()"
+      >Ok</el-button>
+      <el-button
+        @click="cancelHandler"
+        type="text"
+      >Cancel</el-button>
     </div>
   </el-dialog>
 </template>
@@ -139,12 +174,14 @@ export default class extends Vue {
     name: "",
     description: "",
     javascript: "",
-    runType: 0,
+    runType: "0",
     custom: {
       workflow: "",
       button: "",
     },
   };
+
+  private runType: string = "1";
 
   private formRules = {
     name: [
@@ -153,7 +190,6 @@ export default class extends Vue {
         message: "Please type name",
         trigger: "blur",
       },
-      { min: 3, message: 'Length should be 3 to 5', trigger: 'blur' }
     ],
     description: [
       {
@@ -178,23 +214,37 @@ export default class extends Vue {
     ],
   };
 
-  @Watch('dialogVisible', {immediate: true})
-  setUp(val:boolean) {
+  @Watch("dialogVisible", { immediate: true })
+  setUp(val: boolean) {
     if (val) {
-      if (this.action && this.action.name) {
-        this.items = {...this.action}
+      if (this.action && this.action.displayName) {
+        console.log("action", this.action);
+        this.items.name = this.action.displayName;
+        this.items.description = this.action.description;
+        this.items.javascript = this.action.javascriptFunction;
+        if (this.action.reoccurring) this.runType = "1";
+        else if (this.action.useConditions) this.runType = "2";
+        else this.runType = "3";
+        if (this.runType === "3") {
+          this.items.custom = {
+            workflow: this.action.customWorkflow,
+            button: this.action.customButton,
+          };
+        }
       } else {
-        this.items = {...this.defaultItems };
+        this.items = { ...this.defaultItems };
       }
     }
   }
 
-  @Watch("items.runType", { immediate: true })
+  @Watch("runType", { immediate: true })
   clearCustomValue() {
-    this.items.custom.workflow = "";
-    this.items.custom.button = "";
+    this.items.runType = this.runType;
+    if (this.runType !== "3") {
+      this.items.custom.workflow = "";
+      this.items.custom.button = "";
+    }
   }
-
 
   get showModal() {
     return this.dialogVisible;
@@ -208,10 +258,15 @@ export default class extends Vue {
     (this.$refs.form as ElForm).validate((valid: boolean) => {
       if (valid) {
         let action: any = new IntegrationAction();
-        action.name = this.items.name;
+        action.displayName = this.items.name;
         action.description = this.items.description;
-        action.javascript = this.items.javascript;
-        action.custom = this.items.custom;
+        action.javascriptFunction = this.items.javascript;
+        if (this.runType === "1") action.reoccurring = true;
+        else if (this.runType === "2") action.useConditions = true;
+        else {
+          action.customWorkflow = this.items.custom.workflow;
+          action.customButton = this.items.custom.button;
+        }
         this.$emit("update:action", action);
         this.$emit("onSave", action);
         this.showModal = false;
