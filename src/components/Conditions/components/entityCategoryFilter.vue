@@ -33,9 +33,9 @@
       >
         <el-option
           v-for="item in operatorList"
-          :key="item.value"
+          :key="item.key"
           :label="item.key"
-          :value="item.key"
+          :value="item.value"
         />
       </el-select>
     </div>

@@ -406,7 +406,7 @@ export default class extends Vue {
   private allowedNodeTypes = [];
 
   private showFilterModal: any = {
-    StateCondition: false,
+    StatusCondition: false,
     EntityCategoryCondition: false,
     userRole: false,
     PropertyCondition: false,
@@ -584,7 +584,7 @@ export default class extends Vue {
     let str: string = "";
     let rs: any = null;
     let property: any = null;
-    if (condition?.mainOperand && condition.mainOperand.length >= 0) {
+    if (condition?.mainOperand && condition.mainOperand.length > 1) {
       rs = await EntitiesModule.getEntity(condition.mainOperand[0].value);
       property = rs.properties.find(
         (prop: any) => prop.systemName === condition.mainOperand[1].key
@@ -605,7 +605,6 @@ export default class extends Vue {
       let operators = await FormsModule.getOperatorsByDataType(
         parseInt(dataType)
       );
-      console.log(dataType, condition.operator, operators);
       let operator = operators.find((x) => x.value === condition.operator);
       str += " " + (operator?.key ? operator?.key : "");
     }
@@ -652,15 +651,15 @@ export default class extends Vue {
   }
 
   async getItemsetName(condition: ItemSetCondition | any) {
-    let str = "";
-    if (condition?.property?.length > 1) {
-      let rs = await EntitiesModule.getEntity(condition.property[0].value);
-      let property: any = rs.properties.find(
-        (prop: any) => prop.systemName === condition.property[1].key
-      );
-      str += `[Workflow(${rs.displayName}): ${property.displayName}] is about to change`;
-    }
-    return str;
+    // let str = "";
+    // if (condition?.property?.length > 1) {
+    //   let rs = await EntitiesModule.getEntity(condition.property[0].value);
+    //   let property: any = rs.properties.find(
+    //     (prop: any) => prop.systemName === condition.property[1].key
+    //   );
+    //   str += `[Workflow(${rs.displayName}): ${property.displayName}] is about to change`;
+    // }
+    return condition.displayName;
   }
 
   async getPropertyChangeName(condition: PropertyChangeCondition | any) {
@@ -875,7 +874,7 @@ export default class extends Vue {
   private isEditCondition = false;
   newFilterHandler(command: string) {
     this.isEditCondition = true;
-
+console.log(command)
     this.selectedConditionIndex = -1;
     switch (command) {
       case "PropertyCondition":

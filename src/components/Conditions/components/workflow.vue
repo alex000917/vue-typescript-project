@@ -323,6 +323,10 @@ export default class extends Vue {
     (this.$refs.form as ElForm).validate((valid: boolean) => {
       if (valid) {
         var workflowCondition = new WorkflowCondition();
+        if (this.items.property.value.length === 1) {
+          this.items.property.displayName = "";
+          return;
+        }
         workflowCondition.mainOperand = [...this.items.property.value];
         if (this.items.workflow) {
           let workflow = this.workflowOptions.find(
@@ -339,12 +343,12 @@ export default class extends Vue {
         workflowCondition.step = this.items.step;
         workflowCondition.workflowId = this.items.workflow;
         this.$emit("onSave", workflowCondition);
+        this.cancelHandler();
       } else {
         console.log("error submit!!");
         return false;
       }
     });
-    this.cancelHandler();
   }
 
   cancelHandler() {

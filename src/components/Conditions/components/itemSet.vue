@@ -36,7 +36,10 @@
         </el-button>
       </el-row>
       <el-row>
-        <condition-tree :visibleConditions="conditionsList" :data.sync = "roleGroups"/>
+        <condition-tree
+          :visibleConditions="conditionsList"
+          :data.sync="roleGroups"
+        />
       </el-row>
       <el-row style="margin-top: 10px;">
         <el-col :span="8">This item set conditoin passes when:</el-col>
@@ -108,10 +111,9 @@ import { LanguagesPresentationModel } from "@/models/Utils/LanguagesPresentation
 import prefModel from "@/components/Preferences/prefModel.vue";
 import SelectPropertyModel from "@/components/PropertySelector/index.vue";
 import { RoleGroup } from "@/models/RoleGroup";
+import { EntitiesModule } from "@/store/modules/entitiesMod";
 
-import {
-  ItemSetCondition,
-} from "@/models/Conditions";
+import { ItemSetCondition } from "@/models/Conditions";
 import { Restriction } from "@/models/Restriction";
 
 @Component({
@@ -133,7 +135,7 @@ export default class extends Vue {
   private conditionsList = [
     { id: "PropertyCondition", label: "Property" },
     { id: "EntityCategoryCondition", label: "Entity category" },
-    { id: "JavascriptCondition", label: "Javscript" },
+    { id: "FreeTextCondition", label: "Javscript" },
     { id: "AttachmentCondition", label: "Attachment" },
   ];
 
@@ -141,6 +143,16 @@ export default class extends Vue {
   private roleGroups: RoleGroup[] | any = [];
   //Tree Data
   private treeItems: any[] = [];
+
+  private defaultItems = {
+    property: {
+      displayName: "",
+      value: null,
+    },
+    itemSetConditionType: "",
+    skipConditionIfSetIsEmpty: 0,
+    displayName: "",
+  };
 
   private items = {
     property: {
@@ -159,7 +171,7 @@ export default class extends Vue {
         message: "Please select entity property",
         trigger: "blur",
       },
-    ]
+    ],
   };
 
   private selectPropertyModal = {
@@ -206,16 +218,30 @@ export default class extends Vue {
     this.$emit("update:dialogVisible", val);
   }
 
-  @Watch('dailogVisible', {deep: true, immediate: true})
-  setUp(val: boolean) {
+  @Watch("dialogVisible", { deep: true, immediate: true })
+  async setUp(val: boolean) {
     if (val) {
-      if (this.condition) {
+      console.log('dis------------------', this.condition.displayName);
+      if (this.condition.displayName) {
         this.items.property.value = this.condition.property;
-        this.items.property.displayName = this.condition.getPropertyDisplayName();
+        if (this.condition.property?.length > 1) {
+          let rs = await EntitiesModule.getEntity(
+            this.condition.property[0].value
+          );
+          let property = rs.properties.find(
+            (prop: any) => prop.systemName === this.condition.property[1].key
+          );
+          this.items.property.displayName += `[Workflow(${rs.displayName}): ${property.displayName}]`;
+        }
         this.items.itemSetConditionType = this.condition.itemSetConditionType;
-        this.items.skipConditionIfSetIsEmpty = this.condition.skipConditionIfSetIsEmpty;
+        this.items.skipConditionIfSetIsEmpty =
+          this.condition.skipConditionIfSetIsEmpty;
         this.items.displayName = this.condition.displayName;
         this.roleGroups = this.condition.restriction?.roleGroups;
+      } else {        
+        this.items = { ...this.defaultItems };
+        this.items.property.displayName = "";
+        this.roleGroups = [];
       }
     }
   }
@@ -245,8 +271,9 @@ export default class extends Vue {
     condition.restriction.roleGroups = this.roleGroups;
     condition.displayName = this.items.displayName;
     condition.itemSetConditionType = this.items.itemSetConditionType;
-    condition.skipConditionIfSetIsEmpty = this.items.skipConditionIfSetIsEmpty
+    condition.skipConditionIfSetIsEmpty = this.items.skipConditionIfSetIsEmpty;
     this.$emit("onSave", condition);
+    this.$emit("update:condition", condition);
     this.showModal = false;
   }
 
