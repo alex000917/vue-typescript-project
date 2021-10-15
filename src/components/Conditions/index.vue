@@ -776,7 +776,7 @@ export default class extends Vue {
     switch (step.type) {
       case 0:
         switch (step.stepsToIncludeType) {
-          case 0:
+          case 1:
             return "Progress";
           case 2:
             return `Progress to step ${displayName} or beyound it.`;

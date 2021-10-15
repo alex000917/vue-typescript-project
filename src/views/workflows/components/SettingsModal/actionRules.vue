@@ -183,6 +183,7 @@ export default class extends Vue {
         this.showXmlActionModal = true;
         break;
     }
+    this.selectedIndex = -1;
   }
 
   onItemClick(index: number) {

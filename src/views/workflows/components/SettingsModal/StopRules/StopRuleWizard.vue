@@ -575,6 +575,7 @@ $border-color: #cacaca;
             border: 1px solid $border-color;
             height: 3.5vh;
             align-items: center;
+            overflow-x: auto;
           }
         }
       }

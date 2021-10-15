@@ -20,8 +20,8 @@
         <el-option
           v-for="item in WorkflowList"
           :key="item.value"
-          :label="item.label"
-          :value="item.value"
+          :label="item.value"
+          :value="item.key"
         />
       </el-select>
     </div>
@@ -35,7 +35,7 @@
           v-for="item in operatorList"
           :key="item.value"
           :label="item.key"
-          :value="item.key"
+          :value="item.value"
         />
       </el-select>
     </div>
@@ -125,7 +125,7 @@ export default class extends Vue {
   private entityScope = {
     mainOperand: [],
     secondaryOperand: [],
-    operator: "",
+    operator: 1,
     name: "",
   } as any;
 
@@ -159,8 +159,9 @@ export default class extends Vue {
           this.entityScope.mainOperand &&
           this.entityScope.mainOperand.length > 1
         ) {
-          this.entityScope.name = this.entityScope.mainOperand[1].value;
+          this.entityScope.name = this.entityScope.mainOperand[0].value;
         }
+        this.entityScope.operator = this.condition.operator;
       } else {
         let status = this.Entity?.defaultColumns.find((c) => c.key == "STATUS");
         console.log(status);
