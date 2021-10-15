@@ -123,7 +123,7 @@
     />
     <stop-rule-wizard
       :visible-wizard.sync="stopRuleVisible['StopWorkflowRule']"
-      :ruleSysname.sync="selectedRule"
+      :action.sync="currentAction"
       @onSave="onSave"
     />
   </el-container>

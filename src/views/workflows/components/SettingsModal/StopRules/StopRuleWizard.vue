@@ -112,7 +112,7 @@
                 prop="ruleName"
               >
                 <el-input
-                  v-model="items.ruleName"
+                  v-model="ruleName"
                   class="action-rule__row--input"
                 ></el-input>
               </el-form-item>
@@ -201,7 +201,7 @@ import { TextAssembly } from "@/models/TextAssembly";
 })
 export default class extends Vue {
   @Prop({ required: true }) visibleWizard!: string;
-  @Prop({ required: true }) ruleSysname!: string;
+  @Prop({ required: true }) action!: StopWorkflowRule;
 
   allowedProperties = ["1", "2"];
   allowedLookupName = "user";
@@ -274,52 +274,20 @@ export default class extends Vue {
 
   rule: StopWorkflowRule | undefined;
 
-  @Watch("visibleWizard", { immediate: true })
-  setUp(val: boolean) {
-    if (val) this.currentStep = 0;
-  }
-
   @Watch("ruleName", { immediate: true })
   setAdvancedRuleName() {
-    if (this.items.ruleName) {
-      this.items.ruleName = this.items.ruleName.toUpperCase();
+    if (this.ruleName) {
+      this.items.ruleName = this.ruleName.toUpperCase();
       this.advancedRuleName = "cse_" + this.items.ruleName;
     }
   }
 
-  @Watch("ruleSysname", { immediate: true })
-  onSysNameChange() {
-    if (this.ruleSysname) {
-      this.conditionsTree = [];
-      this.rule = this.CurrentWorkflow?.stopWorkflowRules?.find(
-        (c) => c.systemName == this.ruleSysname
-      );
-      if (this.rule) {
-        let idx = 0;
-        this.rule.conditions?.roleGroups.forEach((grp) => {
-          let subIdx = 0;
-          let childRen: any[] = [];
-          grp.conditions.forEach((c) => {
-            childRen.push({
-              label: `Workflow is about to ${this.getMessage(c)}`,
-              children: [],
-              data: c,
-              uniqueIdx: idx,
-            });
-            grp.conditions[subIdx]["uniqueIdx"] = idx;
-            subIdx++;
-            idx++;
-          });
+  @Watch("visibleWizard", { immediate: true })
+  setUp(val: boolean) {
+    if (val) this.currentStep = 0;
 
-          this.conditionsTree.push({
-            label: grp.title,
-            children: childRen,
-            uniqueIdx: idx,
-          });
-          (grp as any)["uniqueIdx"] = idx;
-
-          idx++;
-        });
+    if (this.action.displayName) {
+        this.rule = this.action;
 
         this.items.ruleName = this.rule.displayName;
         this.roleGroups = this.rule.conditions?.roleGroups;
@@ -344,8 +312,19 @@ export default class extends Vue {
         }
         console.log("message", message);
       }
-    } else {
+     else {
       this.onAddEveryone();
+      this.items.ruleName = "";
+      this.roleGroups = [];
+      this.actionGroups = [];
+      this.items.propertyFirst = {
+        value: [],
+        displayName: ""
+      };
+      this.items.propertySecond = {
+        value: [],
+        displayName: ""
+      }
     }
   }
 
