@@ -48,9 +48,9 @@
           </el-form-item>
         </el-row>
         <el-row class="attach-stop__row" type="flex">
-          <el-form-item prop="ruleName" label="Rule name:">
+          <el-form-item prop="displayName" label="Rule name:">
             <el-input
-              v-model="items.ruleName"
+              v-model="items.displayName"
               type="text"
               class="attach-stop__row--input"
             />
@@ -84,7 +84,7 @@ import { WorkflowModule } from "@/store/modules/WorkflowMod";
 import { KeyValue } from "@/models/KeyValue";
 import SelectPropertyModel from "@/components/PropertySelector/index.vue";
 import { ElForm } from "element-ui/types/form";
-import { AttachmentAction } from "@/models/Workflows/Actions";
+import { AttachmentStopWorkflowRule } from "@/models/Workflows/StopWorkflowRule";
 
 @Component({
   name: "attach-stop-rule",
@@ -92,7 +92,7 @@ import { AttachmentAction } from "@/models/Workflows/Actions";
 })
 export default class extends Vue {
   @Prop({ required: true }) dialogVisible!: boolean;
-  @Prop({ required: true }) action!: AttachmentAction;
+  @Prop({ required: true }) action!: AttachmentStopWorkflowRule;
 
   private defaultItems = {
     attachmentType: '',
@@ -104,7 +104,7 @@ export default class extends Vue {
   private items = {
     attachmentType: '',
     step: '',
-    ruleName: '',
+    displayName: '',
     systemName: ''
   };
 
@@ -124,7 +124,7 @@ export default class extends Vue {
         trigger: "blur",
       },
     ],
-    ruleName: [
+    displayName: [
       {
         required: true,
         message: "Please type the description",
@@ -152,8 +152,9 @@ export default class extends Vue {
   @Watch("dialogVisible", {immediate: true})
   setUp(val: boolean) {
     if (val) {
-      if (this.action.getDisplayName()) {
-        this.items = {...this.action};
+      if (this.action.systemName) {
+        this.items.displayName = this.action.displayName;
+        this.items.systemName = this.action.systemName;
       } else {
         this.items = {...this.defaultItems}
       }
@@ -163,10 +164,10 @@ export default class extends Vue {
   okHandler() {
     (this.$refs.form as ElForm).validate((valid: boolean) => {
       if (valid) {
-        let action = new AttachmentAction();
+        let action = new AttachmentStopWorkflowRule();
         action.attachmentType = this.items.attachmentType;
         action.step = this.items.step;
-        action.ruleName = this.items.ruleName;
+        action.displayName = this.items.displayName;
         action.systemName = this.items.systemName;
 
         this.$emit("onSave", action);

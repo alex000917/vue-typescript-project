@@ -60,10 +60,11 @@
               <div class="message__detail--tags">
                 <el-tag
                   type="info"
-                  v-show="items.propertyFirst.value"
+                  v-for="(part,key) in items.propertyFirst.value.parts"
+                  :key="key"
                   closable
-                  @close="closeFirstTag"
-                >{{ items.propertyFirst.displayName }}</el-tag>
+                  @close="closeFirstTag(key)"
+                >{{ display(part) }}</el-tag>
               </div>
               <div class="message__detail--button">
                 <el-button @click.prevent="insertPropertyFirst">Insert Property...</el-button>
@@ -81,10 +82,11 @@
               <div class="message__detail--tags">
                 <el-tag
                   type="info"
-                  v-show="items.propertySecond.value"
+                  v-for="(part,key) in items.propertySecond.value.parts"
+                  :key="key"
                   closable
-                  @close="closeSecondTag"
-                >{{ items.propertySecond.displayName }}</el-tag>
+                  @close="closeSecondTag(key)"
+                >{{ display(part) }}</el-tag>
               </div>
               <div class="message__detail--button">
                 <el-button @click.prevent="insertPropertySecond">Insert Property...</el-button>
@@ -332,14 +334,12 @@ export default class extends Vue {
             let text = new TextAssembly();
             text.parts = message[0].textAssembly.parts;
             this.items.propertyFirst.value = text;
-            this.items.propertyFirst.displayName = text.parts[0];
           }
 
           if (message[1].myspType === "TextAssemblyTranslation") {
             let text = new TextAssembly();
             text.parts = message[1].textAssembly.parts;
             this.items.propertySecond.value = text;
-            this.items.propertySecond.displayName = text.parts[0];
           }
         }
         console.log("message", message);
@@ -349,8 +349,19 @@ export default class extends Vue {
     }
   }
 
-  display(property: any) {
-    if (property.myspType === "TextAssembly") {
+  display(part: any) {console.log(part)
+    if (Array.isArray(part)) {
+      console.log(part)
+      let first = part[0].value ? part[0].value : part[0].key;
+      first = first.split("_");
+      first = first[first.length - 1];
+
+      let second = part[1].key ? part[1].key : part[1].value;
+      second = second.split("_");
+      second = second[second.length - 1];
+      return `${first} : ${second}`;
+    } else {
+      return part;
     }
   }
 
@@ -430,52 +441,29 @@ export default class extends Vue {
   onPrefSelected(value: ApplicationPreference) {
     console.log(this.showProperty.id);
     if (this.showPreference.id) {
-      let text = new TextAssembly();
-      text.parts.push(value.displayName);
-      this.items.propertySecond.value = text;
       if (value?.displayName)
-        this.items.propertySecond.displayName = value.displayName;
+        this.items.propertySecond.value.parts.push(value.displayName);
     } else {
-      let text = new TextAssembly();
-      text.parts.push(value.displayName);
-      this.items.propertyFirst.value = text;
       if (value?.displayName)
-        this.items.propertyFirst.displayName = value.displayName;
+        this.items.propertyFirst.value.parts.push(value.displayName);
     }
   }
 
-  closeFirstTag() {
-    this.items.propertyFirst.value = null;
-    this.items.propertyFirst.displayName = "";
+  closeFirstTag(key: number) {
+    this.items.propertyFirst.value.parts?.splice(key,1);
   }
 
-  closeSecondTag() {
-    this.items.propertySecond.value = null;
-    this.items.propertySecond.displayName = null;
-    console.log("second", this.items.propertySecond.value);
+  closeSecondTag(key: number) {
+    this.items.propertySecond.value.parts?.splice(key,1);
   }
 
   async resultHandler(displayPaths: KeyValue, value: KeyValue[]) {
     console.log("property", value);
     console.log(this.showProperty.id);
-    let str = "";
-    if (value.length > 1) {
-      let rs = await EntitiesModule.getEntity(value[0].value);
-      let property = rs.properties.find(
-        (property) => property.systemName === value[1].key
-      );
-      if (rs?.displayName && property?.displayName) {
-        str += "[" + rs.displayName + ":" + property.displayName + "]";
-      }
-    }
-    let text = new TextAssembly();
-    text.parts.push(str);
     if (this.showProperty.id) {
-      this.items.propertySecond.value = text;
-      this.items.propertySecond.displayName = str;
+      this.items.propertySecond.value.parts.push(value);
     } else {
-      this.items.propertyFirst.value = text;
-      this.items.propertyFirst.displayName = str;
+      this.items.propertyFirst.value.parts.push(value);
     }
   }
 

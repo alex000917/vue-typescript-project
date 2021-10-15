@@ -112,12 +112,12 @@
       <span style="padding-left: 5px; font-weight: 600;">Stop rules are triggered after action rules.</span>
     </el-row>
     <attach-stop-rule
-      :dialogVisible.sync="stopRuleVisible['AttachmentAction']"
+      :dialogVisible.sync="stopRuleVisible['AttachmentStopWorkflowRule']"
       @onSave="onSave"
       :action.sync="currentAction"
     />
     <xml-stop-rule
-      :dialogVisible.sync="stopRuleVisible['XMLAction']"
+      :dialogVisible.sync="stopRuleVisible['XmlWorkflowRule']"
       @onSave="onSave"
       :action.sync="currentAction"
     />
@@ -134,13 +134,9 @@ import Draggable from "vuedraggable";
 import AttachStopRule from "./StopRules/attachmentStopRule.vue";
 import XmlStopRule from "./StopRules/XmlRule.vue";
 import StopRuleWizard from "./StopRules/StopRuleWizard.vue";
-import {
-  BaseAction,
-  XMLAction,
-  AttachmentAction,
-} from "@/models/Workflows/Actions";
 import { WorkflowModule } from "@/store/modules/WorkflowMod";
-import { StopWorkflowRule } from "@/models/Workflows/StopWorkflowRule"
+import { StopWorkflowRule, XmlWorkflowRule, AttachmentStopWorkflowRule } from "@/models/Workflows/StopWorkflowRule"
+import { BaseContent } from "@/models/BaseContent";
 
 @Component({
   name: "",
@@ -148,30 +144,29 @@ import { StopWorkflowRule } from "@/models/Workflows/StopWorkflowRule"
 })
 export default class extends Vue {
   newStopRuleDropDowns = [
-    { id: "AttachmentAction", value: "Attachment Stop Rule" },
+    { id: "AttachmentStopWorkflowRule", value: "Attachment Stop Rule" },
     { id: "StopWorkflowRule", value: "Stop Rule Wizard" },
-    { id: "XMLAction", value: "Xml Rule" },
+    { id: "XmlWorkflowRule", value: "Xml Rule" },
   ];
 
   ruleTree: StopWorkflowRule[] | any = [];
   disableEdit = true;
-
   selectedRule: string | null = null;
 
   private stopRuleVisible: any = {
-    AttachmentAction: false,
+    AttachmentStopWorkflowRule: false,
     StopWorkflowRule: false,
-    XMLAction: false,
+    XmlWorkflowRule: false,
   };
 
-  private actions: BaseAction[] = [];
-  private currentAction: BaseAction | any = new BaseAction();
+  private actions: BaseContent[] = [];
+  private currentAction: BaseContent | any = new BaseContent();
 
   private selectedActionIndex = -1;
 
   myArray: any[] = [];
 
-  private xmlAcion = new XMLAction();
+  private xmlAcion = new XmlWorkflowRule();
 
   get CurrentWorkflow() {
     return WorkflowModule.ActiveWorkflow;
@@ -194,7 +189,7 @@ export default class extends Vue {
   }
 
   @Watch("currentAction", { deep: true, immediate: true })
-  refreshTree(val: BaseAction) {
+  refreshTree(val: BaseContent) {
     this.myArray = []
     if (this.ruleTree.length > 0) {      
       this.ruleTree.forEach((action: any, key: number) => {
@@ -208,6 +203,7 @@ export default class extends Vue {
   }
 
   onSave(action: any) {
+    console.log('ss',action);
     if (this.selectedActionIndex === -1) {
       this.ruleTree.push(action);
     } else {
@@ -219,14 +215,14 @@ export default class extends Vue {
   onNewStopRule(command: string) {
     this.selectedActionIndex = -1;
     switch(command) {
-      case "AttachmentAction":
-        this.currentAction = new AttachmentAction();
+      case "AttachmentStopWorkflowRule":
+        this.currentAction = new AttachmentStopWorkflowRule();
         break;
       case "StopWorkflowRule":
         this.currentAction = new StopWorkflowRule();
         break;
-      case "XMLAction":
-        this.currentAction = new XMLAction();
+      case "XmlWorkflowRule":
+        this.currentAction = new XmlWorkflowRule();
         break;
     }
     this.onEdit();
@@ -237,6 +233,7 @@ export default class extends Vue {
       this.selectedRule = this.currentAction.systemName;
     }
     this.stopRuleVisible[this.currentAction.myspType] = true;
+    console.log(this.currentAction.myspType,this.stopRuleVisible[this.currentAction.myspType])
   }
 
   onDelete() {
@@ -245,12 +242,12 @@ export default class extends Vue {
     } else {
       this.ruleTree.splice(this.ruleTree.length - 1, 1);
     }
-    this.currentAction = new BaseAction();
+    this.currentAction = new BaseContent();
   }
 
   selectNode(index: number) {
     this.selectedActionIndex = index;
-    this.currentAction = this.ruleTree[index];
+    this.currentAction = this.ruleTree[index];console.log(this.currentAction);
   }
 }
 </script>

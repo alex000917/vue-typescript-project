@@ -36,8 +36,8 @@
         </el-row>
         <el-row class="xml-rule__row">
           <el-col>
-            <el-form-item label="Action name:" prop="name">
-              <el-input v-model="items.name" class="xml-rule__row--input" />
+            <el-form-item label="Action name:" prop="displayName">
+              <el-input v-model="items.displayName" class="xml-rule__row--input" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -52,7 +52,7 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { ElForm } from "element-ui/types/form";
-import { XMLAction } from "@/models/Workflows/Actions";
+import { XmlWorkflowRule } from "@/models/Workflows/StopWorkflowRule";
 
 @Component({
   name: "xml-stop-rule",
@@ -60,20 +60,20 @@ import { XMLAction } from "@/models/Workflows/Actions";
 })
 export default class extends Vue {
   @Prop({ required: true }) dialogVisible!: boolean;
-  @Prop({ required: true }) action!: XMLAction;
+  @Prop({ required: true }) action!: XmlWorkflowRule;
 
   private defaultItems: any = {
-    name: "",
+    displayName: "",
     xml: "",
   };
 
   private items: any = {
-    name: "",
+    displayName: "",
     xml: "",
   };
 
   private formRules = {
-    name: [
+    displayName: [
       {
         required: true,
         message: "Please type name",
@@ -93,8 +93,9 @@ export default class extends Vue {
   @Watch("dialogVisible", {deep: true, immediate: true})
   setUp(val: boolean) {
     if (val) {
-      if (this.action.name) {
+      if (this.action.displayName) {
         this.items = {...this.action}
+        console.log(this.items)
       } else {
         this.items = {...this.defaultItems}
       }
@@ -112,11 +113,10 @@ export default class extends Vue {
   okHandler() {
     (this.$refs.form as ElForm).validate((valid: boolean) => {
       if (valid) {
-        let action = new XMLAction()
+        let action = new XmlWorkflowRule()
         action.xml = this.items.xml;
-        action.name = this.items.name;
+        action.displayName = this.items.displayName;console.log('xml', action);
         this.$emit("onSave", action);
-        this.$emit("update:action", action)
         this.showModal = false;
       } else {
         return false;
