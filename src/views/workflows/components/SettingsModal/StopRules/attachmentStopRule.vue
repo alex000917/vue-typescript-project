@@ -22,8 +22,14 @@
             progressed.
           </el-col>
         </el-row>
-        <el-row class="attach-stop__row" type="flex">
-          <el-form-item prop="attachmentType" label="Attachment of type:">
+        <el-row
+          class="attach-stop__row"
+          type="flex"
+        >
+          <el-form-item
+            prop="attachmentType"
+            label="Attachment of type:"
+          >
             <el-input
               v-model="items.attachmentType"
               type="text"
@@ -31,24 +37,36 @@
             />
           </el-form-item>
         </el-row>
-        <el-row class="attach-stop__row" type="flex">
+        <el-row
+          class="attach-stop__row"
+          type="flex"
+        >
           <el-form-item
             prop="step"
             label="Attachment must exist from this step on wards:"
           >
-            <el-select v-model="items.step" filterable
-              ><el-option
+            <el-select
+              v-model="items.step"
+              filterable
+            >
+              <el-option
                 v-for="item in options"
-                :key="item.id"
-                :label="item.value"
-                :value="item.id"
+                :key="item.systemName"
+                :label="item.displayName"
+                :value="item.systemName"
               >
               </el-option>
             </el-select>
           </el-form-item>
         </el-row>
-        <el-row class="attach-stop__row" type="flex">
-          <el-form-item prop="displayName" label="Rule name:">
+        <el-row
+          class="attach-stop__row"
+          type="flex"
+        >
+          <el-form-item
+            prop="displayName"
+            label="Rule name:"
+          >
             <el-input
               v-model="items.displayName"
               type="text"
@@ -56,25 +74,41 @@
             />
           </el-form-item>
         </el-row>
-        <el-row class="attach-stop__row attach-stop__row--advance" type="flex">
+        <el-row
+          class="attach-stop__row attach-stop__row--advance"
+          type="flex"
+        >
           <el-col>
             <el-collapse accordion>
-              <el-collapse-item title="Advanced settings" name="setting">
+              <el-collapse-item
+                title="Advanced settings"
+                name="setting"
+              >
                 <el-form-item label="System name:">
                   <el-input
                     v-model="items.systemName"
                     type="text"
                     class="attach-stop__row--input"
                   />
-                </el-form-item> </el-collapse-item
-            ></el-collapse>
+                </el-form-item>
+              </el-collapse-item>
+            </el-collapse>
           </el-col>
         </el-row>
       </el-form>
     </el-container>
-    <div slot="footer" class="footer">
-      <el-button type="primary" @click="okHandler()">Ok</el-button>
-      <el-button @click="cancelHandler" type="text">Cancel</el-button>
+    <div
+      slot="footer"
+      class="footer"
+    >
+      <el-button
+        type="primary"
+        @click="okHandler()"
+      >Ok</el-button>
+      <el-button
+        @click="cancelHandler"
+        type="text"
+      >Cancel</el-button>
     </div>
   </el-dialog>
 </template>
@@ -85,6 +119,14 @@ import { KeyValue } from "@/models/KeyValue";
 import SelectPropertyModel from "@/components/PropertySelector/index.vue";
 import { ElForm } from "element-ui/types/form";
 import { AttachmentStopWorkflowRule } from "@/models/Workflows/StopWorkflowRule";
+import { EntitiesModule } from "@/store/modules/entitiesMod";
+import { Restriction } from "@/models/Restriction";
+import { RoleGroup } from "@/models/RoleGroup";
+import {
+  AttachmentCondition,
+  PropertyCondition,
+  WorkflowCondition,
+} from "@/models/Conditions";
 
 @Component({
   name: "attach-stop-rule",
@@ -95,17 +137,17 @@ export default class extends Vue {
   @Prop({ required: true }) action!: AttachmentStopWorkflowRule;
 
   private defaultItems = {
-    attachmentType: '',
-    step: '',
-    ruleName: '',
-    systemName: ''
+    attachmentType: "",
+    step: "",
+    ruleName: "",
+    systemName: "",
   };
 
   private items = {
-    attachmentType: '',
-    step: '',
-    displayName: '',
-    systemName: ''
+    attachmentType: "",
+    step: "",
+    displayName: "",
+    systemName: "",
   };
 
   private formRules = {
@@ -130,16 +172,12 @@ export default class extends Vue {
         message: "Please type the description",
         trigger: "blur",
       },
-    ]
+    ],
   };
 
-  private options = [
-    {id: 'start', value: 'Start'},
-    {id: 'draft', value: 'Draft'},
-    {id: 'backlog', value: 'Backlog'},
-    {id: 'implementation', value: 'Implementation'},
-    {id: 'completed', value: 'Completed'},
-  ]
+  get options() {
+    return EntitiesModule.currentEntity?.status;
+  }
 
   get showModal() {
     return this.dialogVisible;
@@ -149,14 +187,21 @@ export default class extends Vue {
     this.$emit("update:dialogVisible", val);
   }
 
-  @Watch("dialogVisible", {immediate: true})
+  @Watch("dialogVisible", { immediate: true })
   setUp(val: boolean) {
     if (val) {
       if (this.action.systemName) {
         this.items.displayName = this.action.displayName;
         this.items.systemName = this.action.systemName;
+
+        let conditions = this.action.conditions?.roleGroups[0].conditions;
+        if (conditions?.length) {
+          this.items.attachmentType =
+            conditions[0].restriction?.roleGroups[0]?.conditions[0]?.secondaryOperand[0]?.value;
+          this.items.step = conditions[1].secondaryOperand[0].value;
+        }
       } else {
-        this.items = {...this.defaultItems}
+        this.items = { ...this.defaultItems };
       }
     }
   }
@@ -165,10 +210,29 @@ export default class extends Vue {
     (this.$refs.form as ElForm).validate((valid: boolean) => {
       if (valid) {
         let action = new AttachmentStopWorkflowRule();
-        action.attachmentType = this.items.attachmentType;
-        action.step = this.items.step;
         action.displayName = this.items.displayName;
         action.systemName = this.items.systemName;
+
+        action.conditions = new Restriction();
+        action.conditions.roleGroups[0] = new RoleGroup();
+        action.conditions.roleGroups[0].conditions[0] =
+          new AttachmentCondition();
+        action.conditions.roleGroups[0].conditions[0].restriction =
+          new Restriction();
+        action.conditions.roleGroups[0].conditions[0].restriction.roleGroups[0] =
+          new RoleGroup();
+        action.conditions.roleGroups[0].conditions[0].restriction.roleGroups[0].conditions[0] =
+          new PropertyCondition();
+        action.conditions.roleGroups[0].conditions[0].restriction.roleGroups[0].conditions[0].secondaryOperand[0] =
+          new KeyValue(null, this.items.attachmentType);
+
+        let status = this.options?.find(
+          (option) => option.systemName === this.items.step
+        );
+
+        action.conditions.roleGroups[0].conditions[1] = new WorkflowCondition();
+        action.conditions.roleGroups[0].conditions[1].secondaryOperand[0] =
+          new KeyValue(status?.displayName, status?.systemName);
 
         this.$emit("onSave", action);
         this.$emit("update:action", action);
