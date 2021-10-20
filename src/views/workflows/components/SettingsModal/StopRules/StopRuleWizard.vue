@@ -318,11 +318,11 @@ export default class extends Vue {
       this.roleGroups = [];
       this.actionGroups = [];
       this.items.propertyFirst = {
-        value: [],
+        value: {parts: []} ,
         displayName: ""
       };
       this.items.propertySecond = {
-        value: [],
+        value: {parts: []} ,
         displayName: ""
       }
     }
@@ -419,6 +419,7 @@ export default class extends Vue {
 
   onPrefSelected(value: ApplicationPreference) {
     console.log(this.showProperty.id);
+    if (!this.items.propertyFirst.value.parts) this.items.propertyFirst.value.parts = [];
     if (this.showPreference.id) {
       if (value?.displayName)
         this.items.propertySecond.value.parts.push(value.displayName);
