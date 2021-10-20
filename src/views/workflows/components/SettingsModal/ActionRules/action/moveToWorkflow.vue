@@ -48,7 +48,7 @@
               label="Workflow:"
             >
               <el-select
-                v-model="items.workflowSystemName"
+                v-model="workflowId"
                 size="mini"
                 placeholder="Select workflow"
                 class="move-workflow__row--input"
@@ -180,14 +180,13 @@ export default class extends Vue {
   dataType = 1;
 
   private workflowOptions: any = [];
+  private stepOptions = [];
 
   get currentEntity() {
     return EntitiesModule.currentEntity;
   }
 
-  get stepOptions() {
-    return EntitiesModule.currentEntity?.status;
-  }
+  flowSteps = [];
 
   get activeWorkflow() {
     return WorkflowModule.activeWorkflow;
@@ -219,17 +218,31 @@ export default class extends Vue {
         this.items.property.displayName = str;
         this.lastPath = this.action.item[this.action.item.length - 1];
         this.workflowOptions = WorkflowModule.Workflows;
-        this.items.workflowSystemName = this.action.workflowSystemName;
-        this.items.stepSystemName = this.action.stepSystemName;
+        this.workflowId = this.items.workflowSystemName =
+          this.action.workflowSystemName;
+        rs = await WorkflowModule.getWorkFlow(this.workflowId);
+        this.stepOptions = rs.flowSteps;
+        this.items.stepSystemName = this.action.stepSystemName;console.log('items',this.items)
       } else {
-        let workflow = WorkflowModule.Workflows[0];
-        this.items.property.displayName = `[${workflow.entityName}]`;
-        this.items.property.value = [
-          new KeyValue("tbl", this.activeWorkflow.entityId),
-        ];
-        this.workflowOptions = [...WorkflowModule.Workflows];
-        this.items.workflowSystemName = workflow.itemId;
-        this.items.stepSystemName = this.stepOptions[0].systemName;
+        let systemName = this.activeWorkflow?.entityId?.split(".");
+        if (systemName?.length) systemName = systemName[systemName?.length - 1];
+        console.log(systemName);
+        let workflows = WorkflowModule.Workflows;
+        if (workflows?.length > 0) {
+          this.workflowOptions = workflows.filter(
+            (workflow: any) => workflow.entitySystemName === systemName
+          );
+          console.log(this.workflowOptions);
+          let workflow = this.workflowOptions[0];
+          this.items.property.displayName = `[${workflow.entityName}]`;
+          this.items.property.value = [
+            new KeyValue("tbl", this.activeWorkflow.entityId),
+          ];
+          this.workflowId = workflow.itemId;
+          let rs = await WorkflowModule.getWorkFlow(workflow.itemId);
+          this.stepOptions = rs.flowSteps;
+          this.items.stepSystemName = this.stepOptions[0].systemName;
+        }
       }
     }
   }
@@ -238,7 +251,6 @@ export default class extends Vue {
   async setOperatorsAndWorkflows(propertyPath: KeyValue) {
     if (propertyPath) {
       this.entityId = propertyPath.value;
-      console.log("this.entityId", this.entityId);
       var rs = await EntitiesModule.getEntity(this.entityId);
       await EntitiesModule.setCurrentEntity(rs);
       this.systemName = rs.systemName;
@@ -252,6 +264,16 @@ export default class extends Vue {
           this.dataType = property?.dataType?.value;
         }
       }
+    }
+  }
+
+  workflowId = "";
+  @Watch("workflowId", { immediate: true })
+  private async loadOptions() {
+    this.items.workflowSystemName = this.workflowId;
+    if (this.workflowId) {
+      let rs = await WorkflowModule.getWorkFlow(this.workflowId);
+      this.stepOptions = rs.flowSteps;
     }
   }
 

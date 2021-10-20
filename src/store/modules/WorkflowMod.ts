@@ -55,6 +55,12 @@ class WorkflowMod extends VuexModule implements IWorkflowData {
     this.context.commit("SET_WORKFLOWs", rs);
   }
 
+  @Action({ rawError: true })
+  public async getWorkFlow(workflowId: string) {
+    const rs = await getWorkflow(workflowId);
+    return rs;
+  }
+
   @Action
   public async getIcons() {
     const rs = await getIconsInFolder();
