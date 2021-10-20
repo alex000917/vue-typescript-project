@@ -17,7 +17,7 @@
         ref="form"
       >
         <el-row
-          style="margin-top: 20px; align-items: center"
+          style="margin-top: 20px; align-items: center;"
           type="flex"
         >
           <el-form-item
@@ -27,20 +27,20 @@
             <el-input
               v-model="items.propertyFirst.displayName"
               type="text"
-              style="padding-right: 30px"
+              style="padding-right: 30px;"
               readonly
             />
           </el-form-item>
           <el-button
             type="text"
-            style="padding: 0; padding-top: 5px"
+            style="padding: 0; padding-top: 5px;"
             @click.prevent="onShowPropertySelector"
           >
             <el-image src="/assets/img/form-document-16x16.png" />
           </el-button>
         </el-row>
         <el-row
-          style="margin-top: 20px"
+          style="margin-top: 20px;"
           type="flex"
         >
           <el-form-item prop="propertySecond">
@@ -48,7 +48,7 @@
               v-model="items.propertySecond.displayName"
               :type="isNumber ? 'number' : 'text'"
               :disabled="isBlank"
-              style="padding-right: 30px"
+              style="padding-right: 30px;"
               :readonly="secondPropertyReadOnly"
             />
           </el-form-item>
@@ -56,24 +56,31 @@
             trigger="click"
             size="small"
             placement="bottom-start"
-            style="display: flex; align-items: center"
+            style="display: flex; align-items: center;"
             @command="selectInputMethod"
             ref="dropdown"
           >
             <el-button
               type="text"
-              style="padding: 0"
+              style="padding: 0;"
               @click="handleChange"
             >
               <el-image src="/assets/img/down_arrow.png" />
             </el-button>
             <el-dropdown-menu
               slot="dropdown"
-              style="margin-top: 0"
+              style="margin-top: 0;"
             >
-              <el-dropdown-item command="Yes">
+              <el-dropdown-item
+                v-for="menu in dropdownList"
+                :key="menu.command"
+                :command="menu.command"
+              >
+                {{ menu.text }}...
+              </el-dropdown-item>
+              <!-- <el-dropdown-item command="Yes">
                 Yes...
-              </el-dropdown-item>              
+              </el-dropdown-item>
               <el-dropdown-item command="No">
                 No...
               </el-dropdown-item>
@@ -82,7 +89,7 @@
               </el-dropdown-item>
               <el-dropdown-item command="selectPreference">
                 Select application Preference...
-              </el-dropdown-item>
+              </el-dropdown-item> -->
             </el-dropdown-menu>
           </el-dropdown>
         </el-row>
@@ -131,6 +138,42 @@ import { ServerAction } from "@/models/Workflows/Actions";
 export default class extends Vue {
   @Prop({ required: true }) dialogVisible!: boolean;
   @Prop({ required: true }) condition!: ServerAction;
+
+  private dropdownMenus = {
+    "0": [{ command: "", text: "" }],
+    "1": [
+      { command: "typeText", text: "Type text" },
+      { command: "blank", text: "Blank" },
+      { command: "selectProperty", text: "Select propery" },
+      { command: "selectPreference", text: "Select application Preference" },
+    ],
+    "2": [
+      { command: "Yes", text: "Yes" },
+      { command: "No", text: "No" },
+      { command: "selectProperty", text: "Select propery" },
+      { command: "selectPreference", text: "Select application Preference" },
+    ],
+    "3": [
+      { command: "number", text: "Type the number" },
+      { command: "zero", text: "zero" },
+      { command: "selectProperty", text: "Select propery" },
+      { command: "selectPreference", text: "Select application Preference" },
+    ],
+  };
+
+  get dropdownList() {
+    let key = "0";
+    if (this.dataType === "0") key = "0";
+    else if (this.dataType === "5") key = "2";
+    else if (
+      this.dataType === "6" ||
+      this.dataType === "7" ||
+      this.dataType === "8"
+    )
+      key = "3";
+    else key = "1";
+    return this.dropdownMenus[key];
+  }
 
   private items = {
     propertyFirst: {
@@ -184,6 +227,8 @@ export default class extends Vue {
 
   private secondPropertyReadOnly = false;
 
+  private dataType = "0";
+
   get activeWorkflow() {
     return WorkflowModule.activeWorkflow;
   }
@@ -217,10 +262,21 @@ export default class extends Vue {
           rs = await EntitiesModule.getEntity(
             this.condition.leftOperand[0].value
           );
-          property = rs.properties.find(
-            (prop: any) => prop.systemName === this.condition.leftOperand[1].key
-          );
-          str += `[Workflow(${rs.displayName}): ${property.displayName}]`;
+          let str = `[Workflow(${rs.displayName})`;
+
+          if (this.items.propertyFirst?.value?.length > 1) {
+            for (let i = 1; i < this.items.propertyFirst.value.length; i++) {
+              property = rs.properties.find(
+                (prop: any) =>
+                  prop.systemName === this.condition.leftOperand[i].key
+              );
+              str += ` : ${property.displayName}`;
+            }
+            this.dataType = property.dataType.value;
+          } else {
+            this.dataType = "1";
+          }
+          str += "]";
           this.items.propertyFirst.displayName += str;
         }
         this.items.propertySecond = {
@@ -243,17 +299,25 @@ export default class extends Vue {
             if (this.items.propertySecond.value[0].key) {
               this.items.propertySecond.displayName =
                 this.items.propertySecond.value[0].value;
-            } else {
-              if (this.items.propertySecond.value[0].value) {
-                this.items.propertySecond.displayName = "Yes";
+            } else { console.log(typeof this.items.propertySecond.value[0].value)
+              if (
+                typeof this.items.propertySecond.value[0].value === "boolean"
+              ) {
+                if (this.items.propertySecond.value[0].value) {
+                  this.items.propertySecond.displayName = "Yes";
+                } else {
+                  this.items.propertySecond.displayName = "No";
+                }
               } else {
-                this.items.propertySecond.displayName = "No";
+                this.items.propertySecond.displayName =
+                  this.items.propertySecond.value[0].value;
               }
             }
           }
         }
       } else {
         this.items = { ...this.defaultItems };
+        this.dataType = "0";
       }
     }
   }
@@ -268,13 +332,15 @@ export default class extends Vue {
   isBlank = false;
 
   selectInputMethod(command: string) {
+    console.log("comand", command);
     this.items.propertySecond = {
       displayName: "",
       value: null,
     };
     console.log(command);
     if (command === "typeText") {
-      this.isNumber = true;
+      this.secondPropertyReadOnly = false;
+      this.isNumber = false;
       this.isBlank = false;
       this.selectPropertyModal = {
         show: false,
@@ -299,16 +365,37 @@ export default class extends Vue {
       this.isNumber = false;
       this.isBlank = false;
     } else if (command === "blank") {
+      this.items.secondOperandIsApplicationPreference = false;
+      this.items.secondOperandIsProperty = false;
       this.items.propertySecond.displayName = "";
       this.isBlank = true;
       this.isNumber = false;
+      this.secondPropertyReadOnly = true;
     } else if (command === "Yes") {
+      this.items.secondOperandIsApplicationPreference = false;
+      this.items.secondOperandIsProperty = false;
       this.items.propertySecond.displayName = "Yes";
       this.items.propertySecond.value = [new KeyValue(null, true)];
       this.secondPropertyReadOnly = true;
     } else if (command === "No") {
+      this.items.secondOperandIsApplicationPreference = false;
+      this.items.secondOperandIsProperty = false;
       this.items.propertySecond.displayName = "No";
       this.items.propertySecond.value = [new KeyValue(null, false)];
+      this.secondPropertyReadOnly = true;
+    } else if (command === "number") {
+      this.items.secondOperandIsApplicationPreference = false;
+      this.items.secondOperandIsProperty = false;
+      this.secondPropertyReadOnly = false;
+      this.isNumber = true;
+      this.isBlank = false;
+      this.secondPropertyReadOnly = false;
+    } else if (command === "zero") {
+      this.items.secondOperandIsApplicationPreference = false;
+      this.items.secondOperandIsProperty = false;
+      this.secondPropertyReadOnly = true;
+      this.items.propertySecond.displayName = "0";
+      this.items.propertySecond.value = [new KeyValue(null, 0)];
       this.secondPropertyReadOnly = true;
     }
   }
@@ -323,23 +410,39 @@ export default class extends Vue {
     console.log(e);
   }
 
-  resultHandler(displayPaths: KeyValue[], result: KeyValue[]) {
+  async resultHandler(displayPaths: KeyValue[], result: KeyValue[]) {
     console.log("result", result);
     let str = "";
     let newItems = Object.assign({}, this.items);
+    let rs = await EntitiesModule.getEntity(result[0].value);
+    let property: any = null;
+    str = `[Workflow(${rs.displayName})`;
     if (result.length > 1) {
-      str += `[Workflow(${displayPaths[0].key}): ${displayPaths[1].key}]`;
+      for (let i = 1; i < result.length; i++) {
+        property = rs.properties.find(
+          (prop: any) => prop.systemName === result[i].key
+        );
+        str += ` : ${property.displayName}]`;
+      }
+      console.log("property", property);
+      str += "]";
     }
     if (this.selectPropertyModal.key === "first") {
       newItems.propertyFirst = {};
       newItems.propertyFirst.displayName = str;
       newItems.propertyFirst.value = result;
+      newItems.propertySecond = {};
+      newItems.propertySecond.displayName = "";
+      newItems.propertySecond.value = [];
+      if (property) this.dataType = property.dataType.value;
+      else this.dataType = "1";
     } else {
       this.items.secondOperandIsProperty = true;
       newItems.propertySecond = {};
       newItems.propertySecond.displayName = str;
       newItems.propertySecond.value = result;
     }
+    console.log("dataType", this.dataType);
     this.items = { ...newItems };
   }
 
@@ -369,9 +472,18 @@ export default class extends Vue {
           this.items.propertySecond.value.length > 0
         )
           propertyCondition.rightOperand = [...this.items.propertySecond.value];
+        else if (!this.secondPropertyReadOnly) {
+          propertyCondition.rightOperand = [
+            new KeyValue(null, this.items.propertySecond.displayName),
+          ];
+        } else if(this.isBlank) {
+          propertyCondition.rightOperand = [
+            new KeyValue(null, this.items.propertySecond.displayName),
+          ];
+        }
         else
           propertyCondition.rightOperand = [...this.items.propertySecond.value];
-          
+
         this.$emit("onSave", propertyCondition);
         this.showModal = false;
       } else {

@@ -232,7 +232,10 @@ export default class extends Vue {
       if (action.rightOperand[0].key) {
         str += ` to be [${action.rightOperand[0].value}]`;
       } else {
-        str += ` to be [${action.rightOperand[0].value ? "Yes" : "No"}]`;
+        if ( typeof action.rightOperand[0].value === "boolean")
+          str += ` to be [${action.rightOperand[0].value ? "Yes" : "No"}]`;
+        else 
+          str += ` to be [${action.rightOperand[0].value}]`;
       }
     }
     return str;
