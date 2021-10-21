@@ -13,6 +13,7 @@
           <el-button
             type="text"
             icon="el-icon-user"
+            :disabled = "isDisabled"
             :title="
               lpmInstance.getLocalizedString(
                 languagesPresentationModel.NEW_ROLE_GROUP
@@ -72,7 +73,7 @@
             <el-button
               type="text"
               icon="el-icon-brush"
-              :disabled="!showConditionsButton"
+              :disabled="!showConditionsButton || isDisabled"
             >
               <span class="button-text">New Condition </span>
             </el-button>
@@ -98,7 +99,7 @@
                 v-for="condition in actionsList"
                 :key="condition.id"
                 :command="condition.id"
-                :disabled="condition.disabled"
+                :disabled="condition.disabled || disabled"
               >
                 {{ condition.label }}
               </el-dropdown-item>
@@ -113,6 +114,7 @@
             type="text"
             icon="el-icon-edit-outline"
             @click="editCondition"
+            :disabled="isDisabled"
           >
             <span class="button-text">Edit</span>
           </el-button>
@@ -125,6 +127,7 @@
             type="text"
             icon="el-icon-delete"
             @click="onDelete"
+            :disabled="isDisabled"
           >
             <span class="button-text">Delete</span>
           </el-button>
@@ -294,6 +297,7 @@ export default class extends Vue {
   private visibleConditions!: any[];
   @Prop({ required: false }) conditionsDivHeight!: boolean;
   @Prop({ required: false, default: false }) isAction!: boolean;
+  @Prop({ required: false, default: false }) isDisabled!: boolean;
 
   private currentCondition: BaseCondition | any = null;
 

@@ -35,10 +35,28 @@
         </el-button>
       </el-row>
       <el-row>
+        <el-checkbox-group
+          style="margin-top: 10px"
+          v-model="isDisable"
+        >
+          <el-checkbox label="property">
+            Aditional Conditions
+          </el-checkbox>
+        </el-checkbox-group>
+      </el-row>
+      <el-row>
         <condition-tree
+          v-if="hasCondition"
           :visibleConditions="conditionsList"
           :data.sync="roleGroups"
           :conditionsDivHeight="true"
+          :isDisabled="!isDisable"
+        />
+        <condition-tree
+          v-else
+          :data.sync="roleGroups"
+          :conditionsDivHeight="true"
+          :isDisabled="!isDisable"
         />
       </el-row>
       <el-row>
@@ -132,6 +150,7 @@ export default class extends Vue {
     { id: "AttachmentCondition", label: "Attachment" },
   ];
 
+  private isDisable = 0;
   //Total Data
   private roleGroups: RoleGroup[] | any = [];
   private actionRules: any[] = [];
@@ -146,6 +165,7 @@ export default class extends Vue {
     itemSetConditionType: 0,
     skipConditionIfSetIsEmpty: 0,
     displayName: "",
+    additional: 0
   };
 
   private items = {
@@ -171,6 +191,8 @@ export default class extends Vue {
   private selectPropertyModal = {
     show: false,
   };
+
+  dataType = "1";
 
   private selectedFilterKey = "";
 
@@ -212,6 +234,11 @@ export default class extends Vue {
     this.$emit("update:dialogVisible", val);
   }
 
+  get hasCondition() {
+    if (this.dataType === "9" || this.dataType === "11") return true;
+    else return false;
+  }
+
   @Watch("dialogVisible", { deep: true, immediate: true })
   async setUp(val: boolean) {
     if (val) {
@@ -219,11 +246,20 @@ export default class extends Vue {
         console.log("itemset", this.condition);
         this.items.property.value = this.condition.property;
         if (this.condition.property?.length > 1) {
-          let rs = await EntitiesModule.getEntity(this.condition.property[0].value);
-          let property = rs.properties.find(
-            (prop: any) => prop.systemName === this.condition.property[1].key
+          let rs = await EntitiesModule.getEntity(
+            this.condition.property[0].value
           );
-          this.items.property.displayName = `Set [Workflow(${rs.displayName}): ${property.displayName}]`;
+          let str = `Set [Workflow(${rs.displayName})`;
+          let property: any = null;
+          for (let i = 1; i < this.condition.property.length; i++) {
+            property = rs.properties.find(
+              (prop: any) => prop.systemName === this.condition.property[1].key
+            );
+            str += ` : ${property.displayName}`;
+          }
+          str += "]";
+          this.items.property.displayName = str;
+          this.dataType = property.dataType.value;
         }
 
         this.items.itemSetConditionType = this.condition.itemSetConditionType;
@@ -238,6 +274,7 @@ export default class extends Vue {
         this.actionRules = [];
         this.items.property.displayName = "";
         this.items.displayName = "";
+        this.dataType = "1";
       }
     }
   }
@@ -248,6 +285,9 @@ export default class extends Vue {
       str += `[Workflow(${result[0].displayName}): ${result[1].displayName}]`;
     this.items.property.displayName = str;
     this.items.property.value = result;
+    this.dataType = displayPath[displayPath.length - 1].value.dataType.value;console.log(this.dataType);
+    this.isDisable = 0;
+    this.roleGroups = [];
   }
 
   handleNodeClick(data: any) {
@@ -265,7 +305,8 @@ export default class extends Vue {
     condition.property = this.items.property.value;
     condition.restriction = new Restriction();
     condition.restriction.roleGroups = this.roleGroups;
-    condition.restriction.actionGroups = this.actionRules; console.log('action-data', this.actionRules);
+    condition.restriction.actionGroups = this.actionRules;
+    console.log("action-data", this.actionRules);
     condition.displayName = this.items.displayName;
     condition.itemSetConditionType = this.items.itemSetConditionType;
     condition.skipConditionIfSetIsEmpty = this.items.skipConditionIfSetIsEmpty;
